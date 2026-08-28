@@ -227,26 +227,31 @@ export function AudioProvider({
       playsinline: "1",
       playlist: youtubeId,
       loop: "1",
+      origin: typeof window !== "undefined" ? window.location.origin : "",
     });
 
     const embedUrl = `https://www.youtube.com/embed/${youtubeId}?${params.toString()}`;
 
     return (
       <div
-        className="fixed pointer-events-none opacity-0 w-0 h-0 overflow-hidden"
-        style={{ left: "-9999px", top: "-9999px" }}
+        className="fixed pointer-events-none opacity-0 overflow-hidden z-[-1]"
+        style={{
+          bottom: "0px",
+          right: "0px",
+          width: "1px",
+          height: "1px",
+        }}
         aria-hidden="true"
       >
         <iframe
           ref={iframeRef}
           id="youtube-ambient-player"
-          width="1"
-          height="1"
           src={embedUrl}
           title="Wedding Music Player"
           allow="autoplay; encrypted-media; fullscreen"
           tabIndex={-1}
           onLoad={handleIframeLoad}
+          className="w-full h-full"
         />
       </div>
     );

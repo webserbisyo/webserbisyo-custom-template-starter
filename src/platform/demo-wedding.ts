@@ -33,8 +33,8 @@ export const DEMO_WEDDING_DATA: WeddingTemplateData = {
   },
 
   music: {
-    musicLink: "https://www.youtube.com/watch?v=2vjPBrBU-TM",
-    musicTitle: "A Thousand Years (Instrumental)",
+    musicLink: "https://www.youtube.com/watch?v=cNGjD0VG4R8",
+    musicTitle: "Until I Found You - Stephen Sanchez",
     playButtonLabel: "Play Music",
     shortNote: "Background music composed for our wedding day",
   },
