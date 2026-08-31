@@ -2,10 +2,6 @@
 
 import { useEffect, useState } from "react";
 import type { CountdownData } from "@/platform/event-template-data";
-import { sageDecorations } from "@/template/template-assets";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
-import { DecorativePattern } from "@/template/components/decorations/DecorativePattern";
 import { AnimatedNumber } from "@/template/components/interactive/AnimatedNumber";
 import { Reveal } from "@/template/components/motion/Reveal";
 
@@ -81,14 +77,6 @@ export function CountdownSection({ data, eventDate, eventTime }: CountdownSectio
       id="countdown"
       className="template-section section-surface-sage template-section-compact relative overflow-x-clip"
     >
-      {/* Decorative Glasshouse Grid Pattern Background (Readable Strength) */}
-      <DecorativePattern
-        src={sageDecorations.glasshouseGridPattern}
-        opacity={0.35}
-        objectPosition="center center"
-        blendMode="multiply"
-      />
-
       <div className="template-container-narrow text-center relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="mb-6 sm:mb-8 space-y-2">
@@ -109,9 +97,6 @@ export function CountdownSection({ data, eventDate, eventTime }: CountdownSectio
                 key={unit.label}
                 className="relative flex flex-col items-center justify-center p-4 sm:p-5 rounded-2xl border border-[var(--wedding-border)] bg-[var(--wedding-surface)] shadow-xs hover:border-[var(--wedding-accent)]/50 transition-colors overflow-visible"
               >
-                {/* Micro Botanical Corner Pair on each Number Card */}
-                <BotanicalCornerPair size="xs" />
-
                 <span className="text-3xl sm:text-4xl lg:text-5xl font-bold font-mono tracking-tight text-[var(--wedding-text)] tabular-nums relative z-10">
                   <AnimatedNumber value={unit.value} format={{ minimumIntegerDigits: 2 }} />
                 </span>
@@ -123,9 +108,6 @@ export function CountdownSection({ data, eventDate, eventTime }: CountdownSectio
           </div>
         </Reveal>
       </div>
-
-      {/* Boundary Threshold Divider: Countdown -> Music */}
-      <SectionFloralDivider />
     </section>
   );
 }

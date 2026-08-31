@@ -1,7 +1,5 @@
 import type { VenueData } from "@/platform/event-template-data";
 import { templateAssets } from "@/template/template-assets";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import { SpecimenFrame } from "@/template/components/containers/SpecimenFrame";
 import { LedgerPanel } from "@/template/components/containers/LedgerPanel";
 import { Reveal } from "@/template/components/motion/Reveal";
@@ -34,7 +32,7 @@ export function VenueSection({ data }: { data: VenueData }) {
             <div className="lg:col-span-6">
               <SpecimenFrame
                 src={venuePhoto}
-                alt={data.venueName || "Wedding Venue"}
+                alt={data.venueName || "Debut Venue"}
                 caption={data.venueName ? `Estate Grounds: ${data.venueName}` : "Estate Grounds"}
                 specimenNumber="ESTATE VIEW // 03"
                 aspectRatio="landscape"
@@ -42,10 +40,9 @@ export function VenueSection({ data }: { data: VenueData }) {
               />
             </div>
 
-            {/* Right Column: Structured Venue Record with Signature Botanical Corners */}
+            {/* Right Column: Structured Venue Record */}
             <div className="lg:col-span-6">
               <div className="relative overflow-visible">
-                <BotanicalCornerPair size="md" />
                 <LedgerPanel
                   title={data.venueName || "Estate Location"}
                   indexTag="VENUE // RECORD"
@@ -100,9 +97,6 @@ export function VenueSection({ data }: { data: VenueData }) {
           </div>
         </Reveal>
       </div>
-
-      {/* Boundary Threshold Divider: Venue -> Reception */}
-      <SectionFloralDivider />
     </section>
   );
 }

@@ -2,10 +2,6 @@
 
 import { useState } from "react";
 import type { EighteenRosesCandlesData, TraditionKind } from "@/platform/event-template-data";
-import { sageDecorations } from "@/template/template-assets";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
-import { DecorativePattern } from "@/template/components/decorations/DecorativePattern";
 import { LedgerPanel } from "@/template/components/containers/LedgerPanel";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Sparkles, Flame, Gift, Heart } from "lucide-react";
@@ -40,14 +36,6 @@ export function EighteenRosesCandlesSection({ data }: { data: EighteenRosesCandl
       id="eighteen_roses_candles"
       className="template-section section-surface-sage relative overflow-x-clip"
     >
-      {/* Parterre Trellis Pattern Background */}
-      <DecorativePattern
-        src={sageDecorations.parterreTrellisPattern}
-        opacity={0.32}
-        objectPosition="center center"
-        blendMode="multiply"
-      />
-
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
@@ -56,8 +44,8 @@ export function EighteenRosesCandlesSection({ data }: { data: EighteenRosesCandl
               Eighteen Traditions
             </h2>
             <p className="text-role-lead max-w-lg mx-auto mt-2 leading-relaxed">
-              Honoring the cherished family, mentors, and friends who illuminate Sophia&apos;s
-              journey into adulthood.
+              Honoring the cherished family, mentors, and friends who illuminate our
+              debutante&apos;s journey into adulthood.
             </p>
           </div>
         </Reveal>
@@ -95,8 +83,6 @@ export function EighteenRosesCandlesSection({ data }: { data: EighteenRosesCandl
         {/* Tradition Entries Grid */}
         <Reveal direction="up" distance={20} delay={0.1}>
           <div className="relative overflow-visible">
-            <BotanicalCornerPair size="md" />
-
             <LedgerPanel
               title={currentGroup.title || "Traditional Honors"}
               subtitle={`A sacred celebration of ${currentGroup.entries.length} special individuals`}
@@ -133,8 +119,6 @@ export function EighteenRosesCandlesSection({ data }: { data: EighteenRosesCandl
           </div>
         </Reveal>
       </div>
-
-      <SectionFloralDivider />
     </section>
   );
 }

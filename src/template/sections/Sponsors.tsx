@@ -1,8 +1,4 @@
 import type { SponsorsData } from "@/platform/event-template-data";
-import { sageDecorations } from "@/template/template-assets";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
-import { DecorativePattern } from "@/template/components/decorations/DecorativePattern";
 import { LedgerPanel } from "@/template/components/containers/LedgerPanel";
 import { Reveal } from "@/template/components/motion/Reveal";
 
@@ -40,14 +36,6 @@ export function SponsorsSection({ data }: { data: SponsorsData }) {
       id="principal_sponsors"
       className="template-section section-surface-paper relative overflow-x-clip"
     >
-      {/* Decorative Glasshouse Grid Pattern Background (Architectural Ledger Paper) */}
-      <DecorativePattern
-        src={sageDecorations.glasshouseGridPattern}
-        opacity={0.28}
-        objectPosition="center top"
-        blendMode="multiply"
-      />
-
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-10 space-y-2">
@@ -65,9 +53,6 @@ export function SponsorsSection({ data }: { data: SponsorsData }) {
 
         <Reveal direction="up" distance={20} delay={0.1}>
           <div className="relative overflow-visible">
-            {/* Botanical Corner Pair on Sponsors Register Card */}
-            <BotanicalCornerPair size="md" />
-
             <LedgerPanel
               title="Roll of Principal Sponsors"
               indexTag="OFFICIAL REGISTER"
@@ -89,9 +74,6 @@ export function SponsorsSection({ data }: { data: SponsorsData }) {
           </div>
         </Reveal>
       </div>
-
-      {/* Boundary Threshold Divider: Sponsors -> Attire */}
-      <SectionFloralDivider />
     </section>
   );
 }

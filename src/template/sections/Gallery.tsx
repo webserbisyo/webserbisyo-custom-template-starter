@@ -3,9 +3,6 @@
 import { useState, useCallback } from "react";
 import Image from "next/image";
 import type { GalleryData } from "@/platform/event-template-data";
-import { sageDecorations } from "@/template/template-assets";
-import { DecorativePattern } from "@/template/components/decorations/DecorativePattern";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import { galleryPhotos, type GalleryPhotoItem } from "@/template/content/gallery";
 import { SkewCarousel } from "@/template/components/interactive/SkewCarousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/template/components/ui/Dialog";
@@ -41,14 +38,6 @@ export function GallerySection({ data }: { data: GalleryData }) {
       id="gallery"
       className="template-section !pt-20 !pb-14 sm:!pt-24 sm:!pb-16 md:!pt-28 md:!pb-18 section-surface-paper text-center relative overflow-x-clip"
     >
-      {/* Decorative Glasshouse Grid Pattern Background (Readable Paper Atmosphere) */}
-      <DecorativePattern
-        src={sageDecorations.glasshouseGridPattern}
-        opacity={0.4}
-        objectPosition="center 35%"
-        blendMode="multiply"
-      />
-
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="mb-5 sm:mb-7 space-y-2">
@@ -78,7 +67,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
         ) : (
           <div className="bg-[var(--wedding-surface-alt)]/60 p-10 rounded-2xl border border-dashed border-[var(--wedding-border)] max-w-xl mx-auto text-center shadow-xs">
             <p className="text-xs font-mono text-[var(--wedding-text-muted)] uppercase tracking-wider">
-              [ Official wedding photos will be mounted in the estate ledger here ]
+              [ Official debut photoshoot will be mounted here ]
             </p>
           </div>
         )}
@@ -153,9 +142,6 @@ export function GallerySection({ data }: { data: GalleryData }) {
           </Dialog>
         )}
       </div>
-
-      {/* Boundary Threshold Divider: Gallery -> Ceremony */}
-      <SectionFloralDivider />
     </section>
   );
 }

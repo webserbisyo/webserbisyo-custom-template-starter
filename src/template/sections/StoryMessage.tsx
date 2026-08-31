@@ -1,6 +1,5 @@
 import type { StoryMessageData } from "@/platform/event-template-data";
 import { templateAssets } from "@/template/template-assets";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { SpecimenFrame } from "@/template/components/containers/SpecimenFrame";
 import { CorrespondenceSheet } from "@/template/components/containers/CorrespondenceSheet";
 import { Reveal } from "@/template/components/motion/Reveal";
@@ -46,15 +45,9 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
               />
             )}
 
-            {/* Story Description Card with Elevated Outward Botanical Corner Framing */}
+            {/* Story Description Card */}
             {data.storyBody && (
               <div className="relative overflow-visible">
-                <BotanicalCornerPair
-                  size="lg"
-                  className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36"
-                  leftOffset="-top-7 -left-6 sm:-top-9 sm:-left-8 md:-top-11 md:-left-10"
-                  rightOffset="-top-7 -right-6 sm:-top-9 sm:-right-8 md:-top-11 md:-right-10"
-                />
                 <CorrespondenceSheet
                   senderLabel="ESTATE DISPATCH"
                   dateStamp="OUR CHRONICLE"

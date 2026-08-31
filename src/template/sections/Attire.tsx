@@ -1,7 +1,5 @@
 import type { AttireData } from "@/platform/event-template-data";
 import { templateConfig } from "@/template/template.config";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Shirt, Sparkles } from "lucide-react";
 
@@ -34,9 +32,6 @@ export function AttireSection({ data }: { data: AttireData }) {
 
         <Reveal direction="up" distance={20} delay={0.1}>
           <div className="relative overflow-visible">
-            {/* Botanical Corner Pair on Attire Panel */}
-            <BotanicalCornerPair size="md" />
-
             <div className="bg-[var(--wedding-surface)] rounded-2xl border border-[var(--wedding-border)] p-6 sm:p-8 shadow-card space-y-6 font-sans relative z-10">
               {data.dressCodeNote && (
                 <div className="flex items-start gap-4 p-4 sm:p-5 rounded-xl bg-[var(--wedding-surface-alt)] border border-[var(--wedding-border-subtle)]">
@@ -90,9 +85,6 @@ export function AttireSection({ data }: { data: AttireData }) {
           </div>
         </Reveal>
       </div>
-
-      {/* Boundary Threshold Divider: Attire -> Extra Info */}
-      <SectionFloralDivider />
     </section>
   );
 }

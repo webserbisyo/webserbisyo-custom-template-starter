@@ -1,9 +1,4 @@
-"use client";
-
-import { useState } from "react";
 import type { ExtraInfoData } from "@/platform/event-template-data";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import {
   Accordion,
   AccordionItem,
@@ -42,9 +37,6 @@ export function ExtraInfoSection({ data }: { data: ExtraInfoData }) {
 
         <Reveal direction="up" distance={20} delay={0.1}>
           <div className="relative overflow-visible">
-            {/* Botanical Corner Pair on FAQ Container */}
-            <BotanicalCornerPair size="md" />
-
             <div className="bg-[var(--wedding-surface)] rounded-2xl border border-[var(--wedding-border)] p-6 sm:p-8 shadow-card relative z-10">
               <Accordion type="single" collapsible className="w-full space-y-2">
                 {data.items.map((item, idx) => (
@@ -66,9 +58,6 @@ export function ExtraInfoSection({ data }: { data: ExtraInfoData }) {
           </div>
         </Reveal>
       </div>
-
-      {/* Boundary Threshold Divider: Extra Info -> RSVP */}
-      <SectionFloralDivider />
     </section>
   );
 }

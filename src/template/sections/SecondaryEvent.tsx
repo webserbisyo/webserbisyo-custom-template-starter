@@ -1,7 +1,5 @@
 import type { SecondaryEventData } from "@/platform/event-template-data";
 import { formatTimeRange } from "@/template/utils/event-formatting";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import { LedgerPanel } from "@/template/components/containers/LedgerPanel";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Clock, MapPin, Navigation, Info } from "lucide-react";
@@ -37,7 +35,6 @@ export function SecondaryEventSection({ data }: SecondaryEventSectionProps) {
 
         <Reveal direction="up" distance={20} delay={0.1}>
           <div className="relative overflow-visible">
-            <BotanicalCornerPair size="md" />
             <LedgerPanel
               title={data.venueName || "Event Grounds"}
               indexTag="RECORD // 02"
@@ -99,9 +96,6 @@ export function SecondaryEventSection({ data }: SecondaryEventSectionProps) {
           </div>
         </Reveal>
       </div>
-
-      {/* Boundary Threshold Divider */}
-      <SectionFloralDivider />
     </section>
   );
 }

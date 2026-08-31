@@ -4,8 +4,6 @@ import {
   formatTimeRange,
   formatRsvpDeadline,
 } from "@/template/utils/event-formatting";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import { DateCalendar } from "@/template/components/interactive/DateCalendar";
 import { LedgerPanel } from "@/template/components/containers/LedgerPanel";
 import { Reveal } from "@/template/components/motion/Reveal";
@@ -41,7 +39,6 @@ export function MainEventSection({ data }: { data: MainEventData }) {
             {/* Left Column: Interactive Month Calendar */}
             <div className="lg:col-span-5 flex flex-col justify-center">
               <div className="relative overflow-visible bg-[var(--wedding-surface)] rounded-2xl p-5 sm:p-6 border border-[var(--wedding-border)] shadow-xs">
-                <BotanicalCornerPair size="md" />
                 <div className="relative z-10">
                   <DateCalendar
                     date={data.eventDate || undefined}
@@ -55,7 +52,6 @@ export function MainEventSection({ data }: { data: MainEventData }) {
             {/* Right Column: Formal Estate Event Record */}
             <div className="lg:col-span-7 flex flex-col justify-between">
               <div className="relative overflow-visible h-full">
-                <BotanicalCornerPair size="md" />
                 <LedgerPanel
                   title="Official Event Record"
                   indexTag="RECORD // 01"
@@ -117,9 +113,6 @@ export function MainEventSection({ data }: { data: MainEventData }) {
           </div>
         </Reveal>
       </div>
-
-      {/* Boundary Threshold Divider */}
-      <SectionFloralDivider />
     </section>
   );
 }

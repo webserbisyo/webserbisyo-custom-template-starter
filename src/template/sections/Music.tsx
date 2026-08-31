@@ -2,10 +2,6 @@
 
 import { useEffect } from "react";
 import type { MusicData } from "@/platform/event-template-data";
-import { sageDecorations } from "@/template/template-assets";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
-import { DecorativePattern } from "@/template/components/decorations/DecorativePattern";
 import { useAudio } from "@/template/components/AudioPlayer";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { parseMusicMeta } from "@/template/utils/music-meta";
@@ -39,21 +35,15 @@ export function MusicSection({ data }: { data: MusicData }) {
       id="music_effects"
       className="template-section section-surface-primary template-section-compact text-center relative overflow-x-clip !pt-20 md:!pt-24"
     >
-      {/* Decorative Parterre Trellis Pattern Background (Floral Garden on Forest Canvas) */}
-      <DecorativePattern
-        src={sageDecorations.parterreTrellisPattern}
-        opacity={0.22}
-        objectPosition="center center"
-        blendMode="soft-light"
-      />
-
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="mb-6 space-y-2">
             <span className="text-role-subheading text-[var(--wedding-accent-soft)]">
               CELEBRATION SOUNDTRACK
             </span>
-            <h2 className="text-role-heading text-[var(--wedding-on-primary)]">Our Wedding Song</h2>
+            <h2 className="text-role-heading text-[var(--wedding-on-primary)]">
+              Debut Celebration Soundtrack
+            </h2>
           </div>
         </Reveal>
 
@@ -62,9 +52,6 @@ export function MusicSection({ data }: { data: MusicData }) {
             data-surface="light"
             className="surface-light-reset bg-[var(--wedding-surface)] p-6 sm:p-8 rounded-2xl border border-[var(--wedding-border)] max-w-md mx-auto shadow-card relative overflow-visible text-[var(--wedding-text)]"
           >
-            {/* Botanical Corner Pair on White Music Panel */}
-            <BotanicalCornerPair size="md" />
-
             {/* Spinning Vinyl Disc with Beamed-Note Center */}
             <div className="relative w-28 h-28 mx-auto mb-6 flex items-center justify-center z-10">
               {/* Pulsating outer light ring */}
@@ -153,9 +140,6 @@ export function MusicSection({ data }: { data: MusicData }) {
           </div>
         </Reveal>
       </div>
-
-      {/* Boundary Threshold Divider: Music -> Gallery */}
-      <SectionFloralDivider />
     </section>
   );
 }

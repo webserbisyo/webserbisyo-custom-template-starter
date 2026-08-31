@@ -1,6 +1,6 @@
 // TEMPLATE ASSET MANIFEST.
 // Local asset references for current template artwork and local images.
-// Visual assets (Hero, Gallery, Love Story, Venue) are managed locally by template designers.
+// Visual assets (Hero, Gallery, Story, Venue) are managed locally by template designers.
 // Connected platform data owns event text, dates, and Gift QR codes.
 
 export type TemplateAssets = {
@@ -23,7 +23,6 @@ export const templateAssets: TemplateAssets = {
     gallery: [
       "/template-assets/photos/gallery/gallery-01-ceremony.webp",
       "/template-assets/photos/gallery/gallery-02-bride.webp",
-      "/template-assets/photos/gallery/gallery-03-groom.webp",
       "/template-assets/photos/gallery/gallery-04-silhouette.webp",
       "/template-assets/photos/gallery/gallery-05-toast.webp",
       "/template-assets/photos/gallery/gallery-06-table.webp",
@@ -38,11 +37,3 @@ export const templateAssets: TemplateAssets = {
   illustrations: {},
   icons: {},
 };
-
-export const sageDecorations = {
-  glasshouseCornerLeft: "/template-assets/decorations/sage-glasshouse-corner-left.webp",
-  glasshouseCornerRight: "/template-assets/decorations/sage-glasshouse-corner-right.webp",
-  parterreGrand: "/template-assets/decorations/sage-parterre-estate-floral-grand.webp",
-  glasshouseGridPattern: "/template-assets/backgrounds/sage-glasshouse-grid-pattern.webp",
-  parterreTrellisPattern: "/template-assets/backgrounds/sage-parterre-trellis-pattern.webp",
-} as const;

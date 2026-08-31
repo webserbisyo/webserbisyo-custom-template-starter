@@ -1,7 +1,5 @@
 import type { TimelineData } from "@/platform/event-template-data";
 import { formatEventTime } from "@/template/utils/event-formatting";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import { StaggerList } from "@/template/components/motion/StaggerList";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Clock } from "lucide-react";
@@ -41,9 +39,6 @@ export function TimelineSection({ data }: { data: TimelineData }) {
                 <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 bg-[var(--wedding-surface)] border-2 border-[var(--wedding-primary)] rotate-45 group-hover:bg-[var(--wedding-primary)] group-hover:rotate-90 transition-all duration-300 shadow-xs z-10" />
 
                 <div className="relative overflow-visible bg-[var(--wedding-surface)] p-5 sm:p-6 rounded-2xl border border-[var(--wedding-border)] shadow-xs hover:border-[var(--wedding-accent)]/60 transition-colors">
-                  {/* Botanical Corner Pair on Timeline Card */}
-                  <BotanicalCornerPair size="sm" />
-
                   <div className="relative z-10">
                     <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[var(--wedding-border-subtle)]">
                       <h3 className="font-serif font-bold text-lg sm:text-xl text-[var(--wedding-text)]">
@@ -69,9 +64,6 @@ export function TimelineSection({ data }: { data: TimelineData }) {
           </StaggerList>
         </div>
       </div>
-
-      {/* Boundary Threshold Divider: Timeline -> Entourage */}
-      <SectionFloralDivider />
     </section>
   );
 }

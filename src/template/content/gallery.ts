@@ -1,8 +1,8 @@
 /**
- * Gallery Content Manifest (Glasshouse Ledger)
+ * Gallery Content Manifest (Debut Rose Glam Edition)
  *
  * Canonical template asset metadata for the kinetic photo gallery.
- * Matches high-resolution wedding photography assets.
+ * Matches high-resolution debut photoshoot and ballroom assets.
  */
 
 export type GalleryOrientation = "portrait" | "landscape" | "square";
@@ -22,8 +22,8 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   {
     id: "gallery-01",
     src: "/template-assets/photos/gallery/gallery-01-ceremony.webp",
-    alt: "Wedding ceremony arch in a garden setting",
-    caption: "The Ceremony Arch",
+    alt: "Grand Cotillion ballroom celebration arch",
+    caption: "The Grand Ballroom",
     folioLabel: "FOLIO // 01",
     width: 2752,
     height: 1536,
@@ -32,8 +32,8 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   {
     id: "gallery-02",
     src: "/template-assets/photos/gallery/gallery-02-bride.webp",
-    alt: "Portrait of the bride in her wedding gown",
-    caption: "The Bride",
+    alt: "Portrait of the debutante in her couture evening gown",
+    caption: "The Debutante",
     folioLabel: "FOLIO // 02",
     width: 1536,
     height: 2752,
@@ -41,19 +41,19 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-03",
-    src: "/template-assets/photos/gallery/gallery-03-groom.webp",
-    alt: "Portrait of the groom in a black tuxedo",
-    caption: "The Groom",
+    src: "/template-assets/photos/gallery/gallery-04-silhouette.webp",
+    alt: "Evening silhouette in the grand hall",
+    caption: "Midnight Silhouette",
     folioLabel: "FOLIO // 03",
-    width: 1536,
-    height: 2752,
-    orientation: "portrait",
+    width: 2752,
+    height: 1536,
+    orientation: "landscape",
   },
   {
     id: "gallery-04",
-    src: "/template-assets/photos/gallery/gallery-04-silhouette.webp",
-    alt: "Evening silhouette of the wedding couple",
-    caption: "Midnight Silhouette",
+    src: "/template-assets/photos/gallery/gallery-05-toast.webp",
+    alt: "Eighteen roses celebratory toast",
+    caption: "Celebration Toast",
     folioLabel: "FOLIO // 04",
     width: 2752,
     height: 1536,
@@ -61,20 +61,10 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-05",
-    src: "/template-assets/photos/gallery/gallery-05-toast.webp",
-    alt: "Candlelit wedding reception toast",
-    caption: "Reception Toast",
-    folioLabel: "FOLIO // 05",
-    width: 2752,
-    height: 1536,
-    orientation: "landscape",
-  },
-  {
-    id: "gallery-06",
     src: "/template-assets/photos/gallery/gallery-06-table.webp",
-    alt: "Intimate wedding reception table setting",
-    caption: "Intimate Table Setting",
-    folioLabel: "FOLIO // 06",
+    alt: "Candlelit gala dining table setting",
+    caption: "Gala Table Setting",
+    folioLabel: "FOLIO // 05",
     width: 2752,
     height: 1536,
     orientation: "landscape",

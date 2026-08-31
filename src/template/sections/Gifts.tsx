@@ -1,9 +1,5 @@
-"use client";
-
 import { useState } from "react";
 import type { GiftsData } from "@/platform/event-template-data";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import { LedgerPanel } from "@/template/components/containers/LedgerPanel";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/template/components/ui/Dialog";
@@ -41,9 +37,6 @@ export function GiftsSection({ data }: { data: GiftsData }) {
 
         <Reveal direction="up" distance={20} delay={0.1}>
           <div className="relative overflow-visible">
-            {/* Botanical Corner Pair on Registry Guidance Outer Panel */}
-            <BotanicalCornerPair size="md" />
-
             <LedgerPanel
               title="Registry Guidance"
               indexTag="GIFTS // FOLIO"
@@ -130,9 +123,6 @@ export function GiftsSection({ data }: { data: GiftsData }) {
           </Dialog>
         )}
       </div>
-
-      {/* Boundary Threshold Divider: Gifts -> Guestbook */}
-      <SectionFloralDivider />
     </section>
   );
 }

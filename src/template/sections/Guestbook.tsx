@@ -1,8 +1,4 @@
 import type { GuestbookData } from "@/platform/event-template-data";
-import { sageDecorations } from "@/template/template-assets";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
-import { DecorativePattern } from "@/template/components/decorations/DecorativePattern";
 import { formatGuestbookDate } from "@/template/utils/event-formatting";
 import { StaggerList } from "@/template/components/motion/StaggerList";
 import { Reveal } from "@/template/components/motion/Reveal";
@@ -19,14 +15,6 @@ export function GuestbookSection({ data }: { data: GuestbookData }) {
       id="guestbook"
       className="template-section section-surface-sage relative overflow-x-clip"
     >
-      {/* Decorative Parterre Trellis Pattern Background (Readable Strength) */}
-      <DecorativePattern
-        src={sageDecorations.parterreTrellisPattern}
-        opacity={0.32}
-        objectPosition="center 65%"
-        blendMode="multiply"
-      />
-
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-10 sm:mb-12 space-y-2">
@@ -53,9 +41,6 @@ export function GuestbookSection({ data }: { data: GuestbookData }) {
                     key={msg.id || idx}
                     className="relative overflow-visible bg-[var(--wedding-surface)] p-6 sm:p-7 rounded-2xl border border-[var(--wedding-border)] shadow-xs transition-shadow hover:shadow-soft space-y-4 font-sans"
                   >
-                    {/* Botanical Corner Pair on Guest Message Card */}
-                    <BotanicalCornerPair size="sm" />
-
                     <div className="relative z-10 space-y-4">
                       <p className="text-[var(--wedding-text)] italic leading-relaxed text-base sm:text-lg font-serif">
                         &ldquo;{msg.message}&rdquo;
@@ -85,9 +70,6 @@ export function GuestbookSection({ data }: { data: GuestbookData }) {
           </Reveal>
         )}
       </div>
-
-      {/* Boundary Threshold Divider: Guestbook -> Love Story */}
-      <SectionFloralDivider />
     </section>
   );
 }

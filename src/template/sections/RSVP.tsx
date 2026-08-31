@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import type { RsvpData } from "@/platform/event-template-data";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { submitRsvp, type PublicRsvpPayload } from "@/platform/submit-rsvp";
 import { formatRsvpDeadline } from "@/template/utils/event-formatting";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import { CorrespondenceSheet } from "@/template/components/containers/CorrespondenceSheet";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Magnetic } from "@/template/components/motion/Magnetic";
@@ -438,19 +436,13 @@ export function RSVPSection(props: RsvpProps) {
 
         <Reveal direction="up" distance={24} delay={0.1}>
           <div className="relative overflow-visible">
-            {/* Signature LG Botanical Corner Pair at z-20 overlapping the paper edge */}
-            <BotanicalCornerPair size="lg" />
-
-            {/* Form Stage (Interactive Controls above florals, Sheet Paper at base) */}
+            {/* Form Stage */}
             <div className="relative z-10">
               <RSVPForm {...props} />
             </div>
           </div>
         </Reveal>
       </div>
-
-      {/* Boundary Threshold Divider: RSVP -> Gifts */}
-      <SectionFloralDivider />
     </section>
   );
 }

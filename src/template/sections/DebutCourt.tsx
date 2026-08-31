@@ -1,8 +1,4 @@
 import type { NamedGroupsData } from "@/platform/event-template-data";
-import { sageDecorations } from "@/template/template-assets";
-import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
-import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
-import { DecorativePattern } from "@/template/components/decorations/DecorativePattern";
 import { LedgerPanel } from "@/template/components/containers/LedgerPanel";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Crown } from "lucide-react";
@@ -19,14 +15,6 @@ export function DebutCourtSection({ data }: { data: NamedGroupsData }) {
       id="debut_court"
       className="template-section section-surface-paper relative overflow-x-clip"
     >
-      {/* Parterre Trellis Pattern Background */}
-      <DecorativePattern
-        src={sageDecorations.glasshouseGridPattern}
-        opacity={0.28}
-        objectPosition="center top"
-        blendMode="multiply"
-      />
-
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-10 sm:mb-14 space-y-2">
@@ -44,8 +32,6 @@ export function DebutCourtSection({ data }: { data: NamedGroupsData }) {
           {groups.map((group, gIdx) => (
             <Reveal key={group.id || gIdx} direction="up" distance={20} delay={gIdx * 0.08}>
               <div className="relative overflow-visible h-full">
-                <BotanicalCornerPair size="sm" />
-
                 <LedgerPanel
                   title={group.title || `Court Group ${gIdx + 1}`}
                   indexTag={`COURT // 0${gIdx + 1}`}
@@ -73,8 +59,6 @@ export function DebutCourtSection({ data }: { data: NamedGroupsData }) {
           ))}
         </div>
       </div>
-
-      <SectionFloralDivider />
     </section>
   );
 }
