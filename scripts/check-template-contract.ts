@@ -4,7 +4,8 @@ import {
   eventWebsiteSectionContract,
   EVENT_WEBSITE_SECTION_CONTRACT_VERSION,
   eventWebsiteSectionKeySet,
-  WEDDING_APPLICABLE_SECTION_KEYS,
+  DEBUT_APPLICABLE_SECTION_KEYS,
+  debutApplicableSectionKeySet,
 } from "../src/platform/contract.js";
 import { templateSectionRegistry } from "../src/template/section-registry.js";
 import { demoWeddingData } from "../src/platform/demo-wedding.js";
@@ -29,8 +30,8 @@ type CheckResult = {
   warnings: string[];
 };
 
-console.log("WebSerbisyo Event Template Contract Check (Contract V1)");
-console.log("───────────────────────────────────────────────────────");
+console.log("WebSerbisyo Debut Template Contract Check (Contract V1)");
+console.log("────────────────────────────────────────────────────────");
 
 const result: CheckResult = {
   passed: true,
@@ -52,12 +53,14 @@ if (EVENT_WEBSITE_SECTION_CONTRACT_VERSION === 1) {
   console.log(`✗ Contract version: ${EVENT_WEBSITE_SECTION_CONTRACT_VERSION}`);
 }
 
-// 2. SECTION REGISTRY & CONTRACT SCOPE VALIDATION
-console.log("\n[2] SECTION REGISTRY & CONTRACT SCOPE VALIDATION");
+// 2. SECTION REGISTRY & DEBUT SCOPE VALIDATION
+console.log("\n[2] DEBUT SECTION REGISTRY SCOPE VALIDATION");
 const globalKeys = eventWebsiteSectionContract.map((entry) => entry.key);
+const applicableKeys = DEBUT_APPLICABLE_SECTION_KEYS;
 const registeredKeys = Object.keys(templateSectionRegistry);
 
 console.log(`Global contract sections: ${globalKeys.length}`);
+console.log(`Debut applicable sections: ${applicableKeys.length}`);
 console.log(`Registered template section components: ${registeredKeys.length}`);
 
 if (globalKeys.length !== 20) {
@@ -65,10 +68,17 @@ if (globalKeys.length !== 20) {
   result.failures.push(`Global contract count mismatch. Expected 20, got ${globalKeys.length}`);
 }
 
-if (registeredKeys.length < 14 || registeredKeys.length > 20) {
+if (applicableKeys.length !== 18) {
   result.passed = false;
   result.failures.push(
-    `Template section registry count mismatch. Expected 14-20, got ${registeredKeys.length}`
+    `Debut applicable section count mismatch. Expected 18, got ${applicableKeys.length}`
+  );
+}
+
+if (registeredKeys.length !== 18) {
+  result.passed = false;
+  result.failures.push(
+    `Template section registry count mismatch. Expected 18, got ${registeredKeys.length}`
   );
 }
 
@@ -85,17 +95,37 @@ for (const key of requiredUniversalSections) {
   }
 }
 
-for (const regKey of registeredKeys) {
-  if (eventWebsiteSectionKeySet.has(regKey)) {
-    console.log(`  ✓ Valid Registered Section: ${regKey}`);
+for (const key of applicableKeys) {
+  if (templateSectionRegistry[key]) {
+    console.log(`  ✓ Valid Registered Section: ${key}`);
   } else {
+    missingCount++;
+    result.failures.push(`Missing template renderer for Debut key: '${key}'`);
+    console.log(`  ✗ MISSING DEBUT RENDERER: ${key}`);
+  }
+}
+
+const forbiddenKeys = ["entourage", "godparents"];
+for (const key of forbiddenKeys) {
+  if (templateSectionRegistry[key]) {
+    result.failures.push(`Forbidden section renderer registered: '${key}'`);
+    console.log(`  ✗ FORBIDDEN RENDERER REGISTERED: ${key}`);
+  }
+}
+
+for (const regKey of registeredKeys) {
+  if (!debutApplicableSectionKeySet.has(regKey)) {
     result.failures.push(`Unknown section key registered in templateSectionRegistry: '${regKey}'`);
     console.log(`  ✗ UNKNOWN KEY REGISTERED: ${regKey}`);
   }
 }
 
-if (missingCount === 0 && registeredKeys.every((k) => eventWebsiteSectionKeySet.has(k))) {
-  console.log(`✓ Template section registry correctly contains valid canonical renderers.`);
+if (
+  missingCount === 0 &&
+  registeredKeys.length === 18 &&
+  registeredKeys.every((k) => debutApplicableSectionKeySet.has(k))
+) {
+  console.log(`✓ Template section registry correctly contains exactly 18 Debut renderers.`);
 } else {
   result.passed = false;
 }

@@ -4,7 +4,7 @@ import contractJson from "../../contracts/event-website-sections.v1.json";
 
 export const EVENT_WEBSITE_SECTION_CONTRACT_VERSION = 1 as const;
 
-export type WeddingSectionKey =
+export type EventSectionKey =
   | "host_info"
   | "countdown"
   | "music_effects"
@@ -26,7 +26,9 @@ export type WeddingSectionKey =
   | "debut_court"
   | "godparents";
 
-export const WEDDING_APPLICABLE_SECTION_KEYS = [
+export type WeddingSectionKey = EventSectionKey;
+
+export const DEBUT_APPLICABLE_SECTION_KEYS = [
   "host_info",
   "countdown",
   "music_effects",
@@ -35,7 +37,8 @@ export const WEDDING_APPLICABLE_SECTION_KEYS = [
   "venue",
   "secondary_event",
   "timeline_program",
-  "entourage",
+  "eighteen_roses_candles",
+  "debut_court",
   "principal_sponsors",
   "attire_motif",
   "extra_info",
@@ -46,17 +49,25 @@ export const WEDDING_APPLICABLE_SECTION_KEYS = [
   "contact_socials",
 ] as const;
 
-export type WeddingApplicableSectionKey = (typeof WEDDING_APPLICABLE_SECTION_KEYS)[number];
-export const weddingApplicableSectionKeySet = new Set<string>(WEDDING_APPLICABLE_SECTION_KEYS);
+export const EVENT_APPLICABLE_SECTION_KEYS = DEBUT_APPLICABLE_SECTION_KEYS;
+export const WEDDING_APPLICABLE_SECTION_KEYS = DEBUT_APPLICABLE_SECTION_KEYS;
+
+export type DebutApplicableSectionKey = (typeof DEBUT_APPLICABLE_SECTION_KEYS)[number];
+export type EventApplicableSectionKey = DebutApplicableSectionKey;
+export type WeddingApplicableSectionKey = DebutApplicableSectionKey;
+
+export const debutApplicableSectionKeySet = new Set<string>(DEBUT_APPLICABLE_SECTION_KEYS);
+export const eventApplicableSectionKeySet = debutApplicableSectionKeySet;
+export const weddingApplicableSectionKeySet = debutApplicableSectionKeySet;
 
 export type SectionContractEntry = {
-  key: WeddingSectionKey;
+  key: EventSectionKey;
   label: string;
   navigationEligible: boolean;
   visibility: "optional" | "required";
 };
 
-const canonicalKeys: WeddingSectionKey[] = [
+const canonicalKeys: EventSectionKey[] = [
   "host_info",
   "countdown",
   "music_effects",

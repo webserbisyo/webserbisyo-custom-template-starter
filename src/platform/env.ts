@@ -34,7 +34,7 @@ export function getPublicEnv(): PublicEnv {
     eventSlug,
     designMode,
     explicitDesignMode,
-    templateId: (process.env.NEXT_PUBLIC_TEMPLATE_ID ?? "wedding-custom-starter-v2").trim(),
+    templateId: (process.env.NEXT_PUBLIC_TEMPLATE_ID ?? "starter-debut-rose-glam").trim(),
     hasLiveConfig,
   };
 }

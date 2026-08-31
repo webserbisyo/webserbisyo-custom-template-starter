@@ -56,6 +56,12 @@ export function AudioProvider({
   const [playbackState, setPlaybackState] = useState<AudioPlaybackState>("idle");
   const [isMuted, setIsMuted] = useState(false);
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const iframeReadyRef = useRef(false);
@@ -215,9 +221,9 @@ export function AudioProvider({
     }
   };
 
-  // Render hidden YouTube iframe player if YouTube ID is detected
+  // Render hidden YouTube iframe player if YouTube ID is detected (Client mounted only)
   const renderHiddenYoutubePlayer = () => {
-    if (sourceType !== "youtube" || !youtubeId) return null;
+    if (!isMounted || sourceType !== "youtube" || !youtubeId) return null;
 
     const params = new URLSearchParams({
       enablejsapi: "1",
@@ -247,7 +253,7 @@ export function AudioProvider({
           ref={iframeRef}
           id="youtube-ambient-player"
           src={embedUrl}
-          title="Wedding Music Player"
+          title="Debut Music Player"
           allow="autoplay; encrypted-media; fullscreen"
           tabIndex={-1}
           onLoad={handleIframeLoad}
@@ -431,7 +437,7 @@ export function FloatingMusicBubble({
         className={`rounded-full bg-[var(--wedding-surface-dark)] text-[var(--wedding-on-dark)] shadow-2xl border-2 border-[var(--wedding-accent)]/50 flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none template-focus-ring shrink-0 relative group ${
           compact ? "w-12 h-12" : "w-14 h-14"
         }`}
-        aria-label="Wedding song controls"
+        aria-label="Debut song controls"
         title={isPlaying ? "Pause music" : "Play music"}
       >
         <AnimatePresence mode="wait">

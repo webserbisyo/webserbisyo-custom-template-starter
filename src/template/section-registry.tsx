@@ -18,7 +18,6 @@ import { StoryMessageSection } from "./sections/StoryMessage";
 import { ContactSection } from "./sections/Contact";
 import { EighteenRosesCandlesSection } from "./sections/EighteenRosesCandles";
 import { DebutCourtSection } from "./sections/DebutCourt";
-import { GodparentsSection } from "./sections/Godparents";
 
 export type SectionRendererProps = {
   data: EventTemplateData;
@@ -77,5 +76,4 @@ export const templateSectionRegistry: Record<
     <EighteenRosesCandlesSection data={data.eighteenRosesCandles} />
   ),
   debut_court: ({ data }) => <DebutCourtSection data={data.debutCourt} />,
-  godparents: ({ data }) => <GodparentsSection data={data.godparents} />,
 };

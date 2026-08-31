@@ -15,16 +15,16 @@ export type TemplateConfig = {
 };
 
 export const templateConfig: TemplateConfig = {
-  id: "template-03-sage-estate",
-  name: "Sage Estate — The Glasshouse Ledger",
+  id: "template-debut-rose-glam",
+  name: "Rose Glam — Grand Cotillion Edition",
   version: 1,
   description:
-    "English Garden Estate architectural wedding template with warm ivory surfaces and conservatory sage accents.",
+    "Rose gold glamour debutante cotillion ball template with blush velvet surfaces, champagne gold accents, and archival parterre trellis patterns.",
   palette: [
-    { name: "Conservatory Sage", hex: "#657A57" },
-    { name: "Mist Sage", hex: "#DDE5D3" },
-    { name: "Deep Forest", hex: "#304438" },
-    { name: "Antique Brass", hex: "#C9A86A" },
-    { name: "Warm Cream", hex: "#F7F4EA" },
+    { name: "Rose Gold", hex: "#B76E79" },
+    { name: "Blush Velvet", hex: "#F4E0E0" },
+    { name: "Champagne Gold", hex: "#D4AF37" },
+    { name: "Deep Plum", hex: "#181216" },
+    { name: "Silk Cream", hex: "#FAF8F5" },
   ],
 };
