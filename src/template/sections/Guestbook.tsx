@@ -17,7 +17,8 @@ export type GuestbookSectionProps = {
 };
 
 export function GuestbookSection({ data }: GuestbookSectionProps) {
-  const messages: DisplayGuestbookMessage[] = (data.messages as DisplayGuestbookMessage[]) || [];
+  const rawMessages = data?.messages || [];
+  const messages: DisplayGuestbookMessage[] = rawMessages as DisplayGuestbookMessage[];
 
   return (
     <section
@@ -29,33 +30,31 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
           <div className="text-center mb-8 sm:mb-12 space-y-2">
             <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>INSCRIBED WISHES // 17</span>
+              <span>COTILLION PROTOCOL // INSCRIBED BLESSINGS &amp; WISHES</span>
             </span>
-            <h2 className="text-role-heading-quiet text-[var(--debut-text-noir,#26131C)] tracking-tight">
-              {data.sectionTitle || "Debutante Guestbook"}
+            <h2 className="text-role-heading-major text-[var(--debut-text-noir,#26131C)] tracking-tight">
+              {data.sectionTitle || "Debut Wishes"}
             </h2>
-            {data.sectionIntro && (
-              <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#704D5B)]">
-                {data.sectionIntro}
-              </p>
-            )}
+            <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#704D5B)] font-serif italic">
+              {data.sectionIntro || "Leave a warm message for our debutante."}
+            </p>
           </div>
         </Reveal>
 
         <Reveal direction="up" distance={20} delay={0.1}>
           {messages.length > 0 ? (
             <div className="space-y-4 max-h-[520px] overflow-y-auto pr-1 font-sans">
-              {messages.map((entry) => {
+              {messages.map((entry, idx) => {
                 const initial = (entry.guestName || "G").charAt(0).toUpperCase();
                 const rawDate = entry.submittedAt || entry.createdAt;
 
                 return (
                   <div
-                    key={entry.id || `msg-${entry.guestName}`}
-                    className="debut-glass-card p-5 sm:p-6 rounded-2xl bg-[var(--debut-surface-alabaster,#ffffff)] border border-[var(--debut-rose-gold-border,#E8C4C8)]/80 shadow-xs flex items-start gap-4 text-left transition-all hover:border-[var(--debut-rose-gold,#B76E79)]"
+                    key={entry.id || `msg-${entry.guestName || idx}`}
+                    className="debut-glass-card p-5 sm:p-6 rounded-2xl bg-white border border-[var(--debut-rose-gold-border,#E8C4C8)]/80 shadow-xs flex items-start gap-4 text-left transition-all hover:border-[var(--debut-rose-gold,#B76E79)]"
                   >
                     {/* Guest Initial Avatar Badge */}
-                    <div className="w-10 h-10 rounded-full bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] text-[var(--debut-bg-coral,#E65C4F)] font-cinzel font-bold text-sm flex items-center justify-center shrink-0 border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-xs">
+                    <div className="w-10 h-10 rounded-full bg-[#F4EBEB] text-[var(--debut-bg-coral,#E65C4F)] font-cinzel font-bold text-sm flex items-center justify-center shrink-0 border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-xs">
                       {initial}
                     </div>
 
@@ -66,7 +65,7 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
                           {entry.guestName}
                         </span>
                         {rawDate && (
-                          <span className="text-[10px] font-cinzel font-bold text-[var(--debut-text-muted,#704D5B)] uppercase shrink-0">
+                          <span className="text-[10px] font-cinzel text-[var(--debut-text-muted,#704D5B)] uppercase shrink-0">
                             {new Date(rawDate).toLocaleDateString(undefined, {
                               month: "short",
                               day: "numeric",
@@ -76,7 +75,7 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
                         )}
                       </div>
                       <p className="text-sm text-[var(--debut-text-noir,#26131C)] leading-relaxed font-sans">
-                        {entry.message}
+                        &ldquo;{entry.message}&rdquo;
                       </p>
                     </div>
                   </div>
@@ -84,9 +83,11 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
               })}
             </div>
           ) : (
-            <div className="p-8 sm:p-10 rounded-3xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/60 text-center text-sm text-[var(--debut-text-muted,#704D5B)] border border-dashed border-[var(--debut-rose-gold-border)] max-w-md mx-auto space-y-2">
-              <MessageSquare className="w-6 h-6 text-[var(--debut-rose-gold,#B76E79)] mx-auto" />
-              <p>{data.emptyStateMessage || "Approved guest wishes will appear here soon."}</p>
+            <div className="p-8 rounded-3xl bg-[#F4EBEB]/60 text-center text-sm text-[var(--debut-text-muted,#704D5B)] border border-dashed border-[var(--debut-rose-gold-border)] max-w-md mx-auto">
+              <MessageSquare className="w-6 h-6 text-[var(--debut-rose-gold,#B76E79)] mx-auto mb-2" />
+              <p>
+                {data.emptyStateMessage || "Approved guest wishes will appear here as guests RSVP."}
+              </p>
             </div>
           )}
         </Reveal>
