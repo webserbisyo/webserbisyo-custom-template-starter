@@ -10,7 +10,7 @@ import { MoreDrawer } from "./MoreDrawer";
 import { Menu } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM FROSTED NAVBAR (OPAQUE GLASS & EXPANDED DIRECTORY TRIGGER)
+// DEBUT ROSE GLAM INVARIANT HEIGHT NAVBAR (FIXED H-16/H-18 & CALIBRATED FROSTED GLASS)
 
 export function Navbar({ data }: { data: EventTemplateData }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -53,15 +53,15 @@ export function Navbar({ data }: { data: EventTemplateData }) {
     <>
       <header
         data-scrolled={isScrolled ? "true" : "false"}
-        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full h-16 sm:h-18 transition-[background-color,border-color,box-shadow] duration-300 ${
           isScrolled
-            ? "debut-glass-navbar py-2 sm:py-2.5 bg-[var(--debut-bg-alabaster,#FAF5F5)]/96 backdrop-blur-xl border-b border-[var(--debut-rose-gold-border,#E8C4C8)]/60 shadow-sm"
-            : "bg-[var(--debut-bg-alabaster,#FAF5F5)]/92 backdrop-blur-md py-3 sm:py-3.5 border-b border-[var(--debut-rose-gold-border,#E8C4C8)]/30 shadow-xs"
+            ? "debut-glass-navbar border-b border-[var(--debut-rose-gold-border,#E8C4C8)]/50 shadow-sm"
+            : "bg-[var(--debut-bg-alabaster,#FAF5F5)]/80 backdrop-blur-md border-b border-[var(--debut-rose-gold-border,#E8C4C8)]/25"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Zone 1: Left Monogram */}
-          <div className="flex items-center min-w-[120px] sm:min-w-[160px]">
+        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+          {/* Zone 1: Wordmark Lockup (shrink-0 prevents line collapse) */}
+          <div className="flex items-center shrink-0">
             <Link
               href="/"
               onClick={handleHomeClick}
@@ -82,10 +82,10 @@ export function Navbar({ data }: { data: EventTemplateData }) {
             </Link>
           </div>
 
-          {/* Zone 2: Center Primary Browsing Links (Hidden on < lg to prevent crowding) */}
+          {/* Zone 2: Center Primary Browsing Links (hidden xl:flex prevents horizontal collision) */}
           <nav
             aria-label="Primary browsing navigation"
-            className="hidden lg:flex flex-1 items-center justify-center gap-6 xl:gap-8 text-xs font-bold uppercase tracking-[0.2em] font-cinzel text-[var(--debut-text-noir)] select-none whitespace-nowrap"
+            className="hidden xl:flex flex-1 items-center justify-center gap-7 text-xs font-bold uppercase tracking-[0.2em] font-cinzel text-[var(--debut-text-noir,#26131C)] select-none whitespace-nowrap"
           >
             {navModel.primaryNavItems.map((item) => {
               const resolvedHref = resolveEventHref(item.anchor, pathname);
@@ -95,7 +95,7 @@ export function Navbar({ data }: { data: EventTemplateData }) {
                   key={item.key}
                   href={resolvedHref}
                   onClick={(e) => handleAnchorClick(e, item.anchor)}
-                  className="py-2 relative text-[var(--debut-text-noir)] hover:text-[var(--debut-bg-coral)] transition-colors after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 after:bg-[var(--debut-bg-coral)] template-focus-ring rounded-xs"
+                  className="py-1 relative text-[var(--debut-text-noir,#26131C)] hover:text-[var(--debut-bg-coral,#E65C4F)] transition-colors after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 after:bg-[var(--debut-bg-coral,#E65C4F)] template-focus-ring rounded-xs"
                 >
                   {item.label}
                 </Link>
@@ -103,19 +103,18 @@ export function Navbar({ data }: { data: EventTemplateData }) {
             })}
           </nav>
 
-          {/* Zone 3: Right Action & Directory Menu Trigger */}
-          <div className="flex items-center justify-end min-w-[120px] sm:min-w-[160px]">
+          {/* Zone 3: Directory Action Trigger (shrink-0) */}
+          <div className="flex items-center justify-end shrink-0">
             <button
+              type="button"
               onClick={() => setDrawerOpen(true)}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-[var(--debut-text-noir)] bg-[var(--debut-surface-alabaster)]/80 hover:bg-[var(--debut-surface-alabaster-alt)] transition-all duration-200 border border-[var(--debut-rose-gold-border)]/60 shadow-xs template-focus-ring cursor-pointer btn-press-physics"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--debut-rose-gold-border,#E8C4C8)]/60 bg-white/80 text-[var(--debut-text-noir,#26131C)] hover:border-[var(--debut-bg-coral,#E65C4F)] hover:text-[var(--debut-bg-coral,#E65C4F)] transition-all text-xs font-cinzel font-bold tracking-widest uppercase shadow-xs active:scale-95 cursor-pointer template-focus-ring btn-press-physics"
               aria-expanded={drawerOpen}
               aria-controls="sitemap-drawer"
               aria-label="Open complete celebration menu"
             >
-              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] font-cinzel text-[var(--debut-text-noir)]">
-                Directory
-              </span>
-              <Menu className="w-4 h-4 text-[var(--debut-rose-gold)]" />
+              <span>Directory</span>
+              <Menu className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>

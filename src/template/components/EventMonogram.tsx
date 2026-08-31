@@ -170,28 +170,32 @@ export function EventMonogram({
   // Debut: SOPHIA • 18TH BIRTHDAY 🌹
   return (
     <span
-      className={`event-nav-monogram inline-flex items-center text-[var(--debut-text-noir,#26131C)] hover:text-[var(--debut-bg-coral,#E65C4F)] transition-colors select-none ${className}`}
+      className={`event-nav-monogram inline-flex items-center whitespace-nowrap shrink-0 text-[var(--debut-text-noir,#26131C)] select-none ${className}`}
       {...props}
     >
       {isSingleHost ? (
-        <span className="event-monogram-glyphs flex items-center font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] uppercase">
-          <span className="text-[var(--debut-text-noir,#26131C)] font-bold">
+        <span className="event-monogram-glyphs inline-flex items-center whitespace-nowrap font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] uppercase">
+          {/* First Name */}
+          <span className="text-[var(--debut-text-noir,#26131C)] font-bold shrink-0">
             {firstName || initial}
           </span>
-          {fullMilestone && (
+
+          {/* Responsive Milestone Lockup */}
+          {milestoneNum ? (
             <>
-              <span className="text-[var(--debut-champagne-gold)] font-bold mx-1.5 text-xs">
+              <span className="text-[var(--debut-champagne-gold,#D4AF37)] font-bold mx-1 sm:mx-1.5 text-xs shrink-0">
                 &bull;
               </span>
-              <span className="font-cinzel text-[11px] sm:text-xs font-semibold tracking-wider text-[var(--debut-rose-gold,#B76E79)]">
-                {fullMilestone}
+              <span className="font-cinzel text-[11px] sm:text-xs font-semibold tracking-wider text-[var(--debut-rose-gold,#B76E79)] shrink-0">
+                <span>{milestoneNum}TH</span>
+                <span className="hidden sm:inline ml-1">BIRTHDAY</span>
               </span>
-              <span className="ml-1 text-xs">🌹</span>
+              <span className="ml-1 text-xs shrink-0">🌹</span>
             </>
-          )}
+          ) : null}
         </span>
       ) : (
-        <span className="event-monogram-glyphs flex items-center font-serif text-lg md:text-xl font-bold tracking-widest">
+        <span className="event-monogram-glyphs inline-flex items-center whitespace-nowrap font-serif text-lg md:text-xl font-bold tracking-widest">
           <span>{initial}</span>
           <span className="text-[var(--debut-champagne-gold)] font-serif italic font-normal mx-1 text-base">
             &amp;
