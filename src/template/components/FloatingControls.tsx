@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import type { WeddingNavItem } from "@/template/navigation/wedding-navigation";
+import type { EventNavItem } from "@/template/navigation/event-navigation";
 import { QuickDock } from "./QuickDock";
 import { FloatingMusicBubble, useAudio } from "./AudioPlayer";
 import { useAutoHideDock } from "../hooks/useAutoHideDock";
 
 export type FloatingControlsProps = {
-  items: WeddingNavItem[];
+  items: EventNavItem[];
 };
 
 /**

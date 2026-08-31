@@ -3,8 +3,8 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { MoreDrawerGroup } from "@/template/navigation/wedding-navigation";
-import { resolveWeddingHref } from "@/template/navigation/wedding-navigation";
+import type { MoreDrawerGroup } from "@/template/navigation/event-navigation";
+import { resolveEventHref } from "@/template/navigation/event-navigation";
 import {
   X,
   Calendar,
@@ -144,7 +144,7 @@ export function MoreDrawer({ isOpen, onClose, groups, coupleDisplayName }: MoreD
               <div className="grid grid-cols-2 gap-2">
                 {group.items.map((item) => {
                   const IconComponent = ICON_MAP[item.iconName] || Info;
-                  const resolvedHref = resolveWeddingHref(item.anchor, pathname);
+                  const resolvedHref = resolveEventHref(item.anchor, pathname);
 
                   return (
                     <Link

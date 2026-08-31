@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { WeddingNavItem } from "@/template/navigation/wedding-navigation";
-import { resolveWeddingHref } from "@/template/navigation/wedding-navigation";
+import type { EventNavItem } from "@/template/navigation/event-navigation";
+import { resolveEventHref } from "@/template/navigation/event-navigation";
 import { Calendar, MapPin, Mail, Utensils, Shirt, Heart, Info, Clock } from "lucide-react";
 
 const ICON_MAP: Record<string, React.ElementType> = {
@@ -19,7 +19,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
 };
 
 export type QuickDockProps = {
-  items: WeddingNavItem[];
+  items: EventNavItem[];
   compact?: boolean;
   className?: string;
 };
@@ -52,7 +52,7 @@ export function QuickDock({ items, compact = false, className = "" }: QuickDockP
       {items.map((item) => {
         const IconComponent = ICON_MAP[item.iconName] || Info;
         const isPrimary = item.isPrimaryAction;
-        const resolvedHref = resolveWeddingHref(item.anchor, pathname);
+        const resolvedHref = resolveEventHref(item.anchor, pathname);
 
         return (
           <div key={item.key} className="relative group">

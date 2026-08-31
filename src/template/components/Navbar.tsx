@@ -5,11 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { EventTemplateData } from "@/platform/event-template-data";
 import {
-  type CanonicalWeddingNavigation,
-  buildWeddingNavigation,
-  resolveWeddingHref,
-} from "@/template/navigation/wedding-navigation";
-import { WeddingMonogram } from "./WeddingMonogram";
+  type CanonicalEventNavigation,
+  buildEventNavigation,
+  resolveEventHref,
+} from "@/template/navigation/event-navigation";
+import { EventMonogram } from "./EventMonogram";
 import { MoreDrawer } from "./MoreDrawer";
 import { Menu } from "lucide-react";
 
@@ -18,7 +18,7 @@ import { Menu } from "lucide-react";
 
 export type NavbarProps = {
   data: EventTemplateData;
-  navModel: CanonicalWeddingNavigation;
+  navModel: CanonicalEventNavigation;
 };
 
 export function Navbar({ data }: { data: EventTemplateData }) {
@@ -27,7 +27,7 @@ export function Navbar({ data }: { data: EventTemplateData }) {
   const pathname = usePathname() || "/";
   const isHomePage = pathname === "/" || pathname === "";
 
-  const navModel = buildWeddingNavigation(data);
+  const navModel = buildEventNavigation(data);
   const isScrolled = !isHomePage || hasScrolled;
 
   useEffect(() => {
@@ -73,10 +73,15 @@ export function Navbar({ data }: { data: EventTemplateData }) {
               className="template-focus-ring rounded-md inline-flex items-center"
               aria-label={`Home - ${data.coupleDisplayName} wedding`}
             >
-              <WeddingMonogram
+              <EventMonogram
                 groomName={data.couple?.groomName}
                 brideName={data.couple?.brideName}
                 coupleDisplayName={data.coupleDisplayName}
+                milestone={
+                  data.couple?.kind === "debut" || data.couple?.kind === "birthday"
+                    ? (data.couple as { milestone?: string }).milestone
+                    : undefined
+                }
                 variant="nav"
               />
             </Link>
@@ -88,7 +93,7 @@ export function Navbar({ data }: { data: EventTemplateData }) {
             className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-8 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] select-none"
           >
             {navModel.primaryNavItems.map((item) => {
-              const resolvedHref = resolveWeddingHref(item.anchor, pathname);
+              const resolvedHref = resolveEventHref(item.anchor, pathname);
 
               return (
                 <Link

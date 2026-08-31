@@ -10,7 +10,7 @@ import { templateSectionRegistry } from "../src/template/section-registry.js";
 import { demoWeddingData } from "../src/platform/demo-wedding.js";
 import { demoDebutData } from "../src/platform/demo-debut.js";
 import { normalizeEventData } from "../src/platform/normalize-event.js";
-import { deriveCoupleIdentity } from "../src/template/utils/couple-identity.js";
+import { deriveHostIdentity } from "../src/template/utils/host-identity.js";
 import {
   formatEventDateLong,
   formatEventTime,
@@ -18,10 +18,10 @@ import {
   formatRsvpDeadline,
 } from "../src/template/utils/event-formatting.js";
 import {
-  buildWeddingNavigation,
-  resolveWeddingHref,
+  buildEventNavigation,
+  resolveEventHref,
   hasMeaningfulContactContent,
-} from "../src/template/navigation/wedding-navigation.js";
+} from "../src/template/navigation/event-navigation.js";
 
 type CheckResult = {
   passed: boolean;
@@ -216,15 +216,15 @@ scanDirForForbiddenCode(path.resolve(process.cwd(), "src/template"));
 
 // 6. DYNAMIC COUPLE IDENTITY & EVENT FORMATTING GUARD
 console.log("\n[6] DYNAMIC COUPLE IDENTITY & EVENT FORMATTING GUARD");
-const derivedTest = deriveCoupleIdentity("Alex Rivera", "Jamie Cruz");
+const derivedTest = deriveHostIdentity("Alex Rivera", "Jamie Cruz");
 if (derivedTest.monogram === "A & J" && derivedTest.compactMonogram === "AJ") {
   console.log(
-    "  ✓ Couple identity derivation verified: 'Alex Rivera' + 'Jamie Cruz' -> 'A & J' / 'AJ'"
+    "  ✓ Host identity derivation verified: 'Alex Rivera' + 'Jamie Cruz' -> 'A & J' / 'AJ'"
   );
 } else {
   result.passed = false;
   result.failures.push(
-    `Couple identity derivation test failed. Got monogram '${derivedTest.monogram}'`
+    `Host identity derivation test failed. Got monogram '${derivedTest.monogram}'`
   );
   console.log(`  ✗ IDENTITY DERIVATION TEST FAILED: ${JSON.stringify(derivedTest)}`);
 }
@@ -247,11 +247,11 @@ if (
 
 // 7. CANONICAL NAVIGATION MODEL GUARD
 console.log("\n[7] CANONICAL NAVIGATION MODEL GUARD");
-const navTest = buildWeddingNavigation(demoWeddingData);
-const homeResolvedOnRoot = resolveWeddingHref("/", "/");
-const homeResolvedOnSub = resolveWeddingHref("/", "/rsvp");
-const sectionResolvedOnRoot = resolveWeddingHref("#timeline_program", "/");
-const sectionResolvedOnSub = resolveWeddingHref("#timeline_program", "/rsvp");
+const navTest = buildEventNavigation(demoWeddingData);
+const homeResolvedOnRoot = resolveEventHref("/", "/");
+const homeResolvedOnSub = resolveEventHref("/", "/rsvp");
+const sectionResolvedOnRoot = resolveEventHref("#timeline_program", "/");
+const sectionResolvedOnSub = resolveEventHref("#timeline_program", "/rsvp");
 
 if (
   navTest.primaryNavItems.length > 0 &&
@@ -888,7 +888,7 @@ if (fullContactTest && !emptyContactTest && !nullContactTest) {
 }
 
 // 10.2 Verify navigation filtering with disabled contact_socials
-const disabledContactNavTest = buildWeddingNavigation({
+const disabledContactNavTest = buildEventNavigation({
   ...demoWeddingData,
   enabledSectionKeys: demoWeddingData.enabledSectionKeys.filter((k) => k !== "contact_socials"),
 });
@@ -897,7 +897,7 @@ const hasContactWhenDisabled = disabledContactNavTest.allEnabledItems.some(
 );
 
 // 10.3 Verify navigation filtering with empty contact data
-const emptyContactNavTest = buildWeddingNavigation({
+const emptyContactNavTest = buildEventNavigation({
   ...demoWeddingData,
   enabledSectionKeys: [...demoWeddingData.enabledSectionKeys, "contact_socials"],
   contact: {

@@ -1,5 +1,5 @@
 import type { EventTemplateData } from "@/platform/event-template-data";
-import { WeddingMonogram } from "./WeddingMonogram";
+import { EventMonogram } from "./EventMonogram";
 import { extractEventYear } from "@/template/utils/event-formatting";
 import { Mail, Phone, User } from "lucide-react";
 import { FacebookIcon, InstagramIcon, TikTokIcon } from "./ui/BrandIcons";
@@ -34,10 +34,15 @@ export function Footer({ data }: { data: EventTemplateData }) {
       <footer className="wedding-footer pattern-glazing-grid pattern-feature pattern-dark pt-10 sm:pt-12 pb-24 sm:pb-28 px-4 bg-[var(--wedding-surface-dark)] text-[var(--wedding-accent-soft)] border-t border-[var(--wedding-surface-dark-alt)] text-xs">
         <div className="max-w-3xl mx-auto flex flex-col items-center text-center gap-3 sm:gap-4 select-none">
           {/* Centered Identity */}
-          <WeddingMonogram
+          <EventMonogram
             groomName={data.couple?.groomName}
             brideName={data.couple?.brideName}
             coupleDisplayName={data.coupleDisplayName}
+            milestone={
+              data.couple?.kind === "debut" || data.couple?.kind === "birthday"
+                ? (data.couple as { milestone?: string }).milestone
+                : undefined
+            }
             variant="footer"
           />
 
@@ -84,10 +89,15 @@ export function Footer({ data }: { data: EventTemplateData }) {
         >
           {/* Column 1: Centered Couple Identity */}
           <div className="flex flex-col items-center md:items-start gap-1">
-            <WeddingMonogram
+            <EventMonogram
               groomName={data.couple?.groomName}
               brideName={data.couple?.brideName}
               coupleDisplayName={data.coupleDisplayName}
+              milestone={
+                data.couple?.kind === "debut" || data.couple?.kind === "birthday"
+                  ? (data.couple as { milestone?: string }).milestone
+                  : undefined
+              }
               variant="footer"
             />
           </div>

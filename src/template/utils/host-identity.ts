@@ -1,8 +1,8 @@
-// DYNAMIC COUPLE IDENTITY.
-// Redesign freely, but derive initials/names from WeddingTemplateData.
+// DYNAMIC HOST / CELEBRANT / COUPLE IDENTITY.
+// Redesign freely, but derive initials/names from EventTemplateData.
 // Never hardcode client initials.
 
-export type CoupleIdentity = {
+export type HostIdentity = {
   groomName: string;
   brideName: string;
   groomInitial: string;
@@ -11,6 +11,9 @@ export type CoupleIdentity = {
   compactMonogram: string;
   displayName: string;
 };
+
+/** @deprecated Use HostIdentity — kept for backward compatibility. */
+export type CoupleIdentity = HostIdentity;
 
 const COMMON_TITLES = new Set(["dr", "mr", "mrs", "ms", "prof", "rev", "atty", "engr", "hon"]);
 
@@ -28,16 +31,62 @@ function extractInitial(name: string): string {
   return match ? match[0].toUpperCase() : "";
 }
 
-export function deriveCoupleIdentity(
+/**
+ * Extracts a milestone number from a milestone string.
+ * Examples:
+ * - "18th Birthday" → "18"
+ * - "Turning 18" → "18"
+ * - "18" → "18"
+ * - "10th" → "10"
+ */
+export function extractMilestoneNumber(milestone?: string | null): string | null {
+  if (!milestone) return null;
+  const match = String(milestone).trim().match(/(\d+)/);
+  return match ? match[1] : null;
+}
+
+/**
+ * Converts an integer milestone into an ordinal string.
+ * Examples:
+ * - "1" → "1st", "2" → "2nd", "3" → "3rd", "4" → "4th"
+ * - "10" → "10th", "11" → "11th", "12" → "12th", "13" → "13th"
+ * - "18" → "18th", "21" → "21st", "22" → "22nd", "30" → "30th"
+ */
+export function getOrdinalSuffix(num?: string | number | null): string {
+  if (!num) return "";
+  const n = parseInt(String(num).trim(), 10);
+  if (isNaN(n)) return String(num);
+  const remainder100 = n % 100;
+  if (remainder100 >= 11 && remainder100 <= 13) {
+    return `${n}th`;
+  }
+  const remainder10 = n % 10;
+  switch (remainder10) {
+    case 1:
+      return `${n}st`;
+    case 2:
+      return `${n}nd`;
+    case 3:
+      return `${n}rd`;
+    default:
+      return `${n}th`;
+  }
+}
+
+export function deriveHostIdentity(
   groomName?: string,
   brideName?: string,
   coupleDisplayName?: string
-): CoupleIdentity {
+): HostIdentity {
   const groom = (groomName || "").trim();
   const bride = (brideName || "").trim();
 
+  // If brideName is numeric (e.g. "10" for 10th birthday), absent, or identical to groomName → single host
+  const isBrideNumeric = /^\d+$/.test(bride);
+  const isSingleHost = !bride || isBrideNumeric || groom.toLowerCase() === bride.toLowerCase();
+
   const groomInitial = groom ? extractInitial(groom) : "";
-  const brideInitial = bride ? extractInitial(bride) : "";
+  const brideInitial = !isSingleHost && bride ? extractInitial(bride) : "";
 
   let monogram = "";
   let compactMonogram = "";
@@ -79,15 +128,18 @@ export function deriveCoupleIdentity(
 
   const defaultDisplay =
     coupleDisplayName?.trim() ||
-    (groom && bride ? `${groom} & ${bride}` : groom || bride || "The Couple");
+    (!isSingleHost && groom && bride ? `${groom} & ${bride}` : groom || bride || "The Celebrant");
 
   return {
     groomName: groom,
-    brideName: bride,
+    brideName: isSingleHost ? "" : bride,
     groomInitial,
     brideInitial,
-    monogram: monogram || "C & C",
-    compactMonogram: compactMonogram || "CC",
+    monogram: monogram || "M",
+    compactMonogram: compactMonogram || "M",
     displayName: defaultDisplay,
   };
 }
+
+/** @deprecated Use deriveHostIdentity — kept for backward compatibility. */
+export const deriveCoupleIdentity = deriveHostIdentity;

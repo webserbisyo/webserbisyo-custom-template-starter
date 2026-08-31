@@ -1,5 +1,5 @@
 import type { HostInfoData } from "@/platform/event-template-data";
-import { deriveCoupleIdentity } from "@/template/utils/couple-identity";
+import { deriveHostIdentity } from "@/template/utils/host-identity";
 import { templateAssets } from "@/template/template-assets";
 import { SpecimenFrame } from "@/template/components/containers/SpecimenFrame";
 import { SageAuroraBackground } from "@/template/components/backgrounds/SageAuroraBackground";
@@ -27,7 +27,7 @@ export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionPr
   } else if (data.kind === "baptism") {
     displayName = data.displayAs || data.childName || "The Child";
   } else {
-    const identity = deriveCoupleIdentity(data.groomName, data.brideName);
+    const identity = deriveHostIdentity(data.groomName, data.brideName);
     displayName =
       data.displayAs === "bride_first"
         ? `${data.brideName || identity.brideName} & ${data.groomName || identity.groomName}`
