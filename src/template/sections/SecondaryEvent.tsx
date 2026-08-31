@@ -24,8 +24,8 @@ export function SecondaryEventSection({ data }: SecondaryEventSectionProps) {
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-10 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-95">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
+            <span className="text-white font-cinzel font-bold tracking-[0.25em] drop-shadow-sm inline-flex items-center gap-1.5 text-xs sm:text-sm uppercase">
+              <Sparkles className="w-3.5 h-3.5 text-[#F9F1DC]" />
               <span>EVENING GALA // 08</span>
             </span>
             <h2 className="text-role-heading-major text-white tracking-tight">{title}</h2>

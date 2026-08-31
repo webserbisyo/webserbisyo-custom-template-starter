@@ -40,15 +40,15 @@ export function GallerySection({ data }: { data: GalleryData }) {
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="mb-6 sm:mb-8 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-95">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
+            <span className="text-white font-cinzel font-bold tracking-[0.25em] drop-shadow-sm inline-flex items-center gap-1.5 text-xs sm:text-sm uppercase">
+              <Sparkles className="w-3.5 h-3.5 text-[#F9F1DC]" />
               <span>PHOTO MOMENTS // 04</span>
             </span>
             <h2 className="text-role-heading-major text-white tracking-tight">
               {data.sectionTitle || "Grand Cotillion Gallery"}
             </h2>
             {data.sectionIntro && (
-              <p className="text-role-lead max-w-xl mx-auto mt-2 leading-relaxed text-[var(--debut-text-on-coral-muted,#FFE7E2)] font-serif italic">
+              <p className="text-role-lead max-w-xl mx-auto mt-2 leading-relaxed text-[#FFE7E2] font-serif italic">
                 {data.sectionIntro}
               </p>
             )}
