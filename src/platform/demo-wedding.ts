@@ -1,10 +1,10 @@
 // PLATFORM DATA — KEEP DYNAMIC.
 // Complete, generic, fictional demo wedding fixture for local design/demo mode.
 
-import type { WeddingTemplateData } from "./wedding-template-data";
+import type { EventTemplateData } from "./event-template-data";
 import { EVENT_WEBSITE_SECTION_CONTRACT_VERSION } from "./contract";
 
-export const DEMO_WEDDING_DATA: WeddingTemplateData = {
+export const DEMO_WEDDING_DATA: EventTemplateData = {
   contractVersion: EVENT_WEBSITE_SECTION_CONTRACT_VERSION,
   source: "demo",
   eventSlug: "alex-and-jamie-wedding",

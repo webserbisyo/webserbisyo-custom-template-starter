@@ -1,7 +1,7 @@
 // PLATFORM VISIBILITY — RESPECT DASHBOARD STATE.
 
 import { eventWebsiteSectionKeySet, requiredWeddingSections, WeddingSectionKey } from "./contract";
-import type { NormalizedSection } from "./wedding-template-data";
+import type { NormalizedSection } from "./event-template-data";
 
 export function isSectionEnabled(
   key: string,

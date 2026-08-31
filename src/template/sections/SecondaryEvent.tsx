@@ -1,4 +1,4 @@
-import type { ReceptionData } from "@/platform/wedding-template-data";
+import type { SecondaryEventData } from "@/platform/event-template-data";
 import { formatTimeRange } from "@/template/utils/event-formatting";
 import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
@@ -7,16 +7,16 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Clock, MapPin, Navigation, Info } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// SAGE ESTATE RECEPTION (THE GLASSHOUSE LEDGER)
+// SAGE ESTATE SECONDARY EVENT (THE GLASSHOUSE LEDGER)
 
-export type ReceptionSectionProps = {
-  data: ReceptionData;
+export type SecondaryEventSectionProps = {
+  data: SecondaryEventData;
   eventDate?: string | null;
 };
 
-export function ReceptionSection({ data }: ReceptionSectionProps) {
+export function SecondaryEventSection({ data }: SecondaryEventSectionProps) {
   const timeFormatted = formatTimeRange(data.startTime, data.endTime);
-  const title = data.title || "The Reception";
+  const title = data.title || "Secondary Event";
 
   return (
     <section
@@ -27,7 +27,7 @@ export function ReceptionSection({ data }: ReceptionSectionProps) {
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-10 space-y-2">
             <span className="text-role-subheading text-[var(--wedding-accent-soft)]">
-              FOLIO // 05 &bull; RECEPTION
+              FOLIO // 05 &bull; SECONDARY EVENT
             </span>
             <h2 className="text-role-heading text-[var(--wedding-on-dark)] tracking-tight">
               {title}
@@ -39,7 +39,7 @@ export function ReceptionSection({ data }: ReceptionSectionProps) {
           <div className="relative overflow-visible">
             <BotanicalCornerPair size="md" />
             <LedgerPanel
-              title={data.venueName || "Reception Grounds"}
+              title={data.venueName || "Event Grounds"}
               indexTag="RECORD // 02"
               className="bg-[var(--wedding-surface)] text-[var(--wedding-text)] shadow-card relative z-10"
             >
@@ -90,7 +90,7 @@ export function ReceptionSection({ data }: ReceptionSectionProps) {
                       className="inline-flex items-center gap-2.5 py-3 px-6 bg-[var(--wedding-primary)] hover:bg-[var(--wedding-primary-hover)] text-[var(--wedding-on-primary)] text-sm font-semibold rounded-xl transition-all shadow-xs template-focus-ring cursor-pointer min-h-[44px]"
                     >
                       <Navigation className="w-4 h-4" />
-                      <span>Reception Directions</span>
+                      <span>Event Directions</span>
                     </a>
                   </div>
                 )}
@@ -100,8 +100,12 @@ export function ReceptionSection({ data }: ReceptionSectionProps) {
         </Reveal>
       </div>
 
-      {/* Boundary Threshold Divider: Reception -> Timeline */}
+      {/* Boundary Threshold Divider */}
       <SectionFloralDivider />
     </section>
   );
 }
+
+/** Backward-compatible alias for wedding templates */
+export const ReceptionSection = SecondaryEventSection;
+export type ReceptionSectionProps = SecondaryEventSectionProps;

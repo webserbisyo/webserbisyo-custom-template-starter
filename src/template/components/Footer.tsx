@@ -1,4 +1,4 @@
-import type { WeddingTemplateData } from "@/platform/wedding-template-data";
+import type { EventTemplateData } from "@/platform/event-template-data";
 import { WeddingMonogram } from "./WeddingMonogram";
 import { extractEventYear } from "@/template/utils/event-formatting";
 import { Mail, Phone, User } from "lucide-react";
@@ -8,7 +8,7 @@ import { FacebookIcon, InstagramIcon, TikTokIcon } from "./ui/BrandIcons";
 // Supports both FULL FOOTER MODE (when contact_socials is enabled with content)
 // and COMPACT FOOTER MODE (when disabled or empty, preventing empty visual space).
 
-export function Footer({ data }: { data: WeddingTemplateData }) {
+export function Footer({ data }: { data: EventTemplateData }) {
   const eventYear = extractEventYear(data.ceremony?.eventDate || data.eventDate);
   const coupleName = data.coupleDisplayName || "The Couple";
 

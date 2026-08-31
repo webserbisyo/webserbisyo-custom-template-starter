@@ -1,4 +1,4 @@
-import type { NamedGroupsData } from "@/platform/wedding-template-data";
+import type { NamedGroupsData } from "@/platform/event-template-data";
 import { sageDecorations } from "@/template/template-assets";
 import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";

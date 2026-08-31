@@ -1,4 +1,4 @@
-import type { TimelineData } from "@/platform/wedding-template-data";
+import type { TimelineData } from "@/platform/event-template-data";
 import { formatEventTime } from "@/template/utils/event-formatting";
 import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";

@@ -3,7 +3,7 @@
 // from connected WeddingTemplateData (enabled sections + section order).
 // Protects against dead links and desynchronized nav surfaces.
 
-import type { WeddingTemplateData } from "@/platform/wedding-template-data";
+import type { EventTemplateData } from "@/platform/event-template-data";
 import {
   WEDDING_APPLICABLE_SECTION_KEYS,
   type WeddingApplicableSectionKey,
@@ -246,7 +246,7 @@ export function resolveWeddingHref(anchor: string, currentPathname: string = "/"
 /**
  * Checks whether contact_socials contains any meaningful non-empty fields.
  */
-export function hasMeaningfulContactContent(contact?: WeddingTemplateData["contact"]): boolean {
+export function hasMeaningfulContactContent(contact?: EventTemplateData["contact"]): boolean {
   if (!contact) return false;
   return Boolean(
     contact.contactPerson?.trim() ||
@@ -261,7 +261,7 @@ export function hasMeaningfulContactContent(contact?: WeddingTemplateData["conta
 /**
  * Builds the unified navigation model for a wedding template.
  */
-export function buildWeddingNavigation(data: WeddingTemplateData): CanonicalWeddingNavigation {
+export function buildWeddingNavigation(data: EventTemplateData): CanonicalWeddingNavigation {
   const enabledSet = new Set((data.enabledSectionKeys || []) as WeddingApplicableSectionKey[]);
 
   // If contact_socials is enabled but has zero actual content, exclude it from navigation to avoid dead links

@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { WeddingTemplateData } from "@/platform/wedding-template-data";
+import type { EventTemplateData } from "@/platform/event-template-data";
 import {
+  type CanonicalWeddingNavigation,
   buildWeddingNavigation,
   resolveWeddingHref,
 } from "@/template/navigation/wedding-navigation";
@@ -15,7 +16,12 @@ import { Menu } from "lucide-react";
 // DYNAMIC COUPLE IDENTITY & CANONICAL NAVIGATION.
 // Generalized 3-zone balanced navbar with adaptive scroll states for Sage Estate.
 
-export function Navbar({ data }: { data: WeddingTemplateData }) {
+export type NavbarProps = {
+  data: EventTemplateData;
+  navModel: CanonicalWeddingNavigation;
+};
+
+export function Navbar({ data }: { data: EventTemplateData }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const pathname = usePathname() || "/";

@@ -1,6 +1,7 @@
 "use client";
 
-import type { ExtraInfoData } from "@/platform/wedding-template-data";
+import { useState } from "react";
+import type { ExtraInfoData } from "@/platform/event-template-data";
 import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import {

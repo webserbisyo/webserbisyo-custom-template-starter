@@ -7,7 +7,7 @@ import {
   requiredWeddingSections,
 } from "./contract";
 import type {
-  WeddingTemplateData,
+  EventTemplateData,
   NormalizedSection,
   PublicMediaAsset,
   GuestbookMessage,
@@ -24,7 +24,7 @@ import type {
   NamedGroupsData,
   NamedGroup,
   NamedEntry,
-} from "./wedding-template-data";
+} from "./event-template-data";
 import { isSectionEnabled } from "./section-visibility";
 
 function record(val: unknown): Record<string, unknown> {
@@ -69,7 +69,7 @@ export type NormalizeEventOptions = {
 export function normalizeEventData(
   rawInput: unknown,
   options: NormalizeEventOptions = {}
-): WeddingTemplateData {
+): EventTemplateData {
   const raw = record(rawInput);
   const source = options.source ?? (raw.source as "demo" | "snapshot" | "live") ?? "snapshot";
   const previewMode = options.previewMode ?? (raw.previewMode as "dashboard") ?? undefined;
@@ -647,10 +647,7 @@ export function normalizeEventData(
   };
 }
 
-export function normalizeEvent(
-  input: unknown,
-  options?: NormalizeEventOptions
-): WeddingTemplateData {
+export function normalizeEvent(input: unknown, options?: NormalizeEventOptions): EventTemplateData {
   if (input && typeof input === "object" && "raw" in input) {
     const wrapper = input as {
       raw: unknown;

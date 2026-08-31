@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Image from "next/image";
-import type { GalleryData } from "@/platform/wedding-template-data";
+import type { GalleryData } from "@/platform/event-template-data";
 import { sageDecorations } from "@/template/template-assets";
 import { DecorativePattern } from "@/template/components/decorations/DecorativePattern";
 import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";

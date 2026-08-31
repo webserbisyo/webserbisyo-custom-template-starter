@@ -1,6 +1,6 @@
 "use client";
 
-import type { WeddingTemplateData } from "@/platform/wedding-template-data";
+import type { EventTemplateData } from "@/platform/event-template-data";
 import { templateSectionRegistry } from "./section-registry";
 import { Navbar } from "./components/Navbar";
 import { FallingPetals } from "./components/decorations/FallingPetals";
@@ -10,7 +10,7 @@ import { AudioProvider } from "./components/AudioPlayer";
 import { buildWeddingNavigation } from "./navigation/wedding-navigation";
 
 export type TemplateRendererProps = {
-  data: WeddingTemplateData;
+  data: EventTemplateData;
   apiBaseUrl?: string;
   accessToken?: string | null;
   isDemoMode?: boolean;

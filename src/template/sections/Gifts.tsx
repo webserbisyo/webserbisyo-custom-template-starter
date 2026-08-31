@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { GiftsData } from "@/platform/wedding-template-data";
+import type { GiftsData } from "@/platform/event-template-data";
 import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import { LedgerPanel } from "@/template/components/containers/LedgerPanel";

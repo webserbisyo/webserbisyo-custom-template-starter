@@ -6,10 +6,10 @@ import { normalizeEvent } from "./normalize-event";
 import { validatePublicEventContract } from "./contract";
 import { DEMO_WEDDING_DATA } from "./demo-wedding";
 import { DEMO_DEBUT_DATA } from "./demo-debut";
-import type { WeddingTemplateData } from "./wedding-template-data";
+import type { EventTemplateData } from "./event-template-data";
 
 export type EventLoadResult =
-  | { status: "available"; data: WeddingTemplateData; env: PublicEnv }
+  | { status: "available"; data: EventTemplateData; env: PublicEnv }
   | { status: "unavailable"; code?: string; message: string; env: PublicEnv }
   | { status: "setup_error"; message: string; env: PublicEnv }
   | { status: "network_error"; message: string; env: PublicEnv }

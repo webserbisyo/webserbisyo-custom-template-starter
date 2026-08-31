@@ -1,4 +1,4 @@
-import type { CeremonyData } from "@/platform/wedding-template-data";
+import type { MainEventData } from "@/platform/event-template-data";
 import {
   formatEventDateLong,
   formatTimeRange,
@@ -12,11 +12,11 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Calendar, Clock, AlertCircle, Bookmark } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// SAGE ESTATE CEREMONY (THE GLASSHOUSE LEDGER SIGNATURE PEAK)
-// Strictly uses connected ceremony fields only (no venue/address borrowing).
+// SAGE ESTATE MAIN EVENT (THE GLASSHOUSE LEDGER SIGNATURE PEAK)
+// Strictly uses connected main_event fields only.
 
-export function CeremonySection({ data }: { data: CeremonyData }) {
-  const eventLabel = data.eventLabel || "The Ceremony";
+export function MainEventSection({ data }: { data: MainEventData }) {
+  const eventLabel = data.eventLabel || "The Event";
   const dateFormatted = formatEventDateLong(data.eventDate);
   const timeFormatted = formatTimeRange(data.eventTime, data.endTime);
   const deadlineFormatted = formatRsvpDeadline(data.rsvpDeadline);
@@ -29,7 +29,7 @@ export function CeremonySection({ data }: { data: CeremonyData }) {
       <div className="template-container">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-role-subheading">FOLIO // 02 &bull; CEREMONY</span>
+            <span className="text-role-subheading">FOLIO // 02 &bull; MAIN EVENT</span>
             <h2 className="text-role-heading-major text-[var(--wedding-text)] tracking-tight">
               {eventLabel}
             </h2>
@@ -45,19 +45,19 @@ export function CeremonySection({ data }: { data: CeremonyData }) {
                 <div className="relative z-10">
                   <DateCalendar
                     date={data.eventDate || undefined}
-                    highlightLabel={data.eventLabel || "The Ceremony"}
+                    highlightLabel={data.eventLabel || "The Event"}
                     className="w-full"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Formal Estate Ceremony Record */}
+            {/* Right Column: Formal Estate Event Record */}
             <div className="lg:col-span-7 flex flex-col justify-between">
               <div className="relative overflow-visible h-full">
                 <BotanicalCornerPair size="md" />
                 <LedgerPanel
-                  title="Official Ceremony Record"
+                  title="Official Event Record"
                   indexTag="RECORD // 01"
                   className="h-full bg-[var(--wedding-surface)] flex flex-col justify-between relative z-10"
                 >
@@ -118,8 +118,11 @@ export function CeremonySection({ data }: { data: CeremonyData }) {
         </Reveal>
       </div>
 
-      {/* Boundary Threshold Divider: Ceremony -> Venue */}
+      {/* Boundary Threshold Divider */}
       <SectionFloralDivider />
     </section>
   );
 }
+
+/** Backward-compatible alias for wedding templates */
+export const CeremonySection = MainEventSection;

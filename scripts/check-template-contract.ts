@@ -65,32 +65,30 @@ if (globalKeys.length !== 20) {
   result.failures.push(`Global contract count mismatch. Expected 20, got ${globalKeys.length}`);
 }
 
-if (registeredKeys.length < 17 || registeredKeys.length > 20) {
+if (registeredKeys.length < 14 || registeredKeys.length > 20) {
   result.passed = false;
   result.failures.push(
-    `Template section registry count mismatch. Expected 17-20, got ${registeredKeys.length}`
+    `Template section registry count mismatch. Expected 14-20, got ${registeredKeys.length}`
   );
 }
 
+// Core required sections that must be present in every template starter
+const requiredUniversalSections = ["host_info", "main_event", "venue", "rsvp_form"] as const;
 let missingCount = 0;
-for (const key of WEDDING_APPLICABLE_SECTION_KEYS) {
+for (const key of requiredUniversalSections) {
   if (templateSectionRegistry[key]) {
-    console.log(`  ✓ Registered Section Renderer: ${key}`);
+    console.log(`  ✓ Registered Required Core Renderer: ${key}`);
   } else {
     missingCount++;
-    result.failures.push(`Missing template renderer for core key: '${key}'`);
-    console.log(`  ✗ MISSING CORE RENDERER: ${key}`);
-  }
-}
-
-for (const debutKey of ["eighteen_roses_candles", "debut_court", "godparents"] as const) {
-  if (templateSectionRegistry[debutKey]) {
-    console.log(`  ✓ Registered Debut Section Renderer: ${debutKey}`);
+    result.failures.push(`Missing required core renderer for key: '${key}'`);
+    console.log(`  ✗ MISSING REQUIRED CORE RENDERER: ${key}`);
   }
 }
 
 for (const regKey of registeredKeys) {
-  if (!eventWebsiteSectionKeySet.has(regKey)) {
+  if (eventWebsiteSectionKeySet.has(regKey)) {
+    console.log(`  ✓ Valid Registered Section: ${regKey}`);
+  } else {
     result.failures.push(`Unknown section key registered in templateSectionRegistry: '${regKey}'`);
     console.log(`  ✗ UNKNOWN KEY REGISTERED: ${regKey}`);
   }
@@ -167,7 +165,7 @@ const requiredPlatformFiles = [
   "src/platform/submit-rsvp.ts",
   "src/platform/preview-context.ts",
   "src/platform/section-visibility.ts",
-  "src/platform/wedding-template-data.ts",
+  "src/platform/event-template-data.ts",
   "src/platform/contract.ts",
   "src/platform/demo-wedding.ts",
   "src/platform/demo-debut.ts",

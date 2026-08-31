@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import type { MusicData } from "@/platform/wedding-template-data";
+import type { MusicData } from "@/platform/event-template-data";
 import { sageDecorations } from "@/template/template-assets";
 import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";

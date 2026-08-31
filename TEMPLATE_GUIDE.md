@@ -15,7 +15,7 @@ The `src/platform/` directory handles:
 - Demo vs. Connected mode state management (`demo-wedding.ts`, `preview-context.ts`)
 - Dynamic section visibility and section ordering (`section-visibility.ts`, `contract.ts`)
 - RSVP submission handling and platform API calls (`submit-rsvp.ts`)
-- Type definitions (`wedding-template-data.ts`)
+- Type definitions (`event-template-data.ts`)
 
 The **Wedding Template Registry** (`src/template/section-registry.tsx`) registers exactly **17 Wedding-applicable renderers**. Non-wedding sections (`eighteen_roses_candles`, `debut_court`, `godparents`) are excluded from the wedding starter.
 

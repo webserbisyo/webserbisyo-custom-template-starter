@@ -1,4 +1,4 @@
-import type { CoupleData } from "@/platform/wedding-template-data";
+import type { HostInfoData } from "@/platform/event-template-data";
 import { deriveCoupleIdentity } from "@/template/utils/couple-identity";
 import { templateAssets } from "@/template/template-assets";
 import { SpecimenFrame } from "@/template/components/containers/SpecimenFrame";
@@ -9,15 +9,15 @@ import { Heart, BookOpen } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
 // SAGE ESTATE EDITORIAL HERO (THE GLASSHOUSE LEDGER — ESTATE FOREST AURORA)
-// DYNAMIC COUPLE IDENTITY: Never hardcode client initials or names.
+// DYNAMIC HOST IDENTITY: Never hardcode client initials or names.
 
-export type CoupleSectionProps = {
-  data: CoupleData;
+export type HeroHostSectionProps = {
+  data: HostInfoData;
   eventDate?: string | null;
   storyEnabled?: boolean;
 };
 
-export function CoupleSection({ data, storyEnabled = true }: CoupleSectionProps) {
+export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionProps) {
   let displayName = "";
 
   if (data.kind === "debut") {
@@ -57,7 +57,7 @@ export function CoupleSection({ data, storyEnabled = true }: CoupleSectionProps)
               </div>
             </Reveal>
 
-            {/* 2. Couple Names — Luminous Warm Ivory on Aurora */}
+            {/* 2. Host Names — Luminous Warm Ivory on Aurora */}
             <Reveal direction="up" distance={20} delay={0.1}>
               <h1 className="text-role-display tracking-tight text-[var(--wedding-on-dark)] drop-shadow-xs text-center lg:text-left">
                 {displayName}
@@ -137,3 +137,7 @@ export function CoupleSection({ data, storyEnabled = true }: CoupleSectionProps)
     </section>
   );
 }
+
+/** Backward-compatible alias for wedding templates */
+export const CoupleSection = HeroHostSection;
+export type CoupleSectionProps = HeroHostSectionProps;

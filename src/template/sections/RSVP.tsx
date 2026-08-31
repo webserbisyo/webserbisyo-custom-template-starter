@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { RsvpData } from "@/platform/wedding-template-data";
+import type { RsvpData } from "@/platform/event-template-data";
 import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { submitRsvp, type PublicRsvpPayload } from "@/platform/submit-rsvp";
 import { formatRsvpDeadline } from "@/template/utils/event-formatting";

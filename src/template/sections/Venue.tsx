@@ -1,4 +1,4 @@
-import type { VenueData } from "@/platform/wedding-template-data";
+import type { VenueData } from "@/platform/event-template-data";
 import { templateAssets } from "@/template/template-assets";
 import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";

@@ -1,4 +1,4 @@
-import type { LoveStoryData } from "@/platform/wedding-template-data";
+import type { StoryMessageData } from "@/platform/event-template-data";
 import { templateAssets } from "@/template/template-assets";
 import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { SpecimenFrame } from "@/template/components/containers/SpecimenFrame";
@@ -6,9 +6,9 @@ import { CorrespondenceSheet } from "@/template/components/containers/Correspond
 import { Reveal } from "@/template/components/motion/Reveal";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// SAGE ESTATE LOVE STORY JOURNAL (THE GLASSHOUSE LEDGER)
+// SAGE ESTATE STORY / MESSAGE JOURNAL (THE GLASSHOUSE LEDGER)
 
-export function LoveStorySection({ data }: { data: LoveStoryData }) {
+export function StoryMessageSection({ data }: { data: StoryMessageData }) {
   if (!data.storyBody && !data.storyTitle) return null;
   const storyPhotos = templateAssets.photos.story || [];
 
@@ -20,7 +20,7 @@ export function LoveStorySection({ data }: { data: LoveStoryData }) {
       <div className="template-container-narrow">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-role-subheading">FOLIO // 14 &bull; OUR STORY</span>
+            <span className="text-role-subheading">FOLIO // 14 &bull; STORY &amp; MESSAGE</span>
             <h2 className="text-role-heading-major text-[var(--wedding-text)] tracking-tight">
               {data.storyTitle || "Our Story"}
             </h2>
@@ -38,7 +38,7 @@ export function LoveStorySection({ data }: { data: LoveStoryData }) {
             {storyPhotos.length > 0 && (
               <SpecimenFrame
                 src={storyPhotos[0]}
-                alt="Our Story Photo"
+                alt="Story Photo"
                 caption="Archival Journal Memory"
                 specimenNumber="MEMORY // 14"
                 aspectRatio="landscape"
@@ -72,3 +72,6 @@ export function LoveStorySection({ data }: { data: LoveStoryData }) {
     </section>
   );
 }
+
+/** Backward-compatible alias for wedding templates */
+export const LoveStorySection = StoryMessageSection;

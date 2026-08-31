@@ -1,4 +1,4 @@
-import type { ContactData } from "@/platform/wedding-template-data";
+import type { ContactData } from "@/platform/event-template-data";
 import { Phone, Mail, User } from "lucide-react";
 import { FacebookIcon, InstagramIcon, TikTokIcon } from "../components/ui/BrandIcons";
 
