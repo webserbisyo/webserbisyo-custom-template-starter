@@ -16,6 +16,14 @@ import type {
   ExtraInfoItem,
   GiftOption,
   RsvpData,
+  HostInfoData,
+  EighteenRosesCandlesData,
+  EighteenTraditionGroup,
+  EighteenTraditionEntry,
+  TraditionKind,
+  NamedGroupsData,
+  NamedGroup,
+  NamedEntry,
 } from "./wedding-template-data";
 import { isSectionEnabled } from "./section-visibility";
 
@@ -72,6 +80,13 @@ export function normalizeEventData(
   const sectionsByKey = record(raw.sectionsByKey);
   const contentSections = record(content.sections);
   const enabledSectionsMap = record(layout.enabledSections ?? raw.enabledSections);
+
+  // Detect event type from available sources
+  const eventType =
+    stringValue(raw.eventType) ??
+    stringValue(content.eventType) ??
+    stringValue(record(contentSections.host_info ?? sectionsByKey.host_info).kind) ??
+    "wedding";
 
   const sectionContentMap = new Map<string, Record<string, unknown>>();
   const sectionMap = new Map<string, NormalizedSection>();
@@ -211,19 +226,59 @@ export function normalizeEventData(
     }
   }
 
-  // 1. host_info (Couple)
+  // 1. host_info (Polymorphic: wedding | debut | birthday | baptism)
   const hostContent = getSectionContent("host_info");
-  const groomName = stringValue(hostContent.groomName) || "Groom";
-  const brideName = stringValue(hostContent.brideName) || "Bride";
+  const hostKind = stringValue(hostContent.kind) || eventType;
   const displayAs = stringValue(hostContent.displayAs) || "";
-  const coupleData = {
-    kind: "wedding" as const,
-    groomName,
-    brideName,
-    displayAs,
-    hostLine: stringValue(hostContent.hostLine) || "Together with their families",
-    shortHostMessage: stringValue(hostContent.shortHostMessage) || "",
-  };
+  const hostLine = stringValue(hostContent.hostLine) || "Together with their families";
+  const shortHostMessage = stringValue(hostContent.shortHostMessage) || "";
+
+  let coupleData: HostInfoData;
+  let groomName = "";
+  let brideName = "";
+
+  if (hostKind === "debut") {
+    const debutantName = stringValue(hostContent.debutantName) || "Debutante";
+    coupleData = {
+      kind: "debut" as const,
+      debutantName,
+      milestone: stringValue(hostContent.milestone) || "18th Birthday",
+      displayAs: displayAs || debutantName,
+      hostLine,
+      shortHostMessage,
+    };
+  } else if (hostKind === "birthday") {
+    const celebrantName = stringValue(hostContent.celebrantName) || "Celebrant";
+    coupleData = {
+      kind: "birthday" as const,
+      celebrantName,
+      milestone: stringValue(hostContent.milestone) || "",
+      displayAs: displayAs || celebrantName,
+      hostLine,
+      shortHostMessage,
+    };
+  } else if (hostKind === "baptism") {
+    const childName = stringValue(hostContent.childName) || "Child";
+    coupleData = {
+      kind: "baptism" as const,
+      childName,
+      parentNames: stringValue(hostContent.parentNames) || "",
+      displayAs: displayAs || childName,
+      hostLine,
+      shortHostMessage,
+    };
+  } else {
+    groomName = stringValue(hostContent.groomName) || "Groom";
+    brideName = stringValue(hostContent.brideName) || "Bride";
+    coupleData = {
+      kind: "wedding" as const,
+      groomName,
+      brideName,
+      displayAs,
+      hostLine,
+      shortHostMessage,
+    };
+  }
 
   // 2. countdown
   const countdownContent = getSectionContent("countdown");
@@ -439,6 +494,47 @@ export function normalizeEventData(
     tikTokUrl: stringValue(contactContent.tikTokUrl),
   };
 
+  // 18. eighteen_roses_candles (Debut traditions)
+  const rosesContent = getSectionContent("eighteen_roses_candles");
+  const rawRosesGroups = arrayOfRecords(rosesContent.groups);
+  const traditionsGroups: EighteenTraditionGroup[] = rawRosesGroups.map((grp, gIdx) => {
+    const rawEntries = arrayOfRecords(grp.entries);
+    const entries: EighteenTraditionEntry[] = rawEntries.map((entry, eIdx) => ({
+      id: stringValue(entry.id) || `tradition-${gIdx}-${eIdx}`,
+      name: stringValue(entry.name) || "",
+      message: stringValue(entry.message) || "",
+    }));
+    const rawKind = stringValue(grp.kind);
+    const kind: TraditionKind =
+      rawKind === "roses" ||
+      rawKind === "candles" ||
+      rawKind === "treasures" ||
+      rawKind === "custom"
+        ? rawKind
+        : "custom";
+    return {
+      id: stringValue(grp.id) || `tradition-group-${gIdx}`,
+      title: stringValue(grp.title) || "Tradition",
+      kind,
+      entries,
+    };
+  });
+  const eighteenRosesCandlesData: EighteenRosesCandlesData = {
+    groups: traditionsGroups,
+  };
+
+  // 19. debut_court (Named groups)
+  const courtContent = getSectionContent("debut_court");
+  const debutCourtData: NamedGroupsData = {
+    groups: normalizeNamedGroups(courtContent, "court"),
+  };
+
+  // 20. godparents (Named groups)
+  const godparentsContent = getSectionContent("godparents");
+  const godparentsData: NamedGroupsData = {
+    groups: normalizeNamedGroups(godparentsContent, "godparent"),
+  };
+
   // Assets Map
   const assetsRecord: Record<string, PublicMediaAsset> = {};
   const rawAssets = raw.assets;
@@ -471,18 +567,42 @@ export function normalizeEventData(
     }
   }
 
-  const title = stringValue(raw.title ?? raw.eventTitle) || `${groomName} & ${brideName} Wedding`;
-  const coupleDisplayName =
-    displayAs ||
-    (groomName && brideName
-      ? `${groomName} & ${brideName}`
-      : groomName || brideName || "The Couple");
+  // Derive title and display name based on event type
+  let defaultTitle: string;
+  let defaultDisplayName: string;
+
+  if (coupleData.kind === "debut") {
+    const dName = coupleData.debutantName;
+    defaultTitle = `${dName}'s ${coupleData.milestone || "Debut"}`;
+    defaultDisplayName = displayAs || dName;
+  } else if (coupleData.kind === "birthday") {
+    const cName = coupleData.celebrantName;
+    defaultTitle = coupleData.milestone
+      ? `${cName}'s ${coupleData.milestone}`
+      : `${cName}'s Birthday`;
+    defaultDisplayName = displayAs || cName;
+  } else if (coupleData.kind === "baptism") {
+    const chName = coupleData.childName;
+    defaultTitle = `${chName}'s Christening`;
+    defaultDisplayName = displayAs || chName;
+  } else {
+    defaultTitle = `${groomName} & ${brideName} Wedding`;
+    defaultDisplayName =
+      displayAs ||
+      (groomName && brideName
+        ? `${groomName} & ${brideName}`
+        : groomName || brideName || "The Couple");
+  }
+
+  const title = stringValue(raw.title ?? raw.eventTitle) || defaultTitle;
+  const coupleDisplayName = defaultDisplayName;
 
   return {
     contractVersion: (raw.contractVersion as number) || EVENT_WEBSITE_SECTION_CONTRACT_VERSION,
     source,
     previewMode,
     eventSlug,
+    eventType,
     title,
     coupleDisplayName,
     eventDate: stringValue(raw.eventDate ?? ceremonyData.eventDate),
@@ -514,6 +634,9 @@ export function normalizeEventData(
     story: storyData,
     contact: contactData,
     gallery: galleryData,
+    eighteenRosesCandles: eighteenRosesCandlesData,
+    debutCourt: debutCourtData,
+    godparents: godparentsData,
 
     sections: normalizedSectionsList,
     orderedSectionKeys,
@@ -543,4 +666,42 @@ export function normalizeEvent(
     });
   }
   return normalizeEventData(input, options);
+}
+
+// ---------------------------------------------------------------------------
+// Named Groups normalizer (for debut_court & godparents)
+// ---------------------------------------------------------------------------
+
+function normalizeNamedGroups(
+  sectionContent: Record<string, unknown>,
+  prefix: string
+): NamedGroup[] {
+  const rawGroups = arrayOfRecords(sectionContent.groups);
+  return rawGroups.map((grp, gIdx) => {
+    const rawNames = Array.isArray(grp.names) ? grp.names : [];
+    const names: NamedEntry[] = rawNames
+      .map((n, nIdx) => {
+        if (typeof n === "string") {
+          return {
+            id: `${prefix}-${gIdx}-${nIdx}`,
+            name: n.trim(),
+          };
+        }
+        if (n && typeof n === "object") {
+          const rec = n as Record<string, unknown>;
+          return {
+            id: stringValue(rec.id) || `${prefix}-${gIdx}-${nIdx}`,
+            name: stringValue(rec.name) || "",
+          };
+        }
+        return null;
+      })
+      .filter((entry): entry is NamedEntry => entry !== null && entry.name.length > 0);
+
+    return {
+      id: stringValue(grp.id) || `${prefix}-group-${gIdx}`,
+      title: stringValue(grp.title) || "",
+      names,
+    };
+  });
 }

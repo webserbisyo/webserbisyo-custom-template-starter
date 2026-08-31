@@ -18,13 +18,23 @@ export type CoupleSectionProps = {
 };
 
 export function CoupleSection({ data, storyEnabled = true }: CoupleSectionProps) {
-  const identity = deriveCoupleIdentity(data.groomName, data.brideName);
-  const heroPhoto = templateAssets.photos.hero;
+  let displayName = "";
 
-  const displayName =
-    data.displayAs === "bride_first"
-      ? `${data.brideName || identity.brideName} & ${data.groomName || identity.groomName}`
-      : `${data.groomName || identity.groomName} & ${data.brideName || identity.brideName}`;
+  if (data.kind === "debut") {
+    displayName = data.displayAs || data.debutantName || "The Debutante";
+  } else if (data.kind === "birthday") {
+    displayName = data.displayAs || data.celebrantName || "The Celebrant";
+  } else if (data.kind === "baptism") {
+    displayName = data.displayAs || data.childName || "The Child";
+  } else {
+    const identity = deriveCoupleIdentity(data.groomName, data.brideName);
+    displayName =
+      data.displayAs === "bride_first"
+        ? `${data.brideName || identity.brideName} & ${data.groomName || identity.groomName}`
+        : `${data.groomName || identity.groomName} & ${data.brideName || identity.brideName}`;
+  }
+
+  const heroPhoto = templateAssets.photos.hero;
 
   return (
     <section

@@ -17,6 +17,9 @@ import { GiftsSection } from "./sections/Gifts";
 import { GuestbookSection } from "./sections/Guestbook";
 import { LoveStorySection } from "./sections/LoveStory";
 import { ContactSection } from "./sections/Contact";
+import { EighteenRosesCandlesSection } from "./sections/EighteenRosesCandles";
+import { DebutCourtSection } from "./sections/DebutCourt";
+import { GodparentsSection } from "./sections/Godparents";
 
 export type SectionRendererProps = {
   data: WeddingTemplateData;
@@ -72,4 +75,9 @@ export const templateSectionRegistry: Record<
   guestbook: ({ data }) => <GuestbookSection data={data.guestbook} />,
   story_message: ({ data }) => <LoveStorySection data={data.story} />,
   contact_socials: ({ data }) => <ContactSection data={data.contact} />,
+  eighteen_roses_candles: ({ data }) => (
+    <EighteenRosesCandlesSection data={data.eighteenRosesCandles} />
+  ),
+  debut_court: ({ data }) => <DebutCourtSection data={data.debutCourt} />,
+  godparents: ({ data }) => <GodparentsSection data={data.godparents} />,
 };

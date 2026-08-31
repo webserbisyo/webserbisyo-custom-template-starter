@@ -267,6 +267,18 @@ export const DEMO_WEDDING_DATA: WeddingTemplateData = {
     tikTokUrl: "https://tiktok.com/@alexandjamie2026",
   },
 
+  eighteenRosesCandles: {
+    groups: [],
+  },
+
+  debutCourt: {
+    groups: [],
+  },
+
+  godparents: {
+    groups: [],
+  },
+
   sections: [
     { key: "host_info", title: "Couple", enabled: true, content: {} },
     { key: "countdown", title: "Countdown", enabled: true, content: {} },

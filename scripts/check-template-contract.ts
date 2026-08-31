@@ -5,10 +5,10 @@ import {
   EVENT_WEBSITE_SECTION_CONTRACT_VERSION,
   eventWebsiteSectionKeySet,
   WEDDING_APPLICABLE_SECTION_KEYS,
-  weddingApplicableSectionKeySet,
 } from "../src/platform/contract.js";
 import { templateSectionRegistry } from "../src/template/section-registry.js";
 import { demoWeddingData } from "../src/platform/demo-wedding.js";
+import { demoDebutData } from "../src/platform/demo-debut.js";
 import { normalizeEventData } from "../src/platform/normalize-event.js";
 import { deriveCoupleIdentity } from "../src/template/utils/couple-identity.js";
 import {
@@ -29,8 +29,8 @@ type CheckResult = {
   warnings: string[];
 };
 
-console.log("WebSerbisyo Wedding Template Contract Check");
-console.log("──────────────────────────────────────────");
+console.log("WebSerbisyo Event Template Contract Check (Contract V1)");
+console.log("───────────────────────────────────────────────────────");
 
 const result: CheckResult = {
   passed: true,
@@ -52,14 +52,12 @@ if (EVENT_WEBSITE_SECTION_CONTRACT_VERSION === 1) {
   console.log(`✗ Contract version: ${EVENT_WEBSITE_SECTION_CONTRACT_VERSION}`);
 }
 
-// 2. SECTION REGISTRY & WEDDING SCOPE VALIDATION
-console.log("\n[2] WEDDING SECTION REGISTRY SCOPE VALIDATION");
+// 2. SECTION REGISTRY & CONTRACT SCOPE VALIDATION
+console.log("\n[2] SECTION REGISTRY & CONTRACT SCOPE VALIDATION");
 const globalKeys = eventWebsiteSectionContract.map((entry) => entry.key);
-const weddingKeys = WEDDING_APPLICABLE_SECTION_KEYS;
 const registeredKeys = Object.keys(templateSectionRegistry);
 
 console.log(`Global contract sections: ${globalKeys.length}`);
-console.log(`Wedding applicable sections: ${weddingKeys.length}`);
 console.log(`Registered template section components: ${registeredKeys.length}`);
 
 if (globalKeys.length !== 20) {
@@ -67,55 +65,44 @@ if (globalKeys.length !== 20) {
   result.failures.push(`Global contract count mismatch. Expected 20, got ${globalKeys.length}`);
 }
 
-if (weddingKeys.length !== 17) {
+if (registeredKeys.length < 17 || registeredKeys.length > 20) {
   result.passed = false;
   result.failures.push(
-    `Wedding applicable section count mismatch. Expected 17, got ${weddingKeys.length}`
-  );
-}
-
-if (registeredKeys.length !== 17) {
-  result.passed = false;
-  result.failures.push(
-    `Template section registry count mismatch. Expected 17, got ${registeredKeys.length}`
+    `Template section registry count mismatch. Expected 17-20, got ${registeredKeys.length}`
   );
 }
 
 let missingCount = 0;
-for (const key of weddingKeys) {
+for (const key of WEDDING_APPLICABLE_SECTION_KEYS) {
   if (templateSectionRegistry[key]) {
-    console.log(`  ✓ Registered Wedding Renderer: ${key}`);
+    console.log(`  ✓ Registered Section Renderer: ${key}`);
   } else {
     missingCount++;
-    result.failures.push(`Missing template renderer for wedding key: '${key}'`);
-    console.log(`  ✗ MISSING WEDDING RENDERER: ${key}`);
+    result.failures.push(`Missing template renderer for core key: '${key}'`);
+    console.log(`  ✗ MISSING CORE RENDERER: ${key}`);
   }
 }
 
-const forbiddenWeddingKeys = ["eighteen_roses_candles", "debut_court", "godparents"];
-for (const key of forbiddenWeddingKeys) {
-  if (templateSectionRegistry[key]) {
-    result.failures.push(`Forbidden non-wedding section renderer registered: '${key}'`);
-    console.log(`  ✗ FORBIDDEN RENDERER REGISTERED: ${key}`);
+for (const debutKey of ["eighteen_roses_candles", "debut_court", "godparents"] as const) {
+  if (templateSectionRegistry[debutKey]) {
+    console.log(`  ✓ Registered Debut Section Renderer: ${debutKey}`);
   }
 }
 
 for (const regKey of registeredKeys) {
-  if (!weddingApplicableSectionKeySet.has(regKey)) {
-    result.failures.push(
-      `Unknown or non-wedding section key registered in templateSectionRegistry: '${regKey}'`
-    );
-    console.log(`  ✗ UNKNOWN/NON-WEDDING KEY REGISTERED: ${regKey}`);
+  if (!eventWebsiteSectionKeySet.has(regKey)) {
+    result.failures.push(`Unknown section key registered in templateSectionRegistry: '${regKey}'`);
+    console.log(`  ✗ UNKNOWN KEY REGISTERED: ${regKey}`);
   }
 }
 
-if (missingCount === 0 && registeredKeys.length === 17) {
-  console.log(`✓ Template section registry correctly contains exactly 17 Wedding renderers.`);
+if (missingCount === 0 && registeredKeys.every((k) => eventWebsiteSectionKeySet.has(k))) {
+  console.log(`✓ Template section registry correctly contains valid canonical renderers.`);
 } else {
   result.passed = false;
 }
 
-// 3. DEMO DATA VALIDATION
+// 3. DEMO DATA VALIDATION (WEDDING & DEBUT)
 console.log("\n[3] DEMO DATA VALIDATION");
 if (
   demoWeddingData &&
@@ -136,6 +123,24 @@ if (
   console.log("✗ Demo wedding dataset failed validation.");
 }
 
+if (
+  demoDebutData &&
+  demoDebutData.eventSlug &&
+  demoDebutData.eventType === "debut" &&
+  Array.isArray(demoDebutData.enabledSectionKeys) &&
+  demoDebutData.couple &&
+  demoDebutData.eighteenRosesCandles &&
+  demoDebutData.eighteenRosesCandles.groups.length > 0
+) {
+  console.log(`✓ Demo debut dataset ('${demoDebutData.eventSlug}') is valid and complete.`);
+} else {
+  result.passed = false;
+  result.failures.push(
+    "src/platform/demo-debut.ts is missing required Debut template data fields."
+  );
+  console.log("✗ Demo debut dataset failed validation.");
+}
+
 // Verify gift options in demo data
 if (demoWeddingData.gifts?.options) {
   if (demoWeddingData.gifts.options.length > 2) {
@@ -154,14 +159,6 @@ if (demoWeddingData.gifts?.options) {
   }
 }
 
-// Verify non-wedding sections absent from demo section list
-for (const secKey of forbiddenWeddingKeys) {
-  if (demoWeddingData.enabledSectionKeys?.includes(secKey)) {
-    result.passed = false;
-    result.failures.push(`Forbidden non-wedding section enabled in demo data: '${secKey}'`);
-  }
-}
-
 // 4. PLATFORM CORE & RSVP GUARD
 console.log("\n[4] PLATFORM CORE & RSVP GUARD");
 const requiredPlatformFiles = [
@@ -173,6 +170,7 @@ const requiredPlatformFiles = [
   "src/platform/wedding-template-data.ts",
   "src/platform/contract.ts",
   "src/platform/demo-wedding.ts",
+  "src/platform/demo-debut.ts",
 ];
 
 for (const relPath of requiredPlatformFiles) {

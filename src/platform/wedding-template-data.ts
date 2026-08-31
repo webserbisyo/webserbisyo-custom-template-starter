@@ -25,8 +25,11 @@ export type NormalizedSection = {
   content: Record<string, unknown>;
 };
 
-// host_info (Couple)
-export type CoupleData = {
+// ---------------------------------------------------------------------------
+// host_info — Discriminated union for all event types
+// ---------------------------------------------------------------------------
+
+export type WeddingHostInfo = {
   kind: "wedding";
   groomName: string;
   brideName: string;
@@ -35,13 +38,99 @@ export type CoupleData = {
   shortHostMessage: string;
 };
 
+export type DebutHostInfo = {
+  kind: "debut";
+  debutantName: string;
+  milestone: string;
+  displayAs: string;
+  hostLine: string;
+  shortHostMessage: string;
+  brideName?: undefined;
+  groomName?: undefined;
+};
+
+export type BirthdayHostInfo = {
+  kind: "birthday";
+  celebrantName: string;
+  milestone: string;
+  displayAs: string;
+  hostLine: string;
+  shortHostMessage: string;
+  brideName?: undefined;
+  groomName?: undefined;
+};
+
+export type BaptismHostInfo = {
+  kind: "baptism";
+  childName: string;
+  parentNames: string;
+  displayAs: string;
+  hostLine: string;
+  shortHostMessage: string;
+  brideName?: undefined;
+  groomName?: undefined;
+};
+
+export type HostInfoData = WeddingHostInfo | DebutHostInfo | BirthdayHostInfo | BaptismHostInfo;
+
+/** @deprecated Use `HostInfoData` — kept for backward compatibility with existing templates. */
+export type CoupleData = HostInfoData;
+
+// ---------------------------------------------------------------------------
+// eighteen_roses_candles — 18 Traditions (Debut)
+// ---------------------------------------------------------------------------
+
+export type TraditionKind = "roses" | "candles" | "treasures" | "custom";
+
+export type EighteenTraditionEntry = {
+  id: string;
+  name: string;
+  message: string;
+};
+
+export type EighteenTraditionGroup = {
+  id: string;
+  title: string;
+  kind: TraditionKind;
+  entries: EighteenTraditionEntry[];
+};
+
+export type EighteenRosesCandlesData = {
+  groups: EighteenTraditionGroup[];
+};
+
+// ---------------------------------------------------------------------------
+// debut_court & godparents — Named Groups (shared shape)
+// ---------------------------------------------------------------------------
+
+export type NamedEntry = {
+  id: string;
+  name: string;
+};
+
+export type NamedGroup = {
+  id: string;
+  title: string;
+  names: NamedEntry[];
+};
+
+export type NamedGroupsData = {
+  groups: NamedGroup[];
+};
+
+// ---------------------------------------------------------------------------
 // countdown
+// ---------------------------------------------------------------------------
+
 export type CountdownData = {
   title?: string;
   shortNote?: string;
 };
 
+// ---------------------------------------------------------------------------
 // music_effects
+// ---------------------------------------------------------------------------
+
 export type MusicData = {
   musicLink?: string;
   musicTitle?: string;
@@ -49,7 +138,10 @@ export type MusicData = {
   shortNote?: string;
 };
 
-// main_event (Ceremony)
+// ---------------------------------------------------------------------------
+// main_event (Ceremony / Program)
+// ---------------------------------------------------------------------------
+
 export type CeremonyData = {
   eventLabel?: string;
   eventDate?: string;
@@ -59,7 +151,10 @@ export type CeremonyData = {
   scheduleNote?: string;
 };
 
+// ---------------------------------------------------------------------------
 // venue (Location)
+// ---------------------------------------------------------------------------
+
 export type VenueData = {
   venueName: string;
   address: string;
@@ -67,7 +162,10 @@ export type VenueData = {
   arrivalNote?: string;
 };
 
-// secondary_event (Reception)
+// ---------------------------------------------------------------------------
+// secondary_event (Reception / After-Party)
+// ---------------------------------------------------------------------------
+
 export type ReceptionData = {
   title?: string;
   venueName?: string;
@@ -78,7 +176,10 @@ export type ReceptionData = {
   note?: string;
 };
 
+// ---------------------------------------------------------------------------
 // timeline_program
+// ---------------------------------------------------------------------------
+
 export type TimelineItem = {
   id: string;
   time: string;
@@ -92,7 +193,10 @@ export type TimelineData = {
   items: TimelineItem[];
 };
 
+// ---------------------------------------------------------------------------
 // entourage
+// ---------------------------------------------------------------------------
+
 export type EntourageGroup = {
   id: string;
   groupTitle: string;
@@ -104,20 +208,29 @@ export type EntourageData = {
   groups: EntourageGroup[];
 };
 
+// ---------------------------------------------------------------------------
 // principal_sponsors
+// ---------------------------------------------------------------------------
+
 export type SponsorsData = {
   introLine?: string;
   names: string;
 };
 
+// ---------------------------------------------------------------------------
 // attire_motif
+// ---------------------------------------------------------------------------
+
 export type AttireData = {
   sectionIntro?: string;
   dressCodeNote?: string;
   colorMotifNote?: string;
 };
 
+// ---------------------------------------------------------------------------
 // extra_info
+// ---------------------------------------------------------------------------
+
 export type ExtraInfoItem = {
   id: string;
   title: string;
@@ -130,7 +243,10 @@ export type ExtraInfoData = {
   items: ExtraInfoItem[];
 };
 
+// ---------------------------------------------------------------------------
 // rsvp_form
+// ---------------------------------------------------------------------------
+
 export type RsvpData = {
   plusOneEnabled: boolean;
   companionLimit: number;
@@ -145,7 +261,10 @@ export type RsvpData = {
   customQuestions?: Array<unknown>;
 };
 
+// ---------------------------------------------------------------------------
 // gift_details (Max 2 options)
+// ---------------------------------------------------------------------------
+
 export type EventWebsiteImageAsset = {
   alt?: string;
   path: string;
@@ -164,7 +283,10 @@ export type GiftsData = {
   options: GiftOption[];
 };
 
+// ---------------------------------------------------------------------------
 // guestbook
+// ---------------------------------------------------------------------------
+
 export type GuestbookData = {
   sectionTitle?: string;
   sectionIntro?: string;
@@ -172,14 +294,20 @@ export type GuestbookData = {
   messages: GuestbookMessage[];
 };
 
+// ---------------------------------------------------------------------------
 // story_message (Scalar narrative)
+// ---------------------------------------------------------------------------
+
 export type LoveStoryData = {
   storyTitle?: string;
   sectionIntro?: string;
   storyBody?: string;
 };
 
+// ---------------------------------------------------------------------------
 // contact_socials
+// ---------------------------------------------------------------------------
+
 export type ContactData = {
   contactPerson?: string;
   contactNumber?: string;
@@ -189,18 +317,25 @@ export type ContactData = {
   tikTokUrl?: string;
 };
 
+// ---------------------------------------------------------------------------
 // gallery (Metadata only; photos are local template assets)
+// ---------------------------------------------------------------------------
+
 export type GalleryData = {
   sectionTitle?: string;
   sectionIntro?: string;
 };
 
-// TOP-LEVEL WEDDING TEMPLATE DATA
+// ---------------------------------------------------------------------------
+// TOP-LEVEL TEMPLATE DATA
+// ---------------------------------------------------------------------------
+
 export type WeddingTemplateData = {
   contractVersion: number;
   source: "demo" | "snapshot" | "live";
   previewMode?: "dashboard";
   eventSlug: string;
+  eventType?: string;
   title: string;
   coupleDisplayName: string; // Derived display representation via deriveCoupleIdentity()
   eventDate?: string | null;
@@ -211,7 +346,7 @@ export type WeddingTemplateData = {
   timezone?: string | null;
   publicUrl?: string | null;
 
-  couple: CoupleData;
+  couple: HostInfoData;
   countdown: CountdownData;
   music: MusicData;
   ceremony: CeremonyData;
@@ -228,6 +363,9 @@ export type WeddingTemplateData = {
   story: LoveStoryData;
   contact: ContactData;
   gallery: GalleryData;
+  eighteenRosesCandles: EighteenRosesCandlesData;
+  debutCourt: NamedGroupsData;
+  godparents: NamedGroupsData;
 
   sections: NormalizedSection[];
   orderedSectionKeys: string[];
@@ -236,3 +374,6 @@ export type WeddingTemplateData = {
   assets?: Record<string, PublicMediaAsset>;
   raw?: Record<string, unknown>;
 };
+
+/** Alias for cross-event-type usage — same shape as WeddingTemplateData. */
+export type EventTemplateData = WeddingTemplateData;

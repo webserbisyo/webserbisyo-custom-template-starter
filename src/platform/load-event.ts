@@ -5,6 +5,7 @@ import { getPreviewContext, appendPrivateAccessToken, type PreviewQuery } from "
 import { normalizeEvent } from "./normalize-event";
 import { validatePublicEventContract } from "./contract";
 import { DEMO_WEDDING_DATA } from "./demo-wedding";
+import { DEMO_DEBUT_DATA } from "./demo-debut";
 import type { WeddingTemplateData } from "./wedding-template-data";
 
 export type EventLoadResult =
@@ -20,9 +21,14 @@ export async function loadEvent(query?: PreviewQuery): Promise<EventLoadResult> 
 
   // Intentional Demo Mode
   if (env.designMode) {
+    const isDebut =
+      env.templateId?.toLowerCase().includes("debut") ||
+      env.eventSlug?.toLowerCase().includes("debut") ||
+      true;
+
     return {
       status: "available",
-      data: DEMO_WEDDING_DATA,
+      data: isDebut ? DEMO_DEBUT_DATA : DEMO_WEDDING_DATA,
       env,
     };
   }
