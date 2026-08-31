@@ -74,7 +74,7 @@ export function AudioProvider({
     : musicLink
       ? isDirect
         ? "direct"
-        : "direct" // fallback attempts HTML5 audio
+        : "direct"
       : "none";
 
   const isPlaying = playbackState === "playing";
@@ -91,7 +91,6 @@ export function AudioProvider({
     [musicLink]
   );
 
-  // Clean up direct audio on unmount or URL change
   useEffect(() => {
     return () => {
       if (audioRef.current) {
@@ -101,7 +100,6 @@ export function AudioProvider({
     };
   }, [musicLink]);
 
-  // Listen for YouTube IFrame API ready and state delivery events
   useEffect(() => {
     const handleWindowMessage = (event: MessageEvent) => {
       try {
@@ -122,7 +120,6 @@ export function AudioProvider({
     return () => window.removeEventListener("message", handleWindowMessage);
   }, []);
 
-  // Send postMessage command to YouTube iframe
   const sendYoutubeCommand = (func: string, args: unknown = "") => {
     const iframe = iframeRef.current;
     if (!iframe?.contentWindow) return;
@@ -159,7 +156,6 @@ export function AudioProvider({
         sendYoutubeCommand("playVideo");
       } else {
         pendingPlayRef.current = true;
-        // Also send initial listening handshake
         sendYoutubeCommand("listening");
       }
       return;
@@ -221,7 +217,6 @@ export function AudioProvider({
     }
   };
 
-  // Render hidden YouTube iframe player if YouTube ID is detected (Client mounted only)
   const renderHiddenYoutubePlayer = () => {
     if (!isMounted || sourceType !== "youtube" || !youtubeId) return null;
 
@@ -311,7 +306,6 @@ export function FloatingMusicBubble({
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMusicSectionVisible, setIsMusicSectionVisible] = useState(false);
 
-  // Recede floating bubble when in-page #music_effects section is in viewport
   useEffect(() => {
     const musicSec = document.querySelector("#music_effects");
     if (!musicSec) return;
@@ -328,7 +322,6 @@ export function FloatingMusicBubble({
     return () => observer.disconnect();
   }, []);
 
-  // Show floating bubble only after music has been activated (playing or paused)
   if (playbackState === "idle" || playbackState === "stopped") {
     return null;
   }
@@ -353,7 +346,7 @@ export function FloatingMusicBubble({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 16 }}
             transition={{ type: "spring", stiffness: 350, damping: 26 }}
-            className={`mb-3 w-72 max-w-[calc(100vw-2rem)] rounded-2xl bg-[var(--wedding-surface)]/95 backdrop-blur-md border border-[var(--wedding-border)] p-4 shadow-2xl text-[var(--wedding-text)] select-none ${
+            className={`mb-3 w-72 max-w-[calc(100vw-2rem)] rounded-2xl bg-[var(--debut-surface-alabaster,#FFFFFF)]/95 backdrop-blur-md border border-[var(--debut-rose-gold-border,#E8C4C8)] p-4 shadow-2xl text-[var(--debut-text-noir,#26131C)] select-none ${
               isInline ? "absolute bottom-full right-0" : ""
             }`}
           >
@@ -361,22 +354,22 @@ export function FloatingMusicBubble({
               <div className="flex gap-3 items-center min-w-0">
                 {/* Mini spinning vinyl disc indicator */}
                 <div
-                  className={`w-9 h-9 rounded-full bg-[var(--wedding-surface-dark)] flex items-center justify-center text-[var(--wedding-accent-soft)] shrink-0 shadow-inner ${
+                  className={`w-9 h-9 rounded-full bg-[var(--debut-bg-noir,#10050B)] flex items-center justify-center text-[var(--debut-champagne-gold,#D4AF37)] shrink-0 shadow-inner ${
                     isPlaying ? "animate-spin" : ""
                   }`}
                   style={{ animationDuration: "6s" }}
                 >
-                  <Music4 className="w-4 h-4 text-[var(--wedding-accent-soft)]" />
+                  <Music4 className="w-4 h-4 text-[var(--debut-rose-gold,#B76E79)]" />
                 </div>
                 <div className="min-w-0">
                   <h4
-                    className="font-serif text-sm font-semibold text-[var(--wedding-text)] truncate leading-tight"
+                    className="font-serif text-sm font-bold text-[var(--debut-text-noir,#26131C)] truncate leading-tight"
                     title={displayTitle}
                   >
                     {displayTitle}
                   </h4>
                   {displayArtist && (
-                    <p className="text-[10px] font-mono text-[var(--wedding-accent-strong,#8f6a2c)] uppercase tracking-widest truncate">
+                    <p className="text-[10px] font-cinzel text-[var(--debut-rose-gold,#B76E79)] uppercase tracking-widest truncate">
                       {displayArtist}
                     </p>
                   )}
@@ -385,21 +378,21 @@ export function FloatingMusicBubble({
               <button
                 type="button"
                 onClick={() => setIsExpanded(false)}
-                className="text-[var(--wedding-text-muted)] hover:text-[var(--wedding-text)] p-1 rounded-full hover:bg-[var(--wedding-surface-alt)] transition template-focus-ring cursor-pointer"
+                className="text-[var(--debut-text-muted,#704D5B)] hover:text-[var(--debut-text-noir,#26131C)] p-1 rounded-full hover:bg-[var(--debut-surface-alabaster-alt)] transition template-focus-ring cursor-pointer"
                 aria-label="Minimize player"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="h-px bg-gradient-to-r from-[var(--wedding-border)]/50 to-transparent mb-3" />
+            <div className="h-px bg-gradient-to-r from-[var(--debut-rose-gold-border)]/60 to-transparent mb-3" />
 
             <div className="flex gap-2 justify-center">
               {isPlaying ? (
                 <button
                   type="button"
                   onClick={pause}
-                  className="py-1.5 px-3 bg-[var(--wedding-primary)] text-[var(--wedding-on-primary)] rounded-lg text-xs font-semibold flex items-center gap-1.5 hover:bg-[var(--wedding-primary-hover)] transition cursor-pointer shadow-xs"
+                  className="py-1.5 px-3.5 bg-[var(--debut-bg-coral,#E65C4F)] text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 hover:bg-[var(--debut-bg-coral-hover,#D85244)] transition cursor-pointer shadow-xs"
                 >
                   <Pause className="w-3.5 h-3.5 fill-current" />
                   <span>Pause</span>
@@ -408,7 +401,7 @@ export function FloatingMusicBubble({
                 <button
                   type="button"
                   onClick={play}
-                  className="py-1.5 px-3 bg-[var(--wedding-primary)] text-[var(--wedding-on-primary)] rounded-lg text-xs font-semibold flex items-center gap-1.5 hover:bg-[var(--wedding-primary-hover)] transition cursor-pointer shadow-xs"
+                  className="py-1.5 px-3.5 bg-[var(--debut-bg-coral,#E65C4F)] text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 hover:bg-[var(--debut-bg-coral-hover,#D85244)] transition cursor-pointer shadow-xs"
                 >
                   <Play className="w-3.5 h-3.5 fill-current" />
                   <span>Resume</span>
@@ -420,7 +413,7 @@ export function FloatingMusicBubble({
                   stop();
                   setIsExpanded(false);
                 }}
-                className="py-1.5 px-3 bg-[var(--wedding-surface-alt)] text-[var(--wedding-text)] rounded-lg text-xs font-medium flex items-center gap-1.5 hover:bg-[var(--wedding-border)] transition cursor-pointer border border-[var(--wedding-border-subtle)]"
+                className="py-1.5 px-3.5 bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] text-[var(--debut-text-noir,#26131C)] rounded-xl text-xs font-medium flex items-center gap-1.5 hover:bg-[var(--debut-rose-gold-border)]/40 transition cursor-pointer border border-[var(--debut-rose-gold-subtle)]"
               >
                 <Square className="w-3.5 h-3.5 fill-current" />
                 <span>Stop</span>
@@ -434,7 +427,7 @@ export function FloatingMusicBubble({
       <button
         type="button"
         onClick={() => setIsExpanded((prev) => !prev)}
-        className={`rounded-full bg-[var(--wedding-surface-dark)] text-[var(--wedding-on-dark)] shadow-2xl border-2 border-[var(--wedding-accent)]/50 flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none template-focus-ring shrink-0 relative group ${
+        className={`rounded-full bg-[var(--debut-bg-noir,#10050B)] text-[var(--debut-text-on-noir,#FAF5F5)] shadow-2xl border-2 border-[var(--debut-rose-gold,#B76E79)] flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none template-focus-ring shrink-0 relative group ${
           compact ? "w-12 h-12" : "w-14 h-14"
         }`}
         aria-label="Debut song controls"
@@ -450,9 +443,9 @@ export function FloatingMusicBubble({
               transition={{ duration: 0.3 }}
               className="relative flex items-center justify-center"
             >
-              {/* Pulsating border rings when playing */}
-              <div className="absolute inset-0 -m-1.5 rounded-full border border-[var(--wedding-accent)] opacity-60 animate-ping pointer-events-none" />
-              <Music4 className="w-6 h-6 text-[var(--wedding-accent)] animate-pulse" />
+              {/* Pulsating border ring */}
+              <div className="absolute inset-0 -m-1.5 rounded-full border border-[var(--debut-bg-coral)] opacity-60 animate-ping pointer-events-none" />
+              <Music4 className="w-6 h-6 text-[var(--debut-rose-gold)] animate-pulse" />
             </motion.div>
           ) : (
             <motion.div
@@ -463,7 +456,7 @@ export function FloatingMusicBubble({
               transition={{ duration: 0.3 }}
               className="flex items-center justify-center"
             >
-              <Music4 className="w-6 h-6 text-[var(--wedding-accent-soft)] opacity-80" />
+              <Music4 className="w-6 h-6 text-[var(--debut-champagne-soft)] opacity-80" />
             </motion.div>
           )}
         </AnimatePresence>

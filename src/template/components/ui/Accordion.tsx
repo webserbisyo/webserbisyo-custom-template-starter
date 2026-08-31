@@ -13,7 +13,7 @@ export const AccordionItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn("border-b border-[var(--wedding-border-subtle)]", className)}
+    className={cn("border-b border-[var(--debut-rose-gold-subtle)]", className)}
     {...props}
   />
 ));
@@ -27,13 +27,13 @@ export const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 items-center justify-between py-4 text-sm font-semibold font-sans transition-all hover:text-[var(--wedding-primary)] [&[data-state=open]>svg]:rotate-180 text-left text-[var(--wedding-text)] template-focus-ring cursor-pointer select-none",
+        "flex flex-1 items-center justify-between py-4 text-base font-bold font-serif transition-all hover:text-[var(--debut-bg-coral,#E65C4F)] [&[data-state=open]>svg]:rotate-180 text-left text-[var(--debut-text-noir,#26131C)] template-focus-ring cursor-pointer select-none",
         className
       )}
       {...props}
     >
       {children}
-      <ChevronDown className="h-4 w-4 shrink-0 text-[var(--wedding-text-muted)] transition-transform duration-200" />
+      <ChevronDown className="h-4 w-4 shrink-0 text-[var(--debut-rose-gold,#B76E79)] transition-transform duration-200" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
@@ -45,10 +45,12 @@ export const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down font-sans"
+    className="overflow-hidden text-sm sm:text-base data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down font-sans"
     {...props}
   >
-    <div className={cn("pb-4 pt-0 text-[var(--wedding-text-muted)] leading-relaxed", className)}>
+    <div
+      className={cn("pb-4 pt-0 text-[var(--debut-text-muted,#704D5B)] leading-relaxed", className)}
+    >
       {children}
     </div>
   </AccordionPrimitive.Content>

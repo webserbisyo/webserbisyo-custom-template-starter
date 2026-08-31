@@ -17,7 +17,7 @@ export const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0 duration-200",
+      "fixed inset-0 z-50 bg-black/65 backdrop-blur-xs transition-opacity animate-in fade-in-0 duration-200",
       className
     )}
     {...props}
@@ -34,13 +34,13 @@ export const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border border-[var(--wedding-border)] bg-[var(--wedding-surface)] p-6 shadow-2xl duration-200 rounded-2xl max-h-[90vh] overflow-y-auto font-sans",
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] p-6 sm:p-8 shadow-2xl duration-200 rounded-3xl max-h-[90vh] overflow-y-auto font-sans text-[var(--debut-text-noir,#26131C)]",
         className
       )}
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-full p-1.5 text-[var(--wedding-text-muted)] hover:bg-[var(--wedding-surface-alt)] hover:text-[var(--wedding-text)] transition-colors template-focus-ring cursor-pointer">
+      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-full p-2 text-[var(--debut-text-muted,#704D5B)] hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] hover:text-[var(--debut-text-noir,#26131C)] transition-colors template-focus-ring cursor-pointer">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -61,7 +61,7 @@ export const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "font-serif text-lg font-bold leading-none tracking-tight text-[var(--wedding-text)]",
+      "font-serif text-xl sm:text-2xl font-bold leading-none tracking-tight text-[var(--debut-text-noir,#26131C)]",
       className
     )}
     {...props}
@@ -75,7 +75,7 @@ export const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-[var(--wedding-text-muted)] font-sans", className)}
+    className={cn("text-sm text-[var(--debut-text-muted,#704D5B)] font-sans", className)}
     {...props}
   />
 ));

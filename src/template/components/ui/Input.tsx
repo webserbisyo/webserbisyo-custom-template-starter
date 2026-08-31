@@ -17,7 +17,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {label ? (
           <label
             htmlFor={inputId}
-            className="block text-xs font-mono font-bold uppercase tracking-wider text-[var(--wedding-text)]"
+            className="block text-xs font-cinzel font-bold uppercase tracking-wider text-[var(--debut-text-noir,#26131C)]"
           >
             {label}
           </label>
@@ -27,7 +27,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           ref={ref}
           className={cn(
-            "flex h-11 w-full rounded-xl border border-[var(--wedding-border)] bg-[var(--wedding-surface)] px-3.5 py-2 text-sm text-[var(--wedding-text)] placeholder:text-[var(--wedding-text-muted)] transition-colors focus:border-[var(--wedding-primary)] focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 template-focus-ring",
+            "flex h-11 w-full rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] px-3.5 py-2 text-base text-[var(--debut-text-noir,#26131C)] placeholder:text-[var(--debut-text-muted,#704D5B)]/60 transition-colors focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 template-focus-ring",
             error && "border-red-500 focus:border-red-600",
             className
           )}
@@ -36,7 +36,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {error ? (
           <p className="text-xs text-red-600 font-medium">{error}</p>
         ) : helperText ? (
-          <p className="text-xs text-[var(--wedding-text-muted)]">{helperText}</p>
+          <p className="text-xs text-[var(--debut-text-muted,#704D5B)]">{helperText}</p>
         ) : null}
       </div>
     );

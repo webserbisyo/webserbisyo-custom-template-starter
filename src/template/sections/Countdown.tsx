@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from "react";
 import type { CountdownData } from "@/platform/event-template-data";
-import { AnimatedNumber } from "@/template/components/interactive/AnimatedNumber";
 import { Reveal } from "@/template/components/motion/Reveal";
+import { Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// SAGE ESTATE COUNTDOWN (THE GLASSHOUSE LEDGER)
-// Real timer calculations mapped to rolling FLIP digits.
+// DEBUT ROSE GLAM COUNTDOWN (CANVAS B: LIVING CORAL BLOOM & FROSTED GLASS CARDS)
 
 export type CountdownSectionProps = {
   data: CountdownData;
@@ -15,38 +14,35 @@ export type CountdownSectionProps = {
   eventTime?: string | null;
 };
 
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
 export function CountdownSection({ data, eventDate, eventTime }: CountdownSectionProps) {
-  const [timeLeft, setTimeLeft] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  }>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     if (!eventDate) return;
 
-    const dateParts = eventDate.split("-").map(Number);
-    if (dateParts.length < 3 || dateParts.some(isNaN)) return;
-
-    let hours = 16;
-    let minutes = 0;
-
+    let targetDateStr = eventDate;
     if (eventTime) {
-      const timeParts = eventTime.split(":").map(Number);
-      if (timeParts.length >= 2 && !isNaN(timeParts[0]) && !isNaN(timeParts[1])) {
-        hours = timeParts[0];
-        minutes = timeParts[1];
-      }
+      targetDateStr = `${eventDate}T${eventTime}:00`;
     }
-
-    const targetDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], hours, minutes, 0);
-    const targetTime = targetDate.getTime();
-    if (isNaN(targetTime)) return;
+    const target = new Date(targetDateStr).getTime();
 
     const updateTimer = () => {
       const now = new Date().getTime();
-      const difference = targetTime - now;
+      const difference = target - now;
 
       if (difference > 0) {
         setTimeLeft({
@@ -65,7 +61,9 @@ export function CountdownSection({ data, eventDate, eventTime }: CountdownSectio
     return () => clearInterval(interval);
   }, [eventDate, eventTime]);
 
-  const units = [
+  if (!eventDate) return null;
+
+  const timeUnits = [
     { label: "DAYS", value: timeLeft.days },
     { label: "HOURS", value: timeLeft.hours },
     { label: "MINUTES", value: timeLeft.minutes },
@@ -75,32 +73,37 @@ export function CountdownSection({ data, eventDate, eventTime }: CountdownSectio
   return (
     <section
       id="countdown"
-      className="template-section section-surface-sage template-section-compact relative overflow-x-clip"
+      className="template-section section-surface-coral pattern-coral relative overflow-x-clip text-white text-center"
     >
-      <div className="template-container-narrow text-center relative z-10">
+      <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
-          <div className="mb-6 sm:mb-8 space-y-2">
-            <span className="text-role-subheading">COUNTDOWN RECORD</span>
-            <h2 className="text-role-heading text-[var(--wedding-text)]">
-              {data.title || "Counting Down To Our Big Day"}
+          <div className="text-center mb-8 sm:mb-12 space-y-2">
+            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-90">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
+              <span>FOLIO // 01 &bull; THE COUNTDOWN</span>
+            </span>
+            <h2 className="text-role-heading-major text-white tracking-tight">
+              {data.title || "Counting Down to 18"}
             </h2>
             {data.shortNote && (
-              <p className="text-role-lead max-w-md mx-auto leading-relaxed">{data.shortNote}</p>
+              <p className="text-role-lead text-[var(--debut-text-on-coral-muted,#FFE7E2)] max-w-md mx-auto mt-2 font-serif italic">
+                {data.shortNote}
+              </p>
             )}
           </div>
         </Reveal>
 
-        <Reveal direction="up" distance={20} delay={0.1}>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 max-w-xl mx-auto">
-            {units.map((unit) => (
+        <Reveal direction="up" distance={24} delay={0.1}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
+            {timeUnits.map((unit, idx) => (
               <div
-                key={unit.label}
-                className="relative flex flex-col items-center justify-center p-4 sm:p-5 rounded-2xl border border-[var(--wedding-border)] bg-[var(--wedding-surface)] shadow-xs hover:border-[var(--wedding-accent)]/50 transition-colors overflow-visible"
+                key={idx}
+                className="debut-glass-coral bg-white/15 backdrop-blur-md border border-white/30 rounded-3xl p-5 sm:p-7 shadow-lg flex flex-col items-center justify-center transition-transform hover:scale-105"
               >
-                <span className="text-3xl sm:text-4xl lg:text-5xl font-bold font-mono tracking-tight text-[var(--wedding-text)] tabular-nums relative z-10">
-                  <AnimatedNumber value={unit.value} format={{ minimumIntegerDigits: 2 }} />
+                <span className="font-serif font-bold text-3xl sm:text-5xl md:text-6xl text-white tracking-tight">
+                  {isClient ? String(unit.value).padStart(2, "0") : "--"}
                 </span>
-                <span className="mt-1.5 text-xs font-mono font-bold tracking-[0.2em] text-[var(--wedding-text-muted)] uppercase relative z-10">
+                <span className="mt-2 text-xs sm:text-sm font-cinzel font-bold tracking-[0.2em] text-[var(--debut-text-on-coral-muted,#FFE7E2)] uppercase">
                   {unit.label}
                 </span>
               </div>

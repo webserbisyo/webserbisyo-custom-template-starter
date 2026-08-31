@@ -1,13 +1,13 @@
 /* ==========================================================================
-   SAGE ESTATE — THE GLASSHOUSE LEDGER
-   SHARED TEMPLATE LAYOUT & FULL-WIDTH SECTION ENVIRONMENT
+   DEBUT ROSE GLAM — GRAND COTILLION EDITION
+   SHARED TEMPLATE LAYOUT & 2-CANVAS SECTION ENVIRONMENT
    ========================================================================== */
 
 :root {
   --section-space-mobile: clamp(3.5rem, 7vw, 6rem);
-  --section-space-desktop: clamp(4rem, 8vw, 6.5rem);
+  --section-space-desktop: clamp(4.5rem, 8vw, 7rem);
   --section-space-compact-mobile: clamp(2.5rem, 5vw, 4rem);
-  --section-space-compact-desktop: clamp(3rem, 6vw, 4.5rem);
+  --section-space-compact-desktop: clamp(3.5rem, 6vw, 5rem);
   --content-max-width: 68rem;
   --reading-max-width: 46rem;
 }
@@ -75,115 +75,159 @@
 }
 
 /* ==========================================================================
-   CENTRALIZED SECTION SURFACE & CONTRAST AUTOMATION
+   2-CANVAS SURFACE & CONTRAST AUTOMATION (ALABASTER + CORAL + NOIR)
    ========================================================================== */
 
-/* 1. Light Parchment Surface (Page Canvas) */
+/* 1. Canvas A: Satin Alabaster Surface (Primary Page Canvas) */
+.section-surface-alabaster,
 .section-surface-ivory,
-.surface-ivory {
-  background-color: var(--wedding-bg);
-  color: var(--wedding-text);
-}
-
-/* 2. Pure Stationery / Paper Surface (Cards & Content Sections) */
 .section-surface-paper,
-.surface-paper,
-.template-card {
-  background-color: var(--wedding-surface);
-  color: var(--wedding-text);
-}
-
-/* 3. Mist Sage Wash Surface (Alternating Light Bands) */
 .section-surface-sage,
+.surface-ivory,
+.surface-paper,
 .surface-sage {
-  background-color: var(--wedding-surface-alt);
-  color: var(--wedding-text);
+  background-color: var(--debut-bg-alabaster);
+  color: var(--debut-text-noir);
 }
 
-/* 4. Primary Conservatory Sage Surface (Callout / Music Bands) */
+/* 2. Canvas B: Living Coral Saturated Feature Canvas */
+.section-surface-coral,
 .section-surface-primary,
 .surface-primary {
-  background-color: var(--wedding-primary);
-  color: var(--wedding-on-primary);
+  background: var(--debut-bg-coral-gradient);
+  color: var(--debut-text-on-coral);
 }
 
-.section-surface-primary > div > * > h1,
-.section-surface-primary > div > * > h2,
-.section-surface-primary > div > * > .text-role-heading,
-.section-surface-primary > div > * > .text-role-heading-major {
-  color: var(--wedding-on-primary);
+.section-surface-coral h1,
+.section-surface-coral h2,
+.section-surface-coral h3,
+.section-surface-coral .text-role-display,
+.section-surface-coral .text-role-heading,
+.section-surface-coral .text-role-heading-major,
+.section-surface-coral .text-role-heading-quiet,
+.section-surface-primary h1,
+.section-surface-primary h2,
+.section-surface-primary h3 {
+  color: var(--debut-text-on-coral);
 }
 
-.section-surface-primary > div > * > p.intro,
-.section-surface-primary > div > * > .text-role-lead {
-  color: var(--wedding-accent-soft);
+.section-surface-coral p.intro,
+.section-surface-coral .text-role-lead,
+.section-surface-primary p.intro,
+.section-surface-primary .text-role-lead {
+  color: var(--debut-text-on-coral-muted);
 }
 
-/* 5. Deep Estate Forest Surface (Reception, RSVP, Footer) */
+/* 3. Dark Anchor Canvas: Velvet Noir Surface (Footer Colophon & Modals) */
+.section-surface-noir,
 .section-surface-forest,
 .section-surface-dark,
+.section-surface-aurora,
 .surface-dark {
-  background-color: var(--wedding-surface-dark);
-  color: var(--wedding-on-dark);
+  background-color: var(--debut-bg-noir);
+  color: var(--debut-text-on-noir);
 }
 
-.section-surface-forest > div > * > h1,
-.section-surface-forest > div > * > h2,
-.section-surface-forest > div > * > .text-role-heading,
-.section-surface-forest > div > * > .text-role-heading-major,
-.section-surface-dark > div > * > h1,
-.section-surface-dark > div > * > h2 {
-  color: var(--wedding-on-dark);
+.section-surface-noir h1,
+.section-surface-noir h2,
+.section-surface-noir h3,
+.section-surface-noir .text-role-display,
+.section-surface-noir .text-role-heading,
+.section-surface-noir .text-role-heading-major,
+.section-surface-dark h1,
+.section-surface-dark h2,
+.section-surface-forest h1,
+.section-surface-forest h2 {
+  color: var(--debut-text-on-noir);
 }
 
-.section-surface-forest > div > * > p.intro,
-.section-surface-forest > div > * > .text-role-lead,
-.section-surface-dark > div > * > p.intro {
-  color: var(--wedding-accent-soft);
-}
-
-/* 6. Estate Forest Aurora Hero Surface (Dark Animated Botanical Glasshouse) */
-.section-surface-aurora {
-  background-color: var(--wedding-surface-dark);
-  color: var(--wedding-on-dark);
-}
-
-.section-surface-aurora h1,
-.section-surface-aurora h2,
-.section-surface-aurora .text-role-display {
-  color: var(--wedding-on-dark);
+.section-surface-noir p.intro,
+.section-surface-noir .text-role-lead,
+.section-surface-dark p.intro,
+.section-surface-forest p.intro {
+  color: var(--debut-text-on-noir-muted);
 }
 
 /* ==========================================================================
-   ESTATE GLASS UTILITIES (STATIONERY & CONTROLS ON AURORA / DARK SURFACES)
+   GLASSMORPHISM & SURFACE ELEVATIONS (ALLSHADCN LUXURY BENCHMARK)
    ========================================================================== */
 
-.estate-glass-light {
-  background-color: var(--wedding-glass-light-bg);
-  border-color: var(--wedding-glass-light-border);
-  backdrop-filter: blur(var(--wedding-glass-blur)) saturate(120%);
-  -webkit-backdrop-filter: blur(var(--wedding-glass-blur)) saturate(120%);
+/* 1. Frosted Sticky Navigation */
+.debut-glass-navbar {
+  background-color: var(--debut-nav-bg-scrolled);
+  border-bottom: 1px solid var(--debut-glass-border);
+  box-shadow: 0 4px 20px -4px rgba(38, 19, 28, 0.05);
+  backdrop-filter: blur(var(--debut-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--debut-blur)) saturate(140%);
 }
 
+/* 2. Frosted Section Card Container */
+.debut-glass-card,
+.estate-glass-light {
+  background-color: var(--debut-glass-bg);
+  border: 1px solid var(--debut-glass-border);
+  border-radius: var(--debut-radius-card);
+  box-shadow:
+    var(--debut-shadow-card),
+    inset 0 1px 1px var(--debut-glass-highlight);
+  backdrop-filter: blur(var(--debut-blur));
+  -webkit-backdrop-filter: blur(var(--debut-blur));
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.debut-glass-card:hover,
+.estate-glass-light:hover {
+  box-shadow:
+    var(--debut-shadow-floating),
+    inset 0 1px 1px var(--debut-glass-highlight);
+}
+
+/* 3. Living Coral Frosted Glass Container */
+.debut-glass-coral,
 .estate-glass-sage {
-  background-color: var(--wedding-glass-sage-bg);
-  border-color: var(--wedding-glass-sage-border);
-  backdrop-filter: blur(var(--wedding-glass-blur));
-  -webkit-backdrop-filter: blur(var(--wedding-glass-blur));
+  background-color: var(--debut-glass-coral-bg);
+  border: 1px solid var(--debut-glass-coral-border);
+  border-radius: var(--debut-radius-card);
+  box-shadow:
+    var(--debut-shadow-card),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(var(--debut-blur));
+  -webkit-backdrop-filter: blur(var(--debut-blur));
+}
+
+/* 4. Solid Pure White Card Enclosure on Living Coral Canvas */
+.debut-card-coral-enclosure {
+  background-color: var(--debut-surface-alabaster);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: var(--debut-radius-card);
+  box-shadow: var(--debut-shadow-coral);
+  color: var(--debut-text-noir);
+}
+
+/* 5. Debut Grand Arch Frame */
+.debut-arch-frame {
+  border-radius: var(--debut-radius-arch);
+  border: 2px solid var(--debut-rose-gold-border);
+  box-shadow: var(--debut-shadow-floating);
+  overflow: hidden;
+  position: relative;
 }
 
 /* ==========================================================================
    SYSTEMIC SURFACE CONTEXT RESET FOR NESTED CONTAINERS
-   Guarantees that nested light cards in dark/primary sections maintain dark text.
+   Guarantees that nested light cards maintain dark text.
    ========================================================================== */
 
 .surface-light-reset,
 [data-surface="light"],
+.debut-card-coral-enclosure,
 .template-card,
 .ledger-panel,
 .correspondence-sheet,
 .specimen-frame {
-  color: var(--wedding-text);
+  color: var(--debut-text-noir);
 }
 
 .surface-light-reset h1,
@@ -194,6 +238,10 @@
 [data-surface="light"] h2,
 [data-surface="light"] h3,
 [data-surface="light"] h4,
+.debut-card-coral-enclosure h1,
+.debut-card-coral-enclosure h2,
+.debut-card-coral-enclosure h3,
+.debut-card-coral-enclosure h4,
 .template-card h1,
 .template-card h2,
 .template-card h3,
@@ -206,11 +254,12 @@
 .correspondence-sheet h2,
 .correspondence-sheet h3,
 .correspondence-sheet h4 {
-  color: var(--wedding-text);
+  color: var(--debut-text-noir);
 }
 
 .surface-light-reset p,
 [data-surface="light"] p,
+.debut-card-coral-enclosure p,
 .template-card p,
 .ledger-panel p,
 .correspondence-sheet p {
@@ -227,7 +276,7 @@ input[type="tel"],
 input[type="number"],
 select,
 textarea {
-  font-size: 1rem !important; /* 16px solid mobile baseline */
+  font-size: 1rem !important;
   line-height: 1.5;
 }
 
@@ -236,26 +285,26 @@ textarea {
    ========================================================================== */
 
 .template-card {
-  background-color: var(--wedding-surface);
-  border: 1px solid var(--wedding-border);
-  border-radius: var(--radius-card);
+  background-color: var(--debut-surface-alabaster);
+  border: 1px solid var(--debut-rose-gold-border);
+  border-radius: var(--debut-radius-card);
   padding: clamp(1.25rem, 3vw, 2.25rem);
-  box-shadow: var(--shadow-xs);
-  transition: all 0.2s ease;
+  box-shadow: var(--debut-shadow-xs);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .template-card:hover {
-  box-shadow: var(--shadow-soft);
+  box-shadow: var(--debut-shadow-card);
 }
 
 .template-focus-ring:focus-visible {
-  outline: 2px solid var(--wedding-focus);
+  outline: 2px solid var(--debut-focus);
   outline-offset: 2px;
 }
 
-/* WEDDING SHELL NAVIGATION STYLES */
+/* SHELL NAVIGATION SCROLL STATES */
 .wedding-nav[data-scrolled="false"] {
-  background-color: var(--wedding-nav-bg-hero, transparent);
+  background-color: transparent;
   border-bottom: 1px solid transparent;
   box-shadow: none;
   backdrop-filter: none;
@@ -263,24 +312,24 @@ textarea {
 }
 
 .wedding-nav[data-scrolled="true"] {
-  background-color: var(--wedding-nav-bg-scrolled, rgba(247, 244, 234, 0.94));
-  border-bottom: 1px solid var(--wedding-nav-border-scrolled, rgba(199, 207, 188, 0.8));
-  box-shadow: var(--wedding-nav-shadow-scrolled, 0 4px 12px -2px rgba(36, 52, 44, 0.06));
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--debut-nav-bg-scrolled);
+  border-bottom: 1px solid var(--debut-nav-border-scrolled);
+  box-shadow: var(--debut-nav-shadow-scrolled);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 section[id] {
-  scroll-margin-top: calc(var(--wedding-nav-height, 4.25rem) + 0.5rem);
+  scroll-margin-top: calc(var(--debut-nav-height, 4.5rem) + 0.5rem);
 }
 
-/* SAGE GALLERY CUSTOM PAGINATION BULLETS */
+/* GALLERY CUSTOM PAGINATION BULLETS */
 .sage-gallery-bullet {
   display: inline-block;
   width: 0.625rem;
   height: 0.625rem;
   border-radius: 9999px;
-  background-color: var(--wedding-border);
+  background-color: var(--debut-rose-gold-border);
   opacity: 0.8;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -288,14 +337,14 @@ section[id] {
 }
 
 .sage-gallery-bullet:hover {
-  background-color: var(--wedding-primary);
+  background-color: var(--debut-bg-coral);
   opacity: 1;
 }
 
 .sage-gallery-bullet-active {
   width: 2rem !important;
   border-radius: 9999px !important;
-  background-color: var(--wedding-primary) !important;
+  background-color: var(--debut-bg-coral) !important;
   opacity: 1 !important;
-  box-shadow: var(--shadow-xs);
+  box-shadow: var(--debut-shadow-xs);
 }

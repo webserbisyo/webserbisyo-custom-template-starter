@@ -25,7 +25,7 @@ export function LedgerPanel({
     <div
       data-surface="light"
       className={cn(
-        "ledger-panel relative rounded-2xl border border-[var(--wedding-border)] bg-[var(--wedding-surface)] text-[var(--wedding-text)] p-6 sm:p-8 shadow-xs text-left transition-all",
+        "ledger-panel debut-glass-card relative rounded-2xl sm:rounded-3xl border border-[var(--debut-glass-border,#E8C4C8)] bg-[var(--debut-glass-bg,#ffffff)]/92 text-[var(--debut-text-noir,#26131C)] p-6 sm:p-8 shadow-card text-left transition-all",
         className
       )}
       {...props}
@@ -34,7 +34,7 @@ export function LedgerPanel({
       {indexTag || title ? (
         <div
           className={cn(
-            "mb-6 border-b border-[var(--wedding-border-subtle)] pb-4",
+            "mb-6 border-b border-[var(--debut-rose-gold-subtle)] pb-4",
             isCentered ? "text-center" : "text-left"
           )}
         >
@@ -45,18 +45,20 @@ export function LedgerPanel({
                 isCentered ? "items-center justify-center" : "items-center justify-between"
               )}
             >
-              <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[var(--wedding-accent-strong,#8f6a2c)] uppercase">
+              <span className="text-[10px] font-cinzel font-bold tracking-[0.22em] text-[var(--debut-rose-gold,#B76E79)] uppercase">
                 {indexTag}
               </span>
             </div>
           ) : null}
           {title ? (
-            <h3 className="mt-1 font-serif text-xl font-bold tracking-tight text-[var(--wedding-text)]">
+            <h3 className="mt-1 font-serif text-xl sm:text-2xl font-bold tracking-tight text-[var(--debut-text-noir,#26131C)]">
               {title}
             </h3>
           ) : null}
           {subtitle ? (
-            <p className="mt-0.5 text-xs text-[var(--wedding-text-muted)] font-sans">{subtitle}</p>
+            <p className="mt-1 text-sm text-[var(--debut-text-muted,#704D5B)] font-sans">
+              {subtitle}
+            </p>
           ) : null}
         </div>
       ) : null}
@@ -66,7 +68,7 @@ export function LedgerPanel({
 
       {/* Optional Footer Strip */}
       {footer ? (
-        <div className="mt-6 border-t border-[var(--wedding-border-subtle)] pt-4 text-xs text-[var(--wedding-text-muted)]">
+        <div className="mt-6 border-t border-[var(--debut-rose-gold-subtle)] pt-4 text-xs text-[var(--debut-text-muted,#704D5B)]">
           {footer}
         </div>
       ) : null}

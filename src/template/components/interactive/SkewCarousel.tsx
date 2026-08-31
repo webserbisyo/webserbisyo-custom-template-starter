@@ -41,7 +41,6 @@ export function SkewCarousel({
   const swiperRef = useRef<SwiperType | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
-  // Control autoplay state based on lightbox open/closed
   useEffect(() => {
     if (!swiperRef.current || !swiperRef.current.autoplay) return;
     if (isLightboxOpen || shouldReduceMotion) {
@@ -63,31 +62,31 @@ export function SkewCarousel({
       <div className={cn("mx-auto p-4 font-sans flex justify-center", className)}>
         <div
           onClick={() => onItemClick?.(item, 0)}
-          className="relative inline-flex flex-col items-center justify-center p-2.5 sm:p-3 rounded-2xl border-2 border-[var(--wedding-border)] bg-[var(--wedding-surface)] shadow-card cursor-pointer transition-transform hover:scale-[1.02]"
+          className="relative inline-flex flex-col items-center justify-center p-3 rounded-3xl border-2 border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] shadow-card cursor-pointer transition-transform hover:scale-[1.02]"
         >
-          <div className="relative flex items-center justify-center overflow-hidden rounded-xl bg-[var(--wedding-surface-alt)]/20">
+          <div className="relative flex items-center justify-center overflow-hidden rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/50">
             {item.src ? (
               <Image
                 src={item.src}
                 alt={item.alt || "Gallery preview"}
                 width={item.width || 2752}
                 height={item.height || 1536}
-                className="block w-auto h-auto max-w-[min(84vw,330px)] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[560px] max-h-[300px] sm:max-h-[360px] md:max-h-[410px] lg:max-h-[440px] object-contain rounded-lg select-none pointer-events-none"
+                className="block w-auto h-auto max-w-[min(84vw,330px)] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[560px] max-h-[300px] sm:max-h-[360px] md:max-h-[410px] lg:max-h-[440px] object-contain rounded-xl select-none pointer-events-none"
                 sizes="(max-width: 640px) 84vw, 560px"
               />
             ) : (
-              <div className="flex h-48 w-64 items-center justify-center text-xs font-mono text-[var(--wedding-text-muted)]">
+              <div className="flex h-48 w-64 items-center justify-center text-xs font-cinzel text-[var(--debut-text-muted)]">
                 [ PHOTO MEMORY ]
               </div>
             )}
           </div>
           {item.caption ? (
-            <div className="w-full mt-2.5 px-1 flex items-center justify-between gap-4 text-left">
-              <p className="text-xs font-medium text-[var(--wedding-text)] font-sans truncate">
+            <div className="w-full mt-3 px-1 flex items-center justify-between gap-4 text-left">
+              <p className="text-xs font-semibold text-[var(--debut-text-noir,#26131C)] font-sans truncate">
                 {item.caption}
               </p>
               {item.folioLabel || item.title ? (
-                <span className="text-[10px] font-bold font-mono tracking-wider uppercase text-[var(--wedding-accent-strong,#8f6a2c)] shrink-0">
+                <span className="text-[10px] font-bold font-cinzel tracking-wider uppercase text-[var(--debut-rose-gold,#B76E79)] shrink-0">
                   {item.folioLabel || item.title}
                 </span>
               ) : null}
@@ -98,12 +97,10 @@ export function SkewCarousel({
     );
   }
 
-  // Scalable numeric formatting helper
   const digits = Math.max(2, String(items.length).length);
   const currentFormatted = String(activeIndex + 1).padStart(digits, "0");
   const totalFormatted = String(items.length).padStart(digits, "0");
 
-  // Capped 5-segment progress mapping algorithm
   const totalItems = items.length;
   const segmentCount = Math.min(5, totalItems);
   const activeSegment =
@@ -162,9 +159,7 @@ export function SkewCarousel({
           {items.map((item, idx) => {
             const diff = idx - activeIndex;
             const isCurrentlyActive = diff === 0;
-            const absDiff = Math.abs(diff);
 
-            // React-Bits-like 5-Position 3D Shelf Transform Values
             let rotateYDeg = 0;
             let scaleVal = 1;
             let translateZPx = 0;
@@ -173,37 +168,31 @@ export function SkewCarousel({
 
             if (!shouldReduceMotion) {
               if (diff === 0) {
-                // Active Center
                 rotateYDeg = 0;
                 scaleVal = 1;
                 translateZPx = 0;
                 zIndexVal = 30;
               } else if (diff === -1) {
-                // Near Left: Inward-turning positive rotateY
                 rotateYDeg = 32;
                 scaleVal = 0.9;
                 translateZPx = -150;
                 zIndexVal = 20;
               } else if (diff === 1) {
-                // Near Right: Inward-turning negative rotateY
                 rotateYDeg = -32;
                 scaleVal = 0.9;
                 translateZPx = -150;
                 zIndexVal = 20;
               } else if (diff === -2) {
-                // Outer Left: Stronger inward perspective
                 rotateYDeg = 52;
                 scaleVal = 0.82;
                 translateZPx = -270;
                 zIndexVal = 10;
               } else if (diff === 2) {
-                // Outer Right: Stronger inward perspective
                 rotateYDeg = -52;
                 scaleVal = 0.82;
                 translateZPx = -270;
                 zIndexVal = 10;
               } else {
-                // Outside 5-position window
                 rotateYDeg = diff < 0 ? 60 : -60;
                 scaleVal = 0.72;
                 translateZPx = -360;
@@ -235,10 +224,10 @@ export function SkewCarousel({
                       "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
                   }}
                   className={cn(
-                    "relative inline-flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl bg-[var(--wedding-surface)] border-2 transition-all duration-300 select-none shadow-card",
+                    "relative inline-flex flex-col items-center justify-center p-2.5 sm:p-3 rounded-3xl bg-[var(--debut-surface-alabaster,#ffffff)] border-2 transition-all duration-300 select-none shadow-card",
                     isCurrentlyActive
-                      ? "border-[var(--wedding-primary)] ring-2 ring-[var(--wedding-accent)]/70 shadow-xl cursor-pointer"
-                      : "border-[var(--wedding-border)] hover:border-[var(--wedding-primary)]/50 cursor-pointer"
+                      ? "border-[var(--debut-rose-gold,#B76E79)] ring-4 ring-[var(--debut-champagne-gold,#D4AF37)]/40 shadow-2xl cursor-pointer"
+                      : "border-[var(--debut-rose-gold-border,#E8C4C8)] hover:border-[var(--debut-rose-gold)]/60 cursor-pointer"
                   )}
                   onClick={() => {
                     if (isCurrentlyActive) {
@@ -252,7 +241,7 @@ export function SkewCarousel({
                   }
                 >
                   {/* Photo Frame Auto-Fitting the Rendered Photography */}
-                  <div className="relative flex items-center justify-center overflow-hidden rounded-xl bg-[var(--wedding-surface-alt)]/20">
+                  <div className="relative flex items-center justify-center overflow-hidden rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/40">
                     {item.src ? (
                       <Image
                         src={item.src}
@@ -260,26 +249,26 @@ export function SkewCarousel({
                         width={item.width || 2752}
                         height={item.height || 1536}
                         sizes="(max-width: 640px) 84vw, (max-width: 1024px) 60vw, 560px"
-                        className="block w-auto h-auto max-w-[min(84vw,330px)] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[560px] max-h-[300px] sm:max-h-[360px] md:max-h-[410px] lg:max-h-[440px] object-contain rounded-lg select-none pointer-events-none"
+                        className="block w-auto h-auto max-w-[min(84vw,330px)] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[560px] max-h-[300px] sm:max-h-[360px] md:max-h-[410px] lg:max-h-[440px] object-contain rounded-xl select-none pointer-events-none"
                       />
                     ) : (
-                      <div className="flex h-44 w-60 items-center justify-center p-6 text-center text-xs font-mono text-[var(--wedding-text-muted)]">
+                      <div className="flex h-44 w-60 items-center justify-center p-6 text-center text-xs font-cinzel text-[var(--debut-text-muted)]">
                         [ PHOTO #{String(idx + 1).padStart(2, "0")} ]
                       </div>
                     )}
                   </div>
 
-                  {/* Archival Glasshouse Caption Strip */}
-                  <div className="w-full mt-2 sm:mt-2.5 px-1 flex items-center justify-between gap-3 text-left shrink-0 h-6">
+                  {/* Cotillion Caption Strip */}
+                  <div className="w-full mt-2.5 sm:mt-3 px-1 flex items-center justify-between gap-3 text-left shrink-0 h-6">
                     {item.caption ? (
-                      <p className="text-xs font-medium text-[var(--wedding-text)] font-sans truncate max-w-[68%]">
+                      <p className="text-xs font-semibold text-[var(--debut-text-noir,#26131C)] font-sans truncate max-w-[68%]">
                         {item.caption}
                       </p>
                     ) : (
                       <span />
                     )}
                     {item.folioLabel || item.title ? (
-                      <span className="text-[10px] font-bold font-mono tracking-wider uppercase text-[var(--wedding-accent-strong,#8f6a2c)] shrink-0">
+                      <span className="text-[10px] font-bold font-cinzel tracking-wider uppercase text-[var(--debut-rose-gold,#B76E79)] shrink-0">
                         {item.folioLabel || item.title}
                       </span>
                     ) : null}
@@ -291,21 +280,21 @@ export function SkewCarousel({
         </Swiper>
       </div>
 
-      {/* Glasshouse Ledger Progress Rail & Navigation Shelf */}
-      <div className="flex items-center justify-center gap-3 sm:gap-4 mt-3 sm:mt-4 select-none min-h-[44px]">
+      {/* Progress Rail & Navigation Shelf */}
+      <div className="flex items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-5 select-none min-h-[44px]">
         {/* Previous Chevron Button */}
         <button
           type="button"
           onClick={() => swiperRef.current?.slidePrev()}
-          className="w-9 h-9 rounded-full bg-[var(--wedding-surface)] text-[var(--wedding-text)] border border-[var(--wedding-border)] shadow-xs flex items-center justify-center hover:bg-[var(--wedding-surface-alt)] hover:scale-105 active:scale-95 transition-all template-focus-ring cursor-pointer"
+          className="w-10 h-10 rounded-full bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-xs flex items-center justify-center hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] hover:scale-105 active:scale-95 transition-all template-focus-ring cursor-pointer btn-press-physics"
           aria-label="Previous photograph"
         >
-          <ChevronLeft className="w-4 h-4" />
+          <ChevronLeft className="w-4 h-4 text-[var(--debut-rose-gold)]" />
         </button>
 
         {/* Numeric Counter: CURRENT / TOTAL */}
-        <div className="font-mono text-xs font-bold tracking-wider text-[var(--wedding-text-muted)] px-1">
-          <span className="text-[var(--wedding-accent-strong,#8f6a2c)]">{currentFormatted}</span>
+        <div className="font-cinzel text-xs font-bold tracking-widest text-[var(--debut-text-muted,#704D5B)] px-1">
+          <span className="text-[var(--debut-rose-gold,#B76E79)]">{currentFormatted}</span>
           <span className="mx-1 opacity-40">/</span>
           <span>{totalFormatted}</span>
         </div>
@@ -328,10 +317,10 @@ export function SkewCarousel({
                 aria-label={`Jump to gallery section ${i + 1}`}
                 onClick={() => handleSegmentClick(i)}
                 className={cn(
-                  "h-1.5 rounded-full transition-all duration-300 cursor-pointer template-focus-ring",
+                  "h-2 rounded-full transition-all duration-300 cursor-pointer template-focus-ring",
                   isSegActive
-                    ? "w-7 sm:w-9 bg-[var(--wedding-primary)] shadow-xs"
-                    : "w-2.5 sm:w-3.5 bg-[var(--wedding-border)] hover:bg-[var(--wedding-primary)]/50 opacity-80"
+                    ? "w-7 sm:w-9 bg-[var(--debut-bg-coral,#E65C4F)] shadow-xs"
+                    : "w-2.5 sm:w-3.5 bg-[var(--debut-rose-gold-border,#E8C4C8)] hover:bg-[var(--debut-bg-coral)]/50 opacity-80"
                 )}
               />
             );
@@ -342,10 +331,10 @@ export function SkewCarousel({
         <button
           type="button"
           onClick={() => swiperRef.current?.slideNext()}
-          className="w-9 h-9 rounded-full bg-[var(--wedding-surface)] text-[var(--wedding-text)] border border-[var(--wedding-border)] shadow-xs flex items-center justify-center hover:bg-[var(--wedding-surface-alt)] hover:scale-105 active:scale-95 transition-all template-focus-ring cursor-pointer"
+          className="w-10 h-10 rounded-full bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-xs flex items-center justify-center hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] hover:scale-105 active:scale-95 transition-all template-focus-ring cursor-pointer btn-press-physics"
           aria-label="Next photograph"
         >
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="w-4 h-4 text-[var(--debut-rose-gold)]" />
         </button>
       </div>
     </div>

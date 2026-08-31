@@ -13,7 +13,7 @@ export const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "inline-flex h-11 items-center justify-center rounded-xl bg-[var(--wedding-surface-alt)] p-1 text-[var(--wedding-text-muted)] border border-[var(--wedding-border)] gap-1 font-sans",
+      "inline-flex h-11 items-center justify-center rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] p-1 text-[var(--debut-text-muted,#704D5B)] border border-[var(--debut-rose-gold-border,#E8C4C8)] gap-1 font-sans",
       className
     )}
     {...props}
@@ -28,7 +28,7 @@ export const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-[var(--wedding-surface)] data-[state=active]:text-[var(--wedding-text)] data-[state=active]:shadow-xs cursor-pointer select-none template-focus-ring",
+      "inline-flex items-center justify-center whitespace-nowrap rounded-xl px-4 py-1.5 text-xs font-bold transition-all focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-[var(--debut-surface-alabaster,#FFFFFF)] data-[state=active]:text-[var(--debut-text-noir,#26131C)] data-[state=active]:shadow-xs cursor-pointer select-none template-focus-ring btn-press-physics",
       className
     )}
     {...props}
@@ -43,7 +43,7 @@ export const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-3 focus-visible:outline-hidden template-focus-ring animate-in fade-in-50 duration-150",
+      "mt-3 focus-visible:outline-hidden template-focus-ring animate-in fade-in-50 duration-200",
       className
     )}
     {...props}

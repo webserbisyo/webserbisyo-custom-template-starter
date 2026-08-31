@@ -1,21 +1,27 @@
 /* ==========================================================================
-   NEUTRAL COMPONENT GEOMETRY & ELEVATION TOKENS
-   Layout constraints for reusable component foundation
+   DEBUT ROSE GLAM — GEOMETRY & ELEVATION TOKENS
    ========================================================================== */
 
 :root {
-  --wedding-panel-max-w: 64rem;
-  --wedding-card-max-w: 48rem;
-  --wedding-sheet-max-w: 42rem;
+  --debut-panel-max-w: 68rem;
+  --debut-card-max-w: 52rem;
+  --debut-sheet-max-w: 46rem;
 
-  --wedding-frame-radius: 1rem;
-  --wedding-panel-radius: 1.25rem;
-  --wedding-pill-radius: 9999px;
+  --debut-frame-radius: 1.5rem;
+  --debut-panel-radius: 1.75rem;
+  --debut-pill-radius: 9999px;
+  --debut-arch-radius: 140px 140px 1.5rem 1.5rem;
+
+  --wedding-panel-max-w: var(--debut-panel-max-w);
+  --wedding-card-max-w: var(--debut-card-max-w);
+  --wedding-sheet-max-w: var(--debut-sheet-max-w);
+
+  --wedding-frame-radius: var(--debut-frame-radius);
+  --wedding-panel-radius: var(--debut-panel-radius);
+  --wedding-pill-radius: var(--debut-pill-radius);
 
   --wedding-elevation-flat: none;
-  --wedding-elevation-low: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-  --wedding-elevation-mid:
-    0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
-  --wedding-elevation-high:
-    0 20px 40px -10px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+  --wedding-elevation-low: var(--debut-shadow-xs);
+  --wedding-elevation-mid: var(--debut-shadow-soft);
+  --wedding-elevation-high: var(--debut-shadow-card);
 }

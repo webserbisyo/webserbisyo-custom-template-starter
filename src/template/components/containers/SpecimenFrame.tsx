@@ -9,6 +9,7 @@ export interface SpecimenFrameProps extends React.HTMLAttributes<HTMLDivElement>
   specimenNumber?: string;
   aspectRatio?: "square" | "portrait" | "landscape" | "video";
   priority?: boolean;
+  isArch?: boolean;
 }
 
 export function SpecimenFrame({
@@ -19,6 +20,7 @@ export function SpecimenFrame({
   specimenNumber,
   aspectRatio = "portrait",
   priority = false,
+  isArch = false,
   children,
   ...props
 }: SpecimenFrameProps) {
@@ -33,7 +35,8 @@ export function SpecimenFrame({
     <div
       data-surface="light"
       className={cn(
-        "specimen-frame group relative rounded-2xl border-2 border-[var(--wedding-border)] bg-[var(--wedding-surface)] text-[var(--wedding-text)] p-3 shadow-xs transition-all hover:shadow-soft",
+        "specimen-frame group relative border-2 border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] p-3 shadow-card transition-all hover:shadow-floating",
+        isArch ? "debut-arch-frame" : "rounded-2xl sm:rounded-3xl",
         className
       )}
       {...props}
@@ -41,7 +44,8 @@ export function SpecimenFrame({
       {/* Visual Inner Frame */}
       <div
         className={cn(
-          "relative w-full overflow-hidden rounded-xl bg-[var(--wedding-surface-alt)]",
+          "relative w-full overflow-hidden bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]",
+          isArch ? "rounded-t-[130px] rounded-b-2xl" : "rounded-xl sm:rounded-2xl",
           aspectClasses[aspectRatio]
         )}
       >
@@ -52,12 +56,12 @@ export function SpecimenFrame({
             fill
             priority={priority}
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
           children || (
-            <div className="flex h-full w-full items-center justify-center text-xs text-[var(--wedding-text-muted)] font-mono">
-              [ SPECIMEN FRAME ]
+            <div className="flex h-full w-full items-center justify-center text-xs text-[var(--debut-text-muted,#704D5B)] font-cinzel tracking-wider">
+              [ PORTRAIT SPECIMEN ]
             </div>
           )
         )}
@@ -65,14 +69,14 @@ export function SpecimenFrame({
 
       {/* Archival Tag Strip */}
       {caption || specimenNumber ? (
-        <div className="mt-3 flex items-center justify-between px-1 text-[11px]">
+        <div className="mt-3 flex items-center justify-between px-1 text-xs">
           {caption ? (
-            <span className="font-medium text-[var(--wedding-text)] font-sans truncate max-w-[80%]">
+            <span className="font-semibold text-[var(--debut-text-noir,#26131C)] font-sans truncate max-w-[75%]">
               {caption}
             </span>
           ) : null}
           {specimenNumber ? (
-            <span className="font-mono text-[10px] font-bold text-[var(--wedding-accent-strong,#8f6a2c)] tracking-wider">
+            <span className="font-cinzel text-[10px] font-bold text-[var(--debut-rose-gold,#B76E79)] tracking-[0.2em]">
               {specimenNumber}
             </span>
           ) : null}

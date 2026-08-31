@@ -6,9 +6,9 @@ import {
   getOrdinalSuffix,
 } from "@/template/utils/host-identity";
 
-// DYNAMIC HOST IDENTITY — Sage Estate Design System.
+// DYNAMIC HOST IDENTITY — Debut Rose Glam Design System.
 // Polymorphic monogram for Debut (SOPHIA • 18TH BIRTHDAY 🌹), Wedding (A & J), Birthday (MICHAEL • 10TH BIRTHDAY ⚡).
-// Uses --wedding-* estate tokens throughout.
+// Uses --debut-* tokens throughout.
 // Never hardcode client initials or names.
 
 export type EventMonogramProps = ComponentPropsWithoutRef<"span"> & {
@@ -44,13 +44,13 @@ export function EventMonogram({
   if (variant === "badge") {
     const badgeText = isSingleHost
       ? milestoneNum
-        ? milestoneNum
+        ? `${milestoneNum}TH`
         : initial
       : identity.compactMonogram;
 
     return (
       <span
-        className={`inline-flex items-center justify-center px-2.5 py-1 rounded-full bg-[var(--wedding-primary)] text-[var(--wedding-on-primary)] text-xs font-bold shrink-0 select-none shadow-xs font-mono tracking-wider ${className}`}
+        className={`inline-flex items-center justify-center px-3 py-1 rounded-full bg-[var(--debut-bg-coral,#E65C4F)] text-white text-xs font-bold shrink-0 select-none shadow-xs font-cinzel tracking-wider ${className}`}
         {...props}
       >
         {badgeText}
@@ -62,24 +62,26 @@ export function EventMonogram({
   if (variant === "seal") {
     return (
       <div
-        className={`inline-flex flex-col items-center justify-center p-3.5 rounded-full border border-[var(--wedding-accent)]/80 ring-2 ring-[var(--wedding-accent)]/25 bg-[var(--wedding-surface)]/95 backdrop-blur-xs shadow-soft select-none ${className}`}
+        className={`inline-flex flex-col items-center justify-center p-4 rounded-full border border-[var(--debut-champagne-gold,#D4AF37)]/80 ring-4 ring-[var(--debut-champagne-gold)]/20 bg-[var(--debut-surface-alabaster,#FFFFFF)]/95 backdrop-blur-xs shadow-soft select-none ${className}`}
         {...props}
       >
-        <span className="font-serif text-xl sm:text-2xl font-bold tracking-widest text-[var(--wedding-text)] flex items-center">
+        <span className="font-serif text-xl sm:text-2xl font-bold tracking-widest text-[var(--debut-text-noir,#26131C)] flex items-center">
           <span>{initial}</span>
           {!isSingleHost ? (
             <>
-              <span className="text-[var(--wedding-accent)] font-serif italic font-normal mx-1.5 text-lg sm:text-xl">
+              <span className="text-[var(--debut-champagne-gold)] font-serif italic font-normal mx-1.5 text-lg sm:text-xl">
                 &amp;
               </span>
               <span>{identity.brideInitial}</span>
             </>
           ) : milestoneNum ? (
             <>
-              <span className="text-[var(--wedding-accent)] font-serif font-bold mx-1.5 text-lg sm:text-xl">
+              <span className="text-[var(--debut-champagne-gold)] font-serif font-bold mx-1.5 text-lg sm:text-xl">
                 &bull;
               </span>
-              <span className="font-mono text-lg sm:text-xl">{milestoneNum}</span>
+              <span className="font-cinzel text-lg sm:text-xl text-[var(--debut-rose-gold)]">
+                {milestoneNum}
+              </span>
             </>
           ) : null}
         </span>
@@ -91,7 +93,7 @@ export function EventMonogram({
   if (variant === "hero") {
     return (
       <span
-        className={`inline-flex items-center justify-center gap-2 font-serif text-2xl md:text-3xl font-bold tracking-wider text-[var(--wedding-on-dark)] ${className}`}
+        className={`inline-flex items-center justify-center gap-2 font-serif text-2xl md:text-3xl font-bold tracking-wider text-[var(--debut-text-on-noir,#FAF5F5)] ${className}`}
         {...props}
       >
         {isSingleHost ? (
@@ -99,10 +101,10 @@ export function EventMonogram({
             <span className="tracking-widest">{firstName || initial}</span>
             {fullMilestone && (
               <>
-                <span className="text-[var(--wedding-accent)] font-serif font-bold mx-1">
+                <span className="text-[var(--debut-champagne-gold)] font-serif font-bold mx-1">
                   &bull;
                 </span>
-                <span className="font-mono text-xl md:text-2xl text-[var(--wedding-accent)]">
+                <span className="font-cinzel text-xl md:text-2xl text-[var(--debut-champagne-gold)]">
                   {fullMilestone}
                 </span>
                 <span className="text-xl">🌹</span>
@@ -112,7 +114,7 @@ export function EventMonogram({
         ) : (
           <>
             <span>{initial}</span>
-            <span className="text-[var(--wedding-accent)] font-serif italic font-normal mx-1">
+            <span className="text-[var(--debut-champagne-gold)] font-serif italic font-normal mx-1">
               &amp;
             </span>
             <span>{identity.brideInitial}</span>
@@ -129,16 +131,16 @@ export function EventMonogram({
         className={`inline-flex flex-col items-center justify-center gap-1.5 ${className}`}
         {...props}
       >
-        <span className="inline-flex items-center gap-1.5 font-serif text-xl sm:text-2xl font-bold tracking-widest text-[var(--wedding-on-dark)]">
+        <span className="inline-flex items-center gap-1.5 font-serif text-xl sm:text-2xl font-bold tracking-widest text-[var(--debut-text-on-noir,#FAF5F5)]">
           {isSingleHost ? (
             <>
               <span className="uppercase tracking-widest">{identity.displayName}</span>
               {fullMilestone && (
                 <>
-                  <span className="text-[var(--wedding-accent)] font-serif font-bold mx-1 text-lg sm:text-xl">
+                  <span className="text-[var(--debut-champagne-gold)] font-serif font-bold mx-1 text-lg sm:text-xl">
                     &bull;
                   </span>
-                  <span className="font-mono text-base sm:text-lg text-[var(--wedding-accent)]">
+                  <span className="font-cinzel text-base sm:text-lg text-[var(--debut-champagne-gold)]">
                     {fullMilestone}
                   </span>
                   <span className="text-base">🌹</span>
@@ -148,7 +150,7 @@ export function EventMonogram({
           ) : (
             <>
               <span>{initial}</span>
-              <span className="text-[var(--wedding-accent)] font-serif italic font-normal mx-1 text-xl sm:text-2xl">
+              <span className="text-[var(--debut-champagne-gold)] font-serif italic font-normal mx-1 text-xl sm:text-2xl">
                 &amp;
               </span>
               <span>{identity.brideInitial}</span>
@@ -156,7 +158,7 @@ export function EventMonogram({
           )}
         </span>
         {!isSingleHost && (
-          <span className="text-xs tracking-wider uppercase text-[var(--wedding-accent-soft)] font-mono">
+          <span className="text-xs tracking-wider uppercase text-[var(--debut-text-on-noir-muted)] font-cinzel">
             {identity.displayName}
           </span>
         )}
@@ -166,31 +168,32 @@ export function EventMonogram({
 
   // ── NAV (default) ──────────────────────────────────────────────────────
   // Debut: SOPHIA • 18TH BIRTHDAY 🌹
-  // Wedding: A & J
   return (
     <span
-      className={`event-nav-monogram inline-flex items-center text-[var(--wedding-text)] hover:opacity-80 transition-opacity select-none ${className}`}
+      className={`event-nav-monogram inline-flex items-center text-[var(--debut-text-noir,#26131C)] hover:text-[var(--debut-bg-coral,#E65C4F)] transition-colors select-none ${className}`}
       {...props}
     >
       {isSingleHost ? (
-        <span className="event-monogram-glyphs flex items-center font-serif text-sm sm:text-base font-bold tracking-widest uppercase">
-          <span className="text-[var(--wedding-text)]">{firstName || initial}</span>
+        <span className="event-monogram-glyphs flex items-center font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] uppercase">
+          <span className="text-[var(--debut-text-noir,#26131C)] font-bold">
+            {firstName || initial}
+          </span>
           {fullMilestone && (
             <>
-              <span className="text-[var(--wedding-accent)] font-serif font-bold mx-1.5 text-sm sm:text-base">
+              <span className="text-[var(--debut-champagne-gold)] font-bold mx-1.5 text-xs">
                 &bull;
               </span>
-              <span className="font-mono text-xs sm:text-sm font-semibold tracking-wider text-[var(--wedding-text-muted)]">
+              <span className="font-cinzel text-[11px] sm:text-xs font-semibold tracking-wider text-[var(--debut-rose-gold,#B76E79)]">
                 {fullMilestone}
               </span>
-              <span className="ml-1 text-xs sm:text-sm">🌹</span>
+              <span className="ml-1 text-xs">🌹</span>
             </>
           )}
         </span>
       ) : (
         <span className="event-monogram-glyphs flex items-center font-serif text-lg md:text-xl font-bold tracking-widest">
           <span>{initial}</span>
-          <span className="text-[var(--wedding-accent)] font-serif italic font-normal mx-1 text-base">
+          <span className="text-[var(--debut-champagne-gold)] font-serif italic font-normal mx-1 text-base">
             &amp;
           </span>
           <span>{identity.brideInitial}</span>

@@ -1,11 +1,11 @@
 /* ==========================================================================
-   SAGE ESTATE — BACKGROUND PATTERN ARCHITECTURE (SVG / CSS GRADIENTS)
-   Zero runtime dependencies. Infinite resolution. Pure theme-aware gradients.
+   DEBUT ROSE GLAM — BACKGROUND PATTERN ARCHITECTURE (SVG / CSS GRADIENTS)
+   Pure theme-aware ambient patterns and micro-dot radial grids.
    ========================================================================== */
 
 :root {
   --pattern-opacity: 0.06;
-  --pattern-color: 36, 52, 44; /* Deep Pine Charcoal on light surfaces */
+  --pattern-color: 183, 110, 121; /* Rose Gold RGB on light surfaces */
 }
 
 /* Intensity Modifiers */
@@ -14,21 +14,64 @@
 }
 
 .pattern-standard {
-  --pattern-opacity: 0.07;
+  --pattern-opacity: 0.08;
 }
 
 .pattern-feature {
-  --pattern-opacity: 0.11;
+  --pattern-opacity: 0.12;
 }
 
-/* Surface-Aware Inversion (for Forest / Dark Sections: Reception, RSVP, Footer) */
+/* Surface-Aware Inversion (for Velvet Noir & Living Coral Sections) */
 .pattern-dark {
-  --pattern-color: 235, 220, 201; /* Soft Champagne Brass on dark surfaces */
+  --pattern-color: 249, 241, 220; /* Soft Champagne on dark/coral surfaces */
 }
 
-/* 1. Glazing Grid: Greenhouse / Conservatory window pane structure */
-.pattern-glazing-grid {
+.pattern-coral {
+  --pattern-color: 255, 255, 255; /* Pure White on Living Coral */
+  --pattern-opacity: 0.08;
+}
+
+/* 1. Rose Parterre Trellis / Lattice */
+.pattern-lattice,
+.pattern-rose-trellis {
   background-size: 32px 32px;
+  background-image:
+    linear-gradient(45deg, rgba(var(--pattern-color), var(--pattern-opacity)) 25%, transparent 25%),
+    linear-gradient(
+      -45deg,
+      rgba(var(--pattern-color), var(--pattern-opacity)) 25%,
+      transparent 25%
+    ),
+    linear-gradient(45deg, transparent 75%, rgba(var(--pattern-color), var(--pattern-opacity)) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(var(--pattern-color), var(--pattern-opacity)) 75%);
+}
+
+/* 2. Stardust Sparkle Dot Grid */
+.pattern-archival-dot,
+.pattern-stardust-dot {
+  background-size: 24px 24px;
+  background-image: radial-gradient(
+    circle,
+    rgba(var(--pattern-color), var(--pattern-opacity)) 1.5px,
+    transparent 1.5px
+  );
+}
+
+/* 3. Cotillion Ledger / Chronicle Rule */
+.pattern-ledger-rule,
+.pattern-chronicle-rule {
+  background-size: 100% 32px;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 31px,
+    rgba(var(--pattern-color), var(--pattern-opacity)) 32px
+  );
+}
+
+/* 4. Ballroom Glazing Pane */
+.pattern-glazing-grid,
+.pattern-ballroom-grid {
+  background-size: 36px 36px;
   background-image:
     linear-gradient(
       to right,
@@ -40,38 +83,4 @@
       rgba(var(--pattern-color), var(--pattern-opacity)) 1px,
       transparent 1px
     );
-}
-
-/* 2. Ledger Rule: Archival correspondence & ledger paper lines */
-.pattern-ledger-rule {
-  background-size: 100% 28px;
-  background-image: linear-gradient(
-    to bottom,
-    transparent 27px,
-    rgba(var(--pattern-color), var(--pattern-opacity)) 28px
-  );
-}
-
-/* 3. Archival Dot: Subtle metric dot grid */
-.pattern-archival-dot {
-  background-size: 20px 20px;
-  background-image: radial-gradient(
-    circle,
-    rgba(var(--pattern-color), var(--pattern-opacity)) 1px,
-    transparent 1px
-  );
-}
-
-/* 4. Conservatory Lattice: 45-degree diagonal trellis geometry */
-.pattern-lattice {
-  background-size: 28px 28px;
-  background-image:
-    linear-gradient(45deg, rgba(var(--pattern-color), var(--pattern-opacity)) 25%, transparent 25%),
-    linear-gradient(
-      -45deg,
-      rgba(var(--pattern-color), var(--pattern-opacity)) 25%,
-      transparent 25%
-    ),
-    linear-gradient(45deg, transparent 75%, rgba(var(--pattern-color), var(--pattern-opacity)) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(var(--pattern-color), var(--pattern-opacity)) 75%);
 }

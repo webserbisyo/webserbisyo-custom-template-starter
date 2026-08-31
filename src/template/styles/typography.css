@@ -1,19 +1,26 @@
 /* ==========================================================================
-   SAGE ESTATE — THE GLASSHOUSE LEDGER
-   CENTRALIZED TYPOGRAPHY ROLES (PLAYFAIR DISPLAY + MANROPE + MONOSPACE)
+   DEBUT ROSE GLAM — GRAND COTILLION EDITION
+   CENTRALIZED TYPOGRAPHY ROLES (PLAYFAIR DISPLAY + CINZEL + PLUS JAKARTA SANS)
    ========================================================================== */
 
 :root {
   --font-family-body: var(
-    --font-wedding-body,
-    "Manrope",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif
+    --font-debut-body,
+    var(
+      --font-wedding-body,
+      "Plus Jakarta Sans",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif
+    )
   );
-  --font-family-display: var(--font-wedding-display, "Playfair Display", Georgia, serif);
+  --font-family-display: var(
+    --font-debut-display,
+    var(--font-wedding-display, "Playfair Display", Georgia, serif)
+  );
+  --font-family-subheading: var(--font-debut-subheading, "Cinzel", Georgia, serif);
   --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
@@ -25,6 +32,14 @@ body {
   font-family: var(--font-family-display);
 }
 
+.font-display {
+  font-family: var(--font-family-display);
+}
+
+.font-cinzel {
+  font-family: var(--font-family-subheading);
+}
+
 .font-mono {
   font-family: var(--font-family-mono);
 }
@@ -34,110 +49,114 @@ body {
 }
 
 /* ==========================================================================
-   CENTRALIZED RESPONSIVE TYPE SCALE ROLES
+   HIGH-IMPACT BOLD RESPONSIVE TYPE SCALE ROLES
    ========================================================================== */
 
-/* 1. Hero Display (Playfair Display 700/800) */
+/* 1. Hero Display (Playfair Display 700 Bold) */
 .text-role-display {
   font-family: var(--font-family-display);
-  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
-  line-height: 1.08;
+  font-size: clamp(2.75rem, 6.5vw + 1rem, 5.75rem);
+  line-height: 1.05;
   font-weight: 700;
   letter-spacing: -0.02em;
+  text-wrap: balance;
   color: inherit;
 }
 
-/* 2. Major Peak Section Headings (Ceremony, RSVP, Gallery, Love Story) */
+/* 2. Major Peak Section Headings (Cotillion Ceremony, RSVP, 18 Traditions, Gallery) */
 .text-role-heading-major {
   font-family: var(--font-family-display);
-  font-size: clamp(1.875rem, 4vw, 2.75rem);
-  line-height: 1.15;
+  font-size: clamp(2.25rem, 4.5vw + 0.5rem, 3.75rem);
+  line-height: 1.12;
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
   color: inherit;
 }
 
-/* 3. Standard Section Headings (Countdown, Music, Venue, Reception, Timeline, Attire, Extra Info) */
+/* 3. Standard Section Headings (Countdown, Music, Venue, Reception, Timeline, Attire, FAQ) */
 .text-role-heading {
   font-family: var(--font-family-display);
-  font-size: clamp(1.5rem, 3vw, 2.125rem);
+  font-size: clamp(1.75rem, 3.5vw + 0.25rem, 2.75rem);
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: inherit;
 }
 
-/* 4. Quiet Section Headings (Entourage, Sponsors, Gifts, Guestbook) */
+/* 4. Quiet Section Headings (Debut Court, Sponsors, Gifts, Guestbook) */
 .text-role-heading-quiet {
   font-family: var(--font-family-display);
-  font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+  font-size: clamp(1.5rem, 2.8vw + 0.2rem, 2.25rem);
   line-height: 1.25;
   font-weight: 600;
   color: inherit;
 }
 
-/* 5. Estate Numeric Date (ui-monospace 700 / Manrope 700) */
-.text-role-estate-date {
-  font-family: var(--font-family-mono);
-  font-size: clamp(1.25rem, 2.8vw, 1.75rem);
+/* 5. Cotillion Date Header (Cinzel 700 / Subheading) */
+.text-role-estate-date,
+.text-role-debut-date {
+  font-family: var(--font-family-subheading);
+  font-size: clamp(1.25rem, 2.8vw, 1.875rem);
   font-weight: 700;
-  letter-spacing: 0.16em;
-  color: var(--wedding-accent-strong, #8f6a2c);
+  letter-spacing: 0.2em;
+  color: var(--debut-rose-gold, #b76e79);
   text-transform: uppercase;
 }
 
-/* 6. Section Intro & Prominent Lead Prose (Manrope 500) */
+/* 6. Section Intro & Prominent Lead Prose (Plus Jakarta Sans 500) */
 .text-role-lead {
   font-family: var(--font-family-body);
-  font-size: clamp(1rem, 1.8vw, 1.125rem); /* 16px - 18px */
+  font-size: clamp(1.125rem, 1.5vw + 0.25rem, 1.35rem);
   font-weight: 500;
   line-height: 1.65;
-  color: var(--wedding-text-muted);
+  color: inherit;
 }
 
 /* 7. Sub-Headings & Card Titles */
 .text-role-card-heading {
   font-family: var(--font-family-display);
-  font-size: clamp(1.15rem, 2vw, 1.35rem);
-  line-height: 1.35;
-  font-weight: 600;
+  font-size: clamp(1.25rem, 2vw + 0.25rem, 1.75rem);
+  line-height: 1.25;
+  font-weight: 700;
   color: inherit;
 }
 
-/* 8. Standard Body & Descriptions (Manrope 400/500 - 16px baseline) */
+/* 8. Standard Body & Descriptions (Plus Jakarta Sans 450 - 17px baseline) */
 .text-role-body {
   font-family: var(--font-family-body);
-  font-size: 1rem; /* 16px solid mobile baseline */
-  font-weight: 400;
-  line-height: 1.65;
+  font-size: clamp(1.0625rem, 1vw + 0.25rem, 1.15rem);
+  font-weight: 450;
+  line-height: 1.7;
   color: inherit;
 }
 
-/* 9. UI Labels & Form Field Headers (Manrope 600) */
+/* 9. UI Labels & Form Field Headers (Plus Jakarta Sans 600) */
 .text-role-ui-label {
   font-family: var(--font-family-body);
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.4;
   color: inherit;
 }
 
-/* 10. Archival Metadata Tag & Folio Stamps (ui-monospace 700) */
+/* 10. Cotillion Metadata Tag, Monogram & Folio Stamps (Cinzel 800) */
 .text-role-metadata,
-.text-role-subheading {
-  font-family: var(--font-family-mono);
-  font-size: 0.75rem; /* 12px */
-  line-height: 1rem;
-  font-weight: 700;
+.text-role-subheading,
+.text-role-monogram,
+.text-role-badge {
+  font-family: var(--font-family-subheading);
+  font-size: clamp(0.8125rem, 1vw + 0.1rem, 0.95rem);
+  line-height: 1.25rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--wedding-accent-strong, #8f6a2c);
+  letter-spacing: 0.22em;
+  color: var(--debut-rose-gold, #b76e79);
 }
 
 /* 11. Small Metadata & Captions */
 .text-role-caption {
-  font-family: var(--font-family-mono);
-  font-size: 0.75rem; /* 12px */
+  font-family: var(--font-family-body);
+  font-size: 0.75rem;
   line-height: 1rem;
-  color: var(--wedding-text-muted);
+  color: var(--debut-text-muted);
 }

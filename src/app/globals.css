@@ -6,9 +6,9 @@
 @import "../template/styles/tokens.css";
 @import "../template/styles/typography.css";
 @import "../template/styles/motion.css";
-@import "../template/styles/template.css";
 @import "../template/styles/geometry.css";
 @import "../template/styles/patterns.css";
+@import "../template/styles/template.css";
 
 @layer base {
   html {
@@ -18,8 +18,9 @@
   body {
     overflow-x: hidden;
     width: 100%;
-    background-color: var(--wedding-bg);
-    color: var(--wedding-text);
+    background-color: var(--debut-bg-alabaster, #faf5f5);
+    color: var(--debut-text-noir, #26131c);
+    font-family: var(--font-debut-body, "Plus Jakarta Sans", sans-serif);
   }
 }
 

@@ -6,6 +6,7 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { FloatingControls } from "./components/FloatingControls";
 import { AudioProvider } from "./components/AudioPlayer";
+import { SparkleBokehEmitter } from "./components/decorations/SparkleBokehEmitter";
 import { buildEventNavigation } from "./navigation/event-navigation";
 
 export type TemplateRendererProps = {
@@ -29,10 +30,13 @@ export function TemplateRenderer({
       initialMusicTitle={data.music?.musicTitle}
       initialShortNote={data.music?.shortNote}
     >
-      <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans antialiased selection:bg-gray-200">
+      <div className="min-h-screen flex flex-col bg-[var(--debut-bg-alabaster,#FAF5F5)] text-[var(--debut-text-noir,#26131C)] font-sans antialiased selection:bg-[var(--debut-bg-coral-subtle,#FFF0EE)] selection:text-[var(--debut-bg-coral,#E65C4F)] relative">
+        {/* Ambient Drifting Bokeh Particles */}
+        <SparkleBokehEmitter />
+
         <Navbar data={data} />
 
-        <main className="flex-1 pt-16">
+        <main className="flex-1 pt-16 relative z-10">
           {data.orderedSectionKeys
             .filter((key) => key !== "contact_socials")
             .map((key) => {

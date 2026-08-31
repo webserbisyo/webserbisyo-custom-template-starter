@@ -1,122 +1,124 @@
 "use client";
 
 import { useState } from "react";
-import type { EighteenRosesCandlesData, TraditionKind } from "@/platform/event-template-data";
-import { LedgerPanel } from "@/template/components/containers/LedgerPanel";
+import type {
+  EighteenRosesCandlesData,
+  EighteenTraditionGroup,
+} from "@/platform/event-template-data";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/template/components/ui/Tabs";
 import { Reveal } from "@/template/components/motion/Reveal";
-import { Sparkles, Flame, Gift, Heart } from "lucide-react";
+import { Flower2, Flame, Gift, Sparkles, Heart } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// SAGE ESTATE 18 TRADITIONS REGISTER (THE 18 ROSES, CANDLES & TREASURES)
+// DEBUT ROSE GLAM 18 TRADITIONS (CANVAS B: LIVING CORAL WITH SOLID PURE WHITE ENCLOSURE CARDS)
 
-function getTraditionIcon(kind: TraditionKind) {
-  switch (kind) {
-    case "roses":
-      return Heart;
-    case "candles":
-      return Flame;
-    case "treasures":
-      return Gift;
-    default:
-      return Sparkles;
-  }
-}
+const TRADITION_ICONS: Record<string, React.ElementType> = {
+  roses: Flower2,
+  candles: Flame,
+  treasures: Gift,
+  custom: Heart,
+};
 
 export function EighteenRosesCandlesSection({ data }: { data: EighteenRosesCandlesData }) {
-  const groups = data?.groups?.filter((g) => g && g.entries && g.entries.length > 0) || [];
-  const [activeTab, setActiveTab] = useState(0);
+  const groups: EighteenTraditionGroup[] = data.groups || [];
+
+  const [activeTab, setActiveTab] = useState<string>(groups[0]?.id || "roses");
 
   if (groups.length === 0) return null;
-
-  const currentGroup = groups[activeTab] || groups[0];
-  const Icon = getTraditionIcon(currentGroup.kind);
 
   return (
     <section
       id="eighteen_roses_candles"
-      className="template-section section-surface-sage relative overflow-x-clip"
+      className="template-section section-surface-coral pattern-coral relative overflow-x-clip text-white"
     >
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-role-subheading">FOLIO // 10 &bull; THE 18 TRADITIONS</span>
-            <h2 className="text-role-heading-quiet text-[var(--wedding-text)] tracking-tight">
-              Eighteen Traditions
+            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-90">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
+              <span>FOLIO // 07 &bull; THE 18 TRADITIONS</span>
+            </span>
+            <h2 className="text-role-heading-major text-white tracking-tight">
+              The 18 Cotillion Traditions
             </h2>
-            <p className="text-role-lead max-w-lg mx-auto mt-2 leading-relaxed">
-              Honoring the cherished family, mentors, and friends who illuminate our
-              debutante&apos;s journey into adulthood.
+            <p className="text-role-lead text-[var(--debut-text-on-coral-muted,#FFE7E2)] max-w-md mx-auto mt-2 leading-relaxed">
+              Honoring the cherished escorts, mentors, and loved ones who illuminate the
+              debutante&apos;s journey.
             </p>
           </div>
         </Reveal>
 
-        {/* Tradition Group Tabs */}
-        {groups.length > 1 && (
-          <Reveal direction="up" distance={12} delay={0.05}>
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-10">
-              {groups.map((grp, idx) => {
-                const TabIcon = getTraditionIcon(grp.kind);
-                const isActive = idx === activeTab;
+        <Reveal direction="up" distance={20} delay={0.1}>
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="w-full max-w-4xl mx-auto flex flex-col items-center"
+          >
+            {/* 3-Way Tab Switcher */}
+            <TabsList className="h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 p-1 text-white gap-1 mb-8 shadow-md">
+              {groups.map((group) => {
+                const IconComponent = TRADITION_ICONS[group.kind] || TRADITION_ICONS.custom;
+                const isActive = activeTab === group.id;
+
                 return (
-                  <button
-                    key={grp.id || idx}
-                    type="button"
-                    onClick={() => setActiveTab(idx)}
-                    className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-[0.14em] uppercase transition-all cursor-pointer ${
+                  <TabsTrigger
+                    key={group.id}
+                    value={group.id}
+                    className={`rounded-full px-5 sm:px-7 py-2 text-xs sm:text-sm font-cinzel font-bold tracking-wider uppercase transition-all flex items-center gap-2 ${
                       isActive
-                        ? "bg-[var(--wedding-primary)] text-[var(--wedding-on-primary)] shadow-soft scale-105"
-                        : "estate-glass-light hover:bg-[var(--wedding-surface)] text-[var(--wedding-text)] border"
+                        ? "bg-white text-[var(--debut-bg-coral,#E65C4F)] shadow-lg scale-105"
+                        : "text-white hover:bg-white/10"
                     }`}
                   >
-                    <TabIcon className="w-3.5 h-3.5" />
-                    <span>{grp.title || `Tradition ${idx + 1}`}</span>
-                    <span className="text-[10px] opacity-75 font-normal">
-                      ({grp.entries.length})
-                    </span>
-                  </button>
+                    <IconComponent className="w-4 h-4" />
+                    <span>{group.title}</span>
+                  </TabsTrigger>
                 );
               })}
-            </div>
-          </Reveal>
-        )}
+            </TabsList>
 
-        {/* Tradition Entries Grid */}
-        <Reveal direction="up" distance={20} delay={0.1}>
-          <div className="relative overflow-visible">
-            <LedgerPanel
-              title={currentGroup.title || "Traditional Honors"}
-              subtitle={`A sacred celebration of ${currentGroup.entries.length} special individuals`}
-              indexTag={`TRADITION // ${String(activeTab + 1).padStart(2, "0")}`}
-              className="bg-[var(--wedding-surface)] shadow-xs relative z-10"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 pt-2">
-                {currentGroup.entries.map((entry, eIdx) => (
-                  <div
-                    key={entry.id || eIdx}
-                    className="p-4 rounded-xl border border-[var(--wedding-border-subtle)] bg-[var(--wedding-surface-subtle,#fcfbf9)] hover:border-[var(--wedding-accent)]/60 transition-all hover:shadow-xs group flex flex-col justify-between"
-                  >
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <span className="text-[11px] font-mono font-bold text-[var(--wedding-accent-strong,#8f6a2c)] uppercase">
-                        #{String(eIdx + 1).padStart(2, "0")}
-                      </span>
-                      <Icon className="w-3.5 h-3.5 text-[var(--wedding-accent)] opacity-60 group-hover:opacity-100 transition-opacity" />
-                    </div>
-
-                    <div>
-                      <h4 className="font-serif font-bold text-base text-[var(--wedding-text)] group-hover:text-[var(--wedding-primary)] transition-colors">
-                        {entry.name}
-                      </h4>
-                      {entry.message && (
-                        <p className="font-serif italic text-xs text-[var(--wedding-text-muted)] mt-1.5 leading-relaxed">
-                          &ldquo;{entry.message}&rdquo;
-                        </p>
-                      )}
-                    </div>
+            {/* Tab Contents: Solid Pure White Enclosure Cards */}
+            {groups.map((group) => (
+              <TabsContent key={group.id} value={group.id} className="w-full">
+                <div
+                  data-surface="light"
+                  className="debut-card-coral-enclosure p-6 sm:p-10 rounded-3xl bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] shadow-2xl"
+                >
+                  <div className="flex items-center justify-between border-b border-[var(--debut-rose-gold-subtle)] pb-4 mb-6">
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-[var(--debut-text-noir,#26131C)]">
+                      {group.title} Roster
+                    </h3>
+                    <span className="font-cinzel text-xs font-bold text-[var(--debut-rose-gold,#B76E79)] uppercase tracking-wider">
+                      {group.entries.length} Honored Participants
+                    </span>
                   </div>
-                ))}
-              </div>
-            </LedgerPanel>
-          </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                    {group.entries.map((item, idx: number) => (
+                      <div
+                        key={item.id || idx}
+                        className="flex items-center gap-3 p-3.5 rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] border border-[var(--debut-rose-gold-subtle)] hover:border-[var(--debut-rose-gold,#B76E79)] transition-colors group"
+                      >
+                        <span className="w-8 h-8 rounded-full bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-bg-coral,#E65C4F)] border border-[var(--debut-rose-gold-border,#E8C4C8)] font-cinzel text-xs font-bold flex items-center justify-center shrink-0 shadow-xs group-hover:bg-[var(--debut-bg-coral)] group-hover:text-white transition-colors">
+                          {String(idx + 1).padStart(2, "0")}
+                        </span>
+                        <div className="min-w-0">
+                          <p className="font-serif font-bold text-sm sm:text-base text-[var(--debut-text-noir,#26131C)] truncate">
+                            {item.name}
+                          </p>
+                          {item.message && (
+                            <p className="text-[11px] font-sans text-[var(--debut-text-muted,#704D5B)] truncate">
+                              {item.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
         </Reveal>
       </div>
     </section>

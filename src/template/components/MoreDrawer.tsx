@@ -124,15 +124,15 @@ export function MoreDrawer({ isOpen, onClose, groups, coupleDisplayName }: MoreD
       />
 
       {/* Drawer Content Panel */}
-      <div className="relative w-full max-w-md bg-[var(--surface-card)] h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-right duration-300 border-l border-[var(--border-default)]">
+      <div className="relative w-full max-w-md bg-[var(--debut-surface-alabaster,#FFFFFF)] h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-right duration-300 border-l border-[var(--debut-rose-gold-border,#E8C4C8)]">
         {/* Drawer Header */}
-        <div className="flex items-center justify-between px-6 py-3.5 border-b border-[var(--border-default)] bg-[var(--surface-muted)]/50">
-          <span className="text-xs font-mono font-bold tracking-[0.2em] text-[var(--color-brass-gold)] uppercase">
-            ESTATE DIRECTORY
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/60">
+          <span className="text-xs font-cinzel font-bold tracking-[0.22em] text-[var(--debut-rose-gold,#B76E79)] uppercase">
+            COTILLION DIRECTORY
           </span>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-muted)] transition-colors template-focus-ring cursor-pointer"
+            className="p-1.5 rounded-full text-[var(--debut-text-muted,#704D5B)] hover:text-[var(--debut-text-noir,#26131C)] hover:bg-[var(--debut-surface-alabaster-alt)] transition-colors template-focus-ring cursor-pointer"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />
@@ -140,12 +140,12 @@ export function MoreDrawer({ isOpen, onClose, groups, coupleDisplayName }: MoreD
         </div>
 
         {/* Drawer Scrollable Body */}
-        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6 overscroll-contain select-none">
+        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6 overscroll-contain select-none font-sans">
           {groups.map((group, gIdx) => (
             <div key={group.title} className="space-y-2.5">
-              <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] border-b border-[var(--border-subtle)] pb-1.5 flex items-center justify-between">
+              <h4 className="text-[10px] font-cinzel font-bold uppercase tracking-[0.22em] text-[var(--debut-text-muted,#704D5B)] border-b border-[var(--debut-rose-gold-subtle)] pb-1.5 flex items-center justify-between">
                 <span>{group.title}</span>
-                <span className="text-[9px] text-[var(--color-brass-accent)]">
+                <span className="text-[9px] text-[var(--debut-champagne-gold,#D4AF37)]">
                   FOLIO 0{gIdx + 1}
                 </span>
               </h4>
@@ -159,10 +159,10 @@ export function MoreDrawer({ isOpen, onClose, groups, coupleDisplayName }: MoreD
                       key={item.key}
                       href={resolvedHref}
                       onClick={(e) => handleLinkClick(e, item.anchor)}
-                      className="flex items-center gap-2.5 p-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:bg-[var(--surface-muted)] hover:text-[var(--text-primary)] transition-colors border border-transparent hover:border-[var(--border-default)] template-focus-ring"
+                      className="flex items-center gap-2.5 p-2.5 rounded-xl text-sm text-[var(--debut-text-noir,#26131C)] hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] hover:text-[var(--debut-bg-coral,#E65C4F)] transition-colors border border-transparent hover:border-[var(--debut-rose-gold-border)] template-focus-ring group"
                     >
-                      <IconComponent className="w-4 h-4 text-[var(--color-sage-primary)] shrink-0" />
-                      <span className="truncate font-medium">{item.label}</span>
+                      <IconComponent className="w-4 h-4 text-[var(--debut-rose-gold,#B76E79)] group-hover:text-[var(--debut-bg-coral)] shrink-0 transition-colors" />
+                      <span className="truncate font-medium text-xs">{item.label}</span>
                     </Link>
                   );
                 })}
@@ -172,14 +172,14 @@ export function MoreDrawer({ isOpen, onClose, groups, coupleDisplayName }: MoreD
         </div>
 
         {/* Drawer Footer */}
-        <div className="px-6 py-4 border-t border-[var(--border-subtle)] bg-[var(--surface-muted)]/40 text-center text-xs text-[var(--text-muted)]">
+        <div className="px-6 py-4 border-t border-[var(--debut-rose-gold-subtle)] bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/40 text-center text-xs text-[var(--debut-text-muted,#704D5B)]">
           <p>
-            Custom RSVP by{" "}
+            Debut Celebration Royale &bull; RSVP by{" "}
             <a
               href="https://rsvp.webserbisyo.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--text-primary)] hover:underline font-semibold"
+              className="text-[var(--debut-text-noir,#26131C)] hover:underline font-semibold"
             >
               WebSerbisyo
             </a>

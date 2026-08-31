@@ -7,11 +7,10 @@ import { galleryPhotos, type GalleryPhotoItem } from "@/template/content/gallery
 import { SkewCarousel } from "@/template/components/interactive/SkewCarousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/template/components/ui/Dialog";
 import { Reveal } from "@/template/components/motion/Reveal";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// SAGE ESTATE KINETIC GALLERY (THE GLASSHOUSE LEDGER)
-// Section metadata comes from platform. Photos are managed with true intrinsic dimensions in local manifest.
+// DEBUT ROSE GLAM KINETIC GALLERY (3D SKEW PERSPECTIVE & FROSTED LIGHTBOX)
 
 export function GallerySection({ data }: { data: GalleryData }) {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
@@ -36,17 +35,20 @@ export function GallerySection({ data }: { data: GalleryData }) {
   return (
     <section
       id="gallery"
-      className="template-section !pt-20 !pb-14 sm:!pt-24 sm:!pb-16 md:!pt-28 md:!pb-18 section-surface-paper text-center relative overflow-x-clip"
+      className="template-section !pt-20 !pb-14 sm:!pt-24 sm:!pb-16 md:!pt-28 md:!pb-18 section-surface-alabaster pattern-stardust-dot pattern-subtle text-center relative overflow-x-clip"
     >
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
-          <div className="mb-5 sm:mb-7 space-y-2">
-            <span className="text-role-subheading">PHOTO FOLIO // 04</span>
-            <h2 className="text-role-heading-major text-[var(--wedding-text)] tracking-tight">
-              {data.sectionTitle || "Gallery"}
+          <div className="mb-6 sm:mb-8 space-y-2">
+            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
+              <span>PHOTO FOLIO // 04</span>
+            </span>
+            <h2 className="text-role-heading-major text-[var(--debut-text-noir,#26131C)] tracking-tight">
+              {data.sectionTitle || "Grand Cotillion Gallery"}
             </h2>
             {data.sectionIntro && (
-              <p className="text-role-lead max-w-xl mx-auto mt-2 leading-relaxed">
+              <p className="text-role-lead max-w-xl mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#704D5B)]">
                 {data.sectionIntro}
               </p>
             )}
@@ -65,8 +67,8 @@ export function GallerySection({ data }: { data: GalleryData }) {
             </div>
           </Reveal>
         ) : (
-          <div className="bg-[var(--wedding-surface-alt)]/60 p-10 rounded-2xl border border-dashed border-[var(--wedding-border)] max-w-xl mx-auto text-center shadow-xs">
-            <p className="text-xs font-mono text-[var(--wedding-text-muted)] uppercase tracking-wider">
+          <div className="bg-[var(--debut-surface-alabaster-alt)] p-10 rounded-3xl border border-dashed border-[var(--debut-rose-gold-border)] max-w-xl mx-auto text-center shadow-xs">
+            <p className="text-xs font-cinzel text-[var(--debut-text-muted)] uppercase tracking-wider">
               [ Official debut photoshoot will be mounted here ]
             </p>
           </div>
@@ -80,25 +82,25 @@ export function GallerySection({ data }: { data: GalleryData }) {
               if (!open) setSelectedPhotoIndex(null);
             }}
           >
-            <DialogContent className="w-full max-w-5xl h-[88dvh] sm:h-[90dvh] max-h-[calc(100dvh-2rem)] p-4 sm:p-5 flex flex-col overflow-hidden bg-[var(--wedding-surface)] border-2 border-[var(--wedding-border)] text-[var(--wedding-text)] shadow-2xl rounded-2xl">
+            <DialogContent className="w-full max-w-5xl h-[88dvh] sm:h-[90dvh] max-h-[calc(100dvh-2rem)] p-4 sm:p-6 flex flex-col overflow-hidden bg-[var(--debut-surface-alabaster,#ffffff)] border-2 border-[var(--debut-rose-gold-border,#E8C4C8)] text-[var(--debut-text-noir,#26131C)] shadow-2xl rounded-3xl">
               {/* Modal Header: shrink-0 */}
-              <DialogHeader className="shrink-0 flex flex-row items-center justify-between pr-8 border-b border-[var(--wedding-border-subtle)] pb-2.5">
-                <DialogTitle className="font-serif text-lg sm:text-xl text-[var(--wedding-text)] font-semibold flex items-center gap-3">
+              <DialogHeader className="shrink-0 flex flex-row items-center justify-between pr-8 border-b border-[var(--debut-rose-gold-subtle)] pb-3">
+                <DialogTitle className="font-serif text-lg sm:text-xl text-[var(--debut-text-noir,#26131C)] font-bold flex items-center gap-3">
                   <span>{selectedPhoto.caption}</span>
-                  <span className="text-xs font-mono font-bold tracking-wider uppercase text-[var(--wedding-accent-strong,#8f6a2c)]">
+                  <span className="text-xs font-cinzel font-bold tracking-widest uppercase text-[var(--debut-rose-gold,#B76E79)]">
                     {selectedPhoto.folioLabel}
                   </span>
                 </DialogTitle>
               </DialogHeader>
 
               {/* Modal Media Stage: flex-1 min-h-0 dynamically fits remaining viewport */}
-              <div className="relative flex-1 min-h-0 w-full flex items-center justify-center p-1 sm:p-2 my-2 bg-[var(--wedding-surface-alt)]/20 rounded-xl overflow-hidden">
+              <div className="relative flex-1 min-h-0 w-full flex items-center justify-center p-2 sm:p-3 my-2 bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/50 rounded-2xl overflow-hidden">
                 <Image
                   src={selectedPhoto.src}
                   alt={selectedPhoto.alt}
                   width={selectedPhoto.width}
                   height={selectedPhoto.height}
-                  className="w-auto h-auto max-w-full max-h-full object-contain rounded-lg shadow-md select-none block"
+                  className="w-auto h-auto max-w-full max-h-full object-contain rounded-xl shadow-md select-none block"
                   sizes="(max-width: 1024px) 95vw, 1100px"
                   priority
                 />
@@ -112,10 +114,10 @@ export function GallerySection({ data }: { data: GalleryData }) {
                         e.stopPropagation();
                         handlePrevPhoto();
                       }}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[var(--wedding-surface)]/90 hover:bg-[var(--wedding-surface)] text-[var(--wedding-text)] border border-[var(--wedding-border)] shadow-md flex items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95 template-focus-ring z-20"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[var(--debut-surface-alabaster)]/90 hover:bg-[var(--debut-surface-alabaster)] text-[var(--debut-text-noir)] border border-[var(--debut-rose-gold-border)] shadow-md flex items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95 template-focus-ring z-20 btn-press-physics"
                       aria-label="Previous photo"
                     >
-                      <ChevronLeft className="w-5 h-5" />
+                      <ChevronLeft className="w-5 h-5 text-[var(--debut-rose-gold)]" />
                     </button>
                     <button
                       type="button"
@@ -123,10 +125,10 @@ export function GallerySection({ data }: { data: GalleryData }) {
                         e.stopPropagation();
                         handleNextPhoto();
                       }}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[var(--wedding-surface)]/90 hover:bg-[var(--wedding-surface)] text-[var(--wedding-text)] border border-[var(--wedding-border)] shadow-md flex items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95 template-focus-ring z-20"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[var(--debut-surface-alabaster)]/90 hover:bg-[var(--debut-surface-alabaster)] text-[var(--debut-text-noir)] border border-[var(--debut-rose-gold-border)] shadow-md flex items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95 template-focus-ring z-20 btn-press-physics"
                       aria-label="Next photo"
                     >
-                      <ChevronRight className="w-5 h-5" />
+                      <ChevronRight className="w-5 h-5 text-[var(--debut-rose-gold)]" />
                     </button>
                   </>
                 )}
@@ -134,7 +136,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
 
               {/* Modal Footer: shrink-0 */}
               <div className="shrink-0 text-center pt-1">
-                <p className="text-xs text-[var(--wedding-text-muted)] italic font-serif">
+                <p className="text-xs text-[var(--debut-text-muted,#704D5B)] italic font-serif">
                   {selectedPhoto.alt}
                 </p>
               </div>
