@@ -81,6 +81,7 @@ const canonicalKeys: WeddingSectionKey[] = [
 
 export const eventWebsiteSectionContract = contractJson.sections as SectionContractEntry[];
 export const eventWebsiteSectionKeys = canonicalKeys;
+export const ALL_EVENT_SECTION_KEYS = canonicalKeys;
 export const eventWebsiteSectionKeySet = new Set<string>(canonicalKeys);
 
 export const requiredWeddingSections = eventWebsiteSectionContract

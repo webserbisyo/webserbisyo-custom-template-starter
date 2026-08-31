@@ -390,13 +390,13 @@ export const DEMO_DEBUT_DATA: EventTemplateData = {
     { key: "story_message", title: "Debutant Story", enabled: true, content: {} },
     { key: "main_event", title: "Debut Program", enabled: true, content: {} },
     { key: "venue", title: "Venue", enabled: true, content: {} },
-    { key: "secondary_event", title: "After-Party", enabled: false, content: {} },
+    { key: "secondary_event", title: "After-Party", enabled: true, content: {} },
     { key: "timeline_program", title: "Program Flow", enabled: true, content: {} },
     { key: "eighteen_roses_candles", title: "18 Traditions", enabled: true, content: {} },
-    { key: "debut_court", title: "Debut Court", enabled: false, content: {} },
-    { key: "principal_sponsors", title: "Special Sponsors", enabled: false, content: {} },
+    { key: "debut_court", title: "Debut Court", enabled: true, content: {} },
+    { key: "principal_sponsors", title: "Special Sponsors", enabled: true, content: {} },
     { key: "attire_motif", title: "Dress Code", enabled: true, content: {} },
-    { key: "extra_info", title: "Details", enabled: false, content: {} },
+    { key: "extra_info", title: "Details", enabled: true, content: {} },
     { key: "rsvp_form", title: "RSVP", enabled: true, content: {} },
     { key: "gift_details", title: "Gifts", enabled: true, content: {} },
     { key: "guestbook", title: "Debut Wishes", enabled: true, content: {} },
@@ -436,9 +436,13 @@ export const DEMO_DEBUT_DATA: EventTemplateData = {
     "story_message",
     "main_event",
     "venue",
+    "secondary_event",
     "timeline_program",
     "eighteen_roses_candles",
+    "debut_court",
+    "principal_sponsors",
     "attire_motif",
+    "extra_info",
     "rsvp_form",
     "gift_details",
     "guestbook",
@@ -448,4 +452,5 @@ export const DEMO_DEBUT_DATA: EventTemplateData = {
   assets: {},
 };
 
+export const DEMO_DEBUT_ENABLED_KEYS = DEMO_DEBUT_DATA.enabledSectionKeys;
 export const demoDebutData = DEMO_DEBUT_DATA;

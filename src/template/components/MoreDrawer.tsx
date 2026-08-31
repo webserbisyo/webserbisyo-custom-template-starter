@@ -25,6 +25,10 @@ import {
   Phone,
   Gift,
   Home,
+  Flower2,
+  Star,
+  Crown,
+  List,
 } from "lucide-react";
 
 const ICON_MAP: Record<string, React.ElementType> = {
@@ -46,6 +50,10 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Phone,
   Gift,
   Home,
+  Flower2,
+  Star,
+  Crown,
+  List,
 };
 
 export type MoreDrawerProps = {

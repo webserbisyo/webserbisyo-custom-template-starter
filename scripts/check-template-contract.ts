@@ -229,6 +229,19 @@ if (derivedTest.monogram === "A & J" && derivedTest.compactMonogram === "AJ") {
   console.log(`  ✗ IDENTITY DERIVATION TEST FAILED: ${JSON.stringify(derivedTest)}`);
 }
 
+const debutDerivedTest = deriveHostIdentity(undefined, undefined, "Sophia Marie Reyes");
+if (debutDerivedTest.monogram === "S" && debutDerivedTest.compactMonogram === "S") {
+  console.log(
+    "  ✓ Debut single-host identity derivation verified: 'Sophia Marie Reyes' -> 'S' (no ampersand artifact)"
+  );
+} else {
+  result.passed = false;
+  result.failures.push(
+    `Debut identity derivation test failed. Got monogram '${debutDerivedTest.monogram}'`
+  );
+  console.log(`  ✗ DEBUT IDENTITY DERIVATION TEST FAILED: ${JSON.stringify(debutDerivedTest)}`);
+}
+
 const formattedDateTest = formatEventDateLong("2027-04-19");
 const formattedTimeTest = formatTimeRange("16:00", "17:30");
 const formattedDeadlineTest = formatRsvpDeadline("2027-03-07T23:59");
@@ -270,6 +283,28 @@ if (
   result.passed = false;
   result.failures.push("Canonical navigation model generator failed validation.");
   console.log("  ✗ NAVIGATION MODEL VALIDATION FAILED");
+}
+
+const debutNavTest = buildEventNavigation(demoDebutData);
+if (
+  debutNavTest.allEnabledItems.length === 18 &&
+  debutNavTest.allEnabledItems.some((item) => item.key === "eighteen_roses_candles") &&
+  debutNavTest.allEnabledItems.some((item) => item.key === "debut_court") &&
+  debutNavTest.allEnabledItems.some((item) => item.key === "principal_sponsors") &&
+  debutNavTest.allEnabledItems.some((item) => item.key === "secondary_event") &&
+  debutNavTest.allEnabledItems.some((item) => item.key === "extra_info")
+) {
+  console.log(
+    `  ✓ Debut 18-section navigation verified: all 18 active sections registered in nav model`
+  );
+} else {
+  result.passed = false;
+  result.failures.push(
+    `Debut navigation model failed validation. Expected 18 active items, got ${debutNavTest.allEnabledItems.length}`
+  );
+  console.log(
+    `  ✗ DEBUT NAVIGATION MODEL FAILED: ${debutNavTest.allEnabledItems.length} items registered`
+  );
 }
 
 // 8. PROHIBITED CLIENT RESIDUE & STALE ALIAS SCAN

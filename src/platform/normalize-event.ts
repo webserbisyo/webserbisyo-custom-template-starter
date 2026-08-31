@@ -338,12 +338,61 @@ export function normalizeEventData(
   // 8. timeline_program
   const timelineContent = getSectionContent("timeline_program");
   const rawTimelineItems = arrayOfRecords(timelineContent.items);
-  const timelineItems: TimelineItem[] = rawTimelineItems.map((item, idx) => ({
-    id: stringValue(item.id) || `timeline-${idx + 1}`,
-    time: stringValue(item.time) || "",
-    title: stringValue(item.title) || "Program Item",
-    description: stringValue(item.description),
-  }));
+  const defaultDebutTimeline: TimelineItem[] = [
+    {
+      id: "timeline-1",
+      time: "17:30",
+      title: "Guest Arrival & Cocktails",
+      description: "Welcome drinks and canapés as guests arrive.",
+    },
+    {
+      id: "timeline-2",
+      time: "18:00",
+      title: "Grand Entrance",
+      description: "Debutante's grand entrance with her parents and escort.",
+    },
+    {
+      id: "timeline-3",
+      time: "18:30",
+      title: "Cotillion de Honor",
+      description: "The debutante's court performs the traditional cotillion waltz.",
+    },
+    {
+      id: "timeline-4",
+      time: "19:00",
+      title: "18 Roses Waltz",
+      description: "Eighteen gentlemen present roses and waltz with the debutante.",
+    },
+    {
+      id: "timeline-5",
+      time: "19:45",
+      title: "18 Candles & 18 Treasures",
+      description: "Candle-lighting wishes and presentation of 18 keepsakes.",
+    },
+    {
+      id: "timeline-6",
+      time: "20:30",
+      title: "Dinner & Toasts",
+      description: "Dinner service with speeches from family and special mentors.",
+    },
+    {
+      id: "timeline-7",
+      time: "21:30",
+      title: "Open Dance Floor",
+      description: "Celebration, music, and dancing into the evening.",
+    },
+  ];
+  const timelineItems: TimelineItem[] =
+    rawTimelineItems.length > 0
+      ? rawTimelineItems.map((item, idx) => ({
+          id: stringValue(item.id) || `timeline-${idx + 1}`,
+          time: stringValue(item.time) || "",
+          title: stringValue(item.title) || "Program Item",
+          description: stringValue(item.description),
+        }))
+      : eventType === "debut"
+        ? defaultDebutTimeline
+        : [];
   const timelineData = {
     sectionTitle: stringValue(timelineContent.sectionTitle) || "Program & Timeline",
     sectionIntro: stringValue(timelineContent.sectionIntro),
@@ -384,7 +433,11 @@ export function normalizeEventData(
       .join("\n");
   }
   const sponsorsData = {
-    introLine: stringValue(sponsorContent.introLine),
+    introLine:
+      stringValue(sponsorContent.introLine) ||
+      (eventType === "debut"
+        ? "We are grateful for the love and guidance of our honored sponsors."
+        : ""),
     names: sponsorsNamesStr,
   };
 
@@ -399,11 +452,33 @@ export function normalizeEventData(
   // 12. extra_info
   const extraContent = getSectionContent("extra_info");
   const rawExtraItems = arrayOfRecords(extraContent.items);
-  const extraItems: ExtraInfoItem[] = rawExtraItems.map((i, idx) => ({
-    id: stringValue(i.id) || `extra-${idx + 1}`,
-    title: stringValue(i.title) || "Note",
-    details: stringValue(i.details) || "",
-  }));
+  const defaultDebutExtraInfo: ExtraInfoItem[] = [
+    {
+      id: "extra-1",
+      title: "Photography & Moments",
+      details: "Official photo and video coverage throughout the evening.",
+    },
+    {
+      id: "extra-2",
+      title: "Parking & Access",
+      details: "Complimentary valet and self-parking are available at the venue.",
+    },
+    {
+      id: "extra-3",
+      title: "Guest Reminders",
+      details: "Please arrive at least 30 minutes before the program begins.",
+    },
+  ];
+  const extraItems: ExtraInfoItem[] =
+    rawExtraItems.length > 0
+      ? rawExtraItems.map((i, idx) => ({
+          id: stringValue(i.id) || `extra-${idx + 1}`,
+          title: stringValue(i.title) || "Note",
+          details: stringValue(i.details) || "",
+        }))
+      : eventType === "debut"
+        ? defaultDebutExtraInfo
+        : [];
   const extraInfoData = {
     sectionTitle: stringValue(extraContent.sectionTitle) || "Good to Know",
     sectionIntro: stringValue(extraContent.sectionIntro),
@@ -497,6 +572,32 @@ export function normalizeEventData(
   // 18. eighteen_roses_candles (Debut traditions)
   const rosesContent = getSectionContent("eighteen_roses_candles");
   const rawRosesGroups = arrayOfRecords(rosesContent.groups);
+  const defaultDebutTraditions: EighteenTraditionGroup[] = [
+    {
+      id: "roses",
+      title: "18 Roses",
+      kind: "roses",
+      entries: [
+        { id: "r1", name: "Father & Escorts", message: "For unconditional love and guidance" },
+      ],
+    },
+    {
+      id: "candles",
+      title: "18 Candles",
+      kind: "candles",
+      entries: [
+        { id: "c1", name: "Family & Loved Ones", message: "For shining light on every path" },
+      ],
+    },
+    {
+      id: "treasures",
+      title: "18 Treasures",
+      kind: "treasures",
+      entries: [
+        { id: "t1", name: "Mentors & Friends", message: "Keepsakes to remember this milestone" },
+      ],
+    },
+  ];
   const traditionsGroups: EighteenTraditionGroup[] = rawRosesGroups.map((grp, gIdx) => {
     const rawEntries = arrayOfRecords(grp.entries);
     const entries: EighteenTraditionEntry[] = rawEntries.map((entry, eIdx) => ({
@@ -520,13 +621,36 @@ export function normalizeEventData(
     };
   });
   const eighteenRosesCandlesData: EighteenRosesCandlesData = {
-    groups: traditionsGroups,
+    groups:
+      traditionsGroups.length > 0
+        ? traditionsGroups
+        : eventType === "debut"
+          ? defaultDebutTraditions
+          : [],
   };
 
   // 19. debut_court (Named groups)
   const courtContent = getSectionContent("debut_court");
+  const defaultDebutCourt: NamedGroup[] = [
+    {
+      id: "court-ladies",
+      title: "Ladies of Honor",
+      names: [{ id: "cl1", name: "Court Ladies" }],
+    },
+    {
+      id: "court-escorts",
+      title: "Gentlemen Escorts",
+      names: [{ id: "ce1", name: "Court Escorts" }],
+    },
+  ];
+  const parsedCourtGroups = normalizeNamedGroups(courtContent, "court");
   const debutCourtData: NamedGroupsData = {
-    groups: normalizeNamedGroups(courtContent, "court"),
+    groups:
+      parsedCourtGroups.length > 0
+        ? parsedCourtGroups
+        : eventType === "debut"
+          ? defaultDebutCourt
+          : [],
   };
 
   // 20. godparents (Named groups)

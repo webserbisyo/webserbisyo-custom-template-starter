@@ -6,17 +6,13 @@
 // Replaces: wedding-navigation.ts (retained as backward-compat re-export shim)
 
 import type { EventTemplateData } from "@/platform/event-template-data";
-import {
-  WEDDING_APPLICABLE_SECTION_KEYS,
-  type WeddingApplicableSectionKey,
-  type WeddingSectionKey,
-} from "@/platform/contract";
+import { ALL_EVENT_SECTION_KEYS, type WeddingSectionKey } from "@/platform/contract";
 
 // Canonical section key — covers all 20 section keys (17 wedding + 3 debut-exclusive)
 export type EventApplicableSectionKey = WeddingSectionKey;
 
 export type NavigationGroup =
-  "Celebration" | "Event Essentials" | "Debut Circle" | "Guest Info & Actions";
+  "Celebration" | "Debut Program & Traditions" | "Guest Essentials & Actions";
 
 export type EventNavItem = {
   key: EventApplicableSectionKey;
@@ -37,6 +33,7 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
   EventApplicableSectionKey,
   Omit<EventNavItem, "key">
 > = {
+  // ── Folio 01: Celebration ──────────────────────────────────────────────
   host_info: {
     label: "Home",
     anchor: "/",
@@ -60,115 +57,15 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
     anchor: "#music_effects",
     group: "Celebration",
     iconName: "Music",
-    isPrimaryTopNav: false, // Keep out of compact TopNav per platform contract
+    isPrimaryTopNav: false,
     isDockEligible: false,
-    isMoreEligible: true, // Discoverable in More Drawer when enabled!
+    isMoreEligible: true,
   },
   gallery: {
     label: "Gallery",
     anchor: "#gallery",
     group: "Celebration",
     iconName: "Image",
-    isPrimaryTopNav: true,
-    isDockEligible: false,
-    isMoreEligible: true,
-  },
-  main_event: {
-    label: "Debut Program",
-    anchor: "#main_event",
-    group: "Event Essentials",
-    iconName: "Calendar",
-    isPrimaryTopNav: false, // Essential logistics live in Dock
-    isDockEligible: true,
-    isMoreEligible: true,
-  },
-  venue: {
-    label: "Venue",
-    anchor: "#venue",
-    group: "Event Essentials",
-    iconName: "MapPin",
-    isPrimaryTopNav: false, // Essential logistics live in Dock
-    isDockEligible: true,
-    isMoreEligible: true,
-  },
-  secondary_event: {
-    label: "Reception",
-    anchor: "#secondary_event",
-    group: "Event Essentials",
-    iconName: "Utensils",
-    isPrimaryTopNav: false, // Essential logistics live in Dock
-    isDockEligible: true,
-    isMoreEligible: true,
-  },
-  timeline_program: {
-    label: "Program",
-    anchor: "#timeline_program",
-    group: "Event Essentials",
-    iconName: "List",
-    isPrimaryTopNav: false,
-    isDockEligible: false,
-    isMoreEligible: true,
-  },
-  entourage: {
-    label: "Entourage",
-    anchor: "#entourage",
-    group: "Debut Circle",
-    iconName: "Users",
-    isPrimaryTopNav: false,
-    isDockEligible: false,
-    isMoreEligible: true,
-  },
-  principal_sponsors: {
-    label: "Sponsors",
-    anchor: "#principal_sponsors",
-    group: "Debut Circle",
-    iconName: "Award",
-    isPrimaryTopNav: false,
-    isDockEligible: false,
-    isMoreEligible: true,
-  },
-  attire_motif: {
-    label: "Attire",
-    anchor: "#attire_motif",
-    group: "Event Essentials",
-    iconName: "Shirt",
-    isPrimaryTopNav: false, // Essential logistics live in Dock
-    isDockEligible: true,
-    isMoreEligible: true,
-  },
-  extra_info: {
-    label: "Details",
-    anchor: "#extra_info",
-    group: "Guest Info & Actions",
-    iconName: "Info",
-    isPrimaryTopNav: true,
-    isDockEligible: false,
-    isMoreEligible: true,
-  },
-  rsvp_form: {
-    label: "RSVP",
-    anchor: "/rsvp",
-    group: "Guest Info & Actions",
-    iconName: "Mail",
-    isPrimaryTopNav: false, // Primary CTA lives in Dock
-    isDockEligible: true,
-    isMoreEligible: true,
-    isPrimaryAction: true,
-  },
-  gift_details: {
-    label: "Gifts",
-    anchor: "#gift_details",
-    group: "Guest Info & Actions",
-    iconName: "Gift",
-    isPrimaryTopNav: false,
-    isDockEligible: false,
-    isMoreEligible: true,
-  },
-  guestbook: {
-    label: "Guestbook",
-    anchor: "#guestbook",
-    group: "Guest Info & Actions",
-    iconName: "MessageSquare",
     isPrimaryTopNav: true,
     isDockEligible: false,
     isMoreEligible: true,
@@ -182,20 +79,48 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
     isDockEligible: false,
     isMoreEligible: true,
   },
-  contact_socials: {
-    label: "Contact",
-    anchor: "#contact_socials",
-    group: "Guest Info & Actions",
-    iconName: "Phone",
+
+  // ── Folio 02: Debut Program & Traditions ──────────────────────────────
+  main_event: {
+    label: "Debut Program",
+    anchor: "#main_event",
+    group: "Debut Program & Traditions",
+    iconName: "Calendar",
+    isPrimaryTopNav: false,
+    isDockEligible: true,
+    isMoreEligible: true,
+  },
+  venue: {
+    label: "Venue",
+    anchor: "#venue",
+    group: "Debut Program & Traditions",
+    iconName: "MapPin",
+    isPrimaryTopNav: false,
+    isDockEligible: true,
+    isMoreEligible: true,
+  },
+  secondary_event: {
+    label: "Reception",
+    anchor: "#secondary_event",
+    group: "Debut Program & Traditions",
+    iconName: "Utensils",
+    isPrimaryTopNav: false,
+    isDockEligible: true,
+    isMoreEligible: true,
+  },
+  timeline_program: {
+    label: "Program Flow",
+    anchor: "#timeline_program",
+    group: "Debut Program & Traditions",
+    iconName: "Clock3",
     isPrimaryTopNav: false,
     isDockEligible: false,
     isMoreEligible: true,
   },
-  // ── Debut-exclusive sections ────────────────────────────────────────────
   eighteen_roses_candles: {
     label: "18 Traditions",
     anchor: "#eighteen_roses_candles",
-    group: "Debut Circle",
+    group: "Debut Program & Traditions",
     iconName: "Flower2",
     isPrimaryTopNav: false,
     isDockEligible: false,
@@ -204,8 +129,26 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
   debut_court: {
     label: "Debut Court",
     anchor: "#debut_court",
-    group: "Debut Circle",
-    iconName: "Star",
+    group: "Debut Program & Traditions",
+    iconName: "Users",
+    isPrimaryTopNav: false,
+    isDockEligible: false,
+    isMoreEligible: true,
+  },
+  principal_sponsors: {
+    label: "Special Sponsors",
+    anchor: "#principal_sponsors",
+    group: "Debut Program & Traditions",
+    iconName: "Award",
+    isPrimaryTopNav: false,
+    isDockEligible: false,
+    isMoreEligible: true,
+  },
+  entourage: {
+    label: "Entourage",
+    anchor: "#entourage",
+    group: "Debut Program & Traditions",
+    iconName: "Users",
     isPrimaryTopNav: false,
     isDockEligible: false,
     isMoreEligible: true,
@@ -213,8 +156,65 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
   godparents: {
     label: "Godparents",
     anchor: "#godparents",
-    group: "Debut Circle",
+    group: "Debut Program & Traditions",
     iconName: "Heart",
+    isPrimaryTopNav: false,
+    isDockEligible: false,
+    isMoreEligible: true,
+  },
+
+  // ── Folio 03: Guest Essentials & Actions ──────────────────────────────
+  attire_motif: {
+    label: "Dress Code",
+    anchor: "#attire_motif",
+    group: "Guest Essentials & Actions",
+    iconName: "Shirt",
+    isPrimaryTopNav: false,
+    isDockEligible: true,
+    isMoreEligible: true,
+  },
+  extra_info: {
+    label: "Details & FAQ",
+    anchor: "#extra_info",
+    group: "Guest Essentials & Actions",
+    iconName: "Info",
+    isPrimaryTopNav: true,
+    isDockEligible: false,
+    isMoreEligible: true,
+  },
+  rsvp_form: {
+    label: "RSVP",
+    anchor: "/rsvp",
+    group: "Guest Essentials & Actions",
+    iconName: "Mail",
+    isPrimaryTopNav: false,
+    isDockEligible: true,
+    isMoreEligible: true,
+    isPrimaryAction: true,
+  },
+  gift_details: {
+    label: "Gifts",
+    anchor: "#gift_details",
+    group: "Guest Essentials & Actions",
+    iconName: "Gift",
+    isPrimaryTopNav: false,
+    isDockEligible: false,
+    isMoreEligible: true,
+  },
+  guestbook: {
+    label: "Debut Wishes",
+    anchor: "#guestbook",
+    group: "Guest Essentials & Actions",
+    iconName: "MessageSquare",
+    isPrimaryTopNav: true,
+    isDockEligible: false,
+    isMoreEligible: true,
+  },
+  contact_socials: {
+    label: "Contact",
+    anchor: "#contact_socials",
+    group: "Guest Essentials & Actions",
+    iconName: "Phone",
     isPrimaryTopNav: false,
     isDockEligible: false,
     isMoreEligible: true,
@@ -244,9 +244,8 @@ const DOCK_PREFERENCE_ORDER: EventApplicableSectionKey[] = [
 
 const NAVIGATION_GROUP_ORDER: NavigationGroup[] = [
   "Celebration",
-  "Event Essentials",
-  "Debut Circle",
-  "Guest Info & Actions",
+  "Debut Program & Traditions",
+  "Guest Essentials & Actions",
 ];
 
 export type MoreDrawerGroup = {
@@ -316,8 +315,8 @@ export function buildEventNavigation(data: EventTemplateData): CanonicalEventNav
     enabledSet.delete("contact_socials");
   }
 
-  // Filter all enabled items according to template data
-  const allEnabledItems: EventNavItem[] = WEDDING_APPLICABLE_SECTION_KEYS.filter((key) =>
+  // Filter all enabled items according to template data across ALL 20 canonical keys
+  const allEnabledItems: EventNavItem[] = ALL_EVENT_SECTION_KEYS.filter((key) =>
     enabledSet.has(key)
   ).map((key) => ({
     key,
@@ -340,7 +339,7 @@ export function buildEventNavigation(data: EventTemplateData): CanonicalEventNav
     })
   );
 
-  // More Drawer items: Grouped by category containing ALL enabled items
+  // More Drawer items: Grouped into clean 3-part Folio structure containing ALL enabled items
   const moreGroups: MoreDrawerGroup[] = NAVIGATION_GROUP_ORDER.map((group) => ({
     title: group,
     items: allEnabledItems.filter((item) => item.group === group && item.isMoreEligible),

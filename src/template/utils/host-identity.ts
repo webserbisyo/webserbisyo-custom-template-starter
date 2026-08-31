@@ -17,7 +17,7 @@ export type CoupleIdentity = HostIdentity;
 
 const COMMON_TITLES = new Set(["dr", "mr", "mrs", "ms", "prof", "rev", "atty", "engr", "hon"]);
 
-function cleanName(name: string): string {
+export function cleanName(name: string): string {
   const parts = name.trim().split(/\s+/);
   if (parts.length > 1 && COMMON_TITLES.has(parts[0].toLowerCase().replace(/\./g, ""))) {
     return parts.slice(1).join(" ");
@@ -25,19 +25,32 @@ function cleanName(name: string): string {
   return name.trim();
 }
 
-function extractInitial(name: string): string {
+export function extractInitial(name: string): string {
   const cleaned = cleanName(name);
   const match = cleaned.match(/[\p{L}]/u);
   return match ? match[0].toUpperCase() : "";
 }
 
 /**
- * Extracts a milestone number from a milestone string.
+ * Extracts the single celebrant's first name from a full display name.
+ * Example: "Sophia Marie Reyes" -> "Sophia"
+ */
+export function getSingleHostFirstName(displayName?: string): string {
+  if (!displayName) return "";
+  const cleaned = cleanName(displayName);
+  const parts = cleaned.split(/\s+(?:&|and|\+|\/)\s+/i);
+  const singleName = parts[0] || cleaned;
+  const words = singleName.trim().split(/\s+/).filter(Boolean);
+  return words[0] || singleName;
+}
+
+/**
+ * Extracts a milestone number from a milestone or age string.
  * Examples:
- * - "18th Birthday" → "18"
- * - "Turning 18" → "18"
- * - "18" → "18"
- * - "10th" → "10"
+ * - "18th Birthday" -> "18"
+ * - "Turning 18" -> "18"
+ * - "18" -> "18"
+ * - "10th" -> "10"
  */
 export function extractMilestoneNumber(milestone?: string | null): string | null {
   if (!milestone) return null;
@@ -48,9 +61,9 @@ export function extractMilestoneNumber(milestone?: string | null): string | null
 /**
  * Converts an integer milestone into an ordinal string.
  * Examples:
- * - "1" → "1st", "2" → "2nd", "3" → "3rd", "4" → "4th"
- * - "10" → "10th", "11" → "11th", "12" → "12th", "13" → "13th"
- * - "18" → "18th", "21" → "21st", "22" → "22nd", "30" → "30th"
+ * - "1" -> "1st", "2" -> "2nd", "3" -> "3rd", "4" -> "4th"
+ * - "10" -> "10th", "11" -> "11th", "12" -> "12th", "13" -> "13th"
+ * - "18" -> "18th", "21" -> "21st", "22" -> "22nd", "30" -> "30th"
  */
 export function getOrdinalSuffix(num?: string | number | null): string {
   if (!num) return "";
@@ -81,7 +94,7 @@ export function deriveHostIdentity(
   const groom = (groomName || "").trim();
   const bride = (brideName || "").trim();
 
-  // If brideName is numeric (e.g. "10" for 10th birthday), absent, or identical to groomName → single host
+  // If brideName is numeric (e.g. "10" for 10th birthday) or matches groomName, treat as single host
   const isBrideNumeric = /^\d+$/.test(bride);
   const isSingleHost = !bride || isBrideNumeric || groom.toLowerCase() === bride.toLowerCase();
 
@@ -102,7 +115,7 @@ export function deriveHostIdentity(
     compactMonogram = brideInitial;
   } else if (coupleDisplayName && coupleDisplayName.trim().length > 0) {
     const cleanDisplay = coupleDisplayName.trim();
-    // Check for couple delimiters: &, and, +, /
+    // Check for explicit couple delimiters: &, and, +, /
     const segments = cleanDisplay.split(/\s+(?:&|and|\+|\/)\s+/i);
     if (segments.length === 2) {
       const first = extractInitial(segments[0]);
@@ -111,18 +124,11 @@ export function deriveHostIdentity(
         monogram = `${first} & ${second}`;
         compactMonogram = `${first}${second}`;
       }
-    }
-    if (!monogram) {
-      const parts = cleanDisplay.split(/\s+/).filter(Boolean);
-      if (parts.length >= 2) {
-        const first = extractInitial(parts[0]);
-        const last = extractInitial(parts[parts.length - 1]);
-        monogram = `${first} & ${last}`;
-        compactMonogram = `${first}${last}`;
-      } else if (parts.length === 1) {
-        monogram = extractInitial(parts[0]);
-        compactMonogram = monogram;
-      }
+    } else {
+      // Single celebrant (e.g. "Sophia Marie Reyes") — DO NOT combine first & last initial with &
+      const firstInitial = extractInitial(cleanDisplay);
+      monogram = firstInitial;
+      compactMonogram = firstInitial;
     }
   }
 
@@ -133,10 +139,10 @@ export function deriveHostIdentity(
   return {
     groomName: groom,
     brideName: isSingleHost ? "" : bride,
-    groomInitial,
+    groomInitial: groomInitial || monogram,
     brideInitial,
-    monogram: monogram || "M",
-    compactMonogram: compactMonogram || "M",
+    monogram: monogram || "S",
+    compactMonogram: compactMonogram || "S",
     displayName: defaultDisplay,
   };
 }
