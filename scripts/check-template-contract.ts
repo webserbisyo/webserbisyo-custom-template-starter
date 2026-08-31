@@ -67,17 +67,17 @@ if (globalKeys.length !== 20) {
   result.failures.push(`Global contract count mismatch. Expected 20, got ${globalKeys.length}`);
 }
 
-if (applicableKeys.length !== 17) {
+if (applicableKeys.length !== 16) {
   result.passed = false;
   result.failures.push(
-    `Applicable section count mismatch. Expected 17, got ${applicableKeys.length}`
+    `Applicable section count mismatch. Expected 16, got ${applicableKeys.length}`
   );
 }
 
-if (registeredKeys.length !== 17) {
+if (registeredKeys.length !== 16) {
   result.passed = false;
   result.failures.push(
-    `Template section registry count mismatch. Expected 17, got ${registeredKeys.length}`
+    `Template section registry count mismatch. Expected 16, got ${registeredKeys.length}`
   );
 }
 
@@ -92,7 +92,7 @@ for (const key of applicableKeys) {
   }
 }
 
-const forbiddenKeys = ["eighteen_roses_candles", "debut_court", "godparents"];
+const forbiddenKeys = ["entourage", "eighteen_roses_candles", "debut_court", "godparents"];
 for (const key of forbiddenKeys) {
   if (templateSectionRegistry[key]) {
     result.failures.push(`Forbidden section renderer registered: '${key}'`);
@@ -107,8 +107,8 @@ for (const regKey of registeredKeys) {
   }
 }
 
-if (missingCount === 0 && registeredKeys.length === 17) {
-  console.log(`✓ Template section registry correctly contains exactly 17 Event renderers.`);
+if (missingCount === 0 && registeredKeys.length === 16) {
+  console.log(`✓ Template section registry correctly contains exactly 16 Event renderers.`);
 } else {
   result.passed = false;
 }
@@ -335,8 +335,8 @@ function scanForResidueAndAliases(dir: string) {
 }
 scanForResidueAndAliases(path.resolve(process.cwd(), "src"));
 
-// 9. REAL 17-SECTION FIELD-LEVEL SENTINEL CONNECTION VERIFICATION
-console.log("\n[9] REAL 17-SECTION FIELD-LEVEL SENTINEL CONNECTION VERIFICATION");
+// 9. REAL 16-SECTION FIELD-LEVEL SENTINEL CONNECTION VERIFICATION
+console.log("\n[9] REAL 16-SECTION FIELD-LEVEL SENTINEL CONNECTION VERIFICATION");
 
 const sentinelPublicDto = {
   eventSlug: "sentinel-event-slug",
@@ -354,7 +354,6 @@ const sentinelPublicDto = {
     "venue",
     "secondary_event",
     "timeline_program",
-    "entourage",
     "principal_sponsors",
     "attire_motif",
     "extra_info",
@@ -375,7 +374,6 @@ const sentinelPublicDto = {
         venue: true,
         secondary_event: true,
         timeline_program: true,
-        entourage: true,
         principal_sponsors: true,
         attire_motif: true,
         extra_info: true,
@@ -394,7 +392,6 @@ const sentinelPublicDto = {
         "venue",
         "secondary_event",
         "timeline_program",
-        "entourage",
         "principal_sponsors",
         "attire_motif",
         "extra_info",
@@ -465,16 +462,6 @@ const sentinelPublicDto = {
             time: "18:00",
             title: "SENTINEL_ITEM_2_TITLE",
             description: "SENTINEL_ITEM_2_DESC",
-          },
-        ],
-      },
-      entourage: {
-        introLine: "SENTINEL_ENTOURAGE_INTRO",
-        groups: [
-          {
-            id: "sentinel-grp-1",
-            groupTitle: "SENTINEL_BEST_MAN",
-            names: ["SENTINEL_PERSON_1", "SENTINEL_PERSON_2"],
           },
         ],
       },
@@ -707,24 +694,7 @@ assertField(
   "timeline_program.items[1].title"
 );
 
-// 9. entourage
-assertField(
-  normalizedSentinel.entourage.introLine,
-  "SENTINEL_ENTOURAGE_INTRO",
-  "entourage.introLine"
-);
-assertField(
-  normalizedSentinel.entourage.groups[0]?.groupTitle,
-  "SENTINEL_BEST_MAN",
-  "entourage.groups[0].groupTitle"
-);
-assertField(
-  normalizedSentinel.entourage.groups[0]?.names.includes("SENTINEL_PERSON_1"),
-  true,
-  "entourage.groups[0].names (person 1)"
-);
-
-// 10. principal_sponsors
+// 9. principal_sponsors
 assertField(
   normalizedSentinel.sponsors.introLine,
   "SENTINEL_SPONSORS_INTRO",
@@ -736,7 +706,7 @@ assertField(
   "principal_sponsors.names (sponsor 1)"
 );
 
-// 11. attire_motif
+// 10. attire_motif
 assertField(
   normalizedSentinel.attire.sectionIntro,
   "SENTINEL_ATTIRE_INTRO",
@@ -753,7 +723,7 @@ assertField(
   "attire_motif.colorMotifNote"
 );
 
-// 12. extra_info
+// 11. extra_info
 assertField(
   normalizedSentinel.extraInfo.sectionTitle,
   "SENTINEL_EXTRA_TITLE",
@@ -775,7 +745,7 @@ assertField(
   "extra_info.items[0].details"
 );
 
-// 13. rsvp_form
+// 12. rsvp_form
 assertField(normalizedSentinel.rsvp.plusOneEnabled, true, "rsvp_form.plusOneEnabled");
 assertField(normalizedSentinel.rsvp.companionLimit, 3, "rsvp_form.companionLimit");
 assertField(normalizedSentinel.rsvp.companionNameEnabled, true, "rsvp_form.companionNameEnabled");
@@ -787,7 +757,7 @@ assertField(normalizedSentinel.rsvp.phoneRequired, true, "rsvp_form.phoneRequire
 assertField(normalizedSentinel.rsvp.foodAllergiesEnabled, true, "rsvp_form.foodAllergiesEnabled");
 assertField(normalizedSentinel.rsvp.messageToHostEnabled, true, "rsvp_form.messageToHostEnabled");
 
-// 14. gift_details
+// 13. gift_details
 assertField(
   normalizedSentinel.gifts.sectionIntro,
   "SENTINEL_GIFT_INTRO",
@@ -805,7 +775,7 @@ assertField(
   "gift_details.options[0].image.url"
 );
 
-// 15. guestbook
+// 14. guestbook
 assertField(
   normalizedSentinel.guestbook.sectionTitle,
   "SENTINEL_GUESTBOOK_TITLE",
@@ -832,7 +802,7 @@ assertField(
   "guestbook.messages[0].message"
 );
 
-// 16. story_message
+// 15. story_message
 assertField(
   normalizedSentinel.story.storyTitle,
   "SENTINEL_STORY_TITLE",
@@ -845,7 +815,7 @@ assertField(
 );
 assertField(normalizedSentinel.story.storyBody, "SENTINEL_STORY_BODY", "story_message.storyBody");
 
-// 17. contact_socials
+// 16. contact_socials
 assertField(
   normalizedSentinel.contact.contactPerson,
   "SENTINEL_CONTACT_PERSON",

@@ -107,11 +107,6 @@ export const DEMO_BIRTHDAY_DATA: EventTemplateData = {
     ],
   },
 
-  entourage: {
-    introLine: "",
-    groups: [],
-  },
-
   sponsors: {
     introLine: "Special thanks to the heroes who helped make this day possible",
     names:

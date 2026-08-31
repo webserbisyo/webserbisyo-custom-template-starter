@@ -234,7 +234,7 @@ export type EventTemplateData = {
   venue: VenueData;
   reception: SecondaryEventData;
   timeline: TimelineData;
-  entourage: EntourageData;
+  entourage?: EntourageData;
   sponsors: SponsorsData;
   attire: AttireData;
   extraInfo: ExtraInfoData;

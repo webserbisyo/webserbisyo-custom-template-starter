@@ -1,5 +1,5 @@
 // EVENT FORMATTING UTILITIES — TEMPLATE / VIEW LAYER ONLY.
-// Pure, deterministic, SSR-safe helpers for human-friendly wedding date/time display.
+// Pure, deterministic, SSR-safe helpers for human-friendly event date/time display.
 // Does NOT modify canonical platform data.
 // Uses local calendar component parsing to avoid UTC rollback bugs.
 

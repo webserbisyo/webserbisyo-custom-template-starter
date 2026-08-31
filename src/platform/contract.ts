@@ -37,7 +37,6 @@ export const EVENT_APPLICABLE_SECTION_KEYS = [
   "venue",
   "secondary_event",
   "timeline_program",
-  "entourage",
   "principal_sponsors",
   "attire_motif",
   "extra_info",
@@ -88,6 +87,7 @@ const canonicalKeys: EventSectionKey[] = [
 
 export const eventWebsiteSectionContract = contractJson.sections as SectionContractEntry[];
 export const eventWebsiteSectionKeys = canonicalKeys;
+export const ALL_EVENT_SECTION_KEYS = canonicalKeys;
 export const eventWebsiteSectionKeySet = new Set<string>(canonicalKeys);
 
 export const requiredEventSections = eventWebsiteSectionContract

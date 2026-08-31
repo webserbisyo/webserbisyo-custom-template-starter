@@ -8,7 +8,6 @@ import { MainEventSection } from "./sections/MainEvent";
 import { VenueSection } from "./sections/Venue";
 import { SecondaryEventSection } from "./sections/SecondaryEvent";
 import { TimelineSection } from "./sections/Timeline";
-import { EntourageSection } from "./sections/Entourage";
 import { SponsorsSection } from "./sections/Sponsors";
 import { AttireSection } from "./sections/Attire";
 import { ExtraInfoSection } from "./sections/ExtraInfo";
@@ -54,7 +53,6 @@ export const templateSectionRegistry: Record<
     />
   ),
   timeline_program: ({ data }) => <TimelineSection data={data.timeline} />,
-  entourage: ({ data }) => <EntourageSection data={data.entourage} />,
   principal_sponsors: ({ data }) => <SponsorsSection data={data.sponsors} />,
   attire_motif: ({ data }) => <AttireSection data={data.attire} />,
   extra_info: ({ data }) => <ExtraInfoSection data={data.extraInfo} />,

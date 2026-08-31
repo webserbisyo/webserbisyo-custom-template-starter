@@ -4,13 +4,13 @@
 // Protects against dead links and desynchronized nav surfaces.
 
 import type { EventTemplateData } from "@/platform/event-template-data";
-import { EVENT_APPLICABLE_SECTION_KEYS, type EventApplicableSectionKey } from "@/platform/contract";
+import { ALL_EVENT_SECTION_KEYS, type EventSectionKey } from "@/platform/contract";
 
 export type NavigationGroup =
   "Celebration" | "Event Essentials" | "Event Party" | "Guest Info & Actions";
 
 export type EventNavItem = {
-  key: EventApplicableSectionKey;
+  key: EventSectionKey;
   label: string;
   anchor: string;
   group: NavigationGroup;
@@ -23,10 +23,7 @@ export type EventNavItem = {
 
 export type WeddingNavItem = EventNavItem;
 
-export const EVENT_SECTION_NAV_DEFINITIONS: Record<
-  EventApplicableSectionKey,
-  Omit<EventNavItem, "key">
-> = {
+export const EVENT_SECTION_NAV_DEFINITIONS: Record<EventSectionKey, Omit<EventNavItem, "key">> = {
   host_info: {
     label: "Home",
     anchor: "/",
@@ -181,12 +178,39 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
     isDockEligible: false,
     isMoreEligible: true,
   },
+  eighteen_roses_candles: {
+    label: "18 Traditions",
+    anchor: "#eighteen_roses_candles",
+    group: "Event Party",
+    iconName: "Sparkles",
+    isPrimaryTopNav: false,
+    isDockEligible: false,
+    isMoreEligible: true,
+  },
+  debut_court: {
+    label: "Debut Court",
+    anchor: "#debut_court",
+    group: "Event Party",
+    iconName: "Users",
+    isPrimaryTopNav: false,
+    isDockEligible: false,
+    isMoreEligible: true,
+  },
+  godparents: {
+    label: "Godparents",
+    anchor: "#godparents",
+    group: "Event Party",
+    iconName: "Heart",
+    isPrimaryTopNav: false,
+    isDockEligible: false,
+    isMoreEligible: true,
+  },
 };
 
 export const WEDDING_SECTION_NAV_DEFINITIONS = EVENT_SECTION_NAV_DEFINITIONS;
 
 // Curated browsing links priority for TopNav center
-const TOP_NAV_ORDER_PREFERENCE: EventApplicableSectionKey[] = [
+const TOP_NAV_ORDER_PREFERENCE: EventSectionKey[] = [
   "countdown",
   "gallery",
   "timeline_program",
@@ -195,7 +219,7 @@ const TOP_NAV_ORDER_PREFERENCE: EventApplicableSectionKey[] = [
   "story_message",
 ];
 
-const DOCK_PREFERENCE_ORDER: EventApplicableSectionKey[] = [
+const DOCK_PREFERENCE_ORDER: EventSectionKey[] = [
   "main_event",
   "venue",
   "rsvp_form",
@@ -216,7 +240,7 @@ export type MoreDrawerGroup = {
 };
 
 export type CanonicalEventNavigation = {
-  enabledKeys: EventApplicableSectionKey[];
+  enabledKeys: EventSectionKey[];
   primaryNavItems: EventNavItem[];
   dockItems: EventNavItem[];
   moreGroups: MoreDrawerGroup[];
@@ -267,19 +291,18 @@ export function hasMeaningfulContactContent(contact?: EventTemplateData["contact
  * Builds the unified navigation model for an event template.
  */
 export function buildEventNavigation(data: EventTemplateData): CanonicalEventNavigation {
-  const enabledSet = new Set((data.enabledSectionKeys || []) as EventApplicableSectionKey[]);
+  const enabledSet = new Set((data.enabledSectionKeys || []) as EventSectionKey[]);
 
   // Detect birthday event type
   const isBirthday =
     data.eventType === "birthday" || data.couple?.kind === "birthday" || !data.couple?.brideName;
 
-  const getAdaptedLabel = (key: EventApplicableSectionKey, defaultLabel: string): string => {
+  const getAdaptedLabel = (key: EventSectionKey, defaultLabel: string): string => {
     if (isBirthday) {
       if (key === "main_event") return "PARTY";
       if (key === "secondary_event") return "DINNER";
       if (key === "story_message") return "STORY";
       if (key === "principal_sponsors") return "VIP GUESTS";
-      if (key === "entourage") return "COURT & HOSTS";
       if (key === "attire_motif") return "COSTUME";
       if (key === "extra_info") return "REMINDERS";
     }
@@ -291,8 +314,8 @@ export function buildEventNavigation(data: EventTemplateData): CanonicalEventNav
     enabledSet.delete("contact_socials");
   }
 
-  // Filter all enabled items according to template data
-  const allEnabledItems: EventNavItem[] = EVENT_APPLICABLE_SECTION_KEYS.filter((key) =>
+  // Filter all enabled items according to template data across ALL 20 canonical keys
+  const allEnabledItems: EventNavItem[] = ALL_EVENT_SECTION_KEYS.filter((key) =>
     enabledSet.has(key)
   ).map((key) => {
     const base = EVENT_SECTION_NAV_DEFINITIONS[key];
