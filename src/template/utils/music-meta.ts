@@ -1,5 +1,5 @@
 /**
- * Music Metadata Parser
+ * Music Metadata Parser (Debut Rose Glam Edition)
  *
  * Extracts display title and artist from a combined music title string.
  *
@@ -14,7 +14,7 @@ export function parseMusicMeta(title?: string): {
   displayTitle: string;
   displayArtist: string;
 } {
-  const fallbackTitle = "Our Wedding Song";
+  const fallbackTitle = "Debut Celebration Waltz";
 
   if (!title || !title.trim()) {
     return { displayTitle: fallbackTitle, displayArtist: "" };

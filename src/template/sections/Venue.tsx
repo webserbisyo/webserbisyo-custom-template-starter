@@ -6,7 +6,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { MapPin, Navigation, Info, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM VENUE LOCATION (SATIN ALABASTER & BALLROOM RECORD)
+// DEBUT ROSE GLAM VENUE LOCATION (CANVAS A: SATIN ALABASTER & BALLROOM RECORD)
 
 export function VenueSection({ data }: { data: VenueData }) {
   const venuePhoto = templateAssets.photos.venue;
@@ -21,7 +21,7 @@ export function VenueSection({ data }: { data: VenueData }) {
           <div className="text-center mb-8 sm:mb-12 space-y-2">
             <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>FOLIO // 03 &bull; THE VENUE</span>
+              <span>BALLROOM RECORD // 07</span>
             </span>
             <h2 className="text-role-heading text-[var(--debut-text-noir,#26131C)] tracking-tight">
               The Grand Ballroom
@@ -39,7 +39,7 @@ export function VenueSection({ data }: { data: VenueData }) {
                 caption={
                   data.venueName ? `Grand Ballroom: ${data.venueName}` : "Grand Ballroom Grounds"
                 }
-                specimenNumber="BALLROOM // 03"
+                specimenNumber="BALLROOM // 07"
                 aspectRatio="landscape"
                 className="shadow-soft bg-[var(--debut-surface-alabaster,#ffffff)]"
               />

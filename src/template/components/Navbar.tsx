@@ -7,7 +7,10 @@ import type { EventTemplateData } from "@/platform/event-template-data";
 import { buildEventNavigation, resolveEventHref } from "@/template/navigation/event-navigation";
 import { EventMonogram } from "./EventMonogram";
 import { MoreDrawer } from "./MoreDrawer";
-import { Menu, Heart } from "lucide-react";
+import { Menu } from "lucide-react";
+
+// PLATFORM DATA — KEEP DYNAMIC.
+// DEBUT ROSE GLAM FROSTED NAVBAR (OPAQUE GLASS & EXPANDED DIRECTORY TRIGGER)
 
 export function Navbar({ data }: { data: EventTemplateData }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -21,7 +24,7 @@ export function Navbar({ data }: { data: EventTemplateData }) {
   useEffect(() => {
     const handleScroll = () => {
       if (!isHomePage) return;
-      setHasScrolled(window.scrollY > 32);
+      setHasScrolled(window.scrollY > 20);
     };
 
     handleScroll();
@@ -50,10 +53,10 @@ export function Navbar({ data }: { data: EventTemplateData }) {
     <>
       <header
         data-scrolled={isScrolled ? "true" : "false"}
-        className={`fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
           isScrolled
-            ? "debut-glass-navbar py-2 sm:py-2.5"
-            : "bg-white/40 backdrop-blur-xs py-3 sm:py-3.5 border-b border-transparent"
+            ? "debut-glass-navbar py-2 sm:py-2.5 bg-[var(--debut-bg-alabaster,#FAF5F5)]/96 backdrop-blur-xl border-b border-[var(--debut-rose-gold-border,#E8C4C8)]/60 shadow-sm"
+            : "bg-[var(--debut-bg-alabaster,#FAF5F5)]/92 backdrop-blur-md py-3 sm:py-3.5 border-b border-[var(--debut-rose-gold-border,#E8C4C8)]/30 shadow-xs"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -79,10 +82,10 @@ export function Navbar({ data }: { data: EventTemplateData }) {
             </Link>
           </div>
 
-          {/* Zone 2: Center Primary Browsing Links */}
+          {/* Zone 2: Center Primary Browsing Links (Hidden on < lg to prevent crowding) */}
           <nav
             aria-label="Primary browsing navigation"
-            className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-8 text-xs font-bold uppercase tracking-[0.2em] font-cinzel text-[var(--debut-text-noir)] select-none"
+            className="hidden lg:flex flex-1 items-center justify-center gap-6 xl:gap-8 text-xs font-bold uppercase tracking-[0.2em] font-cinzel text-[var(--debut-text-noir)] select-none whitespace-nowrap"
           >
             {navModel.primaryNavItems.map((item) => {
               const resolvedHref = resolveEventHref(item.anchor, pathname);
@@ -100,25 +103,17 @@ export function Navbar({ data }: { data: EventTemplateData }) {
             })}
           </nav>
 
-          {/* Zone 3: Right Action & Menu Trigger */}
-          <div className="flex items-center justify-end gap-2.5 min-w-[120px] sm:min-w-[160px]">
-            <a
-              href="/rsvp"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[var(--debut-bg-coral)] hover:bg-[var(--debut-bg-coral-hover)] text-white text-xs font-bold font-sans uppercase tracking-wider transition-all shadow-xs hover:shadow-md active:scale-95 template-focus-ring btn-press-physics"
-            >
-              <Heart className="w-3.5 h-3.5 fill-white/20" />
-              <span>RSVP</span>
-            </a>
-
+          {/* Zone 3: Right Action & Directory Menu Trigger */}
+          <div className="flex items-center justify-end min-w-[120px] sm:min-w-[160px]">
             <button
               onClick={() => setDrawerOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[var(--debut-text-noir)] hover:bg-[var(--debut-surface-alabaster-alt)] transition-all duration-200 border border-[var(--debut-rose-gold-border)]/60 template-focus-ring cursor-pointer"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-[var(--debut-text-noir)] bg-[var(--debut-surface-alabaster)]/80 hover:bg-[var(--debut-surface-alabaster-alt)] transition-all duration-200 border border-[var(--debut-rose-gold-border)]/60 shadow-xs template-focus-ring cursor-pointer btn-press-physics"
               aria-expanded={drawerOpen}
               aria-controls="sitemap-drawer"
               aria-label="Open complete celebration menu"
             >
-              <span className="hidden lg:inline text-[11px] font-bold uppercase tracking-[0.2em] font-cinzel">
-                Folio
+              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] font-cinzel text-[var(--debut-text-noir)]">
+                Directory
               </span>
               <Menu className="w-4 h-4 text-[var(--debut-rose-gold)]" />
             </button>

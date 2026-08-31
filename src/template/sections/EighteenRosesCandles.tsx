@@ -34,14 +34,14 @@ export function EighteenRosesCandlesSection({ data }: { data: EighteenRosesCandl
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-90">
+            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-95">
               <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
-              <span>FOLIO // 07 &bull; THE 18 TRADITIONS</span>
+              <span>THE 18 TRADITIONS // 10</span>
             </span>
             <h2 className="text-role-heading-major text-white tracking-tight">
               The 18 Cotillion Traditions
             </h2>
-            <p className="text-role-lead text-[var(--debut-text-on-coral-muted,#FFE7E2)] max-w-md mx-auto mt-2 leading-relaxed">
+            <p className="text-role-lead text-[var(--debut-text-on-coral-muted,#FFE7E2)] max-w-md mx-auto mt-2 leading-relaxed font-serif italic">
               Honoring the cherished escorts, mentors, and loved ones who illuminate the
               debutante&apos;s journey.
             </p>

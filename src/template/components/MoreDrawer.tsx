@@ -146,7 +146,7 @@ export function MoreDrawer({ isOpen, onClose, groups, coupleDisplayName }: MoreD
               <h4 className="text-[10px] font-cinzel font-bold uppercase tracking-[0.22em] text-[var(--debut-text-muted,#704D5B)] border-b border-[var(--debut-rose-gold-subtle)] pb-1.5 flex items-center justify-between">
                 <span>{group.title}</span>
                 <span className="text-[9px] text-[var(--debut-champagne-gold,#D4AF37)]">
-                  FOLIO 0{gIdx + 1}
+                  ROYALE 0{gIdx + 1}
                 </span>
               </h4>
               <div className="grid grid-cols-2 gap-2">
@@ -174,7 +174,7 @@ export function MoreDrawer({ isOpen, onClose, groups, coupleDisplayName }: MoreD
         {/* Drawer Footer */}
         <div className="px-6 py-4 border-t border-[var(--debut-rose-gold-subtle)] bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/40 text-center text-xs text-[var(--debut-text-muted,#704D5B)]">
           <p>
-            Debut Celebration Royale &bull; RSVP by{" "}
+            Grand Cotillion Royale &bull; RSVP by{" "}
             <a
               href="https://rsvp.webserbisyo.com"
               target="_blank"

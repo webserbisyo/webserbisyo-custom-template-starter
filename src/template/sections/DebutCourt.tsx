@@ -4,7 +4,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Crown, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM DEBUT COURT REGISTER (COTILLION DE HONOR)
+// DEBUT ROSE GLAM DEBUT COURT REGISTER (CANVAS A: SATIN ALABASTER & COTILLION DE HONOR)
 
 export function DebutCourtSection({ data }: { data: NamedGroupsData }) {
   const groups = data?.groups?.filter((g) => g && g.names && g.names.length > 0) || [];
@@ -20,7 +20,7 @@ export function DebutCourtSection({ data }: { data: NamedGroupsData }) {
           <div className="text-center mb-10 sm:mb-14 space-y-2">
             <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>FOLIO // 11 &bull; DEBUT COURT</span>
+              <span>COTILLION COURT // 11</span>
             </span>
             <h2 className="text-role-heading-quiet text-[var(--debut-text-noir,#26131C)] tracking-tight">
               The Cotillion Court of Honor

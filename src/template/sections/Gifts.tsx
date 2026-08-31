@@ -9,7 +9,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Gift, QrCode, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM WISHING WELL & GIFT REGISTRY (SATIN ALABASTER & ENVELOPE STATIONERY)
+// DEBUT ROSE GLAM WISHING WELL & GIFT REGISTRY (CANVAS B: LIVING CORAL WITH SOLID WHITE ENCLOSURE CARD)
 
 export function GiftsSection({ data }: { data: GiftsData }) {
   const [selectedOption, setSelectedOption] = useState<GiftOption | null>(null);
@@ -21,20 +21,20 @@ export function GiftsSection({ data }: { data: GiftsData }) {
   return (
     <section
       id="gift_details"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative overflow-x-clip"
+      className="template-section section-surface-coral pattern-coral text-white relative overflow-x-clip"
     >
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>FOLIO // 12 &bull; WISHING WELL &amp; GIFTS</span>
+            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-95">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
+              <span>WISHING WELL &amp; GIFTS // 16</span>
             </span>
-            <h2 className="text-role-heading-quiet text-[var(--debut-text-noir,#26131C)] tracking-tight">
+            <h2 className="text-role-heading-major text-white tracking-tight">
               Wishing Well &amp; Gift Registry
             </h2>
             {data.sectionIntro && (
-              <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#704D5B)]">
+              <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-on-coral-muted,#FFE7E2)] font-serif italic">
                 {data.sectionIntro}
               </p>
             )}
@@ -47,7 +47,7 @@ export function GiftsSection({ data }: { data: GiftsData }) {
               title="Debut Gift Registry"
               indexTag="REGISTRY // 01"
               headerAlign="center"
-              className="bg-[var(--debut-surface-alabaster,#ffffff)] shadow-card relative z-10"
+              className="debut-card-coral-enclosure bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] shadow-2xl relative z-10"
             >
               <div className="space-y-6 pt-2 text-center font-sans">
                 {data.giftNote && (

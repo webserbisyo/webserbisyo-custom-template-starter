@@ -9,7 +9,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM GUEST GUIDANCE & FAQ (SATIN ALABASTER & FROSTED ACCORDION)
+// DEBUT ROSE GLAM GUEST GUIDANCE & FAQ (CANVAS B: LIVING CORAL WITH SOLID WHITE ENCLOSURE CARD)
 
 export function ExtraInfoSection({ data }: { data: ExtraInfoData }) {
   if (!data.items || data.items.length === 0) return null;
@@ -17,20 +17,20 @@ export function ExtraInfoSection({ data }: { data: ExtraInfoData }) {
   return (
     <section
       id="extra_info"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative overflow-x-clip"
+      className="template-section section-surface-coral pattern-coral text-white relative overflow-x-clip"
     >
-      <div className="template-container-narrow">
+      <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-10 sm:mb-12 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>FOLIO // 10 &bull; GUEST GUIDANCE &amp; FAQ</span>
+            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-95">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
+              <span>GUEST GUIDANCE &amp; FAQ // 14</span>
             </span>
-            <h2 className="text-role-heading text-[var(--debut-text-noir,#26131C)] tracking-tight">
+            <h2 className="text-role-heading-major text-white tracking-tight">
               {data.sectionTitle || "Frequently Asked Questions"}
             </h2>
             {data.sectionIntro && (
-              <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#704D5B)]">
+              <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-on-coral-muted,#FFE7E2)] font-serif italic">
                 {data.sectionIntro}
               </p>
             )}
@@ -39,7 +39,7 @@ export function ExtraInfoSection({ data }: { data: ExtraInfoData }) {
 
         <Reveal direction="up" distance={20} delay={0.1}>
           <div className="relative overflow-visible">
-            <div className="debut-glass-card bg-[var(--debut-surface-alabaster,#ffffff)] rounded-3xl border border-[var(--debut-rose-gold-border,#E8C4C8)] p-6 sm:p-8 shadow-card relative z-10">
+            <div className="debut-card-coral-enclosure bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] rounded-3xl border border-white/95 p-6 sm:p-8 shadow-2xl relative z-10">
               <Accordion type="single" collapsible className="w-full space-y-2">
                 {data.items.map((item, idx) => (
                   <AccordionItem

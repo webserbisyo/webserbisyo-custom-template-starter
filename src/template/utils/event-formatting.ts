@@ -92,9 +92,9 @@ export function formatEventDateShort(dateStr?: string | null): string {
 }
 
 /**
- * Formats YYYY-MM-DD to estate numeric style "04 — 19 — 2027"
+ * Formats YYYY-MM-DD to cotillion numeric style "04 — 19 — 2027"
  */
-export function formatEstateDate(dateStr?: string | null): string {
+export function formatCotillionDate(dateStr?: string | null): string {
   if (!dateStr || typeof dateStr !== "string") return "";
   const match = dateStr.trim().match(/^(\d{4})-(\d{2})-(\d{2})/);
   if (match) {
@@ -113,6 +113,9 @@ export function formatEstateDate(dateStr?: string | null): string {
 
   return `${mm} — ${dd} — ${yyyy}`;
 }
+
+/** Backward-compatible alias */
+export const formatEstateDate = formatCotillionDate;
 
 /**
  * Formats 24-hour time "16:00" or "16:00:00" to 12-hour "4:00 PM"

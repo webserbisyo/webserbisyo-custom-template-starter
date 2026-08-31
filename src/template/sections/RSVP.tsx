@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM RSVP FORM (CANVAS B: LIVING CORAL WITH SOLID PURE WHITE ENCLOSURE CARD)
+// DEBUT ROSE GLAM RSVP FORM (CANVAS A: SATIN ALABASTER WITH HIGH-CONTRAST CARD ENCLOSURE)
 
 export type RSVPSectionProps = {
   data: RsvpData;
@@ -94,25 +94,27 @@ export function RSVPSection({
   return (
     <section
       id="rsvp_form"
-      className="template-section section-surface-coral pattern-coral relative overflow-x-clip text-white"
+      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative overflow-x-clip"
     >
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-90">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
-              <span>FOLIO // 15 &bull; RSVP &amp; ATTENDANCE</span>
+            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
+              <span>RSVP &amp; ATTENDANCE // 15</span>
             </span>
-            <h2 className="text-role-heading-major text-white tracking-tight">
+            <h2 className="text-role-heading-major text-[var(--debut-text-noir,#26131C)] tracking-tight">
               Confirm Your Presence
             </h2>
             {formattedDeadline ? (
-              <p className="text-role-lead text-[var(--debut-text-on-coral-muted,#FFE7E2)] max-w-md mx-auto mt-2">
+              <p className="text-role-lead text-[var(--debut-text-muted,#704D5B)] max-w-md mx-auto mt-2">
                 Kindly respond on or before{" "}
-                <strong className="font-bold underline">{formattedDeadline}</strong>
+                <strong className="font-bold text-[var(--debut-bg-coral,#E65C4F)] underline">
+                  {formattedDeadline}
+                </strong>
               </p>
             ) : (
-              <p className="text-role-lead text-[var(--debut-text-on-coral-muted,#FFE7E2)] max-w-md mx-auto mt-2">
+              <p className="text-role-lead text-[var(--debut-text-muted,#704D5B)] max-w-md mx-auto mt-2">
                 We look forward to celebrating this 18th birthday cotillion with you.
               </p>
             )}
@@ -122,7 +124,7 @@ export function RSVPSection({
         <Reveal direction="up" distance={24} delay={0.1}>
           <div
             data-surface="light"
-            className="debut-card-coral-enclosure bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] p-6 sm:p-10 md:p-12 rounded-3xl shadow-2xl max-w-xl mx-auto font-sans"
+            className="debut-glass-card bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] border-2 border-[var(--debut-rose-gold-border,#E8C4C8)] p-6 sm:p-10 md:p-12 rounded-3xl shadow-card max-w-xl mx-auto font-sans relative z-10"
           >
             {isSuccess ? (
               <div className="py-8 text-center space-y-4">
@@ -193,7 +195,7 @@ export function RSVPSection({
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Eleanor Vance & Guest"
-                      className="w-full h-11 pl-10 pr-3.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-white text-[var(--debut-text-noir,#26131C)] text-base placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring"
+                      className="w-full h-11 pl-10 pr-3.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] text-base placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring"
                     />
                     <User className="w-4 h-4 text-[var(--debut-text-muted,#704D5B)] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
@@ -212,7 +214,7 @@ export function RSVPSection({
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="name@domain.com"
-                        className="w-full h-11 pl-10 pr-3.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-white text-[var(--debut-text-noir,#26131C)] text-base placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring"
+                        className="w-full h-11 pl-10 pr-3.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] text-base placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring"
                       />
                       <Mail className="w-4 h-4 text-[var(--debut-text-muted,#704D5B)] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                     </div>
@@ -229,7 +231,7 @@ export function RSVPSection({
                       <select
                         value={guestsCount}
                         onChange={(e) => setGuestsCount(Number(e.target.value))}
-                        className="w-full h-11 pl-10 pr-3.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-white text-[var(--debut-text-noir,#26131C)] text-base focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring appearance-none cursor-pointer"
+                        className="w-full h-11 pl-10 pr-3.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] text-base focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring appearance-none cursor-pointer"
                       >
                         {Array.from(
                           { length: Math.max(1, data.companionLimit || 4) },
@@ -257,7 +259,7 @@ export function RSVPSection({
                         value={notes}
                         onChange={(e) => setNotes(e.target.value)}
                         placeholder="Vegetarian, allergies, or special cotillion message..."
-                        className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-white text-[var(--debut-text-noir,#26131C)] text-base placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring resize-none"
+                        className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] text-base placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring resize-none"
                       />
                       <MessageSquare className="w-4 h-4 text-[var(--debut-text-muted,#704D5B)] absolute left-3.5 top-3.5 pointer-events-none" />
                     </div>

@@ -6,7 +6,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM STORY / JOURNEY CHRONICLE (SATIN ALABASTER & COTILLION DISPATCH)
+// DEBUT ROSE GLAM STORY / JOURNEY CHRONICLE (CANVAS A: SATIN ALABASTER & COTILLION DISPATCH)
 
 export function StoryMessageSection({ data }: { data: StoryMessageData }) {
   if (!data.storyBody && !data.storyTitle) return null;
@@ -22,7 +22,7 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
           <div className="text-center mb-8 sm:mb-12 space-y-2">
             <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>FOLIO // 14 &bull; STORY &amp; JOURNEY</span>
+              <span>DEBUTANTE CHRONICLE // 05</span>
             </span>
             <h2 className="text-role-heading-major text-[var(--debut-text-noir,#26131C)] tracking-tight">
               {data.storyTitle || "Debut Story"}
@@ -43,7 +43,7 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
                 src={storyPhotos[0]}
                 alt="Story Photo"
                 caption="Debutante Chronicle Memory"
-                specimenNumber="JOURNEY // 14"
+                specimenNumber="JOURNEY // 05"
                 aspectRatio="landscape"
                 className="shadow-soft bg-[var(--debut-surface-alabaster,#ffffff)]"
               />
@@ -53,7 +53,7 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
             {data.storyBody && (
               <div className="relative overflow-visible">
                 <CorrespondenceSheet
-                  senderLabel="DEBUT DISPATCH"
+                  senderLabel="COTILLION DISPATCH"
                   dateStamp="JOURNEY TO 18"
                   className="bg-[var(--debut-surface-alabaster,#ffffff)] relative z-10"
                 >

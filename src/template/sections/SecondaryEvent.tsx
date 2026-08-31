@@ -5,7 +5,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Clock, MapPin, Navigation, Info, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM SECONDARY EVENT (SATIN ALABASTER & BANQUET LOUNGE)
+// DEBUT ROSE GLAM SECONDARY EVENT (CANVAS B: LIVING CORAL WITH SOLID WHITE ENCLOSURE CARD)
 
 export type SecondaryEventSectionProps = {
   data: SecondaryEventData;
@@ -19,18 +19,16 @@ export function SecondaryEventSection({ data }: SecondaryEventSectionProps) {
   return (
     <section
       id="secondary_event"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative overflow-x-clip"
+      className="template-section section-surface-coral pattern-coral text-white relative overflow-x-clip"
     >
-      <div className="template-container-narrow">
+      <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-10 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>FOLIO // 05 &bull; CELEBRATION RECEPTION</span>
+            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-95">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
+              <span>EVENING GALA // 08</span>
             </span>
-            <h2 className="text-role-heading text-[var(--debut-text-noir,#26131C)] tracking-tight">
-              {title}
-            </h2>
+            <h2 className="text-role-heading-major text-white tracking-tight">{title}</h2>
           </div>
         </Reveal>
 
@@ -39,7 +37,7 @@ export function SecondaryEventSection({ data }: SecondaryEventSectionProps) {
             <LedgerPanel
               title={data.venueName || "Banquet & Grand Lounge"}
               indexTag="RECEPTION // 02"
-              className="bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] shadow-card relative z-10"
+              className="debut-card-coral-enclosure bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] shadow-2xl relative z-10"
             >
               <div className="space-y-4 pt-1 font-sans">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -5,7 +5,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Clock, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM TIMELINE (SATIN ALABASTER & ILLUMINATED MILESTONE RAIL)
+// DEBUT ROSE GLAM TIMELINE (CANVAS A: SATIN ALABASTER & ILLUMINATED MILESTONE RAIL)
 
 export function TimelineSection({ data }: { data: TimelineData }) {
   if (!data.items || data.items.length === 0) return null;
@@ -20,7 +20,7 @@ export function TimelineSection({ data }: { data: TimelineData }) {
           <div className="text-center mb-10 sm:mb-14 space-y-2">
             <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>FOLIO // 06 &bull; PROGRAM FLOW</span>
+              <span>PROGRAM FLOW // 09</span>
             </span>
             <h2 className="text-role-heading text-[var(--debut-text-noir,#26131C)] tracking-tight">
               {data.sectionTitle || "Grand Cotillion Timeline"}

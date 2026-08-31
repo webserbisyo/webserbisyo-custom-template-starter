@@ -10,7 +10,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Calendar, Clock, AlertCircle, Bookmark, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM MAIN EVENT (SATIN ALABASTER & COTILLION SCHEDULE LEDGER)
+// DEBUT ROSE GLAM MAIN EVENT (CANVAS B: LIVING CORAL WITH SOLID PURE WHITE ENCLOSURE CARDS)
 
 export function MainEventSection({ data }: { data: MainEventData }) {
   const eventLabel = data.eventLabel || "The Grand Cotillion";
@@ -21,26 +21,24 @@ export function MainEventSection({ data }: { data: MainEventData }) {
   return (
     <section
       id="main_event"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative overflow-x-clip"
+      className="template-section section-surface-coral pattern-coral text-white relative overflow-x-clip"
     >
-      <div className="template-container">
+      <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>FOLIO // 02 &bull; MAIN EVENT</span>
+            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-95">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
+              <span>BALLROOM RECORD // 06</span>
             </span>
-            <h2 className="text-role-heading-major text-[var(--debut-text-noir,#26131C)] tracking-tight">
-              {eventLabel}
-            </h2>
+            <h2 className="text-role-heading-major text-white tracking-tight">{eventLabel}</h2>
           </div>
         </Reveal>
 
         <Reveal direction="up" distance={24} delay={0.1}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
-            {/* Left Column: Interactive Month Calendar */}
+            {/* Left Column: Interactive Month Calendar inside Enclosure Card */}
             <div className="lg:col-span-5 flex flex-col justify-center">
-              <div className="relative overflow-visible rounded-3xl">
+              <div className="debut-card-coral-enclosure bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] p-4 sm:p-6 rounded-3xl shadow-2xl">
                 <DateCalendar
                   date={data.eventDate || undefined}
                   highlightLabel={data.eventLabel || "Grand Cotillion"}
@@ -51,11 +49,11 @@ export function MainEventSection({ data }: { data: MainEventData }) {
 
             {/* Right Column: Formal Cotillion Event Record */}
             <div className="lg:col-span-7 flex flex-col justify-between">
-              <div className="relative overflow-visible h-full">
+              <div className="h-full">
                 <LedgerPanel
                   title="Official Cotillion Schedule"
                   indexTag="SCHEDULE // 01"
-                  className="h-full bg-[var(--debut-surface-alabaster,#ffffff)] flex flex-col justify-between relative z-10"
+                  className="h-full debut-card-coral-enclosure bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] shadow-2xl flex flex-col justify-between"
                 >
                   <div className="space-y-5 pt-2 font-sans">
                     {/* Date & Time Highlights */}

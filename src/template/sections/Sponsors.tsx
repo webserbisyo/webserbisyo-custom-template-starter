@@ -4,7 +4,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM SPECIAL MENTORS & SPONSORS REGISTER (QUIET SECTION)
+// DEBUT ROSE GLAM SPECIAL MENTORS & SPONSORS (CANVAS B: LIVING CORAL WITH SOLID WHITE ENCLOSURE CARD)
 
 function parseSponsorNames(rawNames: string): string[] {
   if (!rawNames || typeof rawNames !== "string") return [];
@@ -35,20 +35,20 @@ export function SponsorsSection({ data }: { data: SponsorsData }) {
   return (
     <section
       id="principal_sponsors"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative overflow-x-clip"
+      className="template-section section-surface-coral pattern-coral text-white relative overflow-x-clip"
     >
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-10 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>FOLIO // 08 &bull; SPECIAL SPONSORS &amp; MENTORS</span>
+            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-95">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
+              <span>SPECIAL MENTORS &amp; SPONSORS // 12</span>
             </span>
-            <h2 className="text-role-heading-quiet text-[var(--debut-text-noir,#26131C)] tracking-tight">
-              Special Sponsors &amp; Mentors
+            <h2 className="text-role-heading-major text-white tracking-tight">
+              Honored Sponsors &amp; Mentors
             </h2>
             {data.introLine && (
-              <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#704D5B)]">
+              <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-on-coral-muted,#FFE7E2)] font-serif italic">
                 {data.introLine}
               </p>
             )}
@@ -61,7 +61,7 @@ export function SponsorsSection({ data }: { data: SponsorsData }) {
               title="Roll of Honored Sponsors"
               indexTag="OFFICIAL ROSTER"
               headerAlign="center"
-              className="bg-[var(--debut-surface-alabaster,#ffffff)] shadow-card relative z-10"
+              className="debut-card-coral-enclosure bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] shadow-2xl relative z-10"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3.5 pt-2 font-sans">
                 {names.map((name, idx) => (

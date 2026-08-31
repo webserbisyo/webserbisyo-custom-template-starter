@@ -4,7 +4,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Shirt, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM ATTIRE & PALETTE GUIDE (SATIN ALABASTER & ROSE TRELLIS)
+// DEBUT ROSE GLAM ATTIRE & PALETTE GUIDE (CANVAS A: SATIN ALABASTER & ROSE TRELLIS)
 
 export function AttireSection({ data }: { data: AttireData }) {
   const palette = templateConfig.palette || [];
@@ -19,7 +19,7 @@ export function AttireSection({ data }: { data: AttireData }) {
           <div className="text-center mb-10 sm:mb-12 space-y-2">
             <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>FOLIO // 09 &bull; ATTIRE &amp; PALETTE</span>
+              <span>DRESS CODE &amp; MOTIF // 13</span>
             </span>
             <h2 className="text-role-heading text-[var(--debut-text-noir,#26131C)] tracking-tight">
               Dress Code &amp; Palette

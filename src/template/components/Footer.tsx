@@ -4,13 +4,16 @@ import type { EventTemplateData } from "@/platform/event-template-data";
 import { EventMonogram } from "./EventMonogram";
 import { Reveal } from "./motion/Reveal";
 import { MapPin, Phone, Mail } from "lucide-react";
+import { FacebookIcon, InstagramIcon, TikTokIcon } from "./ui/BrandIcons";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM VELVET NOIR COLOPHON FOOTER (CLOSING ANCHOR)
+// DEBUT ROSE GLAM VELVET NOIR COLOPHON FOOTER (CLOSING ANCHOR & DYNAMIC SOCIALS)
 
 export function Footer({ data }: { data: EventTemplateData }) {
   const contact = data.contact;
   const currentYear = new Date().getFullYear();
+
+  const hasSocials = Boolean(contact?.facebookUrl || contact?.instagramUrl || contact?.tikTokUrl);
 
   return (
     <footer
@@ -39,12 +42,22 @@ export function Footer({ data }: { data: EventTemplateData }) {
         </Reveal>
 
         {/* 2. Venue Protocol & Contact Box */}
-        {(contact?.contactNumber || contact?.email || data.venue?.venueName) && (
+        {(contact?.contactNumber ||
+          contact?.email ||
+          contact?.contactPerson ||
+          data.venue?.venueName ||
+          hasSocials) && (
           <Reveal direction="up" distance={20} delay={0.1}>
-            <div className="max-w-xl mx-auto p-6 sm:p-8 rounded-3xl bg-[var(--debut-surface-noir,#180812)] border border-[var(--debut-rose-gold-border,#E8C4C8)]/30 space-y-4 text-sm sm:text-base font-sans">
+            <div className="max-w-xl mx-auto p-6 sm:p-8 rounded-3xl bg-[var(--debut-surface-noir,#180812)] border border-[var(--debut-rose-gold-border,#E8C4C8)]/30 space-y-5 text-sm sm:text-base font-sans">
               <span className="text-xs font-cinzel font-bold uppercase tracking-[0.22em] text-[var(--debut-champagne-gold,#D4AF37)] block">
                 Ballroom Protocol &amp; Coordination
               </span>
+
+              {contact?.contactPerson && (
+                <p className="font-serif font-bold text-lg text-[var(--debut-text-on-noir,#FAF5F5)]">
+                  {contact.contactPerson}
+                </p>
+              )}
 
               {data.venue?.venueName && (
                 <div className="flex items-center justify-center gap-2 text-[var(--debut-text-on-noir,#FAF5F5)] font-semibold">
@@ -75,6 +88,45 @@ export function Footer({ data }: { data: EventTemplateData }) {
                   </a>
                 )}
               </div>
+
+              {/* Dynamic Social Links */}
+              {hasSocials && (
+                <div className="flex items-center justify-center gap-3 pt-3 border-t border-[var(--debut-rose-gold-subtle)]">
+                  {contact?.facebookUrl && (
+                    <a
+                      href={contact.facebookUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-[var(--debut-bg-noir,#10050B)] text-[var(--debut-text-on-noir-muted,#E8C4C8)] hover:text-white hover:border-[var(--debut-champagne-gold,#D4AF37)] border border-[var(--debut-rose-gold-border,#E8C4C8)]/30 transition-all flex items-center justify-center template-focus-ring cursor-pointer"
+                      aria-label="Facebook Profile"
+                    >
+                      <FacebookIcon className="w-4 h-4" />
+                    </a>
+                  )}
+                  {contact?.instagramUrl && (
+                    <a
+                      href={contact.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-[var(--debut-bg-noir,#10050B)] text-[var(--debut-text-on-noir-muted,#E8C4C8)] hover:text-white hover:border-[var(--debut-champagne-gold,#D4AF37)] border border-[var(--debut-rose-gold-border,#E8C4C8)]/30 transition-all flex items-center justify-center template-focus-ring cursor-pointer"
+                      aria-label="Instagram Profile"
+                    >
+                      <InstagramIcon className="w-4 h-4" />
+                    </a>
+                  )}
+                  {contact?.tikTokUrl && (
+                    <a
+                      href={contact.tikTokUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-[var(--debut-bg-noir,#10050B)] text-[var(--debut-text-on-noir-muted,#E8C4C8)] hover:text-white hover:border-[var(--debut-champagne-gold,#D4AF37)] border border-[var(--debut-rose-gold-border,#E8C4C8)]/30 transition-all flex items-center justify-center template-focus-ring cursor-pointer"
+                      aria-label="TikTok Profile"
+                    >
+                      <TikTokIcon className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           </Reveal>
         )}

@@ -10,7 +10,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM KINETIC GALLERY (3D SKEW PERSPECTIVE & FROSTED LIGHTBOX)
+// DEBUT ROSE GLAM KINETIC GALLERY (CANVAS B: LIVING CORAL BLOOM & FROSTED LIGHTBOX)
 
 export function GallerySection({ data }: { data: GalleryData }) {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
@@ -35,20 +35,20 @@ export function GallerySection({ data }: { data: GalleryData }) {
   return (
     <section
       id="gallery"
-      className="template-section !pt-20 !pb-14 sm:!pt-24 sm:!pb-16 md:!pt-28 md:!pb-18 section-surface-alabaster pattern-stardust-dot pattern-subtle text-center relative overflow-x-clip"
+      className="template-section !pt-20 !pb-14 sm:!pt-24 sm:!pb-16 md:!pt-28 md:!pb-18 section-surface-coral pattern-coral text-white text-center relative overflow-x-clip"
     >
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="mb-6 sm:mb-8 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>PHOTO FOLIO // 04</span>
+            <span className="text-role-subheading text-[var(--debut-text-on-coral,#FFFFFF)] inline-flex items-center gap-1.5 opacity-95">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
+              <span>PHOTO MOMENTS // 04</span>
             </span>
-            <h2 className="text-role-heading-major text-[var(--debut-text-noir,#26131C)] tracking-tight">
+            <h2 className="text-role-heading-major text-white tracking-tight">
               {data.sectionTitle || "Grand Cotillion Gallery"}
             </h2>
             {data.sectionIntro && (
-              <p className="text-role-lead max-w-xl mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#704D5B)]">
+              <p className="text-role-lead max-w-xl mx-auto mt-2 leading-relaxed text-[var(--debut-text-on-coral-muted,#FFE7E2)] font-serif italic">
                 {data.sectionIntro}
               </p>
             )}
@@ -67,8 +67,8 @@ export function GallerySection({ data }: { data: GalleryData }) {
             </div>
           </Reveal>
         ) : (
-          <div className="bg-[var(--debut-surface-alabaster-alt)] p-10 rounded-3xl border border-dashed border-[var(--debut-rose-gold-border)] max-w-xl mx-auto text-center shadow-xs">
-            <p className="text-xs font-cinzel text-[var(--debut-text-muted)] uppercase tracking-wider">
+          <div className="bg-white/15 backdrop-blur-md p-10 rounded-3xl border border-white/30 max-w-xl mx-auto text-center shadow-md">
+            <p className="text-xs font-cinzel text-white uppercase tracking-wider">
               [ Official debut photoshoot will be mounted here ]
             </p>
           </div>
@@ -83,7 +83,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
             }}
           >
             <DialogContent className="w-full max-w-5xl h-[88dvh] sm:h-[90dvh] max-h-[calc(100dvh-2rem)] p-4 sm:p-6 flex flex-col overflow-hidden bg-[var(--debut-surface-alabaster,#ffffff)] border-2 border-[var(--debut-rose-gold-border,#E8C4C8)] text-[var(--debut-text-noir,#26131C)] shadow-2xl rounded-3xl">
-              {/* Modal Header: shrink-0 */}
+              {/* Modal Header */}
               <DialogHeader className="shrink-0 flex flex-row items-center justify-between pr-8 border-b border-[var(--debut-rose-gold-subtle)] pb-3">
                 <DialogTitle className="font-serif text-lg sm:text-xl text-[var(--debut-text-noir,#26131C)] font-bold flex items-center gap-3">
                   <span>{selectedPhoto.caption}</span>
@@ -93,7 +93,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
                 </DialogTitle>
               </DialogHeader>
 
-              {/* Modal Media Stage: flex-1 min-h-0 dynamically fits remaining viewport */}
+              {/* Modal Media Stage */}
               <div className="relative flex-1 min-h-0 w-full flex items-center justify-center p-2 sm:p-3 my-2 bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/50 rounded-2xl overflow-hidden">
                 <Image
                   src={selectedPhoto.src}
@@ -134,7 +134,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
                 )}
               </div>
 
-              {/* Modal Footer: shrink-0 */}
+              {/* Modal Footer */}
               <div className="shrink-0 text-center pt-1">
                 <p className="text-xs text-[var(--debut-text-muted,#704D5B)] italic font-serif">
                   {selectedPhoto.alt}
