@@ -1,74 +1,77 @@
 "use client";
 
 import type { EventTemplateData } from "@/platform/event-template-data";
-import { EventMonogram } from "./EventMonogram";
+import { formatEventDateLong } from "@/template/utils/event-formatting";
 import { Reveal } from "./motion/Reveal";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { FacebookIcon, InstagramIcon, TikTokIcon } from "./ui/BrandIcons";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM VELVET NOIR COLOPHON FOOTER (CLOSING ANCHOR & DYNAMIC SOCIALS)
+// DEBUT ROSE GLAM VELVET NOIR COLOPHON FOOTER (CLOSING ANCHOR & DYNAMIC SOCIAL CONTRACT LINKS)
 
 export function Footer({ data }: { data: EventTemplateData }) {
   const contact = data.contact;
   const currentYear = new Date().getFullYear();
+  const dateFormatted = formatEventDateLong(data.eventDate || data.ceremony?.eventDate);
 
   const hasSocials = Boolean(contact?.facebookUrl || contact?.instagramUrl || contact?.tikTokUrl);
+
+  const hasCoordinationBox = Boolean(
+    contact?.contactNumber || contact?.email || contact?.contactPerson || data.venue?.venueName
+  );
 
   return (
     <footer
       id="contact_socials"
-      className="section-surface-noir bg-[var(--debut-bg-noir,#10050B)] text-[var(--debut-text-on-noir,#FAF5F5)] border-t border-[var(--debut-rose-gold-subtle)] relative overflow-hidden py-14 sm:py-18 select-none"
+      className="section-surface-noir bg-[#10050B] py-16 px-6 text-center text-[#E8C4C8]/80 border-t border-[#E8C4C8]/20 relative overflow-hidden select-none"
     >
       {/* Background ambient radial glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[var(--debut-bg-coral,#E65C4F)]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="template-container relative z-10 space-y-10 sm:space-y-12 text-center">
-        {/* 1. Grand Cotillion Monogram Seal */}
+      <div className="template-container relative z-10 space-y-8 max-w-2xl mx-auto">
+        {/* 1. Grand Cotillion Monogram Seal & Wordmark */}
         <Reveal direction="down" distance={16}>
-          <div className="flex justify-center">
-            <EventMonogram
-              groomName={data.couple?.groomName}
-              brideName={data.couple?.brideName}
-              coupleDisplayName={data.coupleDisplayName}
-              milestone={
-                data.couple?.kind === "debut" || data.couple?.kind === "birthday"
-                  ? (data.couple as { milestone?: string }).milestone
-                  : undefined
-              }
-              variant="footer"
-            />
+          <div className="flex flex-col items-center">
+            {/* Centered circular rose badge */}
+            <div className="w-12 h-12 rounded-full border border-[#E8C4C8]/40 bg-[#1A0A13] flex items-center justify-center text-base shadow-md mx-auto mb-4">
+              🌹
+            </div>
+
+            <div className="font-cinzel font-bold text-sm sm:text-base tracking-[0.25em] text-[#D4AF37] uppercase mb-2">
+              {data.coupleDisplayName || "SOPHIA • 18TH BIRTHDAY"}
+            </div>
+
+            <p className="font-serif italic text-xs text-[#E8C4C8]/80 mb-2">
+              {data.ceremony?.eventLabel || "The Grand Cotillion Ball"}
+              {dateFormatted ? ` • ${dateFormatted}` : ""}
+            </p>
           </div>
         </Reveal>
 
-        {/* 2. Venue Protocol & Contact Box */}
-        {(contact?.contactNumber ||
-          contact?.email ||
-          contact?.contactPerson ||
-          data.venue?.venueName ||
-          hasSocials) && (
+        {/* 2. Ballroom Protocol & Coordination Box */}
+        {hasCoordinationBox && (
           <Reveal direction="up" distance={20} delay={0.1}>
-            <div className="max-w-xl mx-auto p-6 sm:p-8 rounded-3xl bg-[var(--debut-surface-noir,#180812)] border border-[var(--debut-rose-gold-border,#E8C4C8)]/30 space-y-5 text-sm sm:text-base font-sans">
-              <span className="text-xs font-cinzel font-bold uppercase tracking-[0.22em] text-[var(--debut-champagne-gold,#D4AF37)] block">
+            <div className="bg-[#180812] border border-[#E8C4C8]/20 rounded-2xl p-5 sm:p-6 max-w-lg mx-auto space-y-3 text-sm font-sans">
+              <span className="text-xs font-cinzel font-bold uppercase tracking-[0.22em] text-[#D4AF37] block">
                 Ballroom Protocol &amp; Coordination
               </span>
 
               {contact?.contactPerson && (
-                <p className="font-serif font-bold text-lg text-[var(--debut-text-on-noir,#FAF5F5)]">
+                <p className="font-serif font-bold text-base text-[var(--debut-text-on-noir,#FAF5F5)]">
                   {contact.contactPerson}
                 </p>
               )}
 
               {data.venue?.venueName && (
-                <div className="flex items-center justify-center gap-2 text-[var(--debut-text-on-noir,#FAF5F5)] font-semibold">
-                  <MapPin className="w-4 h-4 text-[var(--debut-rose-gold,#B76E79)] shrink-0" />
+                <div className="flex items-center justify-center gap-2 text-[var(--debut-text-on-noir,#FAF5F5)] font-medium text-xs sm:text-sm">
+                  <MapPin className="w-3.5 h-3.5 text-[var(--debut-rose-gold,#B76E79)] shrink-0" />
                   <span>
                     {data.venue.venueName} {data.venue.address ? `• ${data.venue.address}` : ""}
                   </span>
                 </div>
               )}
 
-              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-1 text-xs sm:text-sm text-[var(--debut-text-on-noir-muted,#E8C4C8)]">
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-1 text-xs text-[#E8C4C8]/90">
                 {contact?.contactNumber && (
                   <a
                     href={`tel:${contact.contactNumber}`}
@@ -88,52 +91,54 @@ export function Footer({ data }: { data: EventTemplateData }) {
                   </a>
                 )}
               </div>
+            </div>
+          </Reveal>
+        )}
 
-              {/* Dynamic Social Links */}
-              {hasSocials && (
-                <div className="flex items-center justify-center gap-3 pt-3 border-t border-[var(--debut-rose-gold-subtle)]">
-                  {contact?.facebookUrl && (
-                    <a
-                      href={contact.facebookUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-[var(--debut-bg-noir,#10050B)] text-[var(--debut-text-on-noir-muted,#E8C4C8)] hover:text-white hover:border-[var(--debut-champagne-gold,#D4AF37)] border border-[var(--debut-rose-gold-border,#E8C4C8)]/30 transition-all flex items-center justify-center template-focus-ring cursor-pointer"
-                      aria-label="Facebook Profile"
-                    >
-                      <FacebookIcon className="w-4 h-4" />
-                    </a>
-                  )}
-                  {contact?.instagramUrl && (
-                    <a
-                      href={contact.instagramUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-[var(--debut-bg-noir,#10050B)] text-[var(--debut-text-on-noir-muted,#E8C4C8)] hover:text-white hover:border-[var(--debut-champagne-gold,#D4AF37)] border border-[var(--debut-rose-gold-border,#E8C4C8)]/30 transition-all flex items-center justify-center template-focus-ring cursor-pointer"
-                      aria-label="Instagram Profile"
-                    >
-                      <InstagramIcon className="w-4 h-4" />
-                    </a>
-                  )}
-                  {contact?.tikTokUrl && (
-                    <a
-                      href={contact.tikTokUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-[var(--debut-bg-noir,#10050B)] text-[var(--debut-text-on-noir-muted,#E8C4C8)] hover:text-white hover:border-[var(--debut-champagne-gold,#D4AF37)] border border-[var(--debut-rose-gold-border,#E8C4C8)]/30 transition-all flex items-center justify-center template-focus-ring cursor-pointer"
-                      aria-label="TikTok Profile"
-                    >
-                      <TikTokIcon className="w-4 h-4" />
-                    </a>
-                  )}
-                </div>
+        {/* 3. Dynamic Social Contract Links */}
+        {hasSocials && (
+          <Reveal direction="up" distance={16} delay={0.15}>
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+              {contact?.facebookUrl && (
+                <a
+                  href={contact.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="w-10 h-10 rounded-full bg-[#180812] text-[#E8C4C8] hover:text-white hover:border-[#D4AF37] border border-[#E8C4C8]/30 flex items-center justify-center transition-all duration-300 hover:scale-105 template-focus-ring cursor-pointer"
+                >
+                  <FacebookIcon className="w-4 h-4" />
+                </a>
+              )}
+              {contact?.instagramUrl && (
+                <a
+                  href={contact.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="w-10 h-10 rounded-full bg-[#180812] text-[#E8C4C8] hover:text-white hover:border-[#D4AF37] border border-[#E8C4C8]/30 flex items-center justify-center transition-all duration-300 hover:scale-105 template-focus-ring cursor-pointer"
+                >
+                  <InstagramIcon className="w-4 h-4" />
+                </a>
+              )}
+              {contact?.tikTokUrl && (
+                <a
+                  href={contact.tikTokUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok"
+                  className="w-10 h-10 rounded-full bg-[#180812] text-[#E8C4C8] hover:text-white hover:border-[#D4AF37] border border-[#E8C4C8]/30 flex items-center justify-center transition-all duration-300 hover:scale-105 template-focus-ring cursor-pointer"
+                >
+                  <TikTokIcon className="w-4 h-4" />
+                </a>
               )}
             </div>
           </Reveal>
         )}
 
-        {/* 3. Colophon & Platform Attribution */}
+        {/* 4. Colophon & Platform Attribution */}
         <Reveal direction="up" distance={16} delay={0.2}>
-          <div className="space-y-2 text-xs text-[var(--debut-text-on-noir-muted,#E8C4C8)] font-sans border-t border-[var(--debut-rose-gold-subtle)] pt-8">
+          <div className="space-y-2 text-xs text-[#E8C4C8]/70 font-sans border-t border-[#E8C4C8]/15 pt-8">
             <p className="flex items-center justify-center gap-1.5">
               <span>Grand Cotillion Royale</span>
               <span>&bull;</span>
@@ -148,7 +153,7 @@ export function Footer({ data }: { data: EventTemplateData }) {
                 href="https://rsvp.webserbisyo.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--debut-champagne-gold,#D4AF37)] hover:underline font-semibold"
+                className="text-[#D4AF37] hover:underline font-semibold"
               >
                 WebSerbisyo
               </a>
