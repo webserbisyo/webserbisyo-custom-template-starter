@@ -53,15 +53,11 @@ export function Navbar({ data }: { data: EventTemplateData }) {
     <>
       <header
         data-scrolled={isScrolled ? "true" : "false"}
-        className={`fixed top-0 left-0 right-0 z-50 w-full h-16 sm:h-18 transition-[background-color,border-color,box-shadow] duration-300 ${
-          isScrolled
-            ? "debut-glass-navbar border-b border-[var(--debut-rose-gold-border,#E8C4C8)]/50 shadow-sm"
-            : "bg-[var(--debut-bg-alabaster,#FAF5F5)]/90 backdrop-blur-md border-b border-[var(--debut-rose-gold-border,#E8C4C8)]/25"
-        }`}
+        className="debut-glass-navbar h-16 sm:h-18"
       >
-        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-6 xl:gap-10">
-          {/* Zone 1: Wordmark Lockup (shrink-0 prevents line collapse, pr buffer prevents emoji collision) */}
-          <div className="flex items-center shrink-0 pr-4 lg:pr-6">
+        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 lg:gap-6">
+          {/* Zone 1: Wordmark Lockup */}
+          <div className="flex items-center shrink-0 pr-2 lg:pr-4">
             <Link
               href="/"
               onClick={handleHomeClick}
@@ -82,10 +78,10 @@ export function Navbar({ data }: { data: EventTemplateData }) {
             </Link>
           </div>
 
-          {/* Zone 2: Center Primary Browsing Links (hidden xl:flex prevents horizontal collision) */}
+          {/* Zone 2: Center Primary Browsing Links */}
           <nav
             aria-label="Primary browsing navigation"
-            className="hidden xl:flex flex-1 items-center justify-center gap-6 xl:gap-8 text-xs font-bold uppercase tracking-[0.2em] font-cinzel text-[var(--debut-text-noir,#26131C)] select-none whitespace-nowrap"
+            className="hidden xl:flex flex-1 items-center justify-center gap-5 xl:gap-6 text-xs font-bold uppercase tracking-[0.16em] font-cinzel text-[var(--debut-text-noir,#26131C)] select-none whitespace-nowrap"
           >
             {navModel.primaryNavItems.map((item) => {
               const resolvedHref = resolveEventHref(item.anchor, pathname);
@@ -103,8 +99,8 @@ export function Navbar({ data }: { data: EventTemplateData }) {
             })}
           </nav>
 
-          {/* Zone 3: Responsive Directory Action Trigger (shrink-0) */}
-          <div className="flex items-center justify-end shrink-0">
+          {/* Zone 3: Responsive Directory Action Trigger (shrink-0 min-w-fit) */}
+          <div className="flex items-center justify-end shrink-0 min-w-fit">
             <button
               type="button"
               onClick={() => setDrawerOpen(true)}

@@ -71,7 +71,7 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
     isMoreEligible: true,
   },
   story_message: {
-    label: "Story & Journey",
+    label: "Story",
     anchor: "#story_message",
     group: "Celebration",
     iconName: "BookOpen",
@@ -109,7 +109,7 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
     isMoreEligible: true,
   },
   timeline_program: {
-    label: "Program Flow",
+    label: "Program",
     anchor: "#timeline_program",
     group: "Debut Program & Traditions",
     iconName: "Clock3",
@@ -174,7 +174,7 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
     isMoreEligible: true,
   },
   extra_info: {
-    label: "Details & FAQ",
+    label: "Details",
     anchor: "#extra_info",
     group: "Guest Essentials & Actions",
     iconName: "Info",
@@ -202,7 +202,7 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
     isMoreEligible: true,
   },
   guestbook: {
-    label: "Debut Wishes",
+    label: "Wishes",
     anchor: "#guestbook",
     group: "Guest Essentials & Actions",
     iconName: "MessageSquare",

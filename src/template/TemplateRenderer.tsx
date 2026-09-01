@@ -36,7 +36,7 @@ export function TemplateRenderer({
 
         <Navbar data={data} />
 
-        <main className="flex-1 pt-16 relative z-10">
+        <main className="flex-1 pt-16 sm:pt-18 relative z-10">
           {data.orderedSectionKeys
             .filter((key) => key !== "contact_socials")
             .map((key) => {
