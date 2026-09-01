@@ -149,10 +149,9 @@
 }
 
 /* ==========================================================================
-   GLASSMORPHISM & SURFACE ELEVATIONS (ALLSHADCN LUXURY BENCHMARK)
+   AUTHENTIC CROSS-BROWSER FROSTED GLASS NAVIGATION (AST-ISOLATED)
    ========================================================================== */
 
-/* Authentic Cross-Browser Frosted Glass Navigation */
 .debut-glass-navbar {
   position: fixed;
   top: 0;
@@ -165,8 +164,6 @@
   box-shadow:
     0 4px 20px -4px rgba(38, 19, 28, 0.05),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
   transition:
     background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
@@ -179,8 +176,26 @@
   box-shadow:
     0 4px 24px -4px rgba(38, 19, 28, 0.08),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px) saturate(190%);
-  -webkit-backdrop-filter: blur(20px) saturate(190%);
+}
+
+/* W3C Standard Rule — Chrome, Edge, Firefox */
+@supports (backdrop-filter: blur(1px)) {
+  .debut-glass-navbar {
+    backdrop-filter: blur(16px) saturate(180%);
+  }
+  .debut-glass-navbar[data-scrolled="true"] {
+    backdrop-filter: blur(20px) saturate(190%);
+  }
+}
+
+/* WebKit Vendor-Prefixed Rule — Safari, iOS WebViews */
+@supports (-webkit-backdrop-filter: blur(1px)) {
+  .debut-glass-navbar {
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+  }
+  .debut-glass-navbar[data-scrolled="true"] {
+    -webkit-backdrop-filter: blur(20px) saturate(190%);
+  }
 }
 
 /* 2. Frosted Section Card Container */
