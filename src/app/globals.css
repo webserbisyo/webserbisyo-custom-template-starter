@@ -13,11 +13,10 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
   }
   body {
-    overflow-x: hidden;
     width: 100%;
+    overflow-x: clip;
     background-color: var(--debut-bg-alabaster, #faf5f5);
     color: var(--debut-text-noir, #26131c);
     font-family: var(--font-debut-body, "Plus Jakarta Sans", sans-serif);
