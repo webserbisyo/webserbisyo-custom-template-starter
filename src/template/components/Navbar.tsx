@@ -56,12 +56,12 @@ export function Navbar({ data }: { data: EventTemplateData }) {
         className={`fixed top-0 left-0 right-0 z-50 w-full h-16 sm:h-18 transition-[background-color,border-color,box-shadow] duration-300 ${
           isScrolled
             ? "debut-glass-navbar border-b border-[var(--debut-rose-gold-border,#E8C4C8)]/50 shadow-sm"
-            : "bg-[var(--debut-bg-alabaster,#FAF5F5)]/80 backdrop-blur-md border-b border-[var(--debut-rose-gold-border,#E8C4C8)]/25"
+            : "bg-[var(--debut-bg-alabaster,#FAF5F5)]/90 backdrop-blur-md border-b border-[var(--debut-rose-gold-border,#E8C4C8)]/25"
         }`}
       >
-        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Zone 1: Wordmark Lockup (shrink-0 prevents line collapse) */}
-          <div className="flex items-center shrink-0">
+        <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-6 xl:gap-10">
+          {/* Zone 1: Wordmark Lockup (shrink-0 prevents line collapse, pr buffer prevents emoji collision) */}
+          <div className="flex items-center shrink-0 pr-4 lg:pr-6">
             <Link
               href="/"
               onClick={handleHomeClick}
@@ -85,7 +85,7 @@ export function Navbar({ data }: { data: EventTemplateData }) {
           {/* Zone 2: Center Primary Browsing Links (hidden xl:flex prevents horizontal collision) */}
           <nav
             aria-label="Primary browsing navigation"
-            className="hidden xl:flex flex-1 items-center justify-center gap-7 text-xs font-bold uppercase tracking-[0.2em] font-cinzel text-[var(--debut-text-noir,#26131C)] select-none whitespace-nowrap"
+            className="hidden xl:flex flex-1 items-center justify-center gap-6 xl:gap-8 text-xs font-bold uppercase tracking-[0.2em] font-cinzel text-[var(--debut-text-noir,#26131C)] select-none whitespace-nowrap"
           >
             {navModel.primaryNavItems.map((item) => {
               const resolvedHref = resolveEventHref(item.anchor, pathname);
@@ -103,18 +103,18 @@ export function Navbar({ data }: { data: EventTemplateData }) {
             })}
           </nav>
 
-          {/* Zone 3: Directory Action Trigger (shrink-0) */}
+          {/* Zone 3: Responsive Directory Action Trigger (shrink-0) */}
           <div className="flex items-center justify-end shrink-0">
             <button
               type="button"
               onClick={() => setDrawerOpen(true)}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--debut-rose-gold-border,#E8C4C8)]/60 bg-white/80 text-[var(--debut-text-noir,#26131C)] hover:border-[var(--debut-bg-coral,#E65C4F)] hover:text-[var(--debut-bg-coral,#E65C4F)] transition-all text-xs font-cinzel font-bold tracking-widest uppercase shadow-xs active:scale-95 cursor-pointer template-focus-ring btn-press-physics"
+              className="inline-flex items-center justify-center gap-2 h-10 px-3 sm:px-4 rounded-full border border-[var(--debut-rose-gold-border,#E8C4C8)]/60 bg-white/90 text-[var(--debut-text-noir,#26131C)] hover:border-[var(--debut-bg-coral,#E65C4F)] hover:text-[var(--debut-bg-coral,#E65C4F)] transition-all text-xs font-cinzel font-bold tracking-widest uppercase shadow-xs active:scale-95 cursor-pointer template-focus-ring btn-press-physics"
               aria-expanded={drawerOpen}
               aria-controls="sitemap-drawer"
-              aria-label="Open complete celebration menu"
+              aria-label="Open celebration directory menu"
             >
-              <span>Directory</span>
-              <Menu className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Directory</span>
+              <Menu className="w-4 h-4 text-[var(--debut-bg-coral,#E65C4F)]" />
             </button>
           </div>
         </div>

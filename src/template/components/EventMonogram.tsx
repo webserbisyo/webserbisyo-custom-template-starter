@@ -174,30 +174,30 @@ export function EventMonogram({
       {...props}
     >
       {isSingleHost ? (
-        <span className="event-monogram-glyphs inline-flex items-center whitespace-nowrap font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] uppercase">
-          {/* First Name */}
-          <span className="text-[var(--debut-text-noir,#26131C)] font-bold shrink-0">
+        <span className="event-monogram-glyphs inline-flex items-center whitespace-nowrap font-cinzel text-sm sm:text-base font-black tracking-[0.18em] uppercase">
+          {/* Celebrant First Name */}
+          <span className="text-[var(--debut-text-noir,#26131C)] font-black shrink-0">
             {firstName || initial}
           </span>
 
-          {/* Responsive Milestone Lockup */}
+          {/* High-Vibrancy Milestone Lockup */}
           {milestoneNum ? (
             <>
-              <span className="text-[var(--debut-champagne-gold,#D4AF37)] font-bold mx-1 sm:mx-1.5 text-xs shrink-0">
+              <span className="text-[var(--debut-champagne-gold,#D4AF37)] font-bold mx-1.5 sm:mx-2 text-xs shrink-0">
                 &bull;
               </span>
-              <span className="font-cinzel text-[11px] sm:text-xs font-semibold tracking-wider text-[var(--debut-rose-gold,#B76E79)] shrink-0">
+              <span className="font-cinzel text-xs sm:text-sm font-bold tracking-wider text-[var(--debut-bg-coral,#E65C4F)] shrink-0">
                 <span>{milestoneNum}TH</span>
                 <span className="hidden sm:inline ml-1">BIRTHDAY</span>
               </span>
-              <span className="ml-1 text-xs shrink-0">🌹</span>
+              <span className="ml-1.5 text-sm shrink-0">🌹</span>
             </>
           ) : null}
         </span>
       ) : (
         <span className="event-monogram-glyphs inline-flex items-center whitespace-nowrap font-serif text-lg md:text-xl font-bold tracking-widest">
           <span>{initial}</span>
-          <span className="text-[var(--debut-champagne-gold)] font-serif italic font-normal mx-1 text-base">
+          <span className="text-[var(--debut-champagne-gold)] font-serif italic font-normal mx-1.5 text-base">
             &amp;
           </span>
           <span>{identity.brideInitial}</span>
