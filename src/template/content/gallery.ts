@@ -21,7 +21,7 @@ export interface GalleryPhotoItem {
 export const galleryPhotos: GalleryPhotoItem[] = [
   {
     id: "gallery-01",
-    src: "/template-assets/photos/gallery/debut-ballroom.webp",
+    src: "",
     alt: "Grand Cotillion ballroom celebration arch",
     caption: "The Grand Ballroom",
     folioLabel: "FOLIO // 01",
@@ -31,7 +31,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-02",
-    src: "/template-assets/photos/gallery/debut-gown.webp",
+    src: "",
     alt: "Portrait of the debutante in her couture evening gown",
     caption: "The Debutante",
     folioLabel: "FOLIO // 02",
@@ -41,7 +41,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-03",
-    src: "/template-assets/photos/gallery/debut-silhouette.webp",
+    src: "",
     alt: "Evening silhouette in the grand hall",
     caption: "Midnight Silhouette",
     folioLabel: "FOLIO // 03",
@@ -51,7 +51,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-04",
-    src: "/template-assets/photos/gallery/debut-toast.webp",
+    src: "",
     alt: "Eighteen roses celebratory toast",
     caption: "Celebration Toast",
     folioLabel: "FOLIO // 04",
@@ -61,10 +61,20 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-05",
-    src: "/template-assets/photos/gallery/debut-table.webp",
+    src: "",
     alt: "Candlelit gala dining table setting",
     caption: "Gala Table Setting",
     folioLabel: "FOLIO // 05",
+    width: 2752,
+    height: 1536,
+    orientation: "landscape",
+  },
+  {
+    id: "gallery-06",
+    src: "",
+    alt: "Grand ballroom chandelier and cotillion dance floor",
+    caption: "Cotillion Chandelier",
+    folioLabel: "FOLIO // 06",
     width: 2752,
     height: 1536,
     orientation: "landscape",

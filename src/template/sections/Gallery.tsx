@@ -7,6 +7,7 @@ import { galleryPhotos, type GalleryPhotoItem } from "@/template/content/gallery
 import { SkewCarousel } from "@/template/components/interactive/SkewCarousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/template/components/ui/Dialog";
 import { Reveal } from "@/template/components/motion/Reveal";
+import { DebutImagePlaceholder } from "@/template/components/containers/DebutImagePlaceholder";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
@@ -95,15 +96,26 @@ export function GallerySection({ data }: { data: GalleryData }) {
 
               {/* Modal Media Stage */}
               <div className="relative flex-1 min-h-0 w-full flex items-center justify-center p-2 sm:p-3 my-2 bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/50 rounded-2xl overflow-hidden">
-                <Image
-                  src={selectedPhoto.src}
-                  alt={selectedPhoto.alt}
-                  width={selectedPhoto.width}
-                  height={selectedPhoto.height}
-                  className="w-auto h-auto max-w-full max-h-full object-contain rounded-xl shadow-md select-none block"
-                  sizes="(max-width: 1024px) 95vw, 1100px"
-                  priority
-                />
+                {selectedPhoto.src ? (
+                  <Image
+                    src={selectedPhoto.src}
+                    alt={selectedPhoto.alt}
+                    width={selectedPhoto.width}
+                    height={selectedPhoto.height}
+                    className="w-auto h-auto max-w-full max-h-full object-contain rounded-xl shadow-md select-none block"
+                    sizes="(max-width: 1024px) 95vw, 1100px"
+                    priority
+                  />
+                ) : (
+                  <div className="w-[320px] sm:w-[460px] h-[240px] sm:h-[320px] p-2">
+                    <DebutImagePlaceholder
+                      context="gallery"
+                      label={
+                        selectedPhoto.folioLabel || selectedPhoto.caption || "GALLERY SPECIMEN"
+                      }
+                    />
+                  </div>
+                )}
 
                 {/* Lightbox Navigation Chevrons pinned to Media Box */}
                 {galleryPhotos.length > 1 && (

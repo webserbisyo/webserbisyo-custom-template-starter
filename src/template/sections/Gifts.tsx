@@ -84,45 +84,54 @@ export function GiftsSection({ data }: { data: GiftsData }) {
                             </p>
                           </div>
 
-                          {/* Footer Action Shelf: QR Modal Trigger OR Wishing Well Fallback */}
+                          {/* Action Shelf: Symmetrical Active Trigger Buttons */}
                           <div className="pt-4 mt-3 border-t border-[var(--debut-rose-gold-subtle)]">
-                            {hasQr ? (
-                              <button
-                                type="button"
-                                onClick={() => setSelectedOption(option)}
-                                className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] text-[var(--debut-text-noir,#26131C)] border border-[var(--debut-rose-gold-border,#E8C4C8)] text-xs font-bold uppercase tracking-wider font-cinzel shadow-xs transition-all active:scale-95 cursor-pointer btn-press-physics"
-                              >
-                                <QrCode className="w-4 h-4 text-[var(--debut-bg-coral,#E65C4F)]" />
-                                <span>View QR Code</span>
-                              </button>
-                            ) : (
-                              <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/70 border border-[var(--debut-rose-gold-subtle)] text-left">
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#E5C158] to-[#D4AF37] flex items-center justify-center shrink-0 shadow-xs">
-                                  <Sparkles className="w-4 h-4 text-white" />
-                                </div>
-                                <div className="min-w-0">
-                                  <p className="text-[11px] font-cinzel font-bold text-[var(--debut-text-noir,#26131C)] uppercase tracking-wider">
-                                    Wishing Well Reception
-                                  </p>
-                                  <p className="text-[10px] font-sans text-[var(--debut-text-muted,#704D5B)] truncate">
-                                    Monetary envelopes received at the grand ballroom foyer
-                                  </p>
-                                </div>
-                              </div>
-                            )}
+                            <button
+                              type="button"
+                              onClick={() => setSelectedOption(option)}
+                              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] text-[var(--debut-text-noir,#26131C)] border border-[var(--debut-rose-gold-border,#E8C4C8)] text-xs font-bold uppercase tracking-wider font-cinzel shadow-xs transition-all active:scale-95 cursor-pointer btn-press-physics"
+                            >
+                              {hasQr ? (
+                                <>
+                                  <QrCode className="w-4 h-4 text-[var(--debut-bg-coral,#E65C4F)]" />
+                                  <span>View QR Code</span>
+                                </>
+                              ) : (
+                                <>
+                                  <QrCode className="w-4 h-4 text-[var(--debut-rose-gold,#B76E79)] opacity-70" />
+                                  <span>View QR Placeholder</span>
+                                </>
+                              )}
+                            </button>
                           </div>
                         </div>
                       );
                     })}
                   </div>
                 )}
+
+                {/* Dedicated Ballroom Wishing Well Note */}
+                <div className="mt-4 p-4 sm:p-5 rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/50 border border-[var(--debut-rose-gold-subtle)] flex items-center gap-3.5 text-left">
+                  <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-xs">
+                    <Gift className="w-4 h-4 text-[var(--debut-bg-coral,#E65C4F)]" />
+                  </div>
+                  <div>
+                    <span className="font-cinzel text-xs font-bold uppercase tracking-wider text-[var(--debut-rose-gold,#B76E79)] block">
+                      Ballroom Wishing Well
+                    </span>
+                    <p className="text-xs text-[var(--debut-text-muted,#704D5B)] font-sans">
+                      For guests who prefer traditional gift-giving, monetary envelopes are
+                      gratefully received at the grand ballroom reception desk.
+                    </p>
+                  </div>
+                </div>
               </div>
             </LedgerPanel>
           </div>
         </Reveal>
 
-        {/* QR / Image Zoom Modal */}
-        {selectedOption && selectedOption.image?.url && (
+        {/* QR / Image Zoom Modal with Placeholder Support */}
+        {selectedOption && (
           <Dialog
             open={Boolean(selectedOption)}
             onOpenChange={(open) => {
@@ -135,17 +144,40 @@ export function GiftsSection({ data }: { data: GiftsData }) {
                   {selectedOption.title}
                 </DialogTitle>
               </DialogHeader>
-              <div className="my-4 relative w-64 h-64 mx-auto p-3 rounded-2xl bg-white border border-[var(--debut-rose-gold-border)] shadow-md flex items-center justify-center">
-                <Image
-                  src={selectedOption.image.url}
-                  alt={selectedOption.image.alt || selectedOption.title}
-                  fill
-                  className="object-contain p-2"
-                />
-              </div>
-              <p className="text-xs text-[var(--debut-text-muted,#704D5B)] font-sans">
-                Scan using your banking or digital wallet app
-              </p>
+
+              {selectedOption.image?.url ? (
+                <>
+                  <div className="my-4 relative w-64 h-64 mx-auto p-3 rounded-2xl bg-white border border-[var(--debut-rose-gold-border)] shadow-md flex items-center justify-center">
+                    <Image
+                      src={selectedOption.image.url}
+                      alt={selectedOption.image.alt || selectedOption.title}
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
+                  <p className="text-xs text-[var(--debut-text-muted,#704D5B)] font-sans">
+                    Scan using your banking or digital wallet app
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="my-4 w-64 h-64 mx-auto p-6 rounded-2xl bg-[#FAF5F5] border-2 border-dashed border-[#E8C4C8] flex flex-col items-center justify-center text-center">
+                    <div className="w-12 h-12 rounded-2xl bg-white shadow-xs border border-[#E8C4C8]/60 flex items-center justify-center mb-3 text-[var(--debut-rose-gold,#B76E79)]">
+                      <QrCode className="w-6 h-6" />
+                    </div>
+                    <span className="font-cinzel text-xs font-bold tracking-wider text-[var(--debut-text-noir,#26131C)] uppercase">
+                      QR Code Placeholder
+                    </span>
+                    <span className="font-sans text-[11px] text-[var(--debut-text-muted,#704D5B)] mt-1.5 leading-relaxed">
+                      Official QR code or transfer instructions will appear here once configured in
+                      the dashboard.
+                    </span>
+                  </div>
+                  <p className="text-xs text-[var(--debut-text-muted,#704D5B)] font-sans">
+                    Please ask the host or coordinator during the reception
+                  </p>
+                </>
+              )}
             </DialogContent>
           </Dialog>
         )}

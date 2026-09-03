@@ -6,7 +6,9 @@ import type { Swiper as SwiperType } from "swiper";
 import { Autoplay, Keyboard, A11y } from "swiper/modules";
 import Image from "next/image";
 import { useReducedMotion } from "motion/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/template/components/ui/Button";
+import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
+import { DebutImagePlaceholder } from "../containers/DebutImagePlaceholder";
 import { cn } from "../ui/cn";
 import type { GalleryOrientation } from "@/template/content/gallery";
 
@@ -75,8 +77,11 @@ export function SkewCarousel({
                 sizes="(max-width: 640px) 84vw, 560px"
               />
             ) : (
-              <div className="flex h-48 w-64 items-center justify-center text-xs font-cinzel text-[var(--debut-text-muted)]">
-                [ PHOTO MEMORY ]
+              <div className="w-[300px] h-[220px] sm:w-[380px] sm:h-[260px]">
+                <DebutImagePlaceholder
+                  context="gallery"
+                  label={item.folioLabel || "GALLERY SPECIMEN"}
+                />
               </div>
             )}
           </div>
@@ -252,8 +257,13 @@ export function SkewCarousel({
                         className="block w-auto h-auto max-w-[min(84vw,330px)] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[560px] max-h-[300px] sm:max-h-[360px] md:max-h-[410px] lg:max-h-[440px] object-contain rounded-xl select-none pointer-events-none"
                       />
                     ) : (
-                      <div className="flex h-44 w-60 items-center justify-center p-6 text-center text-xs font-cinzel text-[var(--debut-text-muted)]">
-                        [ PHOTO #{String(idx + 1).padStart(2, "0")} ]
+                      <div className="w-[280px] h-[200px] sm:w-[340px] sm:h-[240px]">
+                        <DebutImagePlaceholder
+                          context="gallery"
+                          label={
+                            item.folioLabel || `SPECIMEN // ${String(idx + 1).padStart(2, "0")}`
+                          }
+                        />
                       </div>
                     )}
                   </div>

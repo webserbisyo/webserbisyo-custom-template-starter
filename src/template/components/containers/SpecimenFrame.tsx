@@ -1,8 +1,9 @@
+"use client";
+
 import * as React from "react";
 import Image from "next/image";
 import { cn } from "../ui/cn";
-
-import { CotillionSpecimenFallback } from "./CotillionSpecimenFallback";
+import { DebutImagePlaceholder, type PlaceholderContext } from "./DebutImagePlaceholder";
 
 export interface SpecimenFrameProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;
@@ -12,6 +13,8 @@ export interface SpecimenFrameProps extends React.HTMLAttributes<HTMLDivElement>
   aspectRatio?: "square" | "portrait" | "portrait-tall" | "landscape" | "landscape-wide" | "video";
   priority?: boolean;
   isArch?: boolean;
+  context?: PlaceholderContext;
+  recommendation?: string;
 }
 
 export function SpecimenFrame({
@@ -23,9 +26,17 @@ export function SpecimenFrame({
   aspectRatio = "portrait",
   priority = false,
   isArch = false,
+  context,
+  recommendation,
   children,
   ...props
 }: SpecimenFrameProps) {
+  const [hasError, setHasError] = React.useState(false);
+
+  React.useEffect(() => {
+    setHasError(false);
+  }, [src]);
+
   const aspectClasses = {
     square: "aspect-square",
     portrait: "aspect-[4/5]",
@@ -34,6 +45,16 @@ export function SpecimenFrame({
     "landscape-wide": "aspect-[16/10]",
     video: "aspect-16/9",
   };
+
+  const resolvedContext =
+    context ||
+    (isArch
+      ? "portrait"
+      : aspectRatio === "landscape" || aspectRatio === "landscape-wide"
+        ? "venue"
+        : "portrait");
+
+  const shouldShowPlaceholder = !src || hasError;
 
   return (
     <div
@@ -53,20 +74,22 @@ export function SpecimenFrame({
           aspectClasses[aspectRatio]
         )}
       >
-        {src ? (
+        {!shouldShowPlaceholder ? (
           <Image
-            src={src}
+            src={src!}
             alt={alt}
             fill
             priority={priority}
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
+            onError={() => setHasError(true)}
           />
         ) : (
           children || (
-            <CotillionSpecimenFallback
+            <DebutImagePlaceholder
+              context={resolvedContext}
               label={specimenNumber || caption || alt}
-              category={isArch ? "portrait" : aspectRatio}
+              recommendation={recommendation}
             />
           )
         )}

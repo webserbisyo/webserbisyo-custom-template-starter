@@ -19,16 +19,10 @@ export type TemplateAssets = {
 
 export const templateAssets: TemplateAssets = {
   photos: {
-    hero: "/template-assets/photos/hero/debut-portrait.webp",
-    gallery: [
-      "/template-assets/photos/gallery/debut-ballroom.webp",
-      "/template-assets/photos/gallery/debut-gown.webp",
-      "/template-assets/photos/gallery/debut-silhouette.webp",
-      "/template-assets/photos/gallery/debut-toast.webp",
-      "/template-assets/photos/gallery/debut-table.webp",
-    ],
-    story: ["/template-assets/photos/story/debut-chronicle.webp"],
-    venue: "/template-assets/photos/venue/debut-venue.webp",
+    hero: "",
+    gallery: [],
+    story: [],
+    venue: "",
   },
   decorations: {
     qrDemo: "/template-assets/decorations/qr-demo.svg",

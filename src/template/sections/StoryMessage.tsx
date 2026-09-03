@@ -44,6 +44,7 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
               caption="Debutante Chronicle Memory"
               specimenNumber="JOURNEY // 05"
               aspectRatio="landscape"
+              context="story"
               className="shadow-soft bg-[var(--debut-surface-alabaster,#ffffff)]"
             />
 
