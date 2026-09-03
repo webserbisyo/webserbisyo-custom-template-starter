@@ -6,6 +6,7 @@ import type {
   EighteenTraditionGroup,
 } from "@/platform/event-template-data";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/template/components/ui/Tabs";
+import { cn } from "@/template/components/ui/cn";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Flower2, Flame, Gift, Sparkles, Heart } from "lucide-react";
 
@@ -54,8 +55,8 @@ export function EighteenRosesCandlesSection({ data }: { data: EighteenRosesCandl
             onValueChange={setActiveTab}
             className="w-full max-w-4xl mx-auto flex flex-col items-center"
           >
-            {/* 3-Way Tab Switcher */}
-            <TabsList className="h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 p-1 text-white gap-1 mb-8 shadow-md">
+            {/* 3-Way Tab Switcher — Inset Buffered Track & Floating Non-Colliding Pills */}
+            <TabsList className="h-auto min-h-[52px] rounded-full bg-black/15 backdrop-blur-md border border-white/30 p-1.5 sm:p-2 text-white gap-1.5 sm:gap-2 mb-8 shadow-inner inline-flex flex-wrap justify-center">
               {groups.map((group) => {
                 const IconComponent = TRADITION_ICONS[group.kind] || TRADITION_ICONS.custom;
                 const isActive = activeTab === group.id;
@@ -64,13 +65,19 @@ export function EighteenRosesCandlesSection({ data }: { data: EighteenRosesCandl
                   <TabsTrigger
                     key={group.id}
                     value={group.id}
-                    className={`rounded-full px-5 sm:px-7 py-2 text-xs sm:text-sm font-cinzel font-bold tracking-wider uppercase transition-all flex items-center gap-2 cursor-pointer ${
+                    className={cn(
+                      "rounded-full px-5 sm:px-7 py-2 sm:py-2.5 text-xs sm:text-sm font-cinzel font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 cursor-pointer select-none",
                       isActive
-                        ? "bg-white text-[var(--debut-bg-coral,#E65C4F)] shadow-lg scale-105"
-                        : "text-white hover:bg-white/10"
-                    }`}
+                        ? "bg-white text-[var(--debut-bg-coral,#E65C4F)] shadow-floating ring-1 ring-white/60 font-extrabold"
+                        : "text-white/90 hover:text-white hover:bg-white/10"
+                    )}
                   >
-                    <IconComponent className="w-4 h-4" />
+                    <IconComponent
+                      className={cn(
+                        "w-4 h-4",
+                        isActive ? "text-[var(--debut-bg-coral,#E65C4F)]" : "text-white"
+                      )}
+                    />
                     <span>{group.title}</span>
                   </TabsTrigger>
                 );

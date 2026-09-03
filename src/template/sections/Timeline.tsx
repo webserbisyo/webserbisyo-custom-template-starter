@@ -4,6 +4,8 @@ import { StaggerList } from "@/template/components/motion/StaggerList";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Clock, Sparkles } from "lucide-react";
 
+import { TimelineRoseNode } from "@/template/components/decorations/TimelineRoseNode";
+
 // PLATFORM DATA — KEEP DYNAMIC.
 // DEBUT ROSE GLAM TIMELINE (CANVAS A: SATIN ALABASTER & ILLUMINATED MILESTONE RAIL)
 
@@ -38,8 +40,8 @@ export function TimelineSection({ data }: { data: TimelineData }) {
           <StaggerList staggerDelay={0.08} className="space-y-4 sm:space-y-6">
             {data.items.map((item, idx: number) => (
               <div key={item.id || idx} className="relative group">
-                {/* Diamond Milestone Node */}
-                <div className="absolute -left-[31px] sm:-left-[39px] top-2 w-4 h-4 bg-[var(--debut-surface-alabaster,#ffffff)] border-2 border-[var(--debut-bg-coral,#E65C4F)] rotate-45 group-hover:bg-[var(--debut-bg-coral)] group-hover:rotate-90 transition-all duration-300 shadow-xs z-10" />
+                {/* Multi-Petal Blooming Rose Milestone Node */}
+                <TimelineRoseNode />
 
                 <div className="debut-glass-card relative overflow-visible bg-[var(--debut-surface-alabaster,#ffffff)] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-card hover:border-[var(--debut-bg-coral)]/60 transition-colors">
                   <div className="relative z-10">

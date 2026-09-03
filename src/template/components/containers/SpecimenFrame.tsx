@@ -2,12 +2,14 @@ import * as React from "react";
 import Image from "next/image";
 import { cn } from "../ui/cn";
 
+import { CotillionSpecimenFallback } from "./CotillionSpecimenFallback";
+
 export interface SpecimenFrameProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;
   alt?: string;
   caption?: string;
   specimenNumber?: string;
-  aspectRatio?: "square" | "portrait" | "landscape" | "video";
+  aspectRatio?: "square" | "portrait" | "portrait-tall" | "landscape" | "landscape-wide" | "video";
   priority?: boolean;
   isArch?: boolean;
 }
@@ -26,8 +28,10 @@ export function SpecimenFrame({
 }: SpecimenFrameProps) {
   const aspectClasses = {
     square: "aspect-square",
-    portrait: "aspect-3/4",
+    portrait: "aspect-[4/5]",
+    "portrait-tall": "aspect-3/4",
     landscape: "aspect-4/3",
+    "landscape-wide": "aspect-[16/10]",
     video: "aspect-16/9",
   };
 
@@ -60,9 +64,10 @@ export function SpecimenFrame({
           />
         ) : (
           children || (
-            <div className="flex h-full w-full items-center justify-center text-xs text-[var(--debut-text-muted,#704D5B)] font-cinzel tracking-wider">
-              [ PORTRAIT SPECIMEN ]
-            </div>
+            <CotillionSpecimenFallback
+              label={specimenNumber || caption || alt}
+              category={isArch ? "portrait" : aspectRatio}
+            />
           )
         )}
       </div>

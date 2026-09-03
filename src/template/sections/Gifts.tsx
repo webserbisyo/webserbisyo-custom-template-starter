@@ -59,40 +59,61 @@ export function GiftsSection({ data }: { data: GiftsData }) {
                   </div>
                 )}
 
-                {/* Gift Registry Options */}
+                {/* Gift Registry Options — Uniform Balanced Anatomy */}
                 {options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left pt-2">
-                    {options.map((option, idx) => (
-                      <div
-                        key={option.id || idx}
-                        className="p-4 sm:p-5 rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/60 border border-[var(--debut-rose-gold-border,#E8C4C8)]/70 space-y-3 flex flex-col justify-between"
-                      >
-                        <div>
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="text-xs font-cinzel font-bold text-[var(--debut-rose-gold,#B76E79)] uppercase tracking-wider">
-                              Option 0{idx + 1}
-                            </span>
-                            <Gift className="w-4 h-4 text-[var(--debut-text-muted,#704D5B)]" />
-                          </div>
-                          <p className="font-serif font-bold text-base sm:text-lg text-[var(--debut-text-noir,#26131C)] mt-1">
-                            {option.title}
-                          </p>
-                        </div>
+                    {options.map((option, idx) => {
+                      const hasQr = Boolean(option.image?.url);
 
-                        {option.image?.url && (
-                          <div className="pt-3 border-t border-[var(--debut-rose-gold-subtle)]">
-                            <button
-                              type="button"
-                              onClick={() => setSelectedOption(option)}
-                              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--debut-text-noir,#26131C)] hover:text-[var(--debut-bg-coral,#E65C4F)] transition-colors template-focus-ring cursor-pointer"
-                            >
-                              <QrCode className="w-4 h-4 text-[var(--debut-rose-gold,#B76E79)]" />
-                              <span>View Registry QR / Details</span>
-                            </button>
+                      return (
+                        <div
+                          key={option.id || idx}
+                          className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/70 border border-[var(--debut-rose-gold-border,#E8C4C8)]/80 hover:border-[var(--debut-rose-gold,#B76E79)] flex flex-col justify-between min-h-[190px] shadow-xs transition-all"
+                        >
+                          {/* Card Header & Method Title */}
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="text-[11px] font-cinzel font-bold text-[var(--debut-rose-gold,#B76E79)] uppercase tracking-wider">
+                                Option 0{idx + 1}
+                              </span>
+                              <Gift className="w-4 h-4 text-[var(--debut-text-muted,#704D5B)]" />
+                            </div>
+
+                            <p className="font-serif font-bold text-base sm:text-lg text-[var(--debut-text-noir,#26131C)]">
+                              {option.title}
+                            </p>
                           </div>
-                        )}
-                      </div>
-                    ))}
+
+                          {/* Footer Action Shelf: QR Modal Trigger OR Wishing Well Fallback */}
+                          <div className="pt-4 mt-3 border-t border-[var(--debut-rose-gold-subtle)]">
+                            {hasQr ? (
+                              <button
+                                type="button"
+                                onClick={() => setSelectedOption(option)}
+                                className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] text-[var(--debut-text-noir,#26131C)] border border-[var(--debut-rose-gold-border,#E8C4C8)] text-xs font-bold uppercase tracking-wider font-cinzel shadow-xs transition-all active:scale-95 cursor-pointer btn-press-physics"
+                              >
+                                <QrCode className="w-4 h-4 text-[var(--debut-bg-coral,#E65C4F)]" />
+                                <span>View QR Code</span>
+                              </button>
+                            ) : (
+                              <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/70 border border-[var(--debut-rose-gold-subtle)] text-left">
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#E5C158] to-[#D4AF37] flex items-center justify-center shrink-0 shadow-xs">
+                                  <Sparkles className="w-4 h-4 text-white" />
+                                </div>
+                                <div className="min-w-0">
+                                  <p className="text-[11px] font-cinzel font-bold text-[var(--debut-text-noir,#26131C)] uppercase tracking-wider">
+                                    Wishing Well Reception
+                                  </p>
+                                  <p className="text-[10px] font-sans text-[var(--debut-text-muted,#704D5B)] truncate">
+                                    Monetary envelopes received at the grand ballroom foyer
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>

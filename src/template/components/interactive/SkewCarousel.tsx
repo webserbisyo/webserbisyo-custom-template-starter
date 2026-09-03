@@ -86,7 +86,7 @@ export function SkewCarousel({
                 {item.caption}
               </p>
               {item.folioLabel || item.title ? (
-                <span className="text-[10px] font-bold font-cinzel tracking-wider uppercase text-[var(--debut-rose-gold,#B76E79)] shrink-0">
+                <span className="text-[10px] font-bold font-cinzel tracking-[0.2em] uppercase text-[#6B3742] bg-[#F4EBEB] px-2 py-0.5 rounded border border-[#E8C4C8]/60 shrink-0">
                   {item.folioLabel || item.title}
                 </span>
               ) : null}
@@ -268,7 +268,7 @@ export function SkewCarousel({
                       <span />
                     )}
                     {item.folioLabel || item.title ? (
-                      <span className="text-[10px] font-bold font-cinzel tracking-wider uppercase text-[var(--debut-rose-gold,#B76E79)] shrink-0">
+                      <span className="text-[10px] font-bold font-cinzel tracking-[0.2em] uppercase text-[#6B3742] bg-[#F4EBEB] px-2 py-0.5 rounded border border-[#E8C4C8]/60 shrink-0">
                         {item.folioLabel || item.title}
                       </span>
                     ) : null}
@@ -280,62 +280,64 @@ export function SkewCarousel({
         </Swiper>
       </div>
 
-      {/* Progress Rail & Navigation Shelf */}
-      <div className="flex items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-5 select-none min-h-[44px]">
-        {/* Previous Chevron Button */}
-        <button
-          type="button"
-          onClick={() => swiperRef.current?.slidePrev()}
-          className="w-10 h-10 rounded-full bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-xs flex items-center justify-center hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] hover:scale-105 active:scale-95 transition-all template-focus-ring cursor-pointer btn-press-physics"
-          aria-label="Previous photograph"
-        >
-          <ChevronLeft className="w-4 h-4 text-[var(--debut-rose-gold)]" />
-        </button>
+      {/* Progress Rail & Floating High-Contrast Navigation Shelf */}
+      <div className="flex justify-center mt-5 sm:mt-6 select-none">
+        <div className="inline-flex items-center gap-3 sm:gap-4 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/95 text-[var(--debut-text-noir,#26131C)] shadow-floating backdrop-blur-md border border-white/70">
+          {/* Previous Chevron Button */}
+          <button
+            type="button"
+            onClick={() => swiperRef.current?.slidePrev()}
+            className="w-9 h-9 rounded-full bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] hover:bg-white text-[var(--debut-text-noir,#26131C)] border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-xs flex items-center justify-center hover:scale-105 active:scale-95 transition-all template-focus-ring cursor-pointer"
+            aria-label="Previous photograph"
+          >
+            <ChevronLeft className="w-4 h-4 text-[var(--debut-text-noir,#26131C)]" />
+          </button>
 
-        {/* Numeric Counter: CURRENT / TOTAL */}
-        <div className="font-cinzel text-xs font-bold tracking-widest text-[var(--debut-text-muted,#704D5B)] px-1">
-          <span className="text-[var(--debut-rose-gold,#B76E79)]">{currentFormatted}</span>
-          <span className="mx-1 opacity-40">/</span>
-          <span>{totalFormatted}</span>
+          {/* High-Contrast Numeric Counter */}
+          <div className="font-cinzel text-xs font-bold tracking-widest text-[var(--debut-text-noir,#26131C)] px-1 flex items-center">
+            <span className="text-[var(--debut-bg-coral,#E65C4F)] text-sm">{currentFormatted}</span>
+            <span className="mx-1.5 opacity-30 text-xs">/</span>
+            <span className="text-[var(--debut-text-muted,#704D5B)]">{totalFormatted}</span>
+          </div>
+
+          {/* Capped 5-Segment Progress Rail */}
+          <div
+            className="flex items-center gap-1.5 px-1"
+            role="tablist"
+            aria-label="Gallery slide segments"
+          >
+            {Array.from({ length: segmentCount }).map((_, i) => {
+              const isSegActive = i === activeSegment;
+
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  role="tab"
+                  aria-selected={isSegActive}
+                  aria-label={`Jump to slide segment ${i + 1}`}
+                  onClick={() => handleSegmentClick(i)}
+                  className={cn(
+                    "h-2 rounded-full transition-all duration-300 cursor-pointer template-focus-ring",
+                    isSegActive
+                      ? "w-7 sm:w-8 bg-[var(--debut-bg-coral,#E65C4F)] shadow-xs"
+                      : "w-2.5 sm:w-3 bg-[var(--debut-rose-gold-border,#E8C4C8)] hover:bg-[var(--debut-rose-gold)]/60"
+                  )}
+                />
+              );
+            })}
+          </div>
+
+          {/* Next Chevron Button */}
+          <button
+            type="button"
+            onClick={() => swiperRef.current?.slideNext()}
+            className="w-9 h-9 rounded-full bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] hover:bg-white text-[var(--debut-text-noir,#26131C)] border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-xs flex items-center justify-center hover:scale-105 active:scale-95 transition-all template-focus-ring cursor-pointer"
+            aria-label="Next photograph"
+          >
+            <ChevronRight className="w-4 h-4 text-[var(--debut-text-noir,#26131C)]" />
+          </button>
         </div>
-
-        {/* Capped 5-Segment Progress Rail */}
-        <div
-          className="flex items-center gap-1.5 px-2 py-1"
-          role="tablist"
-          aria-label="Gallery slide segments"
-        >
-          {Array.from({ length: segmentCount }).map((_, i) => {
-            const isSegActive = i === activeSegment;
-
-            return (
-              <button
-                key={i}
-                type="button"
-                role="tab"
-                aria-selected={isSegActive}
-                aria-label={`Jump to gallery section ${i + 1}`}
-                onClick={() => handleSegmentClick(i)}
-                className={cn(
-                  "h-2 rounded-full transition-all duration-300 cursor-pointer template-focus-ring",
-                  isSegActive
-                    ? "w-7 sm:w-9 bg-[var(--debut-bg-coral,#E65C4F)] shadow-xs"
-                    : "w-2.5 sm:w-3.5 bg-[var(--debut-rose-gold-border,#E8C4C8)] hover:bg-[var(--debut-bg-coral)]/50 opacity-80"
-                )}
-              />
-            );
-          })}
-        </div>
-
-        {/* Next Chevron Button */}
-        <button
-          type="button"
-          onClick={() => swiperRef.current?.slideNext()}
-          className="w-10 h-10 rounded-full bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-xs flex items-center justify-center hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] hover:scale-105 active:scale-95 transition-all template-focus-ring cursor-pointer btn-press-physics"
-          aria-label="Next photograph"
-        >
-          <ChevronRight className="w-4 h-4 text-[var(--debut-rose-gold)]" />
-        </button>
       </div>
     </div>
   );

@@ -38,16 +38,14 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
         <Reveal direction="up" distance={20} delay={0.1}>
           <div className="max-w-2xl mx-auto space-y-8 sm:space-y-10 md:space-y-12">
             {/* Story Photo Specimen Frame */}
-            {storyPhotos.length > 0 && (
-              <SpecimenFrame
-                src={storyPhotos[0]}
-                alt="Story Photo"
-                caption="Debutante Chronicle Memory"
-                specimenNumber="JOURNEY // 05"
-                aspectRatio="landscape"
-                className="shadow-soft bg-[var(--debut-surface-alabaster,#ffffff)]"
-              />
-            )}
+            <SpecimenFrame
+              src={storyPhotos[0]}
+              alt="Story Photo"
+              caption="Debutante Chronicle Memory"
+              specimenNumber="JOURNEY // 05"
+              aspectRatio="landscape"
+              className="shadow-soft bg-[var(--debut-surface-alabaster,#ffffff)]"
+            />
 
             {/* Story Description Card */}
             {data.storyBody && (

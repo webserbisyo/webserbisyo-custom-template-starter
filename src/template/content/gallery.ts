@@ -21,7 +21,7 @@ export interface GalleryPhotoItem {
 export const galleryPhotos: GalleryPhotoItem[] = [
   {
     id: "gallery-01",
-    src: "/template-assets/photos/gallery/gallery-01-ceremony.webp",
+    src: "/template-assets/photos/gallery/debut-ballroom.webp",
     alt: "Grand Cotillion ballroom celebration arch",
     caption: "The Grand Ballroom",
     folioLabel: "FOLIO // 01",
@@ -31,7 +31,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-02",
-    src: "/template-assets/photos/gallery/gallery-02-bride.webp",
+    src: "/template-assets/photos/gallery/debut-gown.webp",
     alt: "Portrait of the debutante in her couture evening gown",
     caption: "The Debutante",
     folioLabel: "FOLIO // 02",
@@ -41,7 +41,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-03",
-    src: "/template-assets/photos/gallery/gallery-04-silhouette.webp",
+    src: "/template-assets/photos/gallery/debut-silhouette.webp",
     alt: "Evening silhouette in the grand hall",
     caption: "Midnight Silhouette",
     folioLabel: "FOLIO // 03",
@@ -51,7 +51,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-04",
-    src: "/template-assets/photos/gallery/gallery-05-toast.webp",
+    src: "/template-assets/photos/gallery/debut-toast.webp",
     alt: "Eighteen roses celebratory toast",
     caption: "Celebration Toast",
     folioLabel: "FOLIO // 04",
@@ -61,7 +61,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-05",
-    src: "/template-assets/photos/gallery/gallery-06-table.webp",
+    src: "/template-assets/photos/gallery/debut-table.webp",
     alt: "Candlelit gala dining table setting",
     caption: "Gala Table Setting",
     folioLabel: "FOLIO // 05",
