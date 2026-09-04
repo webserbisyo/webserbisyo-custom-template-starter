@@ -84,3 +84,62 @@
       transparent 1px
     );
 }
+
+/* ==========================================================================
+   DEBUT ROSE GLAM — 4-PATTERN CADENCE SYSTEM (IMAGE-BASED)
+   Tiled ambient wallpapers mapped across the 17 section flow.
+   ========================================================================== */
+
+.bg-pattern-debut-01,
+.bg-pattern-debut-02,
+.bg-pattern-debut-03,
+.bg-pattern-debut-04 {
+  position: relative;
+}
+
+.bg-pattern-debut-01::before,
+.bg-pattern-debut-02::before,
+.bg-pattern-debut-03::before,
+.bg-pattern-debut-04::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-repeat: repeat;
+  background-position: center;
+  background-size: clamp(220px, 22vw, 320px);
+}
+
+/* 1. Rosebud Botanical Lattice */
+.bg-pattern-debut-01::before {
+  background-image: url("/template-assets/backgrounds/pattern-01-rosebud.webp");
+  opacity: 0.12;
+}
+
+/* 2. Cotillion Blossom Grid */
+.bg-pattern-debut-02::before {
+  background-image: url("/template-assets/backgrounds/pattern-02-bloom.webp");
+  opacity: 0.12;
+}
+
+/* 3. Celebration Petals & Stardust */
+.bg-pattern-debut-03::before {
+  background-image: url("/template-assets/backgrounds/pattern-03-petals.webp");
+  opacity: 0.14;
+}
+
+/* 4. Ballroom Rosette Medallions */
+.bg-pattern-debut-04::before {
+  background-image: url("/template-assets/backgrounds/pattern-04-rosette.webp");
+  opacity: 0.1;
+}
+
+/* Canvas B (Living Coral) Surface Harmonization */
+.section-surface-coral.bg-pattern-debut-01::before,
+.section-surface-coral.bg-pattern-debut-02::before,
+.section-surface-coral.bg-pattern-debut-03::before,
+.section-surface-coral.bg-pattern-debut-04::before {
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+}

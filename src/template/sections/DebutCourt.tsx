@@ -13,7 +13,7 @@ export function DebutCourtSection({ data }: { data: NamedGroupsData }) {
   return (
     <section
       id="debut_court"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative overflow-x-clip"
+      className="template-section section-surface-alabaster bg-pattern-debut-04 relative overflow-x-clip"
     >
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>

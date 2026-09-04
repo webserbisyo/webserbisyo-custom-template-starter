@@ -4,7 +4,7 @@ import { Reveal } from "@/template/components/motion/Reveal";
 import { Shirt, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM ATTIRE & PALETTE GUIDE (CANVAS A: SATIN ALABASTER & ROSE TRELLIS)
+// DEBUT ROSE GLAM ATTIRE & PALETTE GUIDE (CANVAS A: SATIN ALABASTER & 4-PATTERN BLOOM CADENCE)
 
 export function AttireSection({ data }: { data: AttireData }) {
   const palette = templateConfig.palette || [];
@@ -12,7 +12,7 @@ export function AttireSection({ data }: { data: AttireData }) {
   return (
     <section
       id="attire_motif"
-      className="template-section section-surface-alabaster pattern-rose-trellis pattern-subtle relative overflow-x-clip"
+      className="template-section section-surface-alabaster bg-pattern-debut-02 relative overflow-x-clip"
     >
       <div className="template-container-narrow">
         <Reveal direction="up" distance={16}>

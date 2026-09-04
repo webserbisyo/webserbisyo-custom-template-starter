@@ -23,7 +23,7 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
   return (
     <section
       id="guestbook"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative overflow-x-clip"
+      className="template-section section-surface-alabaster bg-pattern-debut-04 relative overflow-x-clip"
     >
       <div className="template-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <Reveal direction="up" distance={16}>

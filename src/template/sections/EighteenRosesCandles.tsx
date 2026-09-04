@@ -30,7 +30,7 @@ export function EighteenRosesCandlesSection({ data }: { data: EighteenRosesCandl
   return (
     <section
       id="eighteen_roses_candles"
-      className="template-section section-surface-coral pattern-coral relative overflow-x-clip text-white"
+      className="template-section section-surface-coral bg-pattern-debut-01 relative overflow-x-clip text-white"
     >
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>

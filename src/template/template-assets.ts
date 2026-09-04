@@ -34,7 +34,12 @@ export const templateAssets: TemplateAssets = {
   decorations: {
     qrDemo: "/template-assets/decorations/qr-demo.svg",
   },
-  backgrounds: {},
+  backgrounds: {
+    pattern01: "/template-assets/backgrounds/pattern-01-rosebud.webp",
+    pattern02: "/template-assets/backgrounds/pattern-02-bloom.webp",
+    pattern03: "/template-assets/backgrounds/pattern-03-petals.webp",
+    pattern04: "/template-assets/backgrounds/pattern-04-rosette.webp",
+  },
   illustrations: {},
   icons: {},
 };

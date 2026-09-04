@@ -14,7 +14,7 @@ export function VenueSection({ data }: { data: VenueData }) {
   return (
     <section
       id="venue"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative overflow-x-clip"
+      className="template-section section-surface-alabaster bg-pattern-debut-04 relative overflow-x-clip"
     >
       <div className="template-container">
         <Reveal direction="up" distance={16}>

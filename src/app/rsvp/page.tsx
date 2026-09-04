@@ -17,7 +17,7 @@ export default async function RsvpPage({ searchParams }: RsvpPageProps) {
       <div className="min-h-screen flex flex-col bg-[var(--debut-bg-alabaster,#FAF5F5)] text-[var(--debut-text-noir,#26131C)] font-sans antialiased relative">
         <SparkleBokehEmitter />
         <Navbar data={result.data} />
-        <main className="flex-1 py-12 pt-24 relative z-10">
+        <main className="flex-1 py-12 pt-24 relative z-10 bg-pattern-debut-03">
           <RSVPSection
             data={result.data.rsvp}
             apiBaseUrl={result.env.apiBaseUrl}

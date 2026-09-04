@@ -15,7 +15,7 @@ export function TimelineSection({ data }: { data: TimelineData }) {
   return (
     <section
       id="timeline_program"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative overflow-x-clip"
+      className="template-section section-surface-alabaster bg-pattern-debut-02 relative overflow-x-clip"
     >
       <div className="template-container">
         <Reveal direction="up" distance={16}>

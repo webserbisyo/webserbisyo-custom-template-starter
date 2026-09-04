@@ -15,7 +15,7 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
   return (
     <section
       id="story_message"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative overflow-x-clip"
+      className="template-section section-surface-alabaster bg-pattern-debut-01 relative overflow-x-clip"
     >
       <div className="template-container-narrow">
         <Reveal direction="up" distance={16}>

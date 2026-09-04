@@ -17,7 +17,7 @@ export function ExtraInfoSection({ data }: { data: ExtraInfoData }) {
   return (
     <section
       id="extra_info"
-      className="template-section section-surface-coral pattern-coral text-white relative overflow-x-clip"
+      className="template-section section-surface-coral bg-pattern-debut-04 text-white relative overflow-x-clip"
     >
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>

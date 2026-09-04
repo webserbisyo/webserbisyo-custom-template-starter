@@ -38,7 +38,7 @@ export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionPr
   return (
     <section
       id="host_info"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle relative isolate overflow-hidden min-h-0 pt-10 pb-14 sm:pt-14 sm:pb-16 lg:pt-16 lg:pb-20 text-[var(--debut-text-noir,#26131C)]"
+      className="template-section section-surface-alabaster bg-pattern-debut-01 relative isolate overflow-hidden min-h-0 pt-10 pb-14 sm:pt-14 sm:pb-16 lg:pt-16 lg:pb-20 text-[var(--debut-text-noir,#26131C)]"
     >
       <div className="template-container relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center lg:items-start">

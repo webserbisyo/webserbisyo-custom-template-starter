@@ -32,7 +32,7 @@ export function MusicSection({ data }: { data: MusicData }) {
   return (
     <section
       id="music_effects"
-      className="template-section section-surface-alabaster pattern-stardust-dot pattern-subtle template-section-compact text-center relative overflow-x-clip"
+      className="template-section section-surface-alabaster bg-pattern-debut-03 template-section-compact text-center relative overflow-x-clip"
     >
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
