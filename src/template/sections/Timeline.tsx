@@ -1,15 +1,57 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import type { TimelineData } from "@/platform/event-template-data";
 import { formatEventTime } from "@/template/utils/event-formatting";
 import { StaggerList } from "@/template/components/motion/StaggerList";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Clock, Sparkles } from "lucide-react";
-
 import { TimelineRoseNode } from "@/template/components/decorations/TimelineRoseNode";
-
-// PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM TIMELINE (CANVAS A: SATIN ALABASTER & ILLUMINATED MILESTONE RAIL)
+import { cn } from "@/template/components/ui/cn";
 
 export function TimelineSection({ data }: { data: TimelineData }) {
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const itemElementsRef = useRef<Map<string, HTMLElement>>(new Map());
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries.filter((entry) => entry.isIntersecting);
+        if (visibleEntries.length > 0) {
+          const viewportMid = window.innerHeight / 2;
+          visibleEntries.sort((a, b) => {
+            const aDist = Math.abs(
+              a.boundingClientRect.top + a.boundingClientRect.height / 2 - viewportMid
+            );
+            const bDist = Math.abs(
+              b.boundingClientRect.top + b.boundingClientRect.height / 2 - viewportMid
+            );
+            return aDist - bDist;
+          });
+
+          const focalId = visibleEntries[0].target.getAttribute("data-milestone-id");
+          if (focalId) {
+            setActiveId(focalId);
+          }
+        }
+      },
+      {
+        rootMargin: "-25% 0px -35% 0px",
+        threshold: [0.1, 0.4, 0.7],
+      }
+    );
+
+    itemElementsRef.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [data.items]);
+
   if (!data.items || data.items.length === 0) return null;
 
   return (
@@ -35,37 +77,58 @@ export function TimelineSection({ data }: { data: TimelineData }) {
           </div>
         </Reveal>
 
-        {/* Illuminated Continuous Rose Gold Rail */}
-        <div className="relative max-w-2xl mx-auto pl-6 sm:pl-8 border-l-2 border-[var(--debut-rose-gold-border,#E8C4C8)] font-sans">
-          <StaggerList staggerDelay={0.08} className="space-y-4 sm:space-y-6">
-            {data.items.map((item, idx: number) => (
-              <div key={item.id || idx} className="relative group">
-                {/* Multi-Petal Blooming Rose Milestone Node */}
-                <TimelineRoseNode />
+        {/* Illuminated Continuous Rose Gold Rail with Anti-Clipping Mobile Indent */}
+        <div className="relative max-w-2xl mx-auto ml-4 sm:ml-auto sm:mx-auto pl-8 sm:pl-10 border-l-2 border-[var(--debut-rose-gold-border,#E8C4C8)] font-sans">
+          <StaggerList className="space-y-4 sm:space-y-6" staggerDelay={0.08}>
+            {data.items.map((item, idx: number) => {
+              const itemId = item.id || `milestone-${idx}`;
+              const isActive = activeId === itemId;
 
-                <div className="debut-glass-card relative overflow-visible bg-[var(--debut-surface-alabaster,#ffffff)] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-card hover:border-[var(--debut-bg-coral)]/60 transition-colors">
-                  <div className="relative z-10">
-                    <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[var(--debut-rose-gold-subtle)]">
-                      <h3 className="font-serif font-bold text-lg sm:text-xl text-[var(--debut-text-noir,#26131C)]">
-                        {item.title}
-                      </h3>
-                      {item.time && (
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] text-[var(--debut-text-noir,#26131C)] font-cinzel text-xs font-bold uppercase tracking-wider border border-[var(--debut-rose-gold-subtle)]">
-                          <Clock className="w-3.5 h-3.5 text-[var(--debut-bg-coral,#E65C4F)]" />
-                          <span>{formatEventTime(item.time)}</span>
-                        </div>
+              return (
+                <div
+                  key={itemId}
+                  data-milestone-id={itemId}
+                  ref={(el) => {
+                    if (el) itemElementsRef.current.set(itemId, el);
+                    else itemElementsRef.current.delete(itemId);
+                  }}
+                  className="relative group"
+                >
+                  {/* Multi-Petal Blooming Rose Milestone Node */}
+                  <TimelineRoseNode isActive={isActive} />
+
+                  {/* Synchronized Radiant Dual-Tone Event Card */}
+                  <div
+                    className={cn(
+                      "debut-glass-card relative overflow-visible bg-[var(--debut-surface-alabaster,#ffffff)] p-5 sm:p-6 rounded-2xl sm:rounded-3xl border transition-all duration-500 ease-out",
+                      isActive
+                        ? "border-[var(--debut-bg-coral,#E65C4F)] shadow-[0_10px_30px_-5px_rgba(230,92,79,0.22),0_0_0_1.5px_rgba(212,175,55,0.45)]"
+                        : "border-[var(--debut-rose-gold-border,#E8C4C8)]/80 shadow-card group-hover:border-[var(--debut-bg-coral,#E65C4F)] group-hover:shadow-[0_10px_30px_-5px_rgba(230,92,79,0.22),0_0_0_1.5px_rgba(212,175,55,0.45)]"
+                    )}
+                  >
+                    <div className="relative z-10">
+                      <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[var(--debut-rose-gold-subtle)]">
+                        <h3 className="font-serif font-bold text-lg sm:text-xl text-[var(--debut-text-noir,#26131C)]">
+                          {item.title}
+                        </h3>
+                        {item.time && (
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] text-[var(--debut-text-noir,#26131C)] font-cinzel text-xs font-bold uppercase tracking-wider border border-[var(--debut-rose-gold-subtle)]">
+                            <Clock className="w-3.5 h-3.5 text-[var(--debut-bg-coral,#E65C4F)]" />
+                            <span>{formatEventTime(item.time)}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {item.description && (
+                        <p className="text-sm sm:text-base text-[var(--debut-text-noir,#26131C)] leading-relaxed font-sans">
+                          {item.description}
+                        </p>
                       )}
                     </div>
-
-                    {item.description && (
-                      <p className="text-sm sm:text-base text-[var(--debut-text-noir,#26131C)] leading-relaxed font-sans">
-                        {item.description}
-                      </p>
-                    )}
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </StaggerList>
         </div>
       </div>
