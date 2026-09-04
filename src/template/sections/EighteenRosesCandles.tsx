@@ -35,8 +35,8 @@ export function EighteenRosesCandlesSection({ data }: { data: EighteenRosesCandl
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-white font-cinzel font-bold tracking-[0.25em] drop-shadow-sm inline-flex items-center gap-1.5 text-xs sm:text-sm uppercase">
-              <Sparkles className="w-3.5 h-3.5 text-[#F9F1DC]" />
+            <span className="text-role-subheading text-white drop-shadow-sm inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
               <span>THE 18 TRADITIONS // 10</span>
             </span>
             <h2 className="text-role-heading-major text-white tracking-tight">

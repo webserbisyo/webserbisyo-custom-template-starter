@@ -48,9 +48,9 @@ export const DEMO_DEBUT_DATA: EventTemplateData = {
 
   ceremony: {
     eventLabel: "Debut Program",
-    eventDate: "December 14, 2026",
-    eventTime: "6:00 PM",
-    endTime: "11:00 PM",
+    eventDate: "2026-12-14",
+    eventTime: "18:00",
+    endTime: "23:00",
     rsvpDeadline: "November 14, 2026",
     scheduleNote: "Please arrive at least 30 minutes before the program begins.",
   },

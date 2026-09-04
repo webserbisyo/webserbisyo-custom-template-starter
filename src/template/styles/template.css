@@ -118,6 +118,25 @@
   color: var(--debut-text-on-coral-muted);
 }
 
+.section-surface-coral .text-role-subheading,
+.section-surface-coral .text-role-metadata,
+.section-surface-coral .text-role-monogram,
+.section-surface-coral .text-role-badge,
+.section-surface-primary .text-role-subheading,
+.section-surface-primary .text-role-metadata,
+.section-surface-primary .text-role-monogram,
+.section-surface-primary .text-role-badge {
+  color: var(--debut-text-on-coral);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.section-surface-coral .text-role-subheading svg,
+.section-surface-coral .section-eyebrow-icon,
+.section-surface-primary .text-role-subheading svg,
+.section-surface-primary .section-eyebrow-icon {
+  color: var(--debut-champagne-soft);
+}
+
 /* 3. Dark Anchor Canvas: Velvet Noir Surface (Footer Colophon & Modals) */
 .section-surface-noir,
 .section-surface-forest,
@@ -146,6 +165,22 @@
 .section-surface-dark p.intro,
 .section-surface-forest p.intro {
   color: var(--debut-text-on-noir-muted);
+}
+
+.section-surface-noir .text-role-subheading,
+.section-surface-noir .text-role-metadata,
+.section-surface-noir .text-role-monogram,
+.section-surface-noir .text-role-badge,
+.section-surface-dark .text-role-subheading,
+.section-surface-dark .text-role-metadata {
+  color: var(--debut-champagne-soft);
+}
+
+.section-surface-noir .text-role-subheading svg,
+.section-surface-noir .section-eyebrow-icon,
+.section-surface-dark .text-role-subheading svg,
+.section-surface-dark .section-eyebrow-icon {
+  color: var(--debut-champagne-gold);
 }
 
 /* ==========================================================================

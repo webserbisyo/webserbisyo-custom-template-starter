@@ -153,6 +153,12 @@ body {
   color: var(--debut-rose-gold, #b76e79);
 }
 
+.text-role-subheading svg,
+.text-role-metadata svg {
+  color: var(--debut-champagne-gold, #d4af37);
+  flex-shrink: 0;
+}
+
 /* 11. Small Metadata & Captions */
 .text-role-caption {
   font-family: var(--font-family-body);
