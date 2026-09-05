@@ -12,6 +12,7 @@ export type HostIdentity = {
   monogram: string;
   compactMonogram: string;
   displayName: string;
+  initials?: string[];
 };
 
 /** @deprecated Use HostIdentity — kept for backward compatibility. */
@@ -173,6 +174,10 @@ export function deriveHostIdentity(
     monogram: monogram || "S",
     compactMonogram: compactMonogram || "S",
     displayName: defaultDisplay,
+    initials:
+      groomInitial && brideInitial
+        ? [groomInitial, brideInitial]
+        : [groomInitial || monogram || "S"],
   };
 }
 
