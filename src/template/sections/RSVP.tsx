@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { RsvpData } from "@/platform/event-template-data";
 import { formatRsvpDeadline } from "@/template/utils/event-formatting";
+import { getSingleHostFirstName } from "@/template/utils/host-identity";
+import { submitRsvp, type PublicRsvpPayload } from "@/platform/submit-rsvp";
 import { Reveal } from "@/template/components/motion/Reveal";
 import {
   Heart,
@@ -13,6 +15,8 @@ import {
   Users,
   MessageSquare,
   Sparkles,
+  Phone,
+  Utensils,
 } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
@@ -22,6 +26,7 @@ export type RSVPSectionProps = {
   data: RsvpData;
   eventSlug?: string;
   deadlineLabel?: string | null;
+  debutantName?: string;
   apiBaseUrl?: string;
   accessToken?: string | null;
   isDemoMode?: boolean;
@@ -31,21 +36,44 @@ export function RSVPSection({
   data,
   eventSlug,
   deadlineLabel,
+  debutantName,
   apiBaseUrl,
   accessToken,
   isDemoMode,
 }: RSVPSectionProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [attending, setAttending] = useState<"yes" | "no" | null>("yes");
   const [guestsCount, setGuestsCount] = useState(1);
+  const [companions, setCompanions] = useState<Array<{ fullName: string; ageLabel: string }>>([]);
   const [dietaryRequirements, setDietaryRequirements] = useState("");
-  const [notes, setNotes] = useState("");
+  const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  const celebrantFirstName =
+    getSingleHostFirstName(debutantName) || debutantName || "the celebrant";
+
   const formattedDeadline = deadlineLabel ? formatRsvpDeadline(deadlineLabel) : null;
+
+  // Synchronize companion array length whenever guestsCount changes
+  useEffect(() => {
+    const needed = Math.max(0, guestsCount - 1);
+    setCompanions((prev) => {
+      if (prev.length === needed) return prev;
+      return Array.from({ length: needed }, (_, i) => prev[i] || { fullName: "", ageLabel: "" });
+    });
+  }, [guestsCount]);
+
+  const updateCompanion = (index: number, field: "fullName" | "ageLabel", val: string) => {
+    setCompanions((prev) => {
+      const copy = [...prev];
+      copy[index] = { ...copy[index], [field]: val };
+      return copy;
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,36 +82,39 @@ export function RSVPSection({
     setIsSubmitting(true);
     setErrorMsg(null);
 
-    const payload = {
-      eventSlug,
-      name: name.trim(),
+    const companionPayload =
+      attending === "yes" && guestsCount > 1
+        ? companions.slice(0, guestsCount - 1).map((c) => ({
+            fullName: c.fullName.trim() || undefined,
+            ageLabel: c.ageLabel.trim() || undefined,
+          }))
+        : undefined;
+
+    const payload: PublicRsvpPayload = {
+      guestName: name.trim(),
+      attendanceStatus: attending === "yes" ? "attending" : "not_attending",
       email: email.trim() || undefined,
-      attending: attending === "yes",
-      guestsCount: attending === "yes" ? guestsCount : 0,
-      dietaryRequirements: dietaryRequirements.trim() || undefined,
-      notes: notes.trim() || undefined,
+      phone: phone.trim() || undefined,
+      companionCount: attending === "yes" ? Math.max(0, guestsCount - 1) : 0,
+      companions: companionPayload && companionPayload.length > 0 ? companionPayload : undefined,
+      dietaryNotes: dietaryRequirements.trim() || undefined,
+      message: message.trim() || undefined,
     };
 
-    if (isDemoMode || !apiBaseUrl) {
-      setTimeout(() => {
-        setIsSuccess(true);
-        setIsSubmitting(false);
-      }, 600);
-      return;
-    }
-
     try {
-      const res = await fetch(`${apiBaseUrl}/rsvp`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
-        },
-        body: JSON.stringify(payload),
+      const result = await submitRsvp({
+        eventSlug: eventSlug || "event",
+        payload,
+        apiBaseUrl,
+        accessToken,
+        isDemoMode,
       });
 
-      if (!res.ok) throw new Error("Failed to submit RSVP.");
-      setIsSuccess(true);
+      if (result.error) {
+        setErrorMsg(result.error.message || "Failed to submit RSVP response. Please try again.");
+      } else {
+        setIsSuccess(true);
+      }
     } catch {
       setErrorMsg("Failed to submit RSVP response. Please try again.");
     } finally {
@@ -142,7 +173,11 @@ export function RSVPSection({
                     setIsSuccess(false);
                     setName("");
                     setEmail("");
-                    setNotes("");
+                    setPhone("");
+                    setDietaryRequirements("");
+                    setMessage("");
+                    setGuestsCount(1);
+                    setCompanions([]);
                   }}
                   className="mt-4 text-xs font-cinzel font-bold uppercase tracking-wider text-[var(--debut-rose-gold,#B76E79)] hover:underline cursor-pointer"
                 >
@@ -183,7 +218,7 @@ export function RSVPSection({
                   </div>
                 </div>
 
-                {/* Name */}
+                {/* Full Name */}
                 <div className="space-y-1.5">
                   <label className="block text-xs font-cinzel font-bold uppercase tracking-wider text-[var(--debut-text-noir,#26131C)]">
                     Your Full Name *
@@ -201,7 +236,7 @@ export function RSVPSection({
                   </div>
                 </div>
 
-                {/* Email */}
+                {/* Email Address */}
                 {data.emailEnabled && (
                   <div className="space-y-1.5">
                     <label className="block text-xs font-cinzel font-bold uppercase tracking-wider text-[var(--debut-text-noir,#26131C)]">
@@ -217,6 +252,26 @@ export function RSVPSection({
                         className="w-full h-11 pl-10 pr-3.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] text-base placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring"
                       />
                       <Mail className="w-4 h-4 text-[var(--debut-text-muted,#704D5B)] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    </div>
+                  </div>
+                )}
+
+                {/* Phone Number */}
+                {data.phoneEnabled && (
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-cinzel font-bold uppercase tracking-wider text-[var(--debut-text-noir,#26131C)]">
+                      Phone Number {data.phoneRequired ? "*" : ""}
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="tel"
+                        required={data.phoneRequired}
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="+63 912 345 6789"
+                        className="w-full h-11 pl-10 pr-3.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] text-base placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring"
+                      />
+                      <Phone className="w-4 h-4 text-[var(--debut-text-muted,#704D5B)] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                     </div>
                   </div>
                 )}
@@ -247,18 +302,118 @@ export function RSVPSection({
                   </div>
                 )}
 
-                {/* Notes */}
-                {data.messageToHostEnabled && (
+                {/* Companion Details Loop */}
+                {attending === "yes" &&
+                  data.plusOneEnabled &&
+                  guestsCount > 1 &&
+                  (data.companionNameEnabled || data.companionAgeEnabled) && (
+                    <div className="space-y-4 pt-1">
+                      <div className="flex items-center gap-2 text-xs font-cinzel font-bold uppercase tracking-wider text-[var(--debut-rose-gold,#B76E79)]">
+                        <Users className="w-3.5 h-3.5" />
+                        <span>Companion Information</span>
+                      </div>
+                      <div className="space-y-3">
+                        {Array.from({ length: guestsCount - 1 }).map((_, idx) => {
+                          const companion = companions[idx] || { fullName: "", ageLabel: "" };
+                          return (
+                            <div
+                              key={idx}
+                              className="p-3.5 sm:p-4 rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/80 border border-[var(--debut-rose-gold-subtle)] space-y-3"
+                            >
+                              <div className="flex items-center justify-between text-xs font-cinzel font-bold text-[var(--debut-text-noir,#26131C)]">
+                                <span>Guest 0{idx + 2} Details</span>
+                                <span className="text-[var(--debut-rose-gold,#B76E79)]">
+                                  Companion {idx + 1}
+                                </span>
+                              </div>
+                              <div
+                                className={`grid gap-3 ${
+                                  data.companionNameEnabled && data.companionAgeEnabled
+                                    ? "grid-cols-1 sm:grid-cols-3"
+                                    : "grid-cols-1"
+                                }`}
+                              >
+                                {data.companionNameEnabled && (
+                                  <div
+                                    className={
+                                      data.companionAgeEnabled
+                                        ? "sm:col-span-2 space-y-1"
+                                        : "space-y-1"
+                                    }
+                                  >
+                                    <label className="block text-[11px] font-cinzel font-semibold uppercase tracking-wider text-[var(--debut-text-muted,#704D5B)]">
+                                      Companion Name
+                                    </label>
+                                    <div className="relative">
+                                      <input
+                                        type="text"
+                                        value={companion.fullName}
+                                        onChange={(e) =>
+                                          updateCompanion(idx, "fullName", e.target.value)
+                                        }
+                                        placeholder="Full name"
+                                        className="w-full h-10 pl-9 pr-3 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] text-sm placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring"
+                                      />
+                                      <User className="w-3.5 h-3.5 text-[var(--debut-text-muted,#704D5B)] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                                    </div>
+                                  </div>
+                                )}
+
+                                {data.companionAgeEnabled && (
+                                  <div className="space-y-1">
+                                    <label className="block text-[11px] font-cinzel font-semibold uppercase tracking-wider text-[var(--debut-text-muted,#704D5B)]">
+                                      Age / Category
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value={companion.ageLabel}
+                                      onChange={(e) =>
+                                        updateCompanion(idx, "ageLabel", e.target.value)
+                                      }
+                                      placeholder="e.g. Adult / 18"
+                                      className="w-full h-10 px-3 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] text-sm placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring"
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                {/* Dietary Restrictions */}
+                {data.foodAllergiesEnabled && (
                   <div className="space-y-1.5">
                     <label className="block text-xs font-cinzel font-bold uppercase tracking-wider text-[var(--debut-text-noir,#26131C)]">
-                      Dietary Requirements / Note for Sophia
+                      Dietary Restrictions &amp; Food Allergies
                     </label>
                     <div className="relative">
                       <textarea
                         rows={2}
-                        value={notes}
-                        onChange={(e) => setNotes(e.target.value)}
-                        placeholder="Vegetarian, allergies, or special cotillion message..."
+                        value={dietaryRequirements}
+                        onChange={(e) => setDietaryRequirements(e.target.value)}
+                        placeholder="Vegetarian, peanut allergy, gluten sensitivity, etc."
+                        className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] text-base placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring resize-none"
+                      />
+                      <Utensils className="w-4 h-4 text-[var(--debut-text-muted,#704D5B)] absolute left-3.5 top-3.5 pointer-events-none" />
+                    </div>
+                  </div>
+                )}
+
+                {/* Message to Celebrant */}
+                {data.messageToHostEnabled && (
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-cinzel font-bold uppercase tracking-wider text-[var(--debut-text-noir,#26131C)]">
+                      Message or Blessing for {celebrantFirstName}
+                    </label>
+                    <div className="relative">
+                      <textarea
+                        rows={2}
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder={`Note or blessing for ${celebrantFirstName}...`}
                         className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] text-base placeholder:text-[var(--debut-text-muted,#704D5B)]/60 focus:border-[var(--debut-bg-coral,#E65C4F)] focus:outline-hidden template-focus-ring resize-none"
                       />
                       <MessageSquare className="w-4 h-4 text-[var(--debut-text-muted,#704D5B)] absolute left-3.5 top-3.5 pointer-events-none" />

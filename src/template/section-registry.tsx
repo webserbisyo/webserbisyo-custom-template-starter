@@ -63,6 +63,11 @@ export const templateSectionRegistry: Record<
       data={data.rsvp}
       eventSlug={data.eventSlug}
       deadlineLabel={data.rsvpDeadlineLabel || data.ceremony?.rsvpDeadline}
+      debutantName={
+        data.couple?.kind === "debut"
+          ? data.couple.debutantName || data.couple.displayAs
+          : data.coupleDisplayName
+      }
       apiBaseUrl={apiBaseUrl}
       accessToken={accessToken}
       isDemoMode={isDemoMode}
