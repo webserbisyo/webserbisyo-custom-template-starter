@@ -2,6 +2,8 @@
 // Redesign freely, but derive initials/names from EventTemplateData.
 // Never hardcode client initials.
 
+import type { HostInfoData } from "@/platform/event-template-data";
+
 export type HostIdentity = {
   groomName: string;
   brideName: string;
@@ -87,12 +89,39 @@ export function getOrdinalSuffix(num?: string | number | null): string {
 }
 
 export function deriveHostIdentity(
-  groomName?: string,
+  hostInfoOrGroom?: HostInfoData | Record<string, unknown> | object | string | null,
   brideName?: string,
   coupleDisplayName?: string
 ): HostIdentity {
-  const groom = (groomName || "").trim();
-  const bride = (brideName || "").trim();
+  let groom = "";
+  let bride = "";
+  let explicitDisplay = "";
+
+  if (hostInfoOrGroom && typeof hostInfoOrGroom === "object") {
+    const info = hostInfoOrGroom as Record<string, unknown>;
+    if (info.kind === "debut") {
+      groom = String(info.debutantName || info.displayAs || "");
+      explicitDisplay = String(info.debutantName || info.displayAs || "");
+    } else if (info.kind === "birthday") {
+      groom = String(info.celebrantName || info.displayAs || "");
+      explicitDisplay = String(info.celebrantName || info.displayAs || "");
+    } else if (info.kind === "baptism") {
+      groom = String(info.childName || info.displayAs || "");
+      explicitDisplay = String(info.childName || info.displayAs || "");
+    } else if (info.kind === "wedding") {
+      groom = String(info.groomName || "");
+      bride = String(info.brideName || "");
+      explicitDisplay = String(info.displayAs || "");
+    } else {
+      groom = String(info.groomName || info.debutantName || info.celebrantName || "");
+      bride = String(info.brideName || "");
+      explicitDisplay = String(info.displayName || info.displayAs || info.coupleDisplayName || "");
+    }
+  } else {
+    groom = (hostInfoOrGroom || "").trim();
+    bride = (brideName || "").trim();
+    explicitDisplay = coupleDisplayName?.trim() || "";
+  }
 
   // If brideName is numeric (e.g. "10" for 10th birthday) or matches groomName, treat as single host
   const isBrideNumeric = /^\d+$/.test(bride);
@@ -113,8 +142,8 @@ export function deriveHostIdentity(
   } else if (brideInitial) {
     monogram = brideInitial;
     compactMonogram = brideInitial;
-  } else if (coupleDisplayName && coupleDisplayName.trim().length > 0) {
-    const cleanDisplay = coupleDisplayName.trim();
+  } else if (explicitDisplay && explicitDisplay.trim().length > 0) {
+    const cleanDisplay = explicitDisplay.trim();
     // Check for explicit couple delimiters: &, and, +, /
     const segments = cleanDisplay.split(/\s+(?:&|and|\+|\/)\s+/i);
     if (segments.length === 2) {
@@ -133,7 +162,7 @@ export function deriveHostIdentity(
   }
 
   const defaultDisplay =
-    coupleDisplayName?.trim() ||
+    explicitDisplay?.trim() ||
     (!isSingleHost && groom && bride ? `${groom} & ${bride}` : groom || bride || "The Celebrant");
 
   return {
