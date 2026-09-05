@@ -514,15 +514,42 @@ export function normalizeEventData(
   const giftContent = getSectionContent("gift_details");
   const rawOptions = arrayOfRecords(giftContent.options);
   const giftOptions: GiftOption[] = rawOptions.slice(0, 2).map((opt, idx) => {
-    const rawImage = record(opt.image);
-    const imageUrl = stringValue(rawImage.url);
-    const imagePath = stringValue(rawImage.path) || "";
+    let imageUrl: string | undefined;
+    let imagePath = "";
+    let imageAlt: string | undefined;
+
+    if (typeof opt.image === "string") {
+      imageUrl = stringValue(opt.image);
+    } else if (opt.image && typeof opt.image === "object") {
+      const rawImage = record(opt.image);
+      imageUrl = stringValue(rawImage.url ?? rawImage.src);
+      imagePath = stringValue(rawImage.path) || "";
+      imageAlt = stringValue(rawImage.alt);
+    }
+
+    if (!imageUrl) {
+      imageUrl = stringValue(
+        opt.imageUrl ?? opt.qrCodeUrl ?? (opt as Record<string, unknown>).qr_code_url
+      );
+    }
+    if (!imagePath) {
+      imagePath = stringValue(opt.imagePath ?? opt.path) || "";
+    }
+
+    const isValidUrl = imageUrl
+      ? /^https?:\/\/.+/i.test(imageUrl) || imageUrl.startsWith("/") || imageUrl.startsWith("data:")
+      : false;
+
     return {
       id: stringValue(opt.id) || `opt-${idx + 1}`,
       title: stringValue(opt.title) || "Gift Option",
       image:
-        imageUrl || imagePath
-          ? { path: imagePath, url: imageUrl, alt: stringValue(rawImage.alt) }
+        isValidUrl || imagePath
+          ? {
+              path: imagePath,
+              url: isValidUrl ? imageUrl : undefined,
+              alt: imageAlt,
+            }
           : null,
     };
   });

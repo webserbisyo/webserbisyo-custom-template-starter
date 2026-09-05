@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import type { GiftsData, GiftOption } from "@/platform/event-template-data";
 import { LedgerPanel } from "@/template/components/containers/LedgerPanel";
@@ -13,6 +13,11 @@ import { Gift, QrCode, Sparkles } from "lucide-react";
 
 export function GiftsSection({ data }: { data: GiftsData }) {
   const [selectedOption, setSelectedOption] = useState<GiftOption | null>(null);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [selectedOption]);
 
   const options = data.options || [];
 
@@ -145,13 +150,15 @@ export function GiftsSection({ data }: { data: GiftsData }) {
                 </DialogTitle>
               </DialogHeader>
 
-              {selectedOption.image?.url ? (
+              {selectedOption.image?.url && !imageError ? (
                 <>
                   <div className="my-4 relative w-64 h-64 mx-auto p-3 rounded-2xl bg-white border border-[var(--debut-rose-gold-border)] shadow-md flex items-center justify-center">
                     <Image
                       src={selectedOption.image.url}
                       alt={selectedOption.image.alt || selectedOption.title}
                       fill
+                      unoptimized={true}
+                      onError={() => setImageError(true)}
                       className="object-contain p-2"
                     />
                   </div>
