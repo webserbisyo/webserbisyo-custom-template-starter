@@ -73,10 +73,10 @@ export function GiftsSection({ data }: { data: GiftsData }) {
                       return (
                         <div
                           key={option.id || idx}
-                          className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/70 border border-[var(--debut-rose-gold-border,#E8C4C8)]/80 hover:border-[var(--debut-rose-gold,#B76E79)] flex flex-col justify-between min-h-[190px] shadow-xs transition-all"
+                          className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/70 border border-[var(--debut-rose-gold-border,#E8C4C8)]/80 hover:border-[var(--debut-rose-gold,#B76E79)] flex flex-col justify-between shadow-xs transition-all"
                         >
-                          {/* Card Header & Method Title */}
-                          <div className="space-y-2">
+                          {/* 1. Header & Title Compartment */}
+                          <div className="space-y-1">
                             <div className="flex items-center justify-between gap-2">
                               <span className="text-[11px] font-cinzel font-bold text-[var(--debut-rose-gold,#B76E79)] uppercase tracking-wider">
                                 Option 0{idx + 1}
@@ -89,22 +89,47 @@ export function GiftsSection({ data }: { data: GiftsData }) {
                             </p>
                           </div>
 
-                          {/* Action Shelf: Symmetrical Active Trigger Buttons */}
-                          <div className="pt-4 mt-3 border-t border-[var(--debut-rose-gold-subtle)]">
+                          {/* 2. Inline QR Preview Stage (Displayed on top of button) */}
+                          <div className="my-3 flex items-center justify-center">
+                            {option.image?.url ? (
+                              <div className="relative w-32 h-32 p-2 rounded-xl bg-white border border-[var(--debut-rose-gold-border,#E8C4C8)] shadow-xs flex items-center justify-center overflow-hidden">
+                                <Image
+                                  src={option.image.url}
+                                  alt={option.image.alt || option.title}
+                                  fill
+                                  unoptimized={true}
+                                  className="object-contain p-1.5"
+                                />
+                              </div>
+                            ) : (
+                              <div className="w-32 h-32 p-3 rounded-xl bg-[#FAF5F5] border-2 border-dashed border-[#E8C4C8] flex flex-col items-center justify-center text-center select-none">
+                                <QrCode className="w-7 h-7 text-[var(--debut-rose-gold,#B76E79)] opacity-60 mb-1" />
+                                <span className="font-cinzel text-[10px] font-bold tracking-wider text-[var(--debut-text-noir,#26131C)] uppercase">
+                                  QR Preview
+                                </span>
+                                <span className="text-[9px] text-[var(--debut-text-muted,#704D5B)] leading-tight">
+                                  Available soon
+                                </span>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* 3. Action Shelf: Preserves the existing modal trigger button */}
+                          <div className="pt-3 border-t border-[var(--debut-rose-gold-subtle)]">
                             <button
                               type="button"
                               onClick={() => setSelectedOption(option)}
-                              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] text-[var(--debut-text-noir,#26131C)] border border-[var(--debut-rose-gold-border,#E8C4C8)] text-xs font-bold uppercase tracking-wider font-cinzel shadow-xs transition-all active:scale-95 cursor-pointer btn-press-physics"
+                              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] text-[var(--debut-text-noir,#26131C)] border border-[var(--debut-rose-gold-border,#E8C4C8)] text-xs font-bold uppercase tracking-wider font-cinzel shadow-xs transition-all active:scale-95 cursor-pointer"
                             >
                               {hasQr ? (
                                 <>
                                   <QrCode className="w-4 h-4 text-[var(--debut-bg-coral,#E65C4F)]" />
-                                  <span>View QR Code</span>
+                                  <span>View Full QR</span>
                                 </>
                               ) : (
                                 <>
                                   <QrCode className="w-4 h-4 text-[var(--debut-rose-gold,#B76E79)] opacity-70" />
-                                  <span>View QR Placeholder</span>
+                                  <span>View Details</span>
                                 </>
                               )}
                             </button>
