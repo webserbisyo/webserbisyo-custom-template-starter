@@ -10,6 +10,8 @@ export type HostIdentity = {
   monogram: string;
   compactMonogram: string;
   displayName: string;
+  initials?: string[];
+  milestoneText?: string;
 };
 
 export type CoupleIdentity = HostIdentity;
@@ -73,12 +75,34 @@ export function getOrdinalSuffix(num?: string | number | null): string {
 }
 
 export function deriveHostIdentity(
-  groomName?: string,
+  hostInfoOrGroom?: Record<string, unknown> | object | string | null,
   brideName?: string,
   coupleDisplayName?: string
 ): HostIdentity {
-  const groom = (groomName || "").trim();
-  const bride = (brideName || "").trim();
+  let groom = "";
+  let bride = "";
+  let explicitDisplay = "";
+  let milestone = "";
+
+  if (hostInfoOrGroom && typeof hostInfoOrGroom === "object") {
+    const raw = hostInfoOrGroom as Record<string, unknown>;
+    const info = (raw.data as Record<string, unknown> | undefined)?.couple
+      ? ((raw.data as Record<string, unknown>).couple as Record<string, unknown>)
+      : raw.couple
+        ? (raw.couple as Record<string, unknown>)
+        : raw;
+
+    groom = String(info.celebrantName || info.groomName || info.debutantName || "");
+    bride = String(info.brideName || "");
+    explicitDisplay = String(
+      info.celebrantName || info.displayName || info.displayAs || info.coupleDisplayName || ""
+    );
+    milestone = String(info.milestoneAge || info.milestone || "");
+  } else {
+    groom = (hostInfoOrGroom || "").trim();
+    bride = (brideName || "").trim();
+    explicitDisplay = coupleDisplayName?.trim() || "";
+  }
 
   // If brideName is numeric (e.g. "10" for 10th birthday) or matches groomName, treat as single host
   const isBrideNumeric = /^\d+$/.test(bride);
@@ -99,8 +123,8 @@ export function deriveHostIdentity(
   } else if (brideInitial) {
     monogram = brideInitial;
     compactMonogram = brideInitial;
-  } else if (coupleDisplayName && coupleDisplayName.trim().length > 0) {
-    const cleanDisplay = coupleDisplayName.trim();
+  } else if (explicitDisplay && explicitDisplay.trim().length > 0) {
+    const cleanDisplay = explicitDisplay.trim();
     // Check for couple delimiters: &, and, +, /
     const segments = cleanDisplay.split(/\s+(?:&|and|\+|\/)\s+/i);
     if (segments.length === 2) {
@@ -126,17 +150,22 @@ export function deriveHostIdentity(
   }
 
   const defaultDisplay =
-    coupleDisplayName?.trim() ||
-    (!isSingleHost && groom && bride ? `${groom} & ${bride}` : groom || bride || "The Celebrant");
+    explicitDisplay?.trim() ||
+    (!isSingleHost && groom && bride ? `${groom} & ${bride}` : groom || bride || "Michael");
 
   return {
     groomName: groom,
     brideName: isSingleHost ? "" : bride,
-    groomInitial,
+    groomInitial: groomInitial || monogram || "M",
     brideInitial,
     monogram: monogram || "M",
     compactMonogram: compactMonogram || "M",
     displayName: defaultDisplay,
+    initials:
+      groomInitial && brideInitial
+        ? [groomInitial, brideInitial]
+        : [groomInitial || monogram || "M"],
+    milestoneText: milestone || "10th Birthday Special Edition",
   };
 }
 
