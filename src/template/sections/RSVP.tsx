@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { RsvpData } from "@/platform/event-template-data";
 import { submitRsvp, type PublicRsvpPayload } from "@/platform/submit-rsvp";
 import { formatRsvpDeadline } from "@/template/utils/event-formatting";
+import { getSingleHostFirstName } from "@/template/utils/host-identity";
 import { CorrespondenceSheet } from "@/template/components/containers/CorrespondenceSheet";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Magnetic } from "@/template/components/motion/Magnetic";
@@ -12,12 +13,12 @@ import { CheckCircle2, AlertCircle, Loader2, Zap, Send, User, UserPlus } from "l
 // PLATFORM ACTION — DO NOT REIMPLEMENT.
 // Keep submission through the shared platform adapter.
 // PLATFORM VISIBILITY: Respect dashboard state.
-// SAGE ESTATE FORMAL RESPONSE CARD (THE GLASSHOUSE LEDGER)
 
 export type RsvpProps = {
   data: RsvpData;
   eventSlug: string;
   deadlineLabel?: string | null;
+  celebrantName?: string | null;
   apiBaseUrl?: string;
   accessToken?: string | null;
   isDemoMode?: boolean;
@@ -30,10 +31,13 @@ export function RSVPForm({
   data,
   eventSlug,
   deadlineLabel,
+  celebrantName,
   apiBaseUrl,
   accessToken,
   isDemoMode,
 }: RsvpProps) {
+  const celebrantFirstName =
+    getSingleHostFirstName(celebrantName || "") || celebrantName || "the celebrant";
   const [guestName, setGuestName] = useState("");
   const [attendanceStatus, setAttendanceStatus] = useState<"attending" | "not_attending">(
     "attending"
@@ -138,8 +142,8 @@ export function RSVPForm({
             Response Recorded
           </h3>
           <p className="text-base text-[var(--event-text)] max-w-md mx-auto leading-relaxed font-sans">
-            Your formal RSVP response has been registered in the estate ledger. We look forward to
-            celebrating together!
+            Your formal RSVP response has been registered with Avengers HQ! We look forward to
+            celebrating with you.
           </p>
         </div>
       ) : (
@@ -341,32 +345,32 @@ export function RSVPForm({
               >
                 Dietary Restrictions / Food Allergies
               </label>
-              <input
+              <textarea
                 id="dietaryNotes"
-                type="text"
+                rows={2}
                 value={dietaryNotes}
                 onChange={(e) => setDietaryNotes(e.target.value)}
-                placeholder="e.g. Vegetarian, Peanut allergy, Halal"
-                className="w-full px-4 py-3.5 border border-[var(--event-border)] rounded-xl text-base text-[var(--event-text)] focus:outline-none focus:ring-2 focus:ring-[var(--event-primary)] bg-[var(--event-surface)] min-h-[46px]"
+                placeholder="e.g. Vegetarian, Peanut allergy, Halal, Gluten sensitivity"
+                className="w-full px-4 py-3.5 border border-[var(--event-border)] rounded-xl text-base text-[var(--event-text)] focus:outline-none focus:ring-2 focus:ring-[var(--event-primary)] bg-[var(--event-surface)] resize-none min-h-[70px]"
               />
             </div>
           )}
 
-          {/* Message for Couple */}
+          {/* Birthday Wish or Message */}
           {data.messageToHostEnabled && (
             <div>
               <label
                 htmlFor="message"
                 className="block text-sm font-semibold text-[var(--event-text)] mb-2"
               >
-                Warm Wishes &amp; Note
+                Birthday Wish or Message for {celebrantFirstName}
               </label>
               <textarea
                 id="message"
                 rows={3}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Write your wishes or thoughts..."
+                placeholder={`Write a birthday wish or mission note for ${celebrantFirstName}...`}
                 className="w-full px-4 py-3.5 border border-[var(--event-border)] rounded-xl text-base text-[var(--event-text)] focus:outline-none focus:ring-2 focus:ring-[var(--event-primary)] bg-[var(--event-surface)] min-h-[80px]"
               />
             </div>

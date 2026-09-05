@@ -33,6 +33,20 @@ function extractInitial(name: string): string {
 }
 
 /**
+ * Extracts the single celebrant's first name from a full display name.
+ * Example: "Michael's 10th Birthday" -> "Michael", "Michael Johnson" -> "Michael"
+ */
+export function getSingleHostFirstName(displayName?: string): string {
+  if (!displayName) return "";
+  const cleaned = displayName
+    .replace(/^(the|a)\s+/i, "")
+    .replace(/['’]s\b.*/i, "")
+    .trim();
+  const parts = cleaned.split(/\s+/).filter(Boolean);
+  return parts[0] || cleaned;
+}
+
+/**
  * Extracts a milestone number from a milestone or age string.
  * Examples:
  * - "30th birthday" -> "30"

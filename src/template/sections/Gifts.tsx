@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import type { GiftsData } from "@/platform/event-template-data";
+import type { GiftsData, GiftOption } from "@/platform/event-template-data";
 import { LedgerPanel } from "@/template/components/containers/LedgerPanel";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/template/components/ui/Dialog";
@@ -13,7 +13,12 @@ import { QrCode, Gift } from "lucide-react";
 
 export function GiftsSection({ data }: { data: GiftsData }) {
   const options = (data.options || []).slice(0, 2);
-  const [zoomImage, setZoomImage] = useState<{ title: string; url: string } | null>(null);
+  const [selectedOption, setSelectedOption] = useState<GiftOption | null>(null);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [selectedOption]);
 
   if (!data.giftNote && !data.sectionIntro && options.length === 0) return null;
 
@@ -61,50 +66,75 @@ export function GiftsSection({ data }: { data: GiftsData }) {
                       options.length === 2 ? "sm:grid-cols-2" : ""
                     } gap-4 sm:gap-6 max-w-xl mx-auto`}
                   >
-                    {options.map((opt) => (
-                      <div
-                        key={opt.id}
-                        className="p-5 rounded-2xl border-2 border-[var(--event-border)] bg-[var(--event-surface-alt)] text-center shadow-[var(--event-shadow-paper-sm)] space-y-3 flex flex-col justify-between"
-                      >
-                        <span className="font-serif font-bold text-[var(--event-text-main)] block text-lg">
-                          {opt.title}
-                        </span>
-                        {opt.image?.url ? (
-                          <div
-                            className="mt-2 inline-block p-3 bg-[var(--event-surface)] rounded-2xl border-2 border-[var(--event-border)] shadow-[var(--event-shadow-paper-sm)] cursor-pointer group hover:border-[var(--event-primary)] transition-all"
-                            onClick={() => {
-                              if (opt.image?.url) {
-                                setZoomImage({
-                                  title: opt.title || "Contribution Channel",
-                                  url: opt.image.url,
-                                });
-                              }
-                            }}
-                            title="Click to enlarge QR code"
-                          >
-                            <img
-                              src={opt.image.url}
-                              alt={opt.image.alt || `${opt.title} QR`}
-                              className="w-40 h-40 object-contain mx-auto rounded-lg group-hover:scale-105 transition-transform"
-                            />
-                            <div className="flex items-center justify-center gap-1.5 mt-2 text-[11px] font-mono text-[var(--event-text-muted)] group-hover:text-[var(--event-primary)]">
-                              <QrCode className="w-3.5 h-3.5" />
-                              <span>Tap to enlarge</span>
+                    {options.map((opt, idx) => {
+                      const hasQr = Boolean(opt.image?.url);
+
+                      return (
+                        <div
+                          key={opt.id || idx}
+                          className="p-5 rounded-2xl border-2 border-[var(--event-border)] bg-[var(--event-surface-alt)] shadow-[var(--event-shadow-paper-sm)] flex flex-col justify-between text-left space-y-3"
+                        >
+                          {/* 1. Title Compartment */}
+                          <div className="space-y-1">
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="comic-badge comic-badge-gold text-[10px]">
+                                Option 0{idx + 1}
+                              </span>
+                              <Gift className="w-4 h-4 text-[var(--event-primary)]" />
                             </div>
+                            <span className="font-serif font-bold text-[var(--event-text-main)] block text-base sm:text-lg">
+                              {opt.title}
+                            </span>
                           </div>
-                        ) : (
-                          <div className="mt-2 flex flex-col items-center justify-center p-6 rounded-2xl border-2 border-dashed border-slate-400 bg-white min-h-[180px] text-center space-y-2.5">
-                            <div className="w-12 h-12 rounded-xl bg-amber-300 border-2 border-slate-900 flex items-center justify-center text-slate-950 shadow-[2px_2px_0px_#0f172a]">
-                              <Gift className="w-6 h-6 stroke-[2.5]" />
-                            </div>
-                            <p className="text-xs font-sans font-medium text-slate-700 max-w-[200px] leading-relaxed">
-                              Physical gifts and toy contributions are warmly welcomed at the
-                              celebration reception.
-                            </p>
+
+                          {/* 2. Inline QR Preview Stage */}
+                          <div className="my-3 flex items-center justify-center">
+                            {opt.image?.url ? (
+                              <div className="relative w-32 h-32 p-2 rounded-xl bg-white border-2 border-[var(--event-border)] shadow-xs flex items-center justify-center overflow-hidden">
+                                <Image
+                                  src={opt.image.url}
+                                  alt={opt.image.alt || opt.title}
+                                  fill
+                                  unoptimized={true}
+                                  className="object-contain p-1.5"
+                                />
+                              </div>
+                            ) : (
+                              <div className="w-32 h-32 p-3 rounded-xl bg-[var(--event-surface)] border-2 border-dashed border-slate-400 flex flex-col items-center justify-center text-center select-none">
+                                <QrCode className="w-7 h-7 text-[var(--event-primary)] opacity-60 mb-1" />
+                                <span className="font-sans text-[10px] font-bold tracking-wider text-[var(--event-text-main)] uppercase">
+                                  QR Preview
+                                </span>
+                                <span className="text-[9px] text-[var(--event-text-muted)] leading-tight">
+                                  Available soon
+                                </span>
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
-                    ))}
+
+                          {/* 3. Action Shelf */}
+                          <div className="pt-3 border-t border-[var(--event-border-subtle)]">
+                            <button
+                              type="button"
+                              onClick={() => setSelectedOption(opt)}
+                              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-[var(--event-surface-alt)] text-[var(--event-text-main)] border-2 border-[var(--event-border)] text-xs font-bold uppercase tracking-wider font-sans shadow-xs transition-all active:scale-95 cursor-pointer"
+                            >
+                              {hasQr ? (
+                                <>
+                                  <QrCode className="w-4 h-4 text-[var(--event-primary)]" />
+                                  <span>View Full QR</span>
+                                </>
+                              ) : (
+                                <>
+                                  <QrCode className="w-4 h-4 text-[var(--event-text-muted)] opacity-70" />
+                                  <span>View Details</span>
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -112,25 +142,56 @@ export function GiftsSection({ data }: { data: GiftsData }) {
           </div>
         </Reveal>
 
-        {/* QR Zoom Lightbox Dialog */}
-        {zoomImage && (
-          <Dialog open={Boolean(zoomImage)} onOpenChange={() => setZoomImage(null)}>
-            <DialogContent className="max-w-sm p-6 bg-[var(--event-surface)] border-[var(--event-border)] text-center">
+        {/* QR Zoom Lightbox Dialog with Fallback */}
+        {selectedOption && (
+          <Dialog
+            open={Boolean(selectedOption)}
+            onOpenChange={(open) => {
+              if (!open) setSelectedOption(null);
+            }}
+          >
+            <DialogContent className="max-w-sm p-6 bg-[var(--event-surface)] border-2 border-[var(--event-border)] text-center rounded-2xl shadow-xl">
               <DialogHeader>
-                <DialogTitle className="font-serif text-xl text-[var(--event-text-main)]">
-                  {zoomImage.title}
+                <DialogTitle className="font-serif text-xl font-bold text-[var(--event-text-main)]">
+                  {selectedOption.title}
                 </DialogTitle>
               </DialogHeader>
-              <div className="p-4 bg-white rounded-2xl border-2 border-[var(--event-border)] mt-3 inline-block">
-                <img
-                  src={zoomImage.url}
-                  alt={zoomImage.title}
-                  className="w-64 h-64 object-contain mx-auto rounded"
-                />
-              </div>
-              <p className="text-xs text-[var(--event-text-muted)] font-mono mt-3">
-                Scan using your banking or e-wallet application
-              </p>
+
+              {selectedOption.image?.url && !imageError ? (
+                <>
+                  <div className="my-4 relative w-64 h-64 mx-auto p-3 bg-white rounded-2xl border-2 border-[var(--event-border)] shadow-md flex items-center justify-center">
+                    <Image
+                      src={selectedOption.image.url}
+                      alt={selectedOption.image.alt || selectedOption.title}
+                      fill
+                      unoptimized={true}
+                      onError={() => setImageError(true)}
+                      className="object-contain p-2"
+                    />
+                  </div>
+                  <p className="text-xs text-[var(--event-text-muted)] font-mono">
+                    Scan using your banking or e-wallet application
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="my-4 w-64 h-64 mx-auto p-6 rounded-2xl bg-white border-2 border-dashed border-slate-400 flex flex-col items-center justify-center text-center">
+                    <div className="w-12 h-12 rounded-xl bg-amber-300 border-2 border-slate-900 flex items-center justify-center mb-3 text-slate-950 shadow-[2px_2px_0px_#0f172a]">
+                      <QrCode className="w-6 h-6 stroke-[2.5]" />
+                    </div>
+                    <span className="font-sans text-xs font-bold tracking-wider text-[var(--event-text-main)] uppercase">
+                      QR Code Placeholder
+                    </span>
+                    <span className="font-sans text-[11px] text-[var(--event-text-muted)] mt-1.5 leading-relaxed">
+                      Official QR code or transfer instructions will appear here once configured in
+                      the dashboard.
+                    </span>
+                  </div>
+                  <p className="text-xs text-[var(--event-text-muted)] font-mono">
+                    Please check with the host or welcome desk during the reception
+                  </p>
+                </>
+              )}
             </DialogContent>
           </Dialog>
         )}

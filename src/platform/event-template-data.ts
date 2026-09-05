@@ -228,6 +228,7 @@ export type EventTemplateData = {
   publicUrl?: string | null;
 
   couple: HostInfoData;
+  hostInfo?: HostInfoData;
   countdown: CountdownData;
   music: MusicData;
   ceremony: MainEventData;
