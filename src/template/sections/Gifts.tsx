@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import type { GiftsData } from "@/platform/wedding-template-data";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import type { GiftsData, GiftOption } from "@/platform/wedding-template-data";
 import { BotanicalCornerPair } from "@/template/components/decorations/BotanicalCornerPair";
 import { SectionFloralDivider } from "@/template/components/decorations/SectionFloralDivider";
 import { LedgerPanel } from "@/template/components/containers/LedgerPanel";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/template/components/ui/Dialog";
-import { QrCode } from "lucide-react";
+import { QrCode, Gift } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
 // SAGE ESTATE GIFT DETAILS & REGISTRY (THE GLASSHOUSE LEDGER)
@@ -15,7 +16,12 @@ import { QrCode } from "lucide-react";
 
 export function GiftsSection({ data }: { data: GiftsData }) {
   const options = (data.options || []).slice(0, 2);
-  const [zoomImage, setZoomImage] = useState<{ title: string; url: string } | null>(null);
+  const [selectedOption, setSelectedOption] = useState<GiftOption | null>(null);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [selectedOption]);
 
   if (!data.giftNote && !data.sectionIntro && options.length === 0) return null;
 
@@ -66,40 +72,75 @@ export function GiftsSection({ data }: { data: GiftsData }) {
                       options.length === 2 ? "sm:grid-cols-2" : ""
                     } gap-4 sm:gap-6 max-w-xl mx-auto`}
                   >
-                    {options.map((opt) => (
-                      <div
-                        key={opt.id}
-                        className="p-5 rounded-2xl border border-[var(--wedding-border)] bg-[var(--wedding-surface-alt)] text-center shadow-xs space-y-3"
-                      >
-                        <span className="font-serif font-bold text-[var(--wedding-text)] block text-lg">
-                          {opt.title}
-                        </span>
-                        {opt.image?.url && (
-                          <div
-                            className="mt-2 inline-block p-3 bg-[var(--wedding-surface)] rounded-2xl border border-[var(--wedding-border)] shadow-xs cursor-pointer group hover:border-[var(--wedding-primary)] transition-all"
-                            onClick={() => {
-                              if (opt.image?.url) {
-                                setZoomImage({
-                                  title: opt.title || "Contribution Channel",
-                                  url: opt.image.url,
-                                });
-                              }
-                            }}
-                            title="Click to enlarge QR code"
-                          >
-                            <img
-                              src={opt.image.url}
-                              alt={opt.image.alt || `${opt.title} QR`}
-                              className="w-40 h-40 object-contain mx-auto rounded-lg group-hover:scale-105 transition-transform"
-                            />
-                            <div className="flex items-center justify-center gap-1.5 mt-2 text-[11px] font-mono text-[var(--wedding-text-muted)] group-hover:text-[var(--wedding-primary)]">
-                              <QrCode className="w-3.5 h-3.5" />
-                              <span>Tap to enlarge</span>
+                    {options.map((opt, idx) => {
+                      const hasQr = Boolean(opt.image?.url);
+
+                      return (
+                        <div
+                          key={opt.id || idx}
+                          className="p-5 rounded-2xl border border-[var(--wedding-border)] bg-[var(--wedding-surface-alt)] shadow-xs flex flex-col justify-between text-left space-y-3"
+                        >
+                          {/* 1. Title Compartment */}
+                          <div className="space-y-1">
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="text-[11px] font-serif font-bold text-[var(--wedding-accent)] uppercase tracking-wider">
+                                Option 0{idx + 1}
+                              </span>
+                              <Gift className="w-4 h-4 text-[var(--wedding-primary)]" />
                             </div>
+                            <span className="font-serif font-bold text-[var(--wedding-text)] block text-base sm:text-lg">
+                              {opt.title}
+                            </span>
                           </div>
-                        )}
-                      </div>
-                    ))}
+
+                          {/* 2. Inline QR Preview Stage */}
+                          <div className="my-3 flex items-center justify-center">
+                            {opt.image?.url ? (
+                              <div className="relative w-32 h-32 p-2 rounded-xl bg-white border border-[var(--wedding-border)] shadow-xs flex items-center justify-center overflow-hidden">
+                                <Image
+                                  src={opt.image.url}
+                                  alt={opt.image.alt || opt.title}
+                                  fill
+                                  unoptimized={true}
+                                  className="object-contain p-1.5"
+                                />
+                              </div>
+                            ) : (
+                              <div className="w-32 h-32 p-3 rounded-xl bg-[var(--wedding-surface)] border-2 border-dashed border-[var(--wedding-border)] flex flex-col items-center justify-center text-center select-none">
+                                <QrCode className="w-7 h-7 text-[var(--wedding-primary)] opacity-60 mb-1" />
+                                <span className="font-serif text-[10px] font-bold tracking-wider text-[var(--wedding-text)] uppercase">
+                                  QR Preview
+                                </span>
+                                <span className="text-[9px] text-[var(--wedding-text-muted)] leading-tight">
+                                  Available Soon
+                                </span>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* 3. Action Shelf */}
+                          <div className="pt-3 border-t border-[var(--wedding-border-subtle)]">
+                            <button
+                              type="button"
+                              onClick={() => setSelectedOption(opt)}
+                              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-[var(--wedding-surface)] text-[var(--wedding-text)] border border-[var(--wedding-border)] text-xs font-bold uppercase tracking-wider font-serif shadow-xs transition-all active:scale-95 cursor-pointer"
+                            >
+                              {hasQr ? (
+                                <>
+                                  <QrCode className="w-4 h-4 text-[var(--wedding-primary)]" />
+                                  <span>View Full QR</span>
+                                </>
+                              ) : (
+                                <>
+                                  <QrCode className="w-4 h-4 text-[var(--wedding-text-muted)] opacity-70" />
+                                  <span>View Details</span>
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -108,24 +149,55 @@ export function GiftsSection({ data }: { data: GiftsData }) {
         </Reveal>
 
         {/* QR Zoom Lightbox Dialog */}
-        {zoomImage && (
-          <Dialog open={Boolean(zoomImage)} onOpenChange={() => setZoomImage(null)}>
-            <DialogContent className="max-w-sm p-6 bg-[var(--wedding-surface)] border-[var(--wedding-border)] text-center">
+        {selectedOption && (
+          <Dialog
+            open={Boolean(selectedOption)}
+            onOpenChange={(open) => {
+              if (!open) setSelectedOption(null);
+            }}
+          >
+            <DialogContent className="max-w-sm p-6 bg-[var(--wedding-surface)] border border-[var(--wedding-border)] text-center rounded-2xl shadow-xl">
               <DialogHeader>
-                <DialogTitle className="font-serif text-xl text-[var(--wedding-text)]">
-                  {zoomImage.title}
+                <DialogTitle className="font-serif text-xl font-bold text-[var(--wedding-text)]">
+                  {selectedOption.title}
                 </DialogTitle>
               </DialogHeader>
-              <div className="p-4 bg-white rounded-2xl border border-[var(--wedding-border)] mt-3 inline-block">
-                <img
-                  src={zoomImage.url}
-                  alt={zoomImage.title}
-                  className="w-64 h-64 object-contain mx-auto rounded"
-                />
-              </div>
-              <p className="text-xs text-[var(--wedding-text-muted)] font-mono mt-3">
-                Scan using your banking or e-wallet application
-              </p>
+
+              {selectedOption.image?.url && !imageError ? (
+                <>
+                  <div className="my-4 relative w-64 h-64 mx-auto p-3 bg-white rounded-2xl border border-[var(--wedding-border)] shadow-md flex items-center justify-center">
+                    <Image
+                      src={selectedOption.image.url}
+                      alt={selectedOption.image.alt || selectedOption.title}
+                      fill
+                      unoptimized={true}
+                      onError={() => setImageError(true)}
+                      className="object-contain p-2"
+                    />
+                  </div>
+                  <p className="text-xs text-[var(--wedding-text-muted)] font-mono">
+                    Scan using your banking or e-wallet application
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="my-4 w-64 h-64 mx-auto p-6 rounded-2xl bg-[var(--wedding-surface-alt)] border-2 border-dashed border-[var(--wedding-border)] flex flex-col items-center justify-center text-center">
+                    <div className="w-12 h-12 rounded-xl bg-white border border-[var(--wedding-border)] shadow-xs flex items-center justify-center mb-3 text-[var(--wedding-primary)]">
+                      <QrCode className="w-6 h-6" />
+                    </div>
+                    <span className="font-serif text-xs font-bold tracking-wider text-[var(--wedding-text)] uppercase">
+                      QR Code Placeholder
+                    </span>
+                    <span className="font-sans text-[11px] text-[var(--wedding-text-muted)] mt-1.5 leading-relaxed">
+                      Official QR code or transfer instructions will appear here once configured in
+                      the dashboard.
+                    </span>
+                  </div>
+                  <p className="text-xs text-[var(--wedding-text-muted)] font-mono">
+                    Please check with the wedding coordinator at the reception desk
+                  </p>
+                </>
+              )}
             </DialogContent>
           </Dialog>
         )}

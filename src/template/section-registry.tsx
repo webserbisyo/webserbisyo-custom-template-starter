@@ -63,6 +63,12 @@ export const templateSectionRegistry: Record<
       data={data.rsvp}
       eventSlug={data.eventSlug}
       deadlineLabel={data.rsvpDeadlineLabel || data.ceremony?.rsvpDeadline}
+      coupleName={
+        data.coupleDisplayName ||
+        (data.couple?.groomName && data.couple?.brideName
+          ? `${data.couple.groomName} & ${data.couple.brideName}`
+          : undefined)
+      }
       apiBaseUrl={apiBaseUrl}
       accessToken={accessToken}
       isDemoMode={isDemoMode}

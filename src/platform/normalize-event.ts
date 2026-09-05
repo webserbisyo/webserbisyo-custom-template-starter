@@ -356,34 +356,70 @@ export function normalizeEventData(
   };
 
   // 13. rsvp_form
-  const rsvpContent = getSectionContent("rsvp_form");
+  const rsvpSec = record(sectionsByKey.rsvp_form);
+  const rsvpSecContent = record(rsvpSec.content);
+  const rsvpTopLevel = record(raw.rsvp ?? content.rsvp ?? sectionsByKey.rsvp);
+  const rsvpSectionContent = getSectionContent("rsvp_form");
+  const rawRsvp = {
+    ...rsvpTopLevel,
+    ...rsvpSec,
+    ...rsvpSecContent,
+    ...rsvpSectionContent,
+  };
   const rsvpData: RsvpData = {
-    plusOneEnabled: boolValue(rsvpContent.plusOneEnabled) ?? false,
-    companionLimit: numberValue(rsvpContent.companionLimit, 1),
-    companionNameEnabled: boolValue(rsvpContent.companionNameEnabled) ?? true,
-    companionAgeEnabled: boolValue(rsvpContent.companionAgeEnabled) ?? false,
-    emailEnabled: boolValue(rsvpContent.emailEnabled) ?? true,
-    emailRequired: boolValue(rsvpContent.emailRequired) ?? true,
-    phoneEnabled: boolValue(rsvpContent.phoneEnabled) ?? false,
-    phoneRequired: boolValue(rsvpContent.phoneRequired) ?? false,
-    foodAllergiesEnabled: boolValue(rsvpContent.foodAllergiesEnabled) ?? false,
-    messageToHostEnabled: boolValue(rsvpContent.messageToHostEnabled) ?? true,
-    customQuestions: Array.isArray(rsvpContent.customQuestions) ? rsvpContent.customQuestions : [],
+    plusOneEnabled: boolValue(rawRsvp.plusOneEnabled) ?? false,
+    companionLimit: numberValue(rawRsvp.companionLimit, 1),
+    companionNameEnabled: boolValue(rawRsvp.companionNameEnabled) ?? true,
+    companionAgeEnabled: boolValue(rawRsvp.companionAgeEnabled) ?? false,
+    emailEnabled: boolValue(rawRsvp.emailEnabled) ?? true,
+    emailRequired: boolValue(rawRsvp.emailRequired) ?? true,
+    phoneEnabled: boolValue(rawRsvp.phoneEnabled) ?? false,
+    phoneRequired: boolValue(rawRsvp.phoneRequired) ?? false,
+    foodAllergiesEnabled: boolValue(rawRsvp.foodAllergiesEnabled) ?? false,
+    messageToHostEnabled: boolValue(rawRsvp.messageToHostEnabled) ?? true,
+    customQuestions: Array.isArray(rawRsvp.customQuestions) ? rawRsvp.customQuestions : [],
   };
 
   // 14. gift_details (Max 2 options)
   const giftContent = getSectionContent("gift_details");
   const rawOptions = arrayOfRecords(giftContent.options);
   const giftOptions: GiftOption[] = rawOptions.slice(0, 2).map((opt, idx) => {
-    const rawImage = record(opt.image);
-    const imageUrl = stringValue(rawImage.url);
-    const imagePath = stringValue(rawImage.path) || "";
+    let imageUrl: string | undefined;
+    let imagePath = "";
+    let imageAlt: string | undefined;
+
+    if (typeof opt.image === "string") {
+      imageUrl = stringValue(opt.image);
+    } else if (opt.image && typeof opt.image === "object") {
+      const rawImage = record(opt.image);
+      imageUrl = stringValue(rawImage.url ?? rawImage.src);
+      imagePath = stringValue(rawImage.path) || "";
+      imageAlt = stringValue(rawImage.alt);
+    }
+
+    if (!imageUrl) {
+      imageUrl = stringValue(
+        opt.imageUrl ?? opt.qrCodeUrl ?? (opt as Record<string, unknown>).qr_code_url
+      );
+    }
+    if (!imagePath) {
+      imagePath = stringValue(opt.imagePath ?? opt.path) || "";
+    }
+
+    const isValidUrl = imageUrl
+      ? /^https?:\/\/.+/i.test(imageUrl) || imageUrl.startsWith("/") || imageUrl.startsWith("data:")
+      : false;
+
     return {
       id: stringValue(opt.id) || `opt-${idx + 1}`,
       title: stringValue(opt.title) || "Gift Option",
       image:
-        imageUrl || imagePath
-          ? { path: imagePath, url: imageUrl, alt: stringValue(rawImage.alt) }
+        isValidUrl || imagePath
+          ? {
+              path: imagePath,
+              url: isValidUrl ? imageUrl : undefined,
+              alt: imageAlt,
+            }
           : null,
     };
   });

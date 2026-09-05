@@ -20,6 +20,7 @@ export type RsvpProps = {
   data: RsvpData;
   eventSlug: string;
   deadlineLabel?: string | null;
+  coupleName?: string | null;
   apiBaseUrl?: string;
   accessToken?: string | null;
   isDemoMode?: boolean;
@@ -32,10 +33,12 @@ export function RSVPForm({
   data,
   eventSlug,
   deadlineLabel,
+  coupleName,
   apiBaseUrl,
   accessToken,
   isDemoMode,
 }: RsvpProps) {
+  const displayName = coupleName || "the Couple";
   const [guestName, setGuestName] = useState("");
   const [attendanceStatus, setAttendanceStatus] = useState<"attending" | "not_attending">(
     "attending"
@@ -343,13 +346,13 @@ export function RSVPForm({
               >
                 Dietary Restrictions / Food Allergies
               </label>
-              <input
+              <textarea
                 id="dietaryNotes"
-                type="text"
+                rows={3}
                 value={dietaryNotes}
                 onChange={(e) => setDietaryNotes(e.target.value)}
-                placeholder="e.g. Vegetarian, Peanut allergy, Halal"
-                className="w-full px-4 py-3.5 border border-[var(--wedding-border)] rounded-xl text-base text-[var(--wedding-text)] focus:outline-none focus:ring-2 focus:ring-[var(--wedding-primary)] bg-[var(--wedding-surface)] min-h-[46px]"
+                placeholder="e.g. Vegetarian, Peanut allergy, Halal, Gluten sensitivity"
+                className="w-full px-4 py-3.5 border border-[var(--wedding-border)] rounded-xl text-base text-[var(--wedding-text)] focus:outline-none focus:ring-2 focus:ring-[var(--wedding-primary)] bg-[var(--wedding-surface)] resize-none min-h-[70px]"
               />
             </div>
           )}
@@ -361,14 +364,14 @@ export function RSVPForm({
                 htmlFor="message"
                 className="block text-sm font-semibold text-[var(--wedding-text)] mb-2"
               >
-                Warm Note for the Couple
+                Warm Note for {displayName}
               </label>
               <textarea
                 id="message"
                 rows={3}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Write your wishes or thoughts..."
+                placeholder={`Write your wishes for ${displayName}...`}
                 className="w-full px-4 py-3.5 border border-[var(--wedding-border)] rounded-xl text-base text-[var(--wedding-text)] focus:outline-none focus:ring-2 focus:ring-[var(--wedding-primary)] bg-[var(--wedding-surface)] min-h-[80px]"
               />
             </div>
