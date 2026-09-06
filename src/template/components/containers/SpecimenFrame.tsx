@@ -9,6 +9,7 @@ export interface SpecimenFrameProps extends React.HTMLAttributes<HTMLDivElement>
   specimenNumber?: string;
   aspectRatio?: "square" | "portrait" | "landscape" | "video";
   priority?: boolean;
+  imageClassName?: string;
 }
 
 export function SpecimenFrame({
@@ -19,6 +20,7 @@ export function SpecimenFrame({
   specimenNumber,
   aspectRatio = "portrait",
   priority = false,
+  imageClassName,
   children,
   ...props
 }: SpecimenFrameProps) {
@@ -51,8 +53,12 @@ export function SpecimenFrame({
             alt={alt}
             fill
             priority={priority}
+            unoptimized={true}
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className={cn(
+              "object-cover transition-transform duration-500 group-hover:scale-105",
+              imageClassName
+            )}
           />
         ) : (
           children || (

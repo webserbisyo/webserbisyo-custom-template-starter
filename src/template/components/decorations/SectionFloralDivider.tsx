@@ -35,6 +35,7 @@ export function SectionFloralDivider({ className, sizeClassName }: SectionFloral
         alt=""
         width={256}
         height={192}
+        unoptimized={true}
         className="w-full h-auto object-contain mx-auto opacity-95"
       />
     </div>

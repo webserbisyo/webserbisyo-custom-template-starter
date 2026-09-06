@@ -105,6 +105,7 @@ export function BotanicalCornerPair({
           alt=""
           width={config.pixelDim}
           height={config.pixelDim}
+          unoptimized={true}
           className="w-full h-full object-contain"
         />
       </div>
@@ -126,6 +127,7 @@ export function BotanicalCornerPair({
           alt=""
           width={config.pixelDim}
           height={config.pixelDim}
+          unoptimized={true}
           className="w-full h-full object-contain"
         />
       </div>

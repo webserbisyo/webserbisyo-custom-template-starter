@@ -43,6 +43,7 @@ export function DecorativePattern({
         src={src}
         alt={alt}
         fill
+        unoptimized={true}
         sizes="100vw"
         className={cn("object-cover", blendClass)}
         style={{ opacity, objectPosition }}

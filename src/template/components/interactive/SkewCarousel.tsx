@@ -72,6 +72,7 @@ export function SkewCarousel({
                 alt={item.alt || "Gallery preview"}
                 width={item.width || 2752}
                 height={item.height || 1536}
+                unoptimized={true}
                 className="block w-auto h-auto max-w-[min(84vw,330px)] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[560px] max-h-[300px] sm:max-h-[360px] md:max-h-[410px] lg:max-h-[440px] object-contain rounded-lg select-none pointer-events-none"
                 sizes="(max-width: 640px) 84vw, 560px"
               />
@@ -259,6 +260,7 @@ export function SkewCarousel({
                         alt={item.alt || `Photo ${idx + 1}`}
                         width={item.width || 2752}
                         height={item.height || 1536}
+                        unoptimized={true}
                         sizes="(max-width: 640px) 84vw, (max-width: 1024px) 60vw, 560px"
                         className="block w-auto h-auto max-w-[min(84vw,330px)] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[560px] max-h-[300px] sm:max-h-[360px] md:max-h-[410px] lg:max-h-[440px] object-contain rounded-lg select-none pointer-events-none"
                       />
