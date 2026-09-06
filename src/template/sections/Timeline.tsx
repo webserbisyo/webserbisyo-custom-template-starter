@@ -59,7 +59,7 @@ export function TimelineSection({ data }: { data: TimelineData }) {
       id="timeline_program"
       className="template-section section-surface-alabaster bg-pattern-debut-02 relative overflow-x-clip"
     >
-      <div className="template-container">
+      <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-10 sm:mb-14 space-y-2">
             <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">

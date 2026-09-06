@@ -41,6 +41,12 @@
 }
 
 /* Centralized Inner Content Container */
+.template-container,
+.template-container-narrow {
+  position: relative;
+  z-index: 10;
+}
+
 .template-container {
   width: 100%;
   max-width: var(--content-max-width);

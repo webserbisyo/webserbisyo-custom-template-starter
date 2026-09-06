@@ -17,7 +17,7 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
       id="story_message"
       className="template-section section-surface-alabaster bg-pattern-debut-01 relative overflow-x-clip"
     >
-      <div className="template-container-narrow">
+      <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
             <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
