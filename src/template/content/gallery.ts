@@ -21,7 +21,7 @@ export interface GalleryPhotoItem {
 export const galleryPhotos: GalleryPhotoItem[] = [
   {
     id: "gallery-01",
-    src: "/template-assets/photos/gallery/gallery-01.webp",
+    src: "",
     alt: "The holy water baptismal rite at the church font",
     caption: "The Holy Baptismal Rite",
     folioLabel: "FOLIO // 01",
@@ -31,7 +31,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-02",
-    src: "/template-assets/photos/gallery/gallery-02.webp",
+    src: "",
     alt: "Heirloom christening robe and sacramental candle details",
     caption: "Heirloom Gown & Candle",
     folioLabel: "FOLIO // 02",
@@ -41,7 +41,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-03",
-    src: "/template-assets/photos/gallery/gallery-03.webp",
+    src: "",
     alt: "Historic church sanctuary and candlelit church altar",
     caption: "San Agustin Sanctuary",
     folioLabel: "FOLIO // 03",
@@ -51,7 +51,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-04",
-    src: "/template-assets/photos/gallery/gallery-04.webp",
+    src: "",
     alt: "Parents and godparents gathered around the child for the blessing",
     caption: "Family & Godparents Blessing",
     folioLabel: "FOLIO // 04",
@@ -61,7 +61,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-05",
-    src: "/template-assets/photos/gallery/gallery-05.webp",
+    src: "",
     alt: "Guests toasting at the thanksgiving reception banquet table",
     caption: "Thanksgiving Celebration",
     folioLabel: "FOLIO // 05",
@@ -71,7 +71,7 @@ export const galleryPhotos: GalleryPhotoItem[] = [
   },
   {
     id: "gallery-06",
-    src: "/template-assets/photos/gallery/gallery-06.webp",
+    src: "",
     alt: "Family and guests celebrating Liam's welcome into faith",
     caption: "Welcoming Liam into Faith",
     folioLabel: "FOLIO // 06",

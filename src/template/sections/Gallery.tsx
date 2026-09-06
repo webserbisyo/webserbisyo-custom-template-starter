@@ -36,7 +36,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
   return (
     <section
       id="gallery"
-      className="template-section !pt-20 !pb-14 sm:!pt-24 sm:!pb-16 md:!pt-28 md:!pb-18 section-surface-coral bg-pattern-debut-04 text-white text-center relative overflow-x-clip"
+      className="template-section !pt-20 !pb-14 sm:!pt-24 sm:!pb-16 md:!pt-28 md:!pb-18 section-surface-coral text-white text-center relative overflow-x-clip"
     >
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
@@ -49,7 +49,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
               {data.sectionTitle || "Moments of Grace"}
             </h2>
             {data.sectionIntro && (
-              <p className="text-role-lead max-w-xl mx-auto mt-2 leading-relaxed text-[#FFE7E2] font-serif italic">
+              <p className="text-role-lead max-w-xl mx-auto mt-2 leading-relaxed text-[#E0F2FE] font-serif italic">
                 {data.sectionIntro}
               </p>
             )}

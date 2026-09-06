@@ -1,13 +1,12 @@
 import type { HostInfoData } from "@/platform/event-template-data";
 import { deriveHostIdentity } from "@/template/utils/host-identity";
-import { templateAssets } from "@/template/template-assets";
 import { SpecimenFrame } from "@/template/components/containers/SpecimenFrame";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Magnetic } from "@/template/components/motion/Magnetic";
 import { Heart, Sparkles, BookOpen } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM EDITORIAL HERO (2-CANVAS SATIN ALABASTER & COTILLION ARCH)
+// CANONICAL BAPTISM EDITORIAL HERO (2-CANVAS SATIN ALABASTER & CELESTIAL ARCH)
 // DYNAMIC HOST IDENTITY: Never hardcode client initials or names.
 
 export type HeroHostSectionProps = {
@@ -33,12 +32,10 @@ export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionPr
         : `${data.groomName || identity.groomName} & ${data.brideName || identity.brideName}`;
   }
 
-  const heroPhoto = templateAssets.photos.hero;
-
   return (
     <section
       id="host_info"
-      className="template-section section-surface-alabaster bg-pattern-debut-01 relative isolate overflow-hidden min-h-0 pt-10 pb-14 sm:pt-14 sm:pb-16 lg:pt-16 lg:pb-20 text-[var(--debut-text-noir,#26131C)]"
+      className="template-section section-surface-alabaster relative isolate overflow-hidden min-h-0 pt-10 pb-14 sm:pt-14 sm:pb-16 lg:pt-16 lg:pb-20 text-[var(--debut-text-noir,#26131C)]"
     >
       <div className="template-container relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center lg:items-start">
@@ -128,7 +125,7 @@ export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionPr
             >
               <div className="relative w-full max-w-[320px] sm:max-w-sm lg:max-w-[min(360px,calc((100dvh-11.5rem)*0.75))] xl:max-w-[min(385px,calc((100dvh-11.5rem)*0.75))]">
                 <SpecimenFrame
-                  src={heroPhoto}
+                  src={undefined}
                   alt={displayName}
                   specimenNumber="PORTRAIT FOLIO // 01"
                   aspectRatio="portrait"

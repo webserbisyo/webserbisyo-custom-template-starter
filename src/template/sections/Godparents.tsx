@@ -13,19 +13,19 @@ export function GodparentsSection({ data }: { data: NamedGroupsData }) {
   return (
     <section
       id="godparents"
-      className="template-section section-surface-alabaster bg-pattern-debut-04 relative overflow-x-clip"
+      className="template-section section-surface-coral relative overflow-x-clip text-white"
     >
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-10 sm:mb-14 space-y-2">
-            <span className="text-role-subheading text-[var(--celestial-bg-sky,#0284C7)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--celestial-gold,#D97706)]" />
+            <span className="text-role-subheading text-white drop-shadow-xs inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--celestial-gold-glow,#FEF3C7)]" />
               <span>GUIDING LIGHT &amp; SPONSORS // 10</span>
             </span>
-            <h2 className="text-role-heading-quiet text-[var(--celestial-text-navy,#0F172A)] tracking-tight">
+            <h2 className="text-role-heading-quiet text-white tracking-tight">
               Honored Godparents &amp; Mentors
             </h2>
-            <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--celestial-text-muted,#475569)] font-serif italic">
+            <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[#E0F2FE] font-serif italic">
               Blessed mentors chosen to guide and inspire our child in faith, wisdom, and love.
             </p>
           </div>
@@ -38,7 +38,7 @@ export function GodparentsSection({ data }: { data: NamedGroupsData }) {
                 <LedgerPanel
                   title={group.title || `Godparent Group ${gIdx + 1}`}
                   indexTag={`BLESSING // 0${gIdx + 1}`}
-                  className="h-full bg-[var(--celestial-surface-white,#ffffff)] hover:border-[var(--celestial-bg-sky,#0284C7)] transition-colors shadow-card text-center relative z-10"
+                  className="h-full debut-card-coral-enclosure bg-white text-[var(--celestial-text-navy,#0F172A)] shadow-2xl text-center relative z-10"
                 >
                   <ul className="space-y-2.5 pt-1 font-sans">
                     {group.names.map((entry, nIdx) => (
