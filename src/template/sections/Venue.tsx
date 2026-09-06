@@ -19,12 +19,12 @@ export function VenueSection({ data }: { data: VenueData }) {
       <div className="template-container">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>BALLROOM RECORD // 07</span>
+            <span className="text-role-subheading text-[var(--debut-rose-gold,#0284C7)] inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D97706)]" />
+              <span>CEREMONY VENUE // 07</span>
             </span>
-            <h2 className="text-role-heading text-[var(--debut-text-noir,#26131C)] tracking-tight">
-              The Grand Ballroom
+            <h2 className="text-role-heading text-[var(--debut-text-noir,#0F172A)] tracking-tight">
+              The Ceremony Sanctuary
             </h2>
           </div>
         </Reveal>
@@ -35,11 +35,11 @@ export function VenueSection({ data }: { data: VenueData }) {
             <div className="lg:col-span-6">
               <SpecimenFrame
                 src={venuePhoto}
-                alt={data.venueName || "Debut Grand Ballroom"}
+                alt={data.venueName || "San Agustin Church"}
                 caption={
-                  data.venueName ? `Grand Ballroom: ${data.venueName}` : "Grand Ballroom Grounds"
+                  data.venueName ? `Ceremony Venue: ${data.venueName}` : "Sanctuary Church Grounds"
                 }
-                specimenNumber="BALLROOM // 07"
+                specimenNumber="SANCTUARY // 07"
                 aspectRatio="landscape"
                 className="shadow-soft bg-[var(--debut-surface-alabaster,#ffffff)]"
               />
@@ -49,7 +49,7 @@ export function VenueSection({ data }: { data: VenueData }) {
             <div className="lg:col-span-6">
               <div className="relative overflow-visible">
                 <LedgerPanel
-                  title={data.venueName || "Grand Cotillion Ballroom"}
+                  title={data.venueName || "San Agustin Church"}
                   indexTag="LOCATION // RECORD"
                   className="bg-[var(--debut-surface-alabaster,#ffffff)] relative z-10"
                 >

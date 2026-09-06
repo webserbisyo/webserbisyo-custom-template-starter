@@ -7,11 +7,11 @@ import { galleryPhotos, type GalleryPhotoItem } from "@/template/content/gallery
 import { SkewCarousel } from "@/template/components/interactive/SkewCarousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/template/components/ui/Dialog";
 import { Reveal } from "@/template/components/motion/Reveal";
-import { DebutImagePlaceholder } from "@/template/components/containers/DebutImagePlaceholder";
+import { CelestialImagePlaceholder } from "@/template/components/containers/CelestialImagePlaceholder";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM KINETIC GALLERY (CANVAS B: LIVING CORAL BLOOM & FROSTED LIGHTBOX)
+// CELESTIAL SKY KINETIC GALLERY (MOMENTS OF GRACE)
 
 export function GallerySection({ data }: { data: GalleryData }) {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
@@ -46,7 +46,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
               <span>PHOTO MOMENTS // 04</span>
             </span>
             <h2 className="text-role-heading-major text-white tracking-tight">
-              {data.sectionTitle || "Grand Cotillion Gallery"}
+              {data.sectionTitle || "Moments of Grace"}
             </h2>
             {data.sectionIntro && (
               <p className="text-role-lead max-w-xl mx-auto mt-2 leading-relaxed text-[#FFE7E2] font-serif italic">
@@ -70,7 +70,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
         ) : (
           <div className="bg-white/15 backdrop-blur-md p-10 rounded-3xl border border-white/30 max-w-xl mx-auto text-center shadow-md">
             <p className="text-xs font-cinzel text-white uppercase tracking-wider">
-              [ Official debut photoshoot will be mounted here ]
+              [ Official christening photos will be mounted here ]
             </p>
           </div>
         )}
@@ -108,7 +108,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
                   />
                 ) : (
                   <div className="w-[320px] sm:w-[460px] h-[240px] sm:h-[320px] p-2">
-                    <DebutImagePlaceholder
+                    <CelestialImagePlaceholder
                       context="gallery"
                       label={
                         selectedPhoto.folioLabel || selectedPhoto.caption || "GALLERY SPECIMEN"

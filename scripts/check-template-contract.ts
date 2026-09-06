@@ -3,13 +3,13 @@ import path from "node:path";
 import {
   eventWebsiteSectionContract,
   EVENT_WEBSITE_SECTION_CONTRACT_VERSION,
-  eventWebsiteSectionKeySet,
-  DEBUT_APPLICABLE_SECTION_KEYS,
-  debutApplicableSectionKeySet,
+  BAPTISM_APPLICABLE_SECTION_KEYS,
+  baptismApplicableSectionKeySet,
+  requiredBaptismSections,
 } from "../src/platform/contract.js";
 import { templateSectionRegistry } from "../src/template/section-registry.js";
 import { demoWeddingData } from "../src/platform/demo-wedding.js";
-import { demoDebutData } from "../src/platform/demo-debut.js";
+import { demoBaptismData } from "../src/platform/demo-baptism.js";
 import { normalizeEventData } from "../src/platform/normalize-event.js";
 import { deriveHostIdentity } from "../src/template/utils/host-identity.js";
 import {
@@ -30,7 +30,7 @@ type CheckResult = {
   warnings: string[];
 };
 
-console.log("WebSerbisyo Debut Template Contract Check (Contract V1)");
+console.log("WebSerbisyo Baptism Template Contract Check (Contract V1)");
 console.log("────────────────────────────────────────────────────────");
 
 const result: CheckResult = {
@@ -53,14 +53,14 @@ if (EVENT_WEBSITE_SECTION_CONTRACT_VERSION === 1) {
   console.log(`✗ Contract version: ${EVENT_WEBSITE_SECTION_CONTRACT_VERSION}`);
 }
 
-// 2. SECTION REGISTRY & DEBUT SCOPE VALIDATION
-console.log("\n[2] DEBUT SECTION REGISTRY SCOPE VALIDATION");
+// 2. SECTION REGISTRY & BAPTISM SCOPE VALIDATION
+console.log("\n[2] BAPTISM SECTION REGISTRY SCOPE VALIDATION");
 const globalKeys = eventWebsiteSectionContract.map((entry) => entry.key);
-const applicableKeys = DEBUT_APPLICABLE_SECTION_KEYS;
+const applicableKeys = BAPTISM_APPLICABLE_SECTION_KEYS;
 const registeredKeys = Object.keys(templateSectionRegistry);
 
 console.log(`Global contract sections: ${globalKeys.length}`);
-console.log(`Debut applicable sections: ${applicableKeys.length}`);
+console.log(`Baptism applicable sections: ${applicableKeys.length}`);
 console.log(`Registered template section components: ${registeredKeys.length}`);
 
 if (globalKeys.length !== 20) {
@@ -68,17 +68,17 @@ if (globalKeys.length !== 20) {
   result.failures.push(`Global contract count mismatch. Expected 20, got ${globalKeys.length}`);
 }
 
-if (applicableKeys.length !== 18) {
+if (applicableKeys.length !== 16) {
   result.passed = false;
   result.failures.push(
-    `Debut applicable section count mismatch. Expected 18, got ${applicableKeys.length}`
+    `Baptism applicable section count mismatch. Expected 16, got ${applicableKeys.length}`
   );
 }
 
-if (registeredKeys.length !== 18) {
+if (registeredKeys.length !== 16) {
   result.passed = false;
   result.failures.push(
-    `Template section registry count mismatch. Expected 18, got ${registeredKeys.length}`
+    `Template section registry count mismatch. Expected 16, got ${registeredKeys.length}`
   );
 }
 
@@ -100,12 +100,12 @@ for (const key of applicableKeys) {
     console.log(`  ✓ Valid Registered Section: ${key}`);
   } else {
     missingCount++;
-    result.failures.push(`Missing template renderer for Debut key: '${key}'`);
-    console.log(`  ✗ MISSING DEBUT RENDERER: ${key}`);
+    result.failures.push(`Missing template renderer for Baptism key: '${key}'`);
+    console.log(`  ✗ MISSING BAPTISM RENDERER: ${key}`);
   }
 }
 
-const forbiddenKeys = ["entourage", "godparents"];
+const forbiddenKeys = ["eighteen_roses_candles", "debut_court", "entourage", "principal_sponsors"];
 for (const key of forbiddenKeys) {
   if (templateSectionRegistry[key]) {
     result.failures.push(`Forbidden section renderer registered: '${key}'`);
@@ -114,7 +114,7 @@ for (const key of forbiddenKeys) {
 }
 
 for (const regKey of registeredKeys) {
-  if (!debutApplicableSectionKeySet.has(regKey)) {
+  if (!baptismApplicableSectionKeySet.has(regKey)) {
     result.failures.push(`Unknown section key registered in templateSectionRegistry: '${regKey}'`);
     console.log(`  ✗ UNKNOWN KEY REGISTERED: ${regKey}`);
   }
@@ -122,15 +122,15 @@ for (const regKey of registeredKeys) {
 
 if (
   missingCount === 0 &&
-  registeredKeys.length === 18 &&
-  registeredKeys.every((k) => debutApplicableSectionKeySet.has(k))
+  registeredKeys.length === 16 &&
+  registeredKeys.every((k) => baptismApplicableSectionKeySet.has(k))
 ) {
-  console.log(`✓ Template section registry correctly contains exactly 18 Debut renderers.`);
+  console.log(`✓ Template section registry correctly contains exactly 16 Baptism renderers.`);
 } else {
   result.passed = false;
 }
 
-// 3. DEMO DATA VALIDATION (WEDDING & DEBUT)
+// 3. DEMO DATA VALIDATION (WEDDING & BAPTISM)
 console.log("\n[3] DEMO DATA VALIDATION");
 if (
   demoWeddingData &&
@@ -152,21 +152,21 @@ if (
 }
 
 if (
-  demoDebutData &&
-  demoDebutData.eventSlug &&
-  demoDebutData.eventType === "debut" &&
-  Array.isArray(demoDebutData.enabledSectionKeys) &&
-  demoDebutData.couple &&
-  demoDebutData.eighteenRosesCandles &&
-  demoDebutData.eighteenRosesCandles.groups.length > 0
+  demoBaptismData &&
+  demoBaptismData.eventSlug &&
+  demoBaptismData.eventType === "baptism" &&
+  Array.isArray(demoBaptismData.enabledSectionKeys) &&
+  demoBaptismData.couple &&
+  demoBaptismData.godparents &&
+  demoBaptismData.godparents.groups.length > 0
 ) {
-  console.log(`✓ Demo debut dataset ('${demoDebutData.eventSlug}') is valid and complete.`);
+  console.log(`✓ Demo baptism dataset ('${demoBaptismData.eventSlug}') is valid and complete.`);
 } else {
   result.passed = false;
   result.failures.push(
-    "src/platform/demo-debut.ts is missing required Debut template data fields."
+    "src/platform/demo-baptism.ts is missing required Baptism template data fields."
   );
-  console.log("✗ Demo debut dataset failed validation.");
+  console.log("✗ Demo baptism dataset failed validation.");
 }
 
 // Verify gift options in demo data
@@ -198,7 +198,7 @@ const requiredPlatformFiles = [
   "src/platform/event-template-data.ts",
   "src/platform/contract.ts",
   "src/platform/demo-wedding.ts",
-  "src/platform/demo-debut.ts",
+  "src/platform/demo-baptism.ts",
 ];
 
 for (const relPath of requiredPlatformFiles) {
@@ -244,8 +244,8 @@ function scanDirForForbiddenCode(dir: string) {
 }
 scanDirForForbiddenCode(path.resolve(process.cwd(), "src/template"));
 
-// 6. DYNAMIC COUPLE IDENTITY & EVENT FORMATTING GUARD
-console.log("\n[6] DYNAMIC COUPLE IDENTITY & EVENT FORMATTING GUARD");
+// 6. DYNAMIC HOST IDENTITY & EVENT FORMATTING GUARD
+console.log("\n[6] DYNAMIC HOST IDENTITY & EVENT FORMATTING GUARD");
 const derivedTest = deriveHostIdentity("Alex Rivera", "Jamie Cruz");
 if (derivedTest.monogram === "A & J" && derivedTest.compactMonogram === "AJ") {
   console.log(
@@ -259,17 +259,17 @@ if (derivedTest.monogram === "A & J" && derivedTest.compactMonogram === "AJ") {
   console.log(`  ✗ IDENTITY DERIVATION TEST FAILED: ${JSON.stringify(derivedTest)}`);
 }
 
-const debutDerivedTest = deriveHostIdentity(undefined, undefined, "Sophia Marie Reyes");
-if (debutDerivedTest.monogram === "S" && debutDerivedTest.compactMonogram === "S") {
+const baptismDerivedTest = deriveHostIdentity(undefined, undefined, "Liam Santos");
+if (baptismDerivedTest.monogram === "L" && baptismDerivedTest.compactMonogram === "L") {
   console.log(
-    "  ✓ Debut single-host identity derivation verified: 'Sophia Marie Reyes' -> 'S' (no ampersand artifact)"
+    "  ✓ Baptism single-host identity derivation verified: 'Liam Santos' -> 'L' (no ampersand artifact)"
   );
 } else {
   result.passed = false;
   result.failures.push(
-    `Debut identity derivation test failed. Got monogram '${debutDerivedTest.monogram}'`
+    `Baptism identity derivation test failed. Got monogram '${baptismDerivedTest.monogram}'`
   );
-  console.log(`  ✗ DEBUT IDENTITY DERIVATION TEST FAILED: ${JSON.stringify(debutDerivedTest)}`);
+  console.log(`  ✗ BAPTISM IDENTITY DERIVATION TEST FAILED: ${JSON.stringify(baptismDerivedTest)}`);
 }
 
 const formattedDateTest = formatEventDateLong("2027-04-19");
@@ -315,25 +315,25 @@ if (
   console.log("  ✗ NAVIGATION MODEL VALIDATION FAILED");
 }
 
-const debutNavTest = buildEventNavigation(demoDebutData);
+const baptismNavTest = buildEventNavigation(demoBaptismData);
 if (
-  debutNavTest.allEnabledItems.length === 18 &&
-  debutNavTest.allEnabledItems.some((item) => item.key === "eighteen_roses_candles") &&
-  debutNavTest.allEnabledItems.some((item) => item.key === "debut_court") &&
-  debutNavTest.allEnabledItems.some((item) => item.key === "principal_sponsors") &&
-  debutNavTest.allEnabledItems.some((item) => item.key === "secondary_event") &&
-  debutNavTest.allEnabledItems.some((item) => item.key === "extra_info")
+  baptismNavTest.allEnabledItems.length === 16 &&
+  baptismNavTest.allEnabledItems.some((item) => item.key === "godparents") &&
+  baptismNavTest.allEnabledItems.some((item) => item.key === "main_event") &&
+  baptismNavTest.allEnabledItems.some((item) => item.key === "secondary_event") &&
+  baptismNavTest.allEnabledItems.some((item) => item.key === "extra_info") &&
+  !baptismNavTest.allEnabledItems.some((item) => forbiddenKeys.includes(item.key))
 ) {
   console.log(
-    `  ✓ Debut 18-section navigation verified: all 18 active sections registered in nav model`
+    `  ✓ Baptism 16-section navigation verified: all 16 active sections registered in nav model without forbidden keys`
   );
 } else {
   result.passed = false;
   result.failures.push(
-    `Debut navigation model failed validation. Expected 18 active items, got ${debutNavTest.allEnabledItems.length}`
+    `Baptism navigation model failed validation. Expected 16 active items, got ${baptismNavTest.allEnabledItems.length}`
   );
   console.log(
-    `  ✗ DEBUT NAVIGATION MODEL FAILED: ${debutNavTest.allEnabledItems.length} items registered`
+    `  ✗ BAPTISM NAVIGATION MODEL FAILED: ${baptismNavTest.allEnabledItems.length} items registered`
   );
 }
 
@@ -391,12 +391,12 @@ function scanForResidueAndAliases(dir: string) {
 }
 scanForResidueAndAliases(path.resolve(process.cwd(), "src"));
 
-// 9. REAL 17-SECTION FIELD-LEVEL SENTINEL CONNECTION VERIFICATION
-console.log("\n[9] REAL 17-SECTION FIELD-LEVEL SENTINEL CONNECTION VERIFICATION");
+// 9. REAL 16-SECTION FIELD-LEVEL SENTINEL CONNECTION VERIFICATION
+console.log("\n[9] REAL 16-SECTION FIELD-LEVEL SENTINEL CONNECTION VERIFICATION");
 
 const sentinelPublicDto = {
-  eventSlug: "sentinel-wedding-slug",
-  slug: "sentinel-wedding-slug",
+  eventSlug: "sentinel-baptism-slug",
+  slug: "sentinel-baptism-slug",
   eventDate: "2027-09-19",
   eventTime: "15:30",
   venueName: "SENTINEL_ROOT_VENUE_NAME",
@@ -406,18 +406,17 @@ const sentinelPublicDto = {
     "countdown",
     "music_effects",
     "gallery",
+    "story_message",
     "main_event",
     "venue",
     "secondary_event",
     "timeline_program",
-    "entourage",
-    "principal_sponsors",
+    "godparents",
     "attire_motif",
     "extra_info",
     "rsvp_form",
     "gift_details",
     "guestbook",
-    "story_message",
     "contact_socials",
   ],
   content: {
@@ -427,18 +426,17 @@ const sentinelPublicDto = {
         countdown: true,
         music_effects: true,
         gallery: true,
+        story_message: true,
         main_event: true,
         venue: true,
         secondary_event: true,
         timeline_program: true,
-        entourage: true,
-        principal_sponsors: true,
+        godparents: true,
         attire_motif: true,
         extra_info: true,
         rsvp_form: true,
         gift_details: true,
         guestbook: true,
-        story_message: true,
         contact_socials: true,
       },
       sectionOrder: [
@@ -446,25 +444,24 @@ const sentinelPublicDto = {
         "countdown",
         "music_effects",
         "gallery",
+        "story_message",
         "main_event",
         "venue",
         "secondary_event",
         "timeline_program",
-        "entourage",
-        "principal_sponsors",
+        "godparents",
         "attire_motif",
         "extra_info",
         "rsvp_form",
         "gift_details",
         "guestbook",
-        "story_message",
         "contact_socials",
       ],
     },
     sections: {
       host_info: {
-        groomName: "SENTINEL_GROOM",
-        brideName: "SENTINEL_BRIDE",
+        childName: "SENTINEL_CHILD",
+        parentNames: "SENTINEL_PARENTS",
         displayAs: "SENTINEL_DISPLAY_AS",
         hostLine: "SENTINEL_HOST_LINE",
         shortHostMessage: "SENTINEL_HOST_MESSAGE",
@@ -482,6 +479,11 @@ const sentinelPublicDto = {
       gallery: {
         sectionTitle: "SENTINEL_GALLERY_TITLE",
         sectionIntro: "SENTINEL_GALLERY_INTRO",
+      },
+      story_message: {
+        storyTitle: "SENTINEL_STORY_TITLE",
+        sectionIntro: "SENTINEL_STORY_INTRO",
+        storyBody: "SENTINEL_STORY_BODY",
       },
       main_event: {
         eventLabel: "SENTINEL_CEREMONY_LABEL",
@@ -524,19 +526,15 @@ const sentinelPublicDto = {
           },
         ],
       },
-      entourage: {
-        introLine: "SENTINEL_ENTOURAGE_INTRO",
+      godparents: {
+        introLine: "SENTINEL_GODPARENTS_INTRO",
         groups: [
           {
             id: "sentinel-grp-1",
-            groupTitle: "SENTINEL_BEST_MAN",
-            names: ["SENTINEL_PERSON_1", "SENTINEL_PERSON_2"],
+            groupTitle: "SENTINEL_NINONGS",
+            names: ["SENTINEL_NINONG_1", "SENTINEL_NINONG_2"],
           },
         ],
-      },
-      principal_sponsors: {
-        introLine: "SENTINEL_SPONSORS_INTRO",
-        names: "SENTINEL_SPONSOR_1\nSENTINEL_SPONSOR_2",
       },
       attire_motif: {
         sectionIntro: "SENTINEL_ATTIRE_INTRO",
@@ -595,11 +593,6 @@ const sentinelPublicDto = {
           },
         ],
       },
-      story_message: {
-        storyTitle: "SENTINEL_STORY_TITLE",
-        sectionIntro: "SENTINEL_STORY_INTRO",
-        storyBody: "SENTINEL_STORY_BODY",
-      },
       contact_socials: {
         contactPerson: "SENTINEL_CONTACT_PERSON",
         contactNumber: "+639123456789",
@@ -627,8 +620,10 @@ function assertField(actual: unknown, expected: unknown, name: string) {
 }
 
 // 1. host_info
-assertField(normalizedSentinel.couple.groomName, "SENTINEL_GROOM", "host_info.groomName");
-assertField(normalizedSentinel.couple.brideName, "SENTINEL_BRIDE", "host_info.brideName");
+const baptismCouple =
+  normalizedSentinel.couple.kind === "baptism" ? normalizedSentinel.couple : null;
+assertField(baptismCouple?.childName, "SENTINEL_CHILD", "host_info.childName");
+assertField(baptismCouple?.parentNames, "SENTINEL_PARENTS", "host_info.parentNames");
 assertField(normalizedSentinel.couple.displayAs, "SENTINEL_DISPLAY_AS", "host_info.displayAs");
 assertField(normalizedSentinel.couple.hostLine, "SENTINEL_HOST_LINE", "host_info.hostLine");
 assertField(
@@ -685,7 +680,20 @@ assertField(
   "gallery.sectionIntro"
 );
 
-// 5. main_event
+// 5. story_message
+assertField(
+  normalizedSentinel.story.storyTitle,
+  "SENTINEL_STORY_TITLE",
+  "story_message.storyTitle"
+);
+assertField(
+  normalizedSentinel.story.sectionIntro,
+  "SENTINEL_STORY_INTRO",
+  "story_message.sectionIntro"
+);
+assertField(normalizedSentinel.story.storyBody, "SENTINEL_STORY_BODY", "story_message.storyBody");
+
+// 6. main_event
 assertField(
   normalizedSentinel.ceremony.eventLabel,
   "SENTINEL_CEREMONY_LABEL",
@@ -705,7 +713,7 @@ assertField(
   "main_event.scheduleNote"
 );
 
-// 6. venue
+// 7. venue
 assertField(normalizedSentinel.venue.venueName, "SENTINEL_VENUE_NAME", "venue.venueName");
 assertField(normalizedSentinel.venue.address, "SENTINEL_VENUE_ADDRESS", "venue.address");
 assertField(
@@ -715,7 +723,7 @@ assertField(
 );
 assertField(normalizedSentinel.venue.arrivalNote, "SENTINEL_ARRIVAL_NOTE", "venue.arrivalNote");
 
-// 7. secondary_event
+// 8. secondary_event
 assertField(
   normalizedSentinel.reception.title,
   "SENTINEL_RECEPTION_TITLE",
@@ -740,7 +748,7 @@ assertField(
 );
 assertField(normalizedSentinel.reception.note, "SENTINEL_RECEPTION_NOTE", "secondary_event.note");
 
-// 8. timeline_program
+// 9. timeline_program
 assertField(
   normalizedSentinel.timeline.sectionTitle,
   "SENTINEL_TIMELINE_TITLE",
@@ -763,33 +771,21 @@ assertField(
   "timeline_program.items[1].title"
 );
 
-// 9. entourage
+// 10. godparents
 assertField(
-  normalizedSentinel.entourage.introLine,
-  "SENTINEL_ENTOURAGE_INTRO",
-  "entourage.introLine"
+  normalizedSentinel.godparents.introLine,
+  "SENTINEL_GODPARENTS_INTRO",
+  "godparents.introLine"
 );
 assertField(
-  normalizedSentinel.entourage.groups[0]?.groupTitle,
-  "SENTINEL_BEST_MAN",
-  "entourage.groups[0].groupTitle"
+  normalizedSentinel.godparents.groups[0]?.title,
+  "SENTINEL_NINONGS",
+  "godparents.groups[0].title"
 );
 assertField(
-  normalizedSentinel.entourage.groups[0]?.names.includes("SENTINEL_PERSON_1"),
+  normalizedSentinel.godparents.groups[0]?.names.some((n) => n.name === "SENTINEL_NINONG_1"),
   true,
-  "entourage.groups[0].names (person 1)"
-);
-
-// 10. principal_sponsors
-assertField(
-  normalizedSentinel.sponsors.introLine,
-  "SENTINEL_SPONSORS_INTRO",
-  "principal_sponsors.introLine"
-);
-assertField(
-  normalizedSentinel.sponsors.names.includes("SENTINEL_SPONSOR_1"),
-  true,
-  "principal_sponsors.names (sponsor 1)"
+  "godparents.groups[0].names (ninong 1)"
 );
 
 // 11. attire_motif
@@ -888,20 +884,7 @@ assertField(
   "guestbook.messages[0].message"
 );
 
-// 16. story_message
-assertField(
-  normalizedSentinel.story.storyTitle,
-  "SENTINEL_STORY_TITLE",
-  "story_message.storyTitle"
-);
-assertField(
-  normalizedSentinel.story.sectionIntro,
-  "SENTINEL_STORY_INTRO",
-  "story_message.sectionIntro"
-);
-assertField(normalizedSentinel.story.storyBody, "SENTINEL_STORY_BODY", "story_message.storyBody");
-
-// 17. contact_socials
+// 16. contact_socials
 assertField(
   normalizedSentinel.contact.contactPerson,
   "SENTINEL_CONTACT_PERSON",
@@ -934,8 +917,8 @@ console.log("\n[10] CONTACT_SOCIALS FOOTER PLACEMENT & TOGGLE GUARD");
 
 // 10.1 Verify meaningful content detection helper
 const fullContactTest = hasMeaningfulContactContent({
-  contactPerson: "Alex & Jamie",
-  email: "alex@example.com",
+  contactPerson: "Juan & Maria",
+  email: "santos@example.com",
 });
 const emptyContactTest = hasMeaningfulContactContent({
   contactPerson: "   ",
@@ -954,8 +937,8 @@ if (fullContactTest && !emptyContactTest && !nullContactTest) {
 
 // 10.2 Verify navigation filtering with disabled contact_socials
 const disabledContactNavTest = buildEventNavigation({
-  ...demoWeddingData,
-  enabledSectionKeys: demoWeddingData.enabledSectionKeys.filter((k) => k !== "contact_socials"),
+  ...demoBaptismData,
+  enabledSectionKeys: demoBaptismData.enabledSectionKeys.filter((k) => k !== "contact_socials"),
 });
 const hasContactWhenDisabled = disabledContactNavTest.allEnabledItems.some(
   (item) => item.key === "contact_socials"
@@ -963,8 +946,8 @@ const hasContactWhenDisabled = disabledContactNavTest.allEnabledItems.some(
 
 // 10.3 Verify navigation filtering with empty contact data
 const emptyContactNavTest = buildEventNavigation({
-  ...demoWeddingData,
-  enabledSectionKeys: [...demoWeddingData.enabledSectionKeys, "contact_socials"],
+  ...demoBaptismData,
+  enabledSectionKeys: [...demoBaptismData.enabledSectionKeys, "contact_socials"],
   contact: {
     contactPerson: "",
     contactNumber: "",

@@ -22,9 +22,9 @@ export default async function RsvpPage({ searchParams }: RsvpPageProps) {
             data={result.data.rsvp}
             eventSlug={result.data.eventSlug}
             deadlineLabel={result.data.rsvpDeadlineLabel || result.data.ceremony?.rsvpDeadline}
-            debutantName={
-              result.data.couple?.kind === "debut"
-                ? result.data.couple.debutantName || result.data.couple.displayAs
+            childName={
+              result.data.couple?.kind === "baptism"
+                ? result.data.couple.childName || result.data.couple.displayAs
                 : result.data.coupleDisplayName
             }
             apiBaseUrl={result.env.apiBaseUrl}

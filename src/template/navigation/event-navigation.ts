@@ -12,7 +12,7 @@ import { ALL_EVENT_SECTION_KEYS, type WeddingSectionKey } from "@/platform/contr
 export type EventApplicableSectionKey = WeddingSectionKey;
 
 export type NavigationGroup =
-  "Celebration" | "Debut Program & Traditions" | "Guest Essentials & Actions";
+  "Celebration" | "Ceremony & Celebration" | "Guest Essentials & Actions";
 
 export type EventNavItem = {
   key: EventApplicableSectionKey;
@@ -29,10 +29,7 @@ export type EventNavItem = {
 /** @deprecated Use EventNavItem — kept for backward compatibility. */
 export type WeddingNavItem = EventNavItem;
 
-export const EVENT_SECTION_NAV_DEFINITIONS: Record<
-  EventApplicableSectionKey,
-  Omit<EventNavItem, "key">
-> = {
+export const EVENT_SECTION_NAV_DEFINITIONS: Record<string, Omit<EventNavItem, "key">> = {
   // ── Folio 01: Celebration ──────────────────────────────────────────────
   host_info: {
     label: "Home",
@@ -71,7 +68,7 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
     isMoreEligible: true,
   },
   story_message: {
-    label: "Story",
+    label: "Dedication",
     anchor: "#story_message",
     group: "Celebration",
     iconName: "BookOpen",
@@ -80,11 +77,11 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
     isMoreEligible: true,
   },
 
-  // ── Folio 02: Debut Program & Traditions ──────────────────────────────
+  // ── Folio 02: Ceremony & Celebration ──────────────────────────────────
   main_event: {
-    label: "Debut Program",
+    label: "Ceremony",
     anchor: "#main_event",
-    group: "Debut Program & Traditions",
+    group: "Ceremony & Celebration",
     iconName: "Calendar",
     isPrimaryTopNav: false,
     isDockEligible: true,
@@ -93,7 +90,7 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
   venue: {
     label: "Venue",
     anchor: "#venue",
-    group: "Debut Program & Traditions",
+    group: "Ceremony & Celebration",
     iconName: "MapPin",
     isPrimaryTopNav: false,
     isDockEligible: true,
@@ -102,7 +99,7 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
   secondary_event: {
     label: "Reception",
     anchor: "#secondary_event",
-    group: "Debut Program & Traditions",
+    group: "Ceremony & Celebration",
     iconName: "Utensils",
     isPrimaryTopNav: false,
     isDockEligible: true,
@@ -111,44 +108,8 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
   timeline_program: {
     label: "Program",
     anchor: "#timeline_program",
-    group: "Debut Program & Traditions",
+    group: "Ceremony & Celebration",
     iconName: "Clock3",
-    isPrimaryTopNav: false,
-    isDockEligible: false,
-    isMoreEligible: true,
-  },
-  eighteen_roses_candles: {
-    label: "18 Traditions",
-    anchor: "#eighteen_roses_candles",
-    group: "Debut Program & Traditions",
-    iconName: "Flower2",
-    isPrimaryTopNav: false,
-    isDockEligible: false,
-    isMoreEligible: true,
-  },
-  debut_court: {
-    label: "Debut Court",
-    anchor: "#debut_court",
-    group: "Debut Program & Traditions",
-    iconName: "Users",
-    isPrimaryTopNav: false,
-    isDockEligible: false,
-    isMoreEligible: true,
-  },
-  principal_sponsors: {
-    label: "Special Sponsors",
-    anchor: "#principal_sponsors",
-    group: "Debut Program & Traditions",
-    iconName: "Award",
-    isPrimaryTopNav: false,
-    isDockEligible: false,
-    isMoreEligible: true,
-  },
-  entourage: {
-    label: "Entourage",
-    anchor: "#entourage",
-    group: "Debut Program & Traditions",
-    iconName: "Users",
     isPrimaryTopNav: false,
     isDockEligible: false,
     isMoreEligible: true,
@@ -156,11 +117,47 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
   godparents: {
     label: "Godparents",
     anchor: "#godparents",
-    group: "Debut Program & Traditions",
+    group: "Ceremony & Celebration",
     iconName: "Heart",
-    isPrimaryTopNav: false,
+    isPrimaryTopNav: true,
     isDockEligible: false,
     isMoreEligible: true,
+  },
+  eighteen_roses_candles: {
+    label: "Traditions",
+    anchor: "#eighteen_roses_candles",
+    group: "Ceremony & Celebration",
+    iconName: "Flower2",
+    isPrimaryTopNav: false,
+    isDockEligible: false,
+    isMoreEligible: false,
+  },
+  debut_court: {
+    label: "Court",
+    anchor: "#debut_court",
+    group: "Ceremony & Celebration",
+    iconName: "Users",
+    isPrimaryTopNav: false,
+    isDockEligible: false,
+    isMoreEligible: false,
+  },
+  principal_sponsors: {
+    label: "Sponsors",
+    anchor: "#principal_sponsors",
+    group: "Ceremony & Celebration",
+    iconName: "Award",
+    isPrimaryTopNav: false,
+    isDockEligible: false,
+    isMoreEligible: false,
+  },
+  entourage: {
+    label: "Entourage",
+    anchor: "#entourage",
+    group: "Ceremony & Celebration",
+    iconName: "Users",
+    isPrimaryTopNav: false,
+    isDockEligible: false,
+    isMoreEligible: false,
   },
 
   // ── Folio 03: Guest Essentials & Actions ──────────────────────────────
@@ -202,7 +199,7 @@ export const EVENT_SECTION_NAV_DEFINITIONS: Record<
     isMoreEligible: true,
   },
   guestbook: {
-    label: "Wishes",
+    label: "Prayers",
     anchor: "#guestbook",
     group: "Guest Essentials & Actions",
     iconName: "MessageSquare",
@@ -229,6 +226,7 @@ const TOP_NAV_ORDER_PREFERENCE: EventApplicableSectionKey[] = [
   "countdown",
   "gallery",
   "story_message",
+  "godparents",
   "timeline_program",
   "extra_info",
   "guestbook",
@@ -244,7 +242,7 @@ const DOCK_PREFERENCE_ORDER: EventApplicableSectionKey[] = [
 
 const NAVIGATION_GROUP_ORDER: NavigationGroup[] = [
   "Celebration",
-  "Debut Program & Traditions",
+  "Ceremony & Celebration",
   "Guest Essentials & Actions",
 ];
 

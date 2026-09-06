@@ -23,7 +23,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#FAF5F5",
+  themeColor: "#F8FAFC",
 };
 
 function getMetadataBase(): URL {
@@ -43,7 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const identity = deriveHostIdentity((data as any)?.hostInfo || (data as any)?.couple);
 
   const raw = data as Record<string, unknown> | null;
-  const celebrant = identity.displayName || (raw?.displayName as string) || "Sophia Marie Reyes";
+  const celebrant = identity.displayName || (raw?.displayName as string) || "Liam Santos";
 
   const eventDate =
     data?.eventDateLabel ||
@@ -54,18 +54,18 @@ export async function generateMetadata(): Promise<Metadata> {
   const venueName =
     data?.venue?.venueName ||
     (raw?.mainEvent as Record<string, string> | undefined)?.venueName ||
-    "Shangri-La at the Fort";
+    "San Agustin Church, Intramuros";
 
   const invitationMessage =
-    (data?.couple?.kind === "debut" ? data.couple.shortHostMessage : null) ||
+    (data?.couple?.kind === "baptism" ? data.couple.shortHostMessage : null) ||
     (raw?.invitationMessage as string) ||
-    `Official celebration guide and guest program for ${celebrant}'s 18th Birthday Grand Cotillion at ${venueName}.`;
+    `Official celebration guide and guest program for ${celebrant}'s Holy Baptism at ${venueName}.`;
 
   const cacheKey = encodeURIComponent(
-    `${celebrant || "debut"}-${eventDate || "2026"}`.replace(/\s+/g, "_")
+    `${celebrant || "baptism"}-${eventDate || "2026"}`.replace(/\s+/g, "_")
   );
 
-  const title = `${celebrant} — 18th Birthday Debut Royale`;
+  const title = `${celebrant} — The Holy Baptism`;
   const description = invitationMessage;
   const ogImageUrl = `/opengraph-image?v=${cacheKey}`;
 
@@ -82,7 +82,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: `${celebrant} — 18th Birthday Debut Royale`,
+          alt: `${celebrant} — The Holy Baptism`,
         },
       ],
     },

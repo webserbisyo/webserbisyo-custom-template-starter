@@ -6,7 +6,7 @@ import { formatEventTime } from "@/template/utils/event-formatting";
 import { StaggerList } from "@/template/components/motion/StaggerList";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Clock, Sparkles } from "lucide-react";
-import { TimelineRoseNode } from "@/template/components/decorations/TimelineRoseNode";
+import { TimelineCelestialNode } from "@/template/components/decorations/TimelineCelestialNode";
 import { cn } from "@/template/components/ui/cn";
 
 export function TimelineSection({ data }: { data: TimelineData }) {
@@ -62,22 +62,22 @@ export function TimelineSection({ data }: { data: TimelineData }) {
       <div className="template-container">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-10 sm:mb-14 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>PROGRAM FLOW // 09</span>
+            <span className="text-role-subheading text-[var(--debut-rose-gold,#0284C7)] inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D97706)]" />
+              <span>CEREMONY FLOW // 09</span>
             </span>
-            <h2 className="text-role-heading text-[var(--debut-text-noir,#26131C)] tracking-tight">
-              {data.sectionTitle || "Grand Cotillion Timeline"}
+            <h2 className="text-role-heading text-[var(--debut-text-noir,#0F172A)] tracking-tight">
+              {data.sectionTitle || "Celebration Timeline"}
             </h2>
             {data.sectionIntro && (
-              <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#704D5B)]">
+              <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#475569)]">
                 {data.sectionIntro}
               </p>
             )}
           </div>
         </Reveal>
 
-        {/* Illuminated Continuous Rose Gold Rail with Anti-Clipping Mobile Indent */}
+        {/* Illuminated Continuous Starlight Rail with Anti-Clipping Mobile Indent */}
         <div className="relative max-w-2xl mx-auto ml-4 sm:ml-auto sm:mx-auto pl-8 sm:pl-10 border-l-2 border-[var(--debut-rose-gold-border,#E8C4C8)] font-sans">
           <StaggerList className="space-y-4 sm:space-y-6" staggerDelay={0.08}>
             {data.items.map((item, idx: number) => {
@@ -94,8 +94,8 @@ export function TimelineSection({ data }: { data: TimelineData }) {
                   }}
                   className="relative group"
                 >
-                  {/* Multi-Petal Blooming Rose Milestone Node */}
-                  <TimelineRoseNode isActive={isActive} />
+                  {/* Glowing Celestial Star Halo Milestone Node */}
+                  <TimelineCelestialNode isActive={isActive} />
 
                   {/* Synchronized Radiant Dual-Tone Event Card */}
                   <div

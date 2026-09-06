@@ -33,7 +33,7 @@ export function GiftsSection({ data }: { data: GiftsData }) {
           <div className="text-center mb-8 sm:mb-12 space-y-2">
             <span className="text-role-subheading text-white drop-shadow-sm inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
-              <span>WISHING WELL &amp; GIFTS // 16</span>
+              <span>WISHING WELL &amp; GIFTS // 14</span>
             </span>
             <h2 className="text-role-heading-major text-white tracking-tight">
               Wishing Well &amp; Gift Registry
@@ -49,7 +49,7 @@ export function GiftsSection({ data }: { data: GiftsData }) {
         <Reveal direction="up" distance={20} delay={0.1}>
           <div className="relative overflow-visible">
             <LedgerPanel
-              title="Debut Gift Registry"
+              title="Christening Gift Registry"
               indexTag="REGISTRY // 01"
               headerAlign="center"
               className="debut-card-coral-enclosure bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] shadow-2xl relative z-10"

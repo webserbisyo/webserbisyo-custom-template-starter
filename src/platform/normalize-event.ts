@@ -226,9 +226,13 @@ export function normalizeEventData(
     }
   }
 
-  // 1. host_info (Polymorphic: wedding | debut | birthday | baptism)
   const hostContent = getSectionContent("host_info");
-  const hostKind = stringValue(hostContent.kind) || eventType;
+  const hostKind =
+    stringValue(hostContent.kind) ||
+    (hostContent.childName ? "baptism" : "") ||
+    (hostContent.debutantName ? "debut" : "") ||
+    (hostContent.celebrantName ? "birthday" : "") ||
+    eventType;
   const displayAs = stringValue(hostContent.displayAs) || "";
   const hostLine = stringValue(hostContent.hostLine) || "Together with their families";
   const shortHostMessage = stringValue(hostContent.shortHostMessage) || "";
@@ -692,6 +696,7 @@ export function normalizeEventData(
   // 20. godparents (Named groups)
   const godparentsContent = getSectionContent("godparents");
   const godparentsData: NamedGroupsData = {
+    introLine: stringValue(godparentsContent.introLine),
     groups: normalizeNamedGroups(godparentsContent, "godparent"),
   };
 
@@ -857,7 +862,7 @@ function normalizeNamedGroups(
 
     return {
       id: stringValue(grp.id) || `${prefix}-group-${gIdx}`,
-      title: stringValue(grp.title) || "",
+      title: stringValue(grp.title) || stringValue(grp.groupTitle) || "",
       names,
     };
   });

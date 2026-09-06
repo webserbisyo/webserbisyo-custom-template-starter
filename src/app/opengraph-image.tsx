@@ -17,13 +17,13 @@ export default async function OpenGraphImage() {
 
   const identity = deriveHostIdentity((data as any)?.hostInfo || (data as any)?.couple);
 
-  const celebrant = identity.displayName || "Sophia Marie Reyes";
+  const celebrant = identity.displayName || "Liam Santos";
 
   const raw = data as Record<string, unknown> | null;
   const milestone =
-    (data?.couple?.kind === "debut" ? data.couple.milestone : null) ||
+    (data?.couple?.kind === "baptism" ? "THE HOLY BAPTISM" : null) ||
     (raw?.milestoneAge as string) ||
-    "18TH BIRTHDAY GRAND COTILLION";
+    "THE HOLY BAPTISM";
 
   const eventDate =
     data?.eventDateLabel ||
@@ -34,12 +34,12 @@ export default async function OpenGraphImage() {
   const venueName =
     data?.venue?.venueName ||
     (raw?.mainEvent as Record<string, string> | undefined)?.venueName ||
-    "The Grand Ballroom, Shangri-La at the Fort";
+    "San Agustin Church, Intramuros";
 
   const celebrantPhoto =
     data?.assets?.celebrantPhoto?.url || (raw?.celebrantPhoto as string) || null;
 
-  const monogram = identity.monogram || "S";
+  const monogram = identity.monogram || "L";
 
   return new ImageResponse(
     <div
@@ -47,7 +47,7 @@ export default async function OpenGraphImage() {
         width: "100%",
         height: "100%",
         display: "flex",
-        backgroundColor: "#10050B",
+        backgroundColor: "#0B1329",
         padding: 24,
         boxSizing: "border-box",
       }}
@@ -61,9 +61,9 @@ export default async function OpenGraphImage() {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          backgroundColor: "#FAF5F5",
-          backgroundImage: "radial-gradient(circle at 75% 35%, #FAF5F5 0%, #F4E0E0 100%)",
-          border: "3px solid #D4AF37",
+          backgroundColor: "#F8FAFC",
+          backgroundImage: "radial-gradient(circle at 75% 35%, #F8FAFC 0%, #E0F2FE 100%)",
+          border: "3px solid #D97706",
           borderRadius: 8,
           padding: "36px 48px",
           boxSizing: "border-box",
@@ -78,13 +78,13 @@ export default async function OpenGraphImage() {
             left: 8,
             right: 8,
             bottom: 8,
-            border: "1px solid rgba(212, 175, 55, 0.4)",
+            border: "1px solid rgba(217, 119, 6, 0.4)",
             borderRadius: 4,
             pointerEvents: "none",
           }}
         />
 
-        {/* Left Column: Portrait Arched Frame or Living Coral Seal */}
+        {/* Left Column: Portrait Arched Frame or Celestial Seal */}
         <div
           style={{
             width: 340,
@@ -101,10 +101,10 @@ export default async function OpenGraphImage() {
                 width: 320,
                 height: 460,
                 borderRadius: "160px 160px 16px 16px",
-                border: "3px solid #D4AF37",
+                border: "3px solid #D97706",
                 overflow: "hidden",
                 display: "flex",
-                boxShadow: "0 12px 32px rgba(16, 5, 11, 0.15)",
+                boxShadow: "0 12px 32px rgba(11, 19, 41, 0.15)",
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -124,9 +124,9 @@ export default async function OpenGraphImage() {
                 width: 280,
                 height: 280,
                 borderRadius: "50%",
-                backgroundColor: "#E65C4F",
-                border: "4px solid #B76E79",
-                boxShadow: "0 0 0 6px #D4AF37, 0 12px 28px rgba(16, 5, 11, 0.2)",
+                backgroundColor: "#0284C7",
+                border: "4px solid #BAE6FD",
+                boxShadow: "0 0 0 6px #D97706, 0 12px 28px rgba(11, 19, 41, 0.2)",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -143,7 +143,7 @@ export default async function OpenGraphImage() {
                   right: 10,
                   bottom: 10,
                   borderRadius: "50%",
-                  border: "1.5px dashed #D4AF37",
+                  border: "1.5px dashed #D97706",
                 }}
               />
               <span
@@ -151,7 +151,7 @@ export default async function OpenGraphImage() {
                   fontSize: 112,
                   fontFamily: "serif",
                   fontWeight: 700,
-                  color: "#D4AF37",
+                  color: "#FEF3C7",
                   lineHeight: 1,
                   marginTop: -10,
                 }}
@@ -160,21 +160,21 @@ export default async function OpenGraphImage() {
               </span>
               <span
                 style={{
-                  fontSize: 22,
+                  fontSize: 18,
                   fontFamily: "sans-serif",
                   fontWeight: 600,
-                  color: "#FAF5F5",
-                  letterSpacing: 6,
+                  color: "#FFFFFF",
+                  letterSpacing: 4,
                   marginTop: 6,
                 }}
               >
-                {"• 18 •"}
+                {"• CHRISTENING •"}
               </span>
             </div>
           )}
         </div>
 
-        {/* Right Column: Editorial Cotillion Typography */}
+        {/* Right Column: Editorial Christening Typography */}
         <div
           style={{
             width: 680,
@@ -195,20 +195,20 @@ export default async function OpenGraphImage() {
               marginBottom: 12,
             }}
           >
-            <div style={{ width: 28, height: 1, backgroundColor: "#D4AF37" }} />
+            <div style={{ width: 28, height: 1, backgroundColor: "#D97706" }} />
             <span
               style={{
                 fontSize: 14,
                 fontWeight: 700,
                 fontFamily: "serif",
-                color: "#B76E79",
+                color: "#0284C7",
                 letterSpacing: 4,
                 textTransform: "uppercase",
               }}
             >
-              {"OFFICIAL COTILLION INVITATION"}
+              {"OFFICIAL CHRISTENING INVITATION"}
             </span>
-            <div style={{ width: 28, height: 1, backgroundColor: "#D4AF37" }} />
+            <div style={{ width: 28, height: 1, backgroundColor: "#D97706" }} />
           </div>
 
           {/* Headline: Celebrant Name */}
@@ -217,7 +217,7 @@ export default async function OpenGraphImage() {
               fontSize: celebrant.length > 22 ? 50 : 58,
               fontWeight: 700,
               fontFamily: "serif",
-              color: "#180A12",
+              color: "#0F172A",
               lineHeight: 1.12,
               margin: 0,
               letterSpacing: "-0.5px",
@@ -226,7 +226,7 @@ export default async function OpenGraphImage() {
             {celebrant}
           </h1>
 
-          {/* Milestone Badge in Living Coral */}
+          {/* Milestone Badge in Sky Blue */}
           <div
             style={{
               display: "flex",
@@ -236,8 +236,8 @@ export default async function OpenGraphImage() {
           >
             <div
               style={{
-                backgroundColor: "#E65C4F",
-                color: "#FAF5F5",
+                backgroundColor: "#0284C7",
+                color: "#FFFFFF",
                 padding: "6px 18px",
                 borderRadius: 9999,
                 fontSize: 13,
@@ -256,13 +256,13 @@ export default async function OpenGraphImage() {
             style={{
               width: "100%",
               height: 1,
-              backgroundColor: "#D4AF37",
+              backgroundColor: "#D97706",
               marginTop: 24,
               marginBottom: 20,
             }}
           />
 
-          {/* Event Details: Date & Ballroom Venue */}
+          {/* Event Details: Date & Sanctuary Venue */}
           <div
             style={{
               display: "flex",
@@ -277,7 +277,7 @@ export default async function OpenGraphImage() {
                 alignItems: "center",
                 fontSize: 18,
                 fontFamily: "serif",
-                color: "#381E27",
+                color: "#0F172A",
                 fontWeight: 600,
                 letterSpacing: 0.5,
               }}
@@ -289,7 +289,7 @@ export default async function OpenGraphImage() {
                 fill="none"
                 style={{ marginRight: 10, flexShrink: 0 }}
               >
-                <path d="M6 0L7.8 4.2L12 6L7.8 7.8L6 12L4.2 7.8L0 6L4.2 4.2L6 0Z" fill="#D4AF37" />
+                <path d="M6 0L7.8 4.2L12 6L7.8 7.8L6 12L4.2 7.8L0 6L4.2 4.2L6 0Z" fill="#D97706" />
               </svg>
               <span>{eventDate}</span>
             </div>
@@ -299,7 +299,7 @@ export default async function OpenGraphImage() {
                 alignItems: "center",
                 fontSize: 17,
                 fontFamily: "serif",
-                color: "#683C49",
+                color: "#475569",
                 letterSpacing: 0.5,
               }}
             >
@@ -310,7 +310,7 @@ export default async function OpenGraphImage() {
                 fill="none"
                 style={{ marginRight: 10, flexShrink: 0 }}
               >
-                <path d="M6 0L7.8 4.2L12 6L7.8 7.8L6 12L4.2 7.8L0 6L4.2 4.2L6 0Z" fill="#D4AF37" />
+                <path d="M6 0L7.8 4.2L12 6L7.8 7.8L6 12L4.2 7.8L0 6L4.2 4.2L6 0Z" fill="#D97706" />
               </svg>
               <span>{venueName}</span>
             </div>

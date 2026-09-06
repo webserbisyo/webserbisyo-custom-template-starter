@@ -171,13 +171,13 @@ export function deriveHostIdentity(
     brideName: isSingleHost ? "" : bride,
     groomInitial: groomInitial || monogram,
     brideInitial,
-    monogram: monogram || "S",
-    compactMonogram: compactMonogram || "S",
+    monogram: monogram || "L",
+    compactMonogram: compactMonogram || "L",
     displayName: defaultDisplay,
     initials:
       groomInitial && brideInitial
         ? [groomInitial, brideInitial]
-        : [groomInitial || monogram || "S"],
+        : [groomInitial || monogram || "L"],
   };
 }
 

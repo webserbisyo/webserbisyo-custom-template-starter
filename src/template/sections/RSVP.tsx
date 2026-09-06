@@ -27,6 +27,7 @@ export type RSVPSectionProps = {
   eventSlug?: string;
   deadlineLabel?: string | null;
   debutantName?: string;
+  childName?: string;
   apiBaseUrl?: string;
   accessToken?: string | null;
   isDemoMode?: boolean;
@@ -37,6 +38,7 @@ export function RSVPSection({
   eventSlug,
   deadlineLabel,
   debutantName,
+  childName,
   apiBaseUrl,
   accessToken,
   isDemoMode,
@@ -53,8 +55,8 @@ export function RSVPSection({
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const celebrantFirstName =
-    getSingleHostFirstName(debutantName) || debutantName || "the celebrant";
+  const activeHostName = childName || debutantName || "Liam";
+  const celebrantFirstName = getSingleHostFirstName(activeHostName) || activeHostName;
 
   const formattedDeadline = deadlineLabel ? formatRsvpDeadline(deadlineLabel) : null;
 
@@ -130,23 +132,23 @@ export function RSVPSection({
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>RSVP &amp; ATTENDANCE // 15</span>
+            <span className="text-role-subheading text-[var(--debut-rose-gold,#0284C7)] inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D97706)]" />
+              <span>RSVP &amp; ATTENDANCE // 13</span>
             </span>
-            <h2 className="text-role-heading-major text-[var(--debut-text-noir,#26131C)] tracking-tight">
+            <h2 className="text-role-heading-major text-[var(--debut-text-noir,#0F172A)] tracking-tight">
               Confirm Your Presence
             </h2>
             {formattedDeadline ? (
-              <p className="text-role-lead text-[var(--debut-text-muted,#704D5B)] max-w-md mx-auto mt-2">
+              <p className="text-role-lead text-[var(--debut-text-muted,#475569)] max-w-md mx-auto mt-2">
                 Kindly respond on or before{" "}
-                <strong className="font-bold text-[var(--debut-bg-coral,#E65C4F)] underline">
+                <strong className="font-bold text-[var(--debut-bg-coral,#0284C7)] underline">
                   {formattedDeadline}
                 </strong>
               </p>
             ) : (
-              <p className="text-role-lead text-[var(--debut-text-muted,#704D5B)] max-w-md mx-auto mt-2">
-                We look forward to celebrating this 18th birthday cotillion with you.
+              <p className="text-role-lead text-[var(--debut-text-muted,#475569)] max-w-md mx-auto mt-2">
+                We look forward to celebrating this Holy Baptism with you.
               </p>
             )}
           </div>
@@ -155,17 +157,17 @@ export function RSVPSection({
         <Reveal direction="up" distance={24} delay={0.1}>
           <div
             data-surface="light"
-            className="debut-glass-card bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] border-2 border-[var(--debut-rose-gold-border,#E8C4C8)] p-6 sm:p-10 md:p-12 rounded-3xl shadow-card max-w-xl mx-auto font-sans relative z-10"
+            className="debut-glass-card bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#0F172A)] border-2 border-[var(--debut-rose-gold-border,#E8C4C8)] p-6 sm:p-10 md:p-12 rounded-3xl shadow-card max-w-xl mx-auto font-sans relative z-10"
           >
             {isSuccess ? (
               <div className="py-8 text-center space-y-4">
-                <CheckCircle2 className="w-16 h-16 text-[var(--debut-bg-coral,#E65C4F)] mx-auto" />
-                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[var(--debut-text-noir,#26131C)]">
+                <CheckCircle2 className="w-16 h-16 text-[var(--debut-bg-coral,#0284C7)] mx-auto" />
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[var(--debut-text-noir,#0F172A)]">
                   RSVP Response Recorded
                 </h3>
-                <p className="text-base text-[var(--debut-text-muted,#704D5B)] max-w-sm mx-auto font-sans leading-relaxed">
-                  Thank you, <strong>{name}</strong>. Your cotillion attendance response has been
-                  officially inscribed into the debut registry.
+                <p className="text-base text-[var(--debut-text-muted,#475569)] max-w-sm mx-auto font-sans leading-relaxed">
+                  Thank you, <strong>{name}</strong>. Your christening attendance response has been
+                  officially inscribed into the celebration registry.
                 </p>
                 <button
                   type="button"
@@ -432,7 +434,7 @@ export function RSVPSection({
                   <div className="absolute inset-0 animate-debut-shimmer pointer-events-none" />
                   <Send className="w-4 h-4 relative z-10" />
                   <span className="relative z-10">
-                    {isSubmitting ? "Transmitting RSVP..." : "Send Cotillion RSVP"}
+                    {isSubmitting ? "Transmitting RSVP..." : "Send Christening RSVP"}
                   </span>
                 </button>
               </form>

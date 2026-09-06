@@ -15,16 +15,16 @@ export type TemplateConfig = {
 };
 
 export const templateConfig: TemplateConfig = {
-  id: "template-debut-rose-glam",
-  name: "Rose Glam — Grand Cotillion Edition",
+  id: "template-baptism-celestial-sky",
+  name: "Celestial Sky (Christening)",
   version: 1,
   description:
-    "Rose gold glamour debutante cotillion ball template with blush velvet surfaces, champagne gold accents, and archival parterre trellis patterns.",
+    "Serene celestial sky christening and baptism celebration template with cloud pearl surfaces, frosted sky accents, and sacramental gold detailing.",
   palette: [
-    { name: "Rose Gold", hex: "#B76E79" },
-    { name: "Blush Velvet", hex: "#F4E0E0" },
-    { name: "Champagne Gold", hex: "#D4AF37" },
-    { name: "Deep Plum", hex: "#181216" },
-    { name: "Silk Cream", hex: "#FAF8F5" },
+    { name: "Cloud Pearl", hex: "#F8FAFC" },
+    { name: "Sky Blue", hex: "#0284C7" },
+    { name: "Frosted Sky", hex: "#E0F2FE" },
+    { name: "Sacramental Gold", hex: "#D97706" },
+    { name: "Starlight Navy", hex: "#0B1329" },
   ],
 };

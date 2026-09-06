@@ -23,9 +23,9 @@ export function ContactSection({ data }: { data?: ContactData | null }) {
     <section id="contact_socials" className="template-section section-surface-alabaster">
       <div className="template-container">
         <div className="text-center mb-8 space-y-2">
-          <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-            <span>CONTACT &amp; COORDINATION</span>
+          <span className="text-role-subheading text-[var(--debut-rose-gold,#0284C7)] inline-flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D97706)]" />
+            <span>CONTACT &amp; COORDINATION // 16</span>
           </span>
           <h2 className="text-role-heading text-[var(--debut-text-noir,#26131C)]">Get in Touch</h2>
         </div>

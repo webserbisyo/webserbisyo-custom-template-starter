@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { cn } from "../ui/cn";
-import { DebutImagePlaceholder, type PlaceholderContext } from "./DebutImagePlaceholder";
+import { CelestialImagePlaceholder, type PlaceholderContext } from "./CelestialImagePlaceholder";
 
 export interface SpecimenFrameProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;
@@ -60,7 +60,7 @@ export function SpecimenFrame({
     <div
       data-surface="light"
       className={cn(
-        "specimen-frame group relative border-2 border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] p-3 shadow-card transition-all hover:shadow-floating",
+        "specimen-frame group relative border-2 border-[var(--celestial-border-sky,#BAE6FD)] bg-[var(--celestial-surface-white,#ffffff)] text-[var(--celestial-text-navy,#0F172A)] p-3 shadow-card transition-all hover:shadow-floating",
         isArch ? "debut-arch-frame" : "rounded-2xl sm:rounded-3xl",
         className
       )}
@@ -69,7 +69,7 @@ export function SpecimenFrame({
       {/* Visual Inner Frame */}
       <div
         className={cn(
-          "relative w-full overflow-hidden bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]",
+          "relative w-full overflow-hidden bg-[var(--celestial-surface-alt,#F1F5F9)]",
           isArch ? "rounded-t-[130px] rounded-b-2xl" : "rounded-xl sm:rounded-2xl",
           aspectClasses[aspectRatio]
         )}
@@ -86,7 +86,7 @@ export function SpecimenFrame({
           />
         ) : (
           children || (
-            <DebutImagePlaceholder
+            <CelestialImagePlaceholder
               context={resolvedContext}
               label={specimenNumber || caption || alt}
               recommendation={recommendation}
@@ -99,12 +99,12 @@ export function SpecimenFrame({
       {caption || specimenNumber ? (
         <div className="mt-3 flex items-center justify-between px-1 text-xs">
           {caption ? (
-            <span className="font-semibold text-[var(--debut-text-noir,#26131C)] font-sans truncate max-w-[75%]">
+            <span className="font-semibold text-[var(--celestial-text-navy,#0F172A)] font-sans truncate max-w-[75%]">
               {caption}
             </span>
           ) : null}
           {specimenNumber ? (
-            <span className="font-cinzel text-[10px] font-bold text-[var(--debut-rose-gold,#B76E79)] tracking-[0.2em]">
+            <span className="font-cinzel text-[10px] font-bold text-[var(--celestial-bg-sky,#0284C7)] tracking-[0.2em]">
               {specimenNumber}
             </span>
           ) : null}

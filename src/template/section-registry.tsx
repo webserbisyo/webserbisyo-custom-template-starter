@@ -8,7 +8,7 @@ import { MainEventSection } from "./sections/MainEvent";
 import { VenueSection } from "./sections/Venue";
 import { SecondaryEventSection } from "./sections/SecondaryEvent";
 import { TimelineSection } from "./sections/Timeline";
-import { SponsorsSection } from "./sections/Sponsors";
+import { GodparentsSection } from "./sections/Godparents";
 import { AttireSection } from "./sections/Attire";
 import { ExtraInfoSection } from "./sections/ExtraInfo";
 import { RSVPSection } from "./sections/RSVP";
@@ -16,8 +16,6 @@ import { GiftsSection } from "./sections/Gifts";
 import { GuestbookSection } from "./sections/Guestbook";
 import { StoryMessageSection } from "./sections/StoryMessage";
 import { ContactSection } from "./sections/Contact";
-import { EighteenRosesCandlesSection } from "./sections/EighteenRosesCandles";
-import { DebutCourtSection } from "./sections/DebutCourt";
 
 export type SectionRendererProps = {
   data: EventTemplateData;
@@ -46,6 +44,7 @@ export const templateSectionRegistry: Record<
   ),
   music_effects: ({ data }) => <MusicSection data={data.music} />,
   gallery: ({ data }) => <GallerySection data={data.gallery} />,
+  story_message: ({ data }) => <StoryMessageSection data={data.story} />,
   main_event: ({ data }) => <MainEventSection data={data.ceremony} />,
   venue: ({ data }) => <VenueSection data={data.venue} />,
   secondary_event: ({ data }) => (
@@ -55,7 +54,7 @@ export const templateSectionRegistry: Record<
     />
   ),
   timeline_program: ({ data }) => <TimelineSection data={data.timeline} />,
-  principal_sponsors: ({ data }) => <SponsorsSection data={data.sponsors} />,
+  godparents: ({ data }) => <GodparentsSection data={data.godparents} />,
   attire_motif: ({ data }) => <AttireSection data={data.attire} />,
   extra_info: ({ data }) => <ExtraInfoSection data={data.extraInfo} />,
   rsvp_form: ({ data, apiBaseUrl, accessToken, isDemoMode }) => (
@@ -64,8 +63,13 @@ export const templateSectionRegistry: Record<
       eventSlug={data.eventSlug}
       deadlineLabel={data.rsvpDeadlineLabel || data.ceremony?.rsvpDeadline}
       debutantName={
-        data.couple?.kind === "debut"
-          ? data.couple.debutantName || data.couple.displayAs
+        data.couple?.kind === "baptism"
+          ? data.couple.childName || data.couple.displayAs
+          : data.coupleDisplayName
+      }
+      childName={
+        data.couple?.kind === "baptism"
+          ? data.couple.childName || data.couple.displayAs
           : data.coupleDisplayName
       }
       apiBaseUrl={apiBaseUrl}
@@ -75,10 +79,5 @@ export const templateSectionRegistry: Record<
   ),
   gift_details: ({ data }) => <GiftsSection data={data.gifts} />,
   guestbook: ({ data }) => <GuestbookSection data={data.guestbook} />,
-  story_message: ({ data }) => <StoryMessageSection data={data.story} />,
   contact_socials: ({ data }) => <ContactSection data={data.contact} />,
-  eighteen_roses_candles: ({ data }) => (
-    <EighteenRosesCandlesSection data={data.eighteenRosesCandles} />
-  ),
-  debut_court: ({ data }) => <DebutCourtSection data={data.debutCourt} />,
 };

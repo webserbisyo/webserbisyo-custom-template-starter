@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useReducedMotion } from "motion/react";
 import { Button } from "@/template/components/ui/Button";
 import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
-import { DebutImagePlaceholder } from "../containers/DebutImagePlaceholder";
+import { CelestialImagePlaceholder } from "../containers/CelestialImagePlaceholder";
 import { cn } from "../ui/cn";
 import type { GalleryOrientation } from "@/template/content/gallery";
 
@@ -78,7 +78,7 @@ export function SkewCarousel({
               />
             ) : (
               <div className="w-[300px] h-[220px] sm:w-[380px] sm:h-[260px]">
-                <DebutImagePlaceholder
+                <CelestialImagePlaceholder
                   context="gallery"
                   label={item.folioLabel || "GALLERY SPECIMEN"}
                 />
@@ -258,7 +258,7 @@ export function SkewCarousel({
                       />
                     ) : (
                       <div className="w-[280px] h-[200px] sm:w-[340px] sm:h-[240px]">
-                        <DebutImagePlaceholder
+                        <CelestialImagePlaceholder
                           context="gallery"
                           label={
                             item.folioLabel || `SPECIMEN // ${String(idx + 1).padStart(2, "0")}`

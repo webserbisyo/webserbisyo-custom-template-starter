@@ -21,16 +21,16 @@ interface Particle {
 }
 
 const BOKEH_COLORS = [
-  "rgba(212, 175, 55, ", // Champagne Gold
-  "rgba(183, 110, 121, ", // Rose Gold
-  "rgba(230, 92, 79, ", // Living Coral tint
-  "rgba(255, 231, 226, ", // Soft Blush Rose
-  "rgba(249, 241, 220, ", // Soft Champagne
+  "rgba(217, 119, 6, ", // Warm Sacramental Gold
+  "rgba(2, 132, 199, ", // Sky Blue
+  "rgba(56, 189, 248, ", // Starlight Azure
+  "rgba(254, 243, 199, ", // Candlelight Glow
+  "rgba(241, 245, 249, ", // Cloud Pearl
 ];
 
 /**
  * Ambient GPU-accelerated Bokeh & Sparkle Spore Emitter.
- * Drifts subtle luxury golden spores across the debut viewport.
+ * Drifts subtle celestial spores and starlight across the viewport.
  * Automatically halts when prefers-reduced-motion is active.
  */
 export function SparkleBokehEmitter({

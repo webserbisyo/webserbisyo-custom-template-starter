@@ -1,39 +1,41 @@
 /* ==========================================================================
-   DEBUT ROSE GLAM — BACKGROUND PATTERN ARCHITECTURE (SVG / CSS GRADIENTS)
-   Pure theme-aware ambient patterns and micro-dot radial grids.
+   CANONICAL BAPTISM — BACKGROUND PATTERN ARCHITECTURE (SVG / CSS GRADIENTS)
+   Celestial sky ambient patterns and starlight micro-dot radial grids.
    ========================================================================== */
 
 :root {
-  --pattern-opacity: 0.06;
-  --pattern-color: 183, 110, 121; /* Rose Gold RGB on light surfaces */
+  --pattern-opacity: 0.05;
+  --pattern-color: 2, 132, 199; /* Sky Blue RGB on light surfaces */
 }
 
 /* Intensity Modifiers */
 .pattern-subtle {
-  --pattern-opacity: 0.04;
+  --pattern-opacity: 0.03;
 }
 
 .pattern-standard {
-  --pattern-opacity: 0.08;
+  --pattern-opacity: 0.06;
 }
 
 .pattern-feature {
-  --pattern-opacity: 0.12;
+  --pattern-opacity: 0.09;
 }
 
-/* Surface-Aware Inversion (for Velvet Noir & Living Coral Sections) */
+/* Surface-Aware Inversion (for Midnight Navy & Sky Blue Sections) */
 .pattern-dark {
-  --pattern-color: 249, 241, 220; /* Soft Champagne on dark/coral surfaces */
+  --pattern-color: 254, 243, 199; /* Candlelight Gold on dark surfaces */
 }
 
-.pattern-coral {
-  --pattern-color: 255, 255, 255; /* Pure White on Living Coral */
-  --pattern-opacity: 0.08;
+.pattern-coral,
+.pattern-sky {
+  --pattern-color: 255, 255, 255; /* Pure White on Sky Blue surfaces */
+  --pattern-opacity: 0.07;
 }
 
-/* 1. Rose Parterre Trellis / Lattice */
+/* 1. Celestial Star Lattice */
 .pattern-lattice,
-.pattern-rose-trellis {
+.pattern-rose-trellis,
+.pattern-celestial-trellis {
   background-size: 32px 32px;
   background-image:
     linear-gradient(45deg, rgba(var(--pattern-color), var(--pattern-opacity)) 25%, transparent 25%),
@@ -46,9 +48,10 @@
     linear-gradient(-45deg, transparent 75%, rgba(var(--pattern-color), var(--pattern-opacity)) 75%);
 }
 
-/* 2. Stardust Sparkle Dot Grid */
+/* 2. Starlight Sparkle Dot Grid */
 .pattern-archival-dot,
-.pattern-stardust-dot {
+.pattern-stardust-dot,
+.pattern-celestial-dot {
   background-size: 24px 24px;
   background-image: radial-gradient(
     circle,
@@ -57,7 +60,7 @@
   );
 }
 
-/* 3. Cotillion Ledger / Chronicle Rule */
+/* 3. Sacramental Chronicle Rule */
 .pattern-ledger-rule,
 .pattern-chronicle-rule {
   background-size: 100% 32px;
@@ -68,9 +71,10 @@
   );
 }
 
-/* 4. Ballroom Glazing Pane */
+/* 4. Sanctuary Glazing Grid */
 .pattern-glazing-grid,
-.pattern-ballroom-grid {
+.pattern-ballroom-grid,
+.pattern-sanctuary-grid {
   background-size: 36px 36px;
   background-image:
     linear-gradient(
@@ -86,21 +90,29 @@
 }
 
 /* ==========================================================================
-   DEBUT ROSE GLAM — 4-PATTERN CADENCE SYSTEM (IMAGE-BASED)
-   Tiled ambient wallpapers mapped across the 17 section flow.
+   CELESTIAL SKY — 4-PATTERN CADENCE SYSTEM (IMAGE-BASED)
+   Tiled ambient wallpapers mapped across the 16 section flow.
    ========================================================================== */
 
 .bg-pattern-debut-01,
 .bg-pattern-debut-02,
 .bg-pattern-debut-03,
-.bg-pattern-debut-04 {
+.bg-pattern-debut-04,
+.bg-pattern-celestial-01,
+.bg-pattern-celestial-02,
+.bg-pattern-celestial-03,
+.bg-pattern-celestial-04 {
   position: relative;
 }
 
 .bg-pattern-debut-01::before,
 .bg-pattern-debut-02::before,
 .bg-pattern-debut-03::before,
-.bg-pattern-debut-04::before {
+.bg-pattern-debut-04::before,
+.bg-pattern-celestial-01::before,
+.bg-pattern-celestial-02::before,
+.bg-pattern-celestial-03::before,
+.bg-pattern-celestial-04::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -111,35 +123,43 @@
   background-size: clamp(220px, 22vw, 320px);
 }
 
-/* 1. Rosebud Botanical Lattice */
-.bg-pattern-debut-01::before {
+/* 1. Star / Botanical Lattice */
+.bg-pattern-debut-01::before,
+.bg-pattern-celestial-01::before {
   background-image: url("/template-assets/backgrounds/pattern-01-rosebud.webp");
-  opacity: 0.12;
+  opacity: 0.08;
 }
 
-/* 2. Cotillion Blossom Grid */
-.bg-pattern-debut-02::before {
+/* 2. Serene Grid */
+.bg-pattern-debut-02::before,
+.bg-pattern-celestial-02::before {
   background-image: url("/template-assets/backgrounds/pattern-02-bloom.webp");
-  opacity: 0.12;
+  opacity: 0.08;
 }
 
-/* 3. Celebration Petals & Stardust */
-.bg-pattern-debut-03::before {
+/* 3. Starlight Spores */
+.bg-pattern-debut-03::before,
+.bg-pattern-celestial-03::before {
   background-image: url("/template-assets/backgrounds/pattern-03-petals.webp");
-  opacity: 0.14;
+  opacity: 0.09;
 }
 
-/* 4. Ballroom Rosette Medallions */
-.bg-pattern-debut-04::before {
+/* 4. Medallion Pane */
+.bg-pattern-debut-04::before,
+.bg-pattern-celestial-04::before {
   background-image: url("/template-assets/backgrounds/pattern-04-rosette.webp");
-  opacity: 0.1;
+  opacity: 0.07;
 }
 
-/* Canvas B (Living Coral) Surface Harmonization */
+/* Canvas B Surface Harmonization */
 .section-surface-coral.bg-pattern-debut-01::before,
 .section-surface-coral.bg-pattern-debut-02::before,
 .section-surface-coral.bg-pattern-debut-03::before,
-.section-surface-coral.bg-pattern-debut-04::before {
-  opacity: 0.1;
+.section-surface-coral.bg-pattern-debut-04::before,
+.section-surface-primary.bg-pattern-celestial-01::before,
+.section-surface-primary.bg-pattern-celestial-02::before,
+.section-surface-primary.bg-pattern-celestial-03::before,
+.section-surface-primary.bg-pattern-celestial-04::before {
+  opacity: 0.08;
   mix-blend-mode: overlay;
 }

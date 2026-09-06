@@ -17,15 +17,15 @@ export function AttireSection({ data }: { data: AttireData }) {
       <div className="template-container-narrow">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-10 sm:mb-12 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>DRESS CODE &amp; MOTIF // 13</span>
+            <span className="text-role-subheading text-[var(--debut-rose-gold,#0284C7)] inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D97706)]" />
+              <span>DRESS CODE &amp; MOTIF // 11</span>
             </span>
-            <h2 className="text-role-heading text-[var(--debut-text-noir,#26131C)] tracking-tight">
+            <h2 className="text-role-heading text-[var(--debut-text-noir,#0F172A)] tracking-tight">
               Dress Code &amp; Palette
             </h2>
             {data.sectionIntro && (
-              <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#704D5B)]">
+              <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#475569)]">
                 {data.sectionIntro}
               </p>
             )}
@@ -37,12 +37,12 @@ export function AttireSection({ data }: { data: AttireData }) {
             <div className="debut-glass-card bg-[var(--debut-surface-alabaster,#ffffff)] rounded-3xl border border-[var(--debut-rose-gold-border,#E8C4C8)] p-6 sm:p-8 shadow-card space-y-6 font-sans relative z-10">
               {data.dressCodeNote && (
                 <div className="flex items-start gap-4 p-4 sm:p-5 rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] border border-[var(--debut-rose-gold-subtle)]">
-                  <Shirt className="w-5 h-5 text-[var(--debut-bg-coral,#E65C4F)] shrink-0 mt-0.5" />
+                  <Shirt className="w-5 h-5 text-[var(--debut-bg-coral,#0284C7)] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-xs font-cinzel font-bold tracking-wider uppercase text-[var(--debut-rose-gold,#B76E79)] block mb-1">
+                    <span className="text-xs font-cinzel font-bold tracking-wider uppercase text-[var(--debut-rose-gold,#0284C7)] block mb-1">
                       Dress Code Guidelines
                     </span>
-                    <p className="text-base text-[var(--debut-text-noir,#26131C)] leading-relaxed font-sans">
+                    <p className="text-base text-[var(--debut-text-noir,#0F172A)] leading-relaxed font-sans">
                       {data.dressCodeNote}
                     </p>
                   </div>
@@ -51,12 +51,12 @@ export function AttireSection({ data }: { data: AttireData }) {
 
               {data.colorMotifNote && (
                 <div className="flex items-start gap-4 p-4 sm:p-5 rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] border border-[var(--debut-rose-gold-subtle)]">
-                  <Sparkles className="w-5 h-5 text-[var(--debut-champagne-gold,#D4AF37)] shrink-0 mt-0.5" />
+                  <Sparkles className="w-5 h-5 text-[var(--debut-champagne-gold,#D97706)] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-xs font-cinzel font-bold tracking-wider uppercase text-[var(--debut-rose-gold,#B76E79)] block mb-1">
+                    <span className="text-xs font-cinzel font-bold tracking-wider uppercase text-[var(--debut-rose-gold,#0284C7)] block mb-1">
                       Motif &amp; Atmosphere
                     </span>
-                    <p className="text-base text-[var(--debut-text-noir,#26131C)] leading-relaxed font-sans">
+                    <p className="text-base text-[var(--debut-text-noir,#0F172A)] leading-relaxed font-sans">
                       {data.colorMotifNote}
                     </p>
                   </div>
@@ -65,8 +65,8 @@ export function AttireSection({ data }: { data: AttireData }) {
 
               {palette.length > 0 && (
                 <div className="pt-2 text-center">
-                  <span className="text-xs font-cinzel font-bold tracking-[0.2em] uppercase text-[var(--debut-rose-gold,#B76E79)] block mb-4">
-                    Cotillion Color Inspiration
+                  <span className="text-xs font-cinzel font-bold tracking-[0.2em] uppercase text-[var(--debut-rose-gold,#0284C7)] block mb-4">
+                    Celestial Color Inspiration
                   </span>
                   <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
                     {palette.map((color, idx) => (

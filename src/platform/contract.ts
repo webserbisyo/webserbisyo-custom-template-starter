@@ -28,37 +28,38 @@ export type EventSectionKey =
 
 export type WeddingSectionKey = EventSectionKey;
 
-export const DEBUT_APPLICABLE_SECTION_KEYS = [
+export const BAPTISM_APPLICABLE_SECTION_KEYS = [
   "host_info",
   "countdown",
   "music_effects",
   "gallery",
+  "story_message",
   "main_event",
   "venue",
   "secondary_event",
   "timeline_program",
-  "eighteen_roses_candles",
-  "debut_court",
-  "principal_sponsors",
+  "godparents",
   "attire_motif",
   "extra_info",
   "rsvp_form",
   "gift_details",
   "guestbook",
-  "story_message",
   "contact_socials",
 ] as const;
 
-export const EVENT_APPLICABLE_SECTION_KEYS = DEBUT_APPLICABLE_SECTION_KEYS;
-export const WEDDING_APPLICABLE_SECTION_KEYS = DEBUT_APPLICABLE_SECTION_KEYS;
+export const EVENT_APPLICABLE_SECTION_KEYS = BAPTISM_APPLICABLE_SECTION_KEYS;
+export const WEDDING_APPLICABLE_SECTION_KEYS = BAPTISM_APPLICABLE_SECTION_KEYS;
+export const DEBUT_APPLICABLE_SECTION_KEYS = BAPTISM_APPLICABLE_SECTION_KEYS;
 
-export type DebutApplicableSectionKey = (typeof DEBUT_APPLICABLE_SECTION_KEYS)[number];
-export type EventApplicableSectionKey = DebutApplicableSectionKey;
-export type WeddingApplicableSectionKey = DebutApplicableSectionKey;
+export type BaptismApplicableSectionKey = (typeof BAPTISM_APPLICABLE_SECTION_KEYS)[number];
+export type EventApplicableSectionKey = BaptismApplicableSectionKey;
+export type WeddingApplicableSectionKey = BaptismApplicableSectionKey;
+export type DebutApplicableSectionKey = BaptismApplicableSectionKey;
 
-export const debutApplicableSectionKeySet = new Set<string>(DEBUT_APPLICABLE_SECTION_KEYS);
-export const eventApplicableSectionKeySet = debutApplicableSectionKeySet;
-export const weddingApplicableSectionKeySet = debutApplicableSectionKeySet;
+export const baptismApplicableSectionKeySet = new Set<string>(BAPTISM_APPLICABLE_SECTION_KEYS);
+export const eventApplicableSectionKeySet = baptismApplicableSectionKeySet;
+export const weddingApplicableSectionKeySet = baptismApplicableSectionKeySet;
+export const debutApplicableSectionKeySet = baptismApplicableSectionKeySet;
 
 export type SectionContractEntry = {
   key: EventSectionKey;
@@ -97,6 +98,12 @@ export const eventWebsiteSectionKeySet = new Set<string>(canonicalKeys);
 
 export const requiredWeddingSections = eventWebsiteSectionContract
   .filter((entry) => entry.visibility === "required")
+  .map((entry) => entry.key);
+
+export const requiredBaptismSections = eventWebsiteSectionContract
+  .filter(
+    (entry) => entry.visibility === "required" && baptismApplicableSectionKeySet.has(entry.key)
+  )
   .map((entry) => entry.key);
 
 export function validatePublicEventContract(event: Record<string, unknown>): boolean {

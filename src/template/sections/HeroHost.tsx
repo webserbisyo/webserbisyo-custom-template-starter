@@ -47,26 +47,35 @@ export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionPr
             {/* 1. Folio Stamp */}
             <Reveal direction="down" distance={16}>
               <div className="flex items-center justify-center lg:justify-start">
-                <span className="text-xs font-cinzel font-bold uppercase tracking-[0.22em] text-[var(--debut-rose-gold,#B76E79)] debut-glass-card px-4 py-1.5 rounded-full border shadow-xs inline-flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-                  <span>DEBUT ROYALE // 01</span>
+                <span className="text-xs font-cinzel font-bold uppercase tracking-[0.22em] text-[var(--debut-rose-gold,#0284C7)] debut-glass-card px-4 py-1.5 rounded-full border shadow-xs inline-flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D97706)]" />
+                  <span>HOLY BAPTISM // 01</span>
                 </span>
               </div>
             </Reveal>
 
             {/* 2. Host Names — High-Impact Playfair Display */}
             <Reveal direction="up" distance={20} delay={0.1}>
-              <h1 className="text-role-display tracking-tight text-[var(--debut-text-noir,#26131C)] text-center lg:text-left">
+              <h1 className="text-role-display tracking-tight text-[var(--debut-text-noir,#0F172A)] text-center lg:text-left">
                 {displayName}
               </h1>
             </Reveal>
 
-            {/* 3. Single Connected Debut Date in Glass Pill */}
+            {/* Parents' Line for Baptism */}
+            {data.kind === "baptism" && data.parentNames && (
+              <Reveal direction="up" distance={16} delay={0.12}>
+                <p className="font-serif italic text-lg sm:text-xl text-[var(--debut-text-muted,#475569)] text-center lg:text-left">
+                  Beloved Child of {data.parentNames}
+                </p>
+              </Reveal>
+            )}
+
+            {/* 3. Single Connected Date in Glass Pill */}
             {data.hostLine && (
               <Reveal direction="up" distance={16} delay={0.15}>
                 <div className="flex justify-center lg:justify-start">
                   <div className="inline-flex items-center justify-center px-6 py-2.5 sm:px-8 sm:py-3 rounded-full debut-glass-card border shadow-xs">
-                    <span className="font-cinzel font-bold text-base sm:text-lg md:text-xl tracking-[0.2em] text-[var(--debut-rose-gold,#B76E79)] uppercase">
+                    <span className="font-cinzel font-bold text-base sm:text-lg md:text-xl tracking-[0.2em] text-[var(--debut-rose-gold,#0284C7)] uppercase">
                       {data.hostLine}
                     </span>
                   </div>
@@ -77,19 +86,19 @@ export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionPr
             {/* 4. Editorial Invitation Greeting */}
             {data.shortHostMessage && (
               <Reveal direction="up" distance={16} delay={0.25}>
-                <p className="font-serif italic text-2xl sm:text-3xl text-[var(--debut-text-noir,#26131C)] font-bold max-w-xl mx-auto lg:mx-0 text-center lg:text-left leading-relaxed">
+                <p className="font-serif italic text-2xl sm:text-3xl text-[var(--debut-text-noir,#0F172A)] font-bold max-w-xl mx-auto lg:mx-0 text-center lg:text-left leading-relaxed">
                   &ldquo;{data.shortHostMessage}&rdquo;
                 </p>
               </Reveal>
             )}
 
-            {/* 5. Action CTA Buttons with Rose Glam Physics */}
+            {/* 5. Action CTA Buttons */}
             <Reveal direction="up" distance={16} delay={0.3}>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2 font-sans">
                 <Magnetic intensity={0.25}>
                   <a
                     href="/rsvp"
-                    className="inline-flex items-center gap-2.5 py-3.5 px-7 bg-[var(--debut-bg-coral,#E65C4F)] hover:bg-[var(--debut-bg-coral-hover,#D85244)] text-white text-sm font-bold uppercase tracking-wider rounded-2xl shadow-floating hover:shadow-xl transition-all active:scale-95 template-focus-ring cursor-pointer min-h-[48px] btn-press-physics"
+                    className="inline-flex items-center gap-2.5 py-3.5 px-7 bg-[var(--debut-bg-coral,#0284C7)] hover:bg-[var(--debut-bg-coral-hover,#0369A1)] text-white text-sm font-bold uppercase tracking-wider rounded-2xl shadow-floating hover:shadow-xl transition-all active:scale-95 template-focus-ring cursor-pointer min-h-[48px] btn-press-physics"
                   >
                     <Heart className="w-4 h-4 fill-white/20" />
                     <span>Reserve Your Seat</span>
@@ -99,10 +108,10 @@ export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionPr
                 {storyEnabled && (
                   <a
                     href="#story_message"
-                    className="inline-flex items-center gap-2 py-3.5 px-6 debut-glass-card hover:bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] text-[var(--debut-text-noir,#26131C)] text-sm font-semibold rounded-2xl border transition-all active:scale-95 template-focus-ring cursor-pointer shadow-xs min-h-[48px] btn-press-physics"
+                    className="inline-flex items-center gap-2 py-3.5 px-6 debut-glass-card hover:bg-[var(--debut-surface-alabaster-alt,#F1F5F9)] text-[var(--debut-text-noir,#0F172A)] text-sm font-semibold rounded-2xl border transition-all active:scale-95 template-focus-ring cursor-pointer shadow-xs min-h-[48px] btn-press-physics"
                   >
-                    <BookOpen className="w-4 h-4 text-[var(--debut-rose-gold,#B76E79)]" />
-                    <span>Debut Story</span>
+                    <BookOpen className="w-4 h-4 text-[var(--debut-rose-gold,#0284C7)]" />
+                    <span>Dedication</span>
                   </a>
                 )}
               </div>

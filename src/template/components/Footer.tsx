@@ -3,11 +3,11 @@
 import type { EventTemplateData } from "@/platform/event-template-data";
 import { formatEventDateLong } from "@/template/utils/event-formatting";
 import { Reveal } from "./motion/Reveal";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Sparkles } from "lucide-react";
 import { FacebookIcon, InstagramIcon, TikTokIcon } from "./ui/BrandIcons";
 
 // PLATFORM DATA — KEEP DYNAMIC.
-// DEBUT ROSE GLAM VELVET NOIR COLOPHON FOOTER (CLOSING ANCHOR & DYNAMIC SOCIAL CONTRACT LINKS)
+// CELESTIAL SKY MIDNIGHT NAVY COLOPHON FOOTER
 
 export function Footer({ data }: { data: EventTemplateData }) {
   const contact = data.contact;
@@ -23,61 +23,61 @@ export function Footer({ data }: { data: EventTemplateData }) {
   return (
     <footer
       id="contact_socials"
-      className="section-surface-noir bg-[#10050B] py-16 px-6 text-center text-[#E8C4C8]/80 border-t border-[#E8C4C8]/20 relative overflow-hidden select-none"
+      className="section-surface-noir bg-[#0B1329] py-16 px-6 text-center text-[#94A3B8] border-t border-[#BAE6FD]/20 relative overflow-hidden select-none"
     >
       {/* Background ambient radial glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[var(--debut-bg-coral,#E65C4F)]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[var(--debut-bg-coral,#0284C7)]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="template-container relative z-10 space-y-8 max-w-2xl mx-auto">
-        {/* 1. Grand Cotillion Monogram Seal & Wordmark */}
+        {/* 1. Celestial Star Monogram Seal & Wordmark */}
         <Reveal direction="down" distance={16}>
           <div className="flex flex-col items-center">
-            {/* Centered circular rose badge */}
-            <div className="w-12 h-12 rounded-full border border-[#E8C4C8]/40 bg-[#1A0A13] flex items-center justify-center text-base shadow-md mx-auto mb-4">
-              🌹
+            {/* Centered circular celestial star badge */}
+            <div className="w-12 h-12 rounded-full border border-[#BAE6FD]/40 bg-[#0F1E36] flex items-center justify-center text-base shadow-md mx-auto mb-4">
+              <Sparkles className="w-5 h-5 text-[var(--debut-champagne-gold,#D97706)]" />
             </div>
 
-            <div className="font-cinzel font-bold text-sm sm:text-base tracking-[0.25em] text-[#D4AF37] uppercase mb-2">
-              {data.coupleDisplayName || "SOPHIA • 18TH BIRTHDAY"}
+            <div className="font-cinzel font-bold text-sm sm:text-base tracking-[0.25em] text-[var(--debut-champagne-gold,#D97706)] uppercase mb-2">
+              {data.coupleDisplayName || "LIAM'S CHRISTENING"}
             </div>
 
-            <p className="font-serif italic text-xs text-[#E8C4C8]/80 mb-2">
-              {data.ceremony?.eventLabel || "The Grand Cotillion Ball"}
+            <p className="font-serif italic text-xs text-[#94A3B8] mb-2">
+              {data.ceremony?.eventLabel || "The Holy Baptism"}
               {dateFormatted ? ` • ${dateFormatted}` : ""}
             </p>
           </div>
         </Reveal>
 
-        {/* 2. Ballroom Protocol & Coordination Box */}
+        {/* 2. Ceremony Protocol & Coordination Box */}
         {hasCoordinationBox && (
           <Reveal direction="up" distance={20} delay={0.1}>
-            <div className="bg-[#180812] border border-[#E8C4C8]/20 rounded-2xl p-5 sm:p-6 max-w-lg mx-auto space-y-3 text-sm font-sans">
-              <span className="text-xs font-cinzel font-bold uppercase tracking-[0.22em] text-[#D4AF37] block">
-                Ballroom Protocol &amp; Coordination
+            <div className="bg-[#0F1E36] border border-[#BAE6FD]/20 rounded-2xl p-5 sm:p-6 max-w-lg mx-auto space-y-3 text-sm font-sans">
+              <span className="text-xs font-cinzel font-bold uppercase tracking-[0.22em] text-[var(--debut-champagne-gold,#D97706)] block">
+                Ceremony Coordination
               </span>
 
               {contact?.contactPerson && (
-                <p className="font-serif font-bold text-base text-[var(--debut-text-on-noir,#FAF5F5)]">
+                <p className="font-serif font-bold text-base text-[var(--debut-text-on-noir,#F8FAFC)]">
                   {contact.contactPerson}
                 </p>
               )}
 
               {data.venue?.venueName && (
-                <div className="flex items-center justify-center gap-2 text-[var(--debut-text-on-noir,#FAF5F5)] font-medium text-xs sm:text-sm">
-                  <MapPin className="w-3.5 h-3.5 text-[var(--debut-rose-gold,#B76E79)] shrink-0" />
+                <div className="flex items-center justify-center gap-2 text-[var(--debut-text-on-noir,#F8FAFC)] font-medium text-xs sm:text-sm">
+                  <MapPin className="w-3.5 h-3.5 text-[var(--debut-rose-gold,#0284C7)] shrink-0" />
                   <span>
                     {data.venue.venueName} {data.venue.address ? `• ${data.venue.address}` : ""}
                   </span>
                 </div>
               )}
 
-              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-1 text-xs text-[#E8C4C8]/90">
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-1 text-xs text-[#94A3B8]">
                 {contact?.contactNumber && (
                   <a
                     href={`tel:${contact.contactNumber}`}
                     className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
                   >
-                    <Phone className="w-3.5 h-3.5 text-[var(--debut-rose-gold,#B76E79)]" />
+                    <Phone className="w-3.5 h-3.5 text-[var(--debut-rose-gold,#0284C7)]" />
                     <span>{contact.contactNumber}</span>
                   </a>
                 )}
@@ -86,7 +86,7 @@ export function Footer({ data }: { data: EventTemplateData }) {
                     href={`mailto:${contact.email}`}
                     className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
                   >
-                    <Mail className="w-3.5 h-3.5 text-[var(--debut-rose-gold,#B76E79)]" />
+                    <Mail className="w-3.5 h-3.5 text-[var(--debut-rose-gold,#0284C7)]" />
                     <span>{contact.email}</span>
                   </a>
                 )}
@@ -105,7 +105,7 @@ export function Footer({ data }: { data: EventTemplateData }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
-                  className="w-10 h-10 rounded-full bg-[#180812] text-[#E8C4C8] hover:text-white hover:border-[#D4AF37] border border-[#E8C4C8]/30 flex items-center justify-center transition-all duration-300 hover:scale-105 template-focus-ring cursor-pointer"
+                  className="w-10 h-10 rounded-full bg-[#0F1E36] text-[#94A3B8] hover:text-white hover:border-[#D97706] border border-[#BAE6FD]/30 flex items-center justify-center transition-all duration-300 hover:scale-105 template-focus-ring cursor-pointer"
                 >
                   <FacebookIcon className="w-4 h-4" />
                 </a>
@@ -116,7 +116,7 @@ export function Footer({ data }: { data: EventTemplateData }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="w-10 h-10 rounded-full bg-[#180812] text-[#E8C4C8] hover:text-white hover:border-[#D4AF37] border border-[#E8C4C8]/30 flex items-center justify-center transition-all duration-300 hover:scale-105 template-focus-ring cursor-pointer"
+                  className="w-10 h-10 rounded-full bg-[#0F1E36] text-[#94A3B8] hover:text-white hover:border-[#D97706] border border-[#BAE6FD]/30 flex items-center justify-center transition-all duration-300 hover:scale-105 template-focus-ring cursor-pointer"
                 >
                   <InstagramIcon className="w-4 h-4" />
                 </a>
@@ -127,7 +127,7 @@ export function Footer({ data }: { data: EventTemplateData }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="TikTok"
-                  className="w-10 h-10 rounded-full bg-[#180812] text-[#E8C4C8] hover:text-white hover:border-[#D4AF37] border border-[#E8C4C8]/30 flex items-center justify-center transition-all duration-300 hover:scale-105 template-focus-ring cursor-pointer"
+                  className="w-10 h-10 rounded-full bg-[#0F1E36] text-[#94A3B8] hover:text-white hover:border-[#D97706] border border-[#BAE6FD]/30 flex items-center justify-center transition-all duration-300 hover:scale-105 template-focus-ring cursor-pointer"
                 >
                   <TikTokIcon className="w-4 h-4" />
                 </a>
@@ -138,13 +138,12 @@ export function Footer({ data }: { data: EventTemplateData }) {
 
         {/* 4. Colophon & Platform Attribution */}
         <Reveal direction="up" distance={16} delay={0.2}>
-          <div className="space-y-2 text-xs text-[#E8C4C8]/70 font-sans border-t border-[#E8C4C8]/15 pt-8">
+          <div className="space-y-2 text-xs text-[#94A3B8]/80 font-sans border-t border-[#BAE6FD]/15 pt-8">
             <p className="flex items-center justify-center gap-1.5">
-              <span>Grand Cotillion Royale</span>
+              <span>Liam&apos;s Christening</span>
               <span>&bull;</span>
               <span>
-                &copy; {currentYear} {data.coupleDisplayName || "Sophia Eleanor"}. All Rights
-                Reserved.
+                &copy; {currentYear} {data.coupleDisplayName || "Liam Santos"}. All Rights Reserved.
               </span>
             </p>
             <p className="text-[11px] opacity-80">
@@ -153,7 +152,7 @@ export function Footer({ data }: { data: EventTemplateData }) {
                 href="https://rsvp.webserbisyo.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#D4AF37] hover:underline font-semibold"
+                className="text-[var(--debut-champagne-gold,#D97706)] hover:underline font-semibold"
               >
                 WebSerbisyo
               </a>

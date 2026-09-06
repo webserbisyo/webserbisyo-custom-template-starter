@@ -3,8 +3,8 @@ import path from "node:path";
 import { getPublicEnv } from "../src/platform/env.js";
 import { loadEvent } from "../src/platform/load-event.js";
 import {
-  requiredWeddingSections,
-  WEDDING_APPLICABLE_SECTION_KEYS,
+  requiredBaptismSections,
+  BAPTISM_APPLICABLE_SECTION_KEYS,
 } from "../src/platform/contract.js";
 
 // Load .env.local deterministically if present in project root
@@ -49,9 +49,9 @@ async function runVerifyConnection() {
     console.log("MODE: DEMO");
     console.log("───────────────────────────────────");
     console.log("The starter is currently running in local Demo / Design Mode.");
-    console.log("Demo Wedding data: PASS");
-    console.log(`17 Wedding sections: PASS (${WEDDING_APPLICABLE_SECTION_KEYS.length} applicable)`);
-    console.log(`Required sections: ${requiredWeddingSections.join(", ")}`);
+    console.log("Demo Baptism data: PASS");
+    console.log(`16 Baptism sections: PASS (${BAPTISM_APPLICABLE_SECTION_KEYS.length} applicable)`);
+    console.log(`Required sections: ${requiredBaptismSections.join(", ")}`);
     console.log("\nTo connect to a live WebSerbisyo event, set in .env.local:");
     console.log("  NEXT_PUBLIC_WEBSERBISYO_API_URL=https://api.webserbisyo.com");
     console.log("  NEXT_PUBLIC_EVENT_SLUG=your-actual-event-slug");
@@ -65,7 +65,7 @@ async function runVerifyConnection() {
   console.log("───────────────────────────────────");
   console.log(`API base URL: ${env.apiBaseUrl ? "configured" : "missing"}`);
   console.log(`Event slug: ${env.eventSlug ? "configured" : "missing"}`);
-  console.log(`Event kind: wedding`);
+  console.log(`Event kind: baptism`);
 
   const tokenPresent = Boolean(process.env.NEXT_PUBLIC_WEBSERBISYO_ACCESS_TOKEN);
   console.log(`Private Token: ${tokenPresent ? "Present (redacted)" : "None"}`);
@@ -78,23 +78,23 @@ async function runVerifyConnection() {
     console.log(`Public DTO: PASS`);
     console.log(`Contract version: ${data.contractVersion}`);
     console.log(`Source mode: ${data.source}`);
-    console.log(`Couple: ${data.coupleDisplayName}`);
+    console.log(`Child: ${data.coupleDisplayName}`);
     console.log(`Event Date: ${data.eventDateLabel || "N/A"}`);
 
     const enabled = data.enabledSectionKeys || [];
     const ordered = data.orderedSectionKeys || [];
-    const missingRequired = requiredWeddingSections.filter((req) => !enabled.includes(req));
+    const missingRequired = requiredBaptismSections.filter((req) => !enabled.includes(req));
 
     if (missingRequired.length === 0) {
       console.log(
-        `Required sections: PASS (${requiredWeddingSections.length}/${requiredWeddingSections.length})`
+        `Required sections: PASS (${requiredBaptismSections.length}/${requiredBaptismSections.length})`
       );
     } else {
       console.log(`Required sections: FAILED (Missing: ${missingRequired.join(", ")})`);
     }
 
     console.log(`Enabled section count: ${enabled.length}`);
-    console.log(`Normalized Wedding sections: PASS`);
+    console.log(`Normalized Baptism sections: PASS`);
 
     const disabled = ordered.filter((k) => !enabled.includes(k));
     if (disabled.length > 0) {

@@ -13,7 +13,7 @@ import { Calendar, Clock, AlertCircle, Bookmark, Sparkles } from "lucide-react";
 // DEBUT ROSE GLAM MAIN EVENT (CANVAS B: LIVING CORAL WITH SOLID PURE WHITE ENCLOSURE CARDS)
 
 export function MainEventSection({ data }: { data: MainEventData }) {
-  const eventLabel = data.eventLabel || "The Grand Cotillion";
+  const eventLabel = data.eventLabel || "The Holy Baptism";
   const dateFormatted = formatEventDateLong(data.eventDate);
   const timeFormatted = formatTimeRange(data.eventTime, data.endTime);
   const deadlineFormatted = formatRsvpDeadline(data.rsvpDeadline);
@@ -28,7 +28,7 @@ export function MainEventSection({ data }: { data: MainEventData }) {
           <div className="text-center mb-8 sm:mb-12 space-y-2">
             <span className="text-role-subheading text-white drop-shadow-sm inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
-              <span>BALLROOM RECORD // 06</span>
+              <span>CEREMONY RECORD // 06</span>
             </span>
             <h2 className="text-role-heading-major text-white tracking-tight">{eventLabel}</h2>
           </div>
@@ -41,17 +41,17 @@ export function MainEventSection({ data }: { data: MainEventData }) {
               <div className="debut-card-coral-enclosure bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] p-4 sm:p-6 rounded-3xl shadow-2xl">
                 <DateCalendar
                   date={data.eventDate || undefined}
-                  highlightLabel={data.eventLabel || "Grand Cotillion"}
+                  highlightLabel={data.eventLabel || "Holy Baptism"}
                   className="w-full"
                 />
               </div>
             </div>
 
-            {/* Right Column: Formal Cotillion Event Record */}
+            {/* Right Column: Formal Ceremony Event Record */}
             <div className="lg:col-span-7 flex flex-col justify-between">
               <div className="h-full">
                 <LedgerPanel
-                  title="Official Cotillion Schedule"
+                  title="Ceremony Schedule"
                   indexTag="SCHEDULE // 01"
                   className="h-full debut-card-coral-enclosure bg-[var(--debut-surface-alabaster,#ffffff)] text-[var(--debut-text-noir,#26131C)] shadow-2xl flex flex-col justify-between"
                 >
@@ -62,7 +62,7 @@ export function MainEventSection({ data }: { data: MainEventData }) {
                         <div className="p-4 rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] border border-[var(--debut-rose-gold-subtle)] space-y-1.5">
                           <div className="flex items-center gap-1.5 text-xs font-cinzel font-bold tracking-wider uppercase text-[var(--debut-rose-gold,#B76E79)]">
                             <Calendar className="w-3.5 h-3.5 text-[var(--debut-bg-coral,#E65C4F)]" />
-                            <span>Celebration Date</span>
+                            <span>Ceremony Date</span>
                           </div>
                           <p className="text-base sm:text-lg font-bold text-[var(--debut-text-noir,#26131C)] font-serif">
                             {dateFormatted}
@@ -74,7 +74,7 @@ export function MainEventSection({ data }: { data: MainEventData }) {
                         <div className="p-4 rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)] border border-[var(--debut-rose-gold-subtle)] space-y-1.5">
                           <div className="flex items-center gap-1.5 text-xs font-cinzel font-bold tracking-wider uppercase text-[var(--debut-rose-gold,#B76E79)]">
                             <Clock className="w-3.5 h-3.5 text-[var(--debut-bg-coral,#E65C4F)]" />
-                            <span>Program Hours</span>
+                            <span>Ceremony Hours</span>
                           </div>
                           <p className="text-base sm:text-lg font-bold text-[var(--debut-text-noir,#26131C)] font-serif">
                             {timeFormatted}

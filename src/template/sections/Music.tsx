@@ -16,7 +16,7 @@ export function MusicSection({ data }: { data: MusicData }) {
   const { playbackState, isPlaying, play, pause, stop, setMusicData } = useAudio();
 
   const link = data.musicLink;
-  const playLabel = data.playButtonLabel || "Play Debut Song";
+  const playLabel = data.playButtonLabel || "Play Music";
   const note = data.shortNote;
 
   useEffect(() => {
@@ -37,12 +37,12 @@ export function MusicSection({ data }: { data: MusicData }) {
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="mb-6 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>COTILLION SOUNDTRACK</span>
+            <span className="text-role-subheading text-[var(--debut-rose-gold,#0284C7)] inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D97706)]" />
+              <span>CEREMONY SOUNDTRACK</span>
             </span>
-            <h2 className="text-role-heading text-[var(--debut-text-noir,#26131C)]">
-              Debut Celebration Soundtrack
+            <h2 className="text-role-heading text-[var(--debut-text-noir,#0F172A)]">
+              Sacred Christening Hymns
             </h2>
           </div>
         </Reveal>

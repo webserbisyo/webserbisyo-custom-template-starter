@@ -127,8 +127,8 @@ export function MoreDrawer({ isOpen, onClose, groups, coupleDisplayName }: MoreD
       <div className="relative w-full max-w-md bg-[var(--debut-surface-alabaster,#FFFFFF)] h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-right duration-300 border-l border-[var(--debut-rose-gold-border,#E8C4C8)]">
         {/* Drawer Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/60">
-          <span className="text-xs font-cinzel font-bold tracking-[0.22em] text-[var(--debut-rose-gold,#B76E79)] uppercase">
-            COTILLION DIRECTORY
+          <span className="text-xs font-cinzel font-bold tracking-[0.22em] text-[var(--debut-rose-gold,#0284C7)] uppercase">
+            CELEBRATION DIRECTORY
           </span>
           <button
             onClick={onClose}
@@ -145,8 +145,8 @@ export function MoreDrawer({ isOpen, onClose, groups, coupleDisplayName }: MoreD
             <div key={group.title} className="space-y-2.5">
               <h4 className="text-[10px] font-cinzel font-bold uppercase tracking-[0.22em] text-[var(--debut-text-muted,#704D5B)] border-b border-[var(--debut-rose-gold-subtle)] pb-1.5 flex items-center justify-between">
                 <span>{group.title}</span>
-                <span className="text-[9px] text-[var(--debut-champagne-gold,#D4AF37)]">
-                  ROYALE 0{gIdx + 1}
+                <span className="text-[9px] text-[var(--debut-champagne-gold,#D97706)]">
+                  PART 0{gIdx + 1}
                 </span>
               </h4>
               <div className="grid grid-cols-2 gap-2">
@@ -174,7 +174,7 @@ export function MoreDrawer({ isOpen, onClose, groups, coupleDisplayName }: MoreD
         {/* Drawer Footer */}
         <div className="px-6 py-4 border-t border-[var(--debut-rose-gold-subtle)] bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/40 text-center text-xs text-[var(--debut-text-muted,#704D5B)]">
           <p>
-            Grand Cotillion Royale &bull; RSVP by{" "}
+            Christening Celebration &bull; RSVP by{" "}
             <a
               href="https://rsvp.webserbisyo.com"
               target="_blank"

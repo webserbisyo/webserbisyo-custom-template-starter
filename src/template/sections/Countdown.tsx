@@ -134,7 +134,7 @@ export function CountdownSection({ data, eventDate, eventTime }: CountdownSectio
               <span>THE COUNTDOWN // 02</span>
             </span>
             <h2 className="text-role-heading text-white tracking-tight">
-              {data.title || "Counting Down to Sophia's 18th Birthday"}
+              {data.title || "Counting Down to the Christening"}
             </h2>
             {data.shortNote && (
               <p className="text-role-lead text-white/80 max-w-md mx-auto italic font-serif">

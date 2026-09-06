@@ -24,7 +24,7 @@ export function ExtraInfoSection({ data }: { data: ExtraInfoData }) {
           <div className="text-center mb-10 sm:mb-12 space-y-2">
             <span className="text-role-subheading text-white drop-shadow-sm inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-soft,#F9F1DC)]" />
-              <span>GUEST GUIDANCE &amp; FAQ // 14</span>
+              <span>GUEST GUIDANCE &amp; FAQ // 12</span>
             </span>
             <h2 className="text-role-heading-major text-white tracking-tight">
               {data.sectionTitle || "Frequently Asked Questions"}

@@ -115,6 +115,7 @@ export type NamedGroup = {
 };
 
 export type NamedGroupsData = {
+  introLine?: string;
   groups: NamedGroup[];
 };
 

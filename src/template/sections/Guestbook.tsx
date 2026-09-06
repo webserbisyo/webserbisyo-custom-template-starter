@@ -28,15 +28,15 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
       <div className="template-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>COTILLION PROTOCOL // INSCRIBED BLESSINGS &amp; WISHES</span>
+            <span className="text-role-subheading text-[var(--debut-rose-gold,#0284C7)] inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D97706)]" />
+              <span>PRAYERS &amp; BLESSINGS // 15</span>
             </span>
-            <h2 className="text-role-heading-major text-[var(--debut-text-noir,#26131C)] tracking-tight">
-              {data.sectionTitle || "Debut Wishes"}
+            <h2 className="text-role-heading-major text-[var(--debut-text-noir,#0F172A)] tracking-tight">
+              {data.sectionTitle || "Prayers & Blessings"}
             </h2>
-            <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#704D5B)] font-serif italic">
-              {data.sectionIntro || "Leave a warm message for our debutante."}
+            <p className="text-role-lead max-w-md mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#475569)] font-serif italic">
+              {data.sectionIntro || "Leave a prayer or blessing for our child."}
             </p>
           </div>
         </Reveal>
@@ -86,8 +86,8 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
 
                     {/* Card Footer Inscription Tag */}
                     <div className="mt-4 pt-2.5 flex items-center justify-end border-t border-[var(--debut-rose-gold-subtle)]/40">
-                      <span className="text-[9px] font-cinzel font-bold tracking-[0.2em] text-[var(--debut-rose-gold,#B76E79)]/70 uppercase">
-                        COTILLION BLESSING
+                      <span className="text-[9px] font-cinzel font-bold tracking-[0.2em] text-[var(--debut-rose-gold,#0284C7)]/70 uppercase">
+                        BAPTISM BLESSING
                       </span>
                     </div>
                   </div>
@@ -95,10 +95,11 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
               })}
             </div>
           ) : (
-            <div className="p-8 rounded-3xl bg-[#F4EBEB]/60 text-center text-sm text-[var(--debut-text-muted,#704D5B)] border border-dashed border-[var(--debut-rose-gold-border)] max-w-md mx-auto">
-              <MessageSquare className="w-6 h-6 text-[var(--debut-rose-gold,#B76E79)] mx-auto mb-2" />
+            <div className="p-8 rounded-3xl bg-[#F1F5F9]/60 text-center text-sm text-[var(--debut-text-muted,#475569)] border border-dashed border-[var(--debut-rose-gold-border)] max-w-md mx-auto">
+              <MessageSquare className="w-6 h-6 text-[var(--debut-rose-gold,#0284C7)] mx-auto mb-2" />
               <p>
-                {data.emptyStateMessage || "Approved guest wishes will appear here as guests RSVP."}
+                {data.emptyStateMessage ||
+                  "Approved prayers and blessings will appear here as guests RSVP."}
               </p>
             </div>
           )}

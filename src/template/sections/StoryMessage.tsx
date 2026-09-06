@@ -20,15 +20,15 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
       <div className="template-container-narrow">
         <Reveal direction="up" distance={16}>
           <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="text-role-subheading text-[var(--debut-rose-gold,#B76E79)] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D4AF37)]" />
-              <span>DEBUTANTE CHRONICLE // 05</span>
+            <span className="text-role-subheading text-[var(--debut-rose-gold,#0284C7)] inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--debut-champagne-gold,#D97706)]" />
+              <span>PARENTS&apos; DEDICATION // 05</span>
             </span>
-            <h2 className="text-role-heading-major text-[var(--debut-text-noir,#26131C)] tracking-tight">
-              {data.storyTitle || "Debut Story"}
+            <h2 className="text-role-heading-major text-[var(--debut-text-noir,#0F172A)] tracking-tight">
+              {data.storyTitle || "Welcoming Liam into Faith"}
             </h2>
             {data.sectionIntro && (
-              <p className="text-role-lead max-w-lg mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#704D5B)]">
+              <p className="text-role-lead max-w-lg mx-auto mt-2 leading-relaxed text-[var(--debut-text-muted,#475569)]">
                 {data.sectionIntro}
               </p>
             )}
@@ -40,9 +40,9 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
             {/* Story Photo Specimen Frame */}
             <SpecimenFrame
               src={storyPhotos[0]}
-              alt="Story Photo"
-              caption="Debutante Chronicle Memory"
-              specimenNumber="JOURNEY // 05"
+              alt="Dedication Photo"
+              caption="Sacramental Dedication Memory"
+              specimenNumber="DEDICATION // 05"
               aspectRatio="landscape"
               context="story"
               className="shadow-soft bg-[var(--debut-surface-alabaster,#ffffff)]"
@@ -52,11 +52,11 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
             {data.storyBody && (
               <div className="relative overflow-visible">
                 <CorrespondenceSheet
-                  senderLabel="COTILLION DISPATCH"
-                  dateStamp="JOURNEY TO 18"
+                  senderLabel="PARENTS' BLESSING"
+                  dateStamp="A GIFT OF FAITH"
                   className="bg-[var(--debut-surface-alabaster,#ffffff)] relative z-10"
                 >
-                  <p className="text-base sm:text-lg text-[var(--debut-text-noir,#26131C)] leading-relaxed font-serif text-left pt-1">
+                  <p className="text-base sm:text-lg text-[var(--debut-text-noir,#0F172A)] leading-relaxed font-serif text-left pt-1">
                     &ldquo;{data.storyBody}&rdquo;
                   </p>
                 </CorrespondenceSheet>

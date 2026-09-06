@@ -1,71 +1,109 @@
 /* ==========================================================================
-   DEBUT ROSE GLAM — GRAND COTILLION EDITION
-   DESIGN SYSTEM TOKENS (2-CANVAS SATIN ALABASTER + LIVING CORAL + VELVET NOIR)
+   CANONICAL BAPTISM — CELESTIAL SKY & CLOUD PEARL EDITION
+   DESIGN SYSTEM TOKENS (60-30-10 HARMONIC RATIO)
+   60% Base Surface: Cloud Silk / Warm Pearl (#F8FAFC to #F1F5F9)
+   30% Frosted Sky & Azure: Sky Blue (#0284C7), Hover (#0369A1), Wash (#E0F2FE), Border (#BAE6FD)
+   Midnight Colophon: Deep Starlight Navy (#0B1329)
+   10% Accents: Warm Sacramental Gold (#D97706), Glow (#FEF3C7), Starlight (#38BDF8)
+   Contrast Typography: Slate Navy (#0F172A) & Slate Muted (#475569)
    ========================================================================== */
 
 :root {
   /* ==========================================================================
-     PRIMARY 2-CANVAS & ACCENT PALETTE TOKENS
+     PRIMARY CELESTIAL SKY & CLOUD PEARL PALETTE (60-30-10)
      ========================================================================== */
-  /* Canvas A: Dominant Base Surfaces (Satin Alabaster & Pure White Stationery) */
-  --debut-bg-alabaster: #faf5f5; /* Satin Alabaster Page Canvas */
-  --debut-surface-alabaster: #ffffff; /* Pure White Card & Stationery Surface */
-  --debut-surface-alabaster-alt: #f4ebeb; /* Blush Velvet Wash (Alternating Sub-Cards) */
+  /* 60% Canvas A: Dominant Base Surfaces (Cloud Silk & Pure Pearl Stationery) */
+  --celestial-bg-cloud: #f8fafc; /* Cloud Silk Page Canvas */
+  --celestial-surface-pearl: #ffffff; /* Pure Pearl Card Surface */
+  --celestial-surface-wash: #f1f5f9; /* Warm Pearl Wash (Alternating Sub-Cards) */
 
-  /* Canvas B: Saturated Cotillion Feature Canvas (Living Coral) */
-  --debut-bg-coral: #e65c4f; /* Living Coral Core Brand Action & Feature Canvas */
-  --debut-bg-coral-hover: #d85244; /* Saturated Coral Hover */
-  --debut-bg-coral-gradient: linear-gradient(145deg, #e65c4f 0%, #d85244 55%, #c74235 100%);
-  --debut-bg-coral-subtle: #fff0ee; /* Soft Coral Wash */
+  /* 30% Canvas B: Saturated Frosted Sky & Azure (Feature Moments) */
+  --celestial-sky-blue: #0284c7; /* Sky Blue Core Action & Brand Accent */
+  --celestial-sky-hover: #0369a1; /* Sky Blue Hover State */
+  --celestial-sky-gradient: linear-gradient(145deg, #0284c7 0%, #0369a1 60%, #075985 100%);
+  --celestial-sky-wash: #e0f2fe; /* Frosted Sky Card Wash */
+  --celestial-sky-border: #bae6fd; /* Serene Sky Border */
 
-  /* Dark Anchor Canvas: Grand Ballroom Colophon (Velvet Noir) */
-  --debut-bg-noir: #10050b; /* Deep Velvet Noir (Footer Colophon & Modals) */
-  --debut-surface-noir: #180812; /* Deep Cotillion Plum Elevated Surface */
+  /* Dark Anchor Canvas: Deep Starlight Navy Colophon */
+  --celestial-midnight-navy: #0b1329; /* Deep Starlight Navy (Footer Colophon & Modals) */
+  --celestial-surface-navy: #0f1e36; /* Elevated Starlight Navy Surface */
 
-  /* Metallics & Luxury Accents */
-  --debut-rose-gold: #b76e79; /* Signature Rose Gold (Icons, Badges, Ribbons) */
-  --debut-rose-gold-border: #e8c4c8; /* Rose Gold Glazing Border */
-  --debut-rose-gold-subtle: rgba(232, 196, 200, 0.45); /* Hairline Divider */
-  --debut-champagne-gold: #d4af37; /* Champagne Gold (Seals, Monograms, Stars) */
-  --debut-champagne-dark: #856404; /* High-Contrast Champagne Tag */
-  --debut-champagne-soft: #f9f1dc; /* Soft Champagne Shimmer */
+  /* 10% Sacramental Accents & Celestial Glows */
+  --celestial-gold: #d97706; /* Warm Sacramental Gold (Badges, Seals, Halo Stars) */
+  --celestial-gold-glow: #fef3c7; /* Candlelight Glow */
+  --celestial-gold-border: #fcd34d; /* Soft Sacramental Gold Border */
+  --celestial-starlight: #38bdf8; /* Starlight Blue Sparkle */
 
   /* ==========================================================================
      TYPOGRAPHY CONTRAST TOKENS (AAA ACCESSIBILITY VERIFIED)
      ========================================================================== */
-  --debut-text-noir: #26131c; /* Deep Blackberry Noir (Headings & Primary Text) */
-  --debut-text-muted: #704d5b; /* Mauve Slate (Secondary & Body Descriptions) */
-  --debut-text-coral-dark: #b83224; /* High-Contrast Dark Coral for Tags & Badges */
+  --celestial-text-navy: #0f172a; /* Slate Navy (Headings & Primary Text) */
+  --celestial-text-muted: #475569; /* Slate Muted (Secondary & Body Descriptions) */
+  --celestial-text-accent: #0369a1; /* High-Contrast Sky for Tags & Badges */
 
-  --debut-text-on-coral: #ffffff; /* Pure White Text on Living Coral Surfaces */
-  --debut-text-on-coral-muted: #ffe7e2; /* Soft Blush White on Living Coral Surfaces */
+  --celestial-text-on-sky: #ffffff; /* Pure White Text on Sky Blue Surfaces */
+  --celestial-text-on-sky-muted: #e0f2fe; /* Soft Sky Mist on Sky Blue Surfaces */
 
-  --debut-text-on-noir: #faf5f5; /* Satin Alabaster Text on Velvet Noir */
-  --debut-text-on-noir-muted: #e8c4c8; /* Rose Gold Mist Text on Velvet Noir */
+  --celestial-text-on-navy: #f8fafc; /* Cloud Pearl Text on Deep Midnight Navy */
+  --celestial-text-on-navy-muted: #94a3b8; /* Star Mist Text on Deep Midnight Navy */
 
-  --debut-focus: #e65c4f; /* Focus Ring Accent */
+  --celestial-focus: #0284c7; /* Focus Ring Accent */
 
   /* ==========================================================================
-     GLASSMORPHISM & REFRACTION TOKENS (ALLSHADCN LUXURY BENCHMARK)
+     MAP TO EXISTING THEME TOKENS FOR ZERO-REGRESSION COMPATIBILITY
      ========================================================================== */
-  --debut-glass-bg: rgba(255, 255, 255, 0.88);
-  --debut-glass-border: rgba(232, 196, 200, 0.55);
-  --debut-glass-highlight: rgba(255, 255, 255, 0.75);
-  --debut-glass-coral-bg: rgba(230, 92, 79, 0.92);
-  --debut-glass-coral-border: rgba(255, 231, 226, 0.4);
+  --debut-bg-alabaster: var(--celestial-bg-cloud);
+  --debut-surface-alabaster: var(--celestial-surface-pearl);
+  --debut-surface-alabaster-alt: var(--celestial-surface-wash);
+
+  --debut-bg-coral: var(--celestial-sky-blue);
+  --debut-bg-coral-hover: var(--celestial-sky-hover);
+  --debut-bg-coral-gradient: var(--celestial-sky-gradient);
+  --debut-bg-coral-subtle: var(--celestial-sky-wash);
+
+  --debut-bg-noir: var(--celestial-midnight-navy);
+  --debut-surface-noir: var(--celestial-surface-navy);
+
+  --debut-rose-gold: var(--celestial-sky-blue);
+  --debut-rose-gold-border: var(--celestial-sky-border);
+  --debut-rose-gold-subtle: rgba(186, 230, 253, 0.45);
+  --debut-champagne-gold: var(--celestial-gold);
+  --debut-champagne-dark: #b45309;
+  --debut-champagne-soft: var(--celestial-gold-glow);
+
+  --debut-text-noir: var(--celestial-text-navy);
+  --debut-text-muted: var(--celestial-text-muted);
+  --debut-text-coral-dark: var(--celestial-text-accent);
+
+  --debut-text-on-coral: var(--celestial-text-on-sky);
+  --debut-text-on-coral-muted: var(--celestial-text-on-sky-muted);
+
+  --debut-text-on-noir: var(--celestial-text-on-navy);
+  --debut-text-on-noir-muted: var(--celestial-text-on-navy-muted);
+
+  --debut-focus: var(--celestial-focus);
+
+  /* ==========================================================================
+     GLASSMORPHISM & REFRACTION TOKENS
+     ========================================================================== */
+  --debut-glass-bg: rgba(255, 255, 255, 0.9);
+  --debut-glass-border: rgba(186, 230, 253, 0.65);
+  --debut-glass-highlight: rgba(255, 255, 255, 0.85);
+  --debut-glass-coral-bg: rgba(2, 132, 199, 0.92);
+  --debut-glass-coral-border: rgba(224, 242, 254, 0.4);
   --debut-blur: 16px;
 
   /* ==========================================================================
-     SHADOWS & LUXURY CARD ELEVATIONS
+     SHADOWS & CELESTIAL CARD ELEVATIONS
      ========================================================================== */
-  --debut-shadow-xs: 0 1px 3px 0 rgba(38, 19, 28, 0.04);
+  --debut-shadow-xs: 0 1px 3px 0 rgba(15, 23, 42, 0.04);
   --debut-shadow-soft:
-    0 4px 16px -2px rgba(38, 19, 28, 0.06), 0 2px 6px -1px rgba(38, 19, 28, 0.03);
+    0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
   --debut-shadow-card:
-    0 16px 40px -10px rgba(38, 19, 28, 0.08), 0 4px 12px -2px rgba(38, 19, 28, 0.04);
+    0 16px 40px -10px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
   --debut-shadow-floating:
-    0 24px 56px -12px rgba(230, 92, 79, 0.18), 0 6px 18px -4px rgba(38, 19, 28, 0.08);
-  --debut-shadow-coral: 0 20px 48px -10px rgba(230, 92, 79, 0.25);
+    0 24px 56px -12px rgba(2, 132, 199, 0.2), 0 6px 18px -4px rgba(15, 23, 42, 0.08);
+  --debut-shadow-coral: 0 20px 48px -10px rgba(2, 132, 199, 0.25);
 
   /* ==========================================================================
      GEOMETRY & RADII
@@ -89,43 +127,42 @@
      ========================================================================== */
   --nav-height: 4.5rem;
   --debut-nav-height: 4.5rem;
-  --debut-nav-bg-scrolled: rgba(250, 245, 245, 0.92);
-  --debut-nav-border-scrolled: var(--debut-rose-gold-border);
+  --debut-nav-bg-scrolled: rgba(248, 250, 252, 0.94);
+  --debut-nav-border-scrolled: var(--celestial-sky-border);
   --debut-nav-shadow-scrolled: var(--debut-shadow-soft);
-  --debut-nav-text: var(--debut-text-noir);
-  --debut-nav-muted: var(--debut-text-muted);
+  --debut-nav-text: var(--celestial-text-navy);
+  --debut-nav-muted: var(--celestial-text-muted);
 
   --debut-floating-bottom: calc(env(safe-area-inset-bottom) + 1.25rem);
-  --debut-dock-bg: rgba(255, 255, 255, 0.92);
-  --debut-dock-border: var(--debut-rose-gold-border);
-  --debut-dock-primary-bg: var(--debut-bg-coral);
+  --debut-dock-bg: rgba(255, 255, 255, 0.94);
+  --debut-dock-border: var(--celestial-sky-border);
+  --debut-dock-primary-bg: var(--celestial-sky-blue);
   --debut-dock-primary-fg: #ffffff;
-  --debut-dock-secondary-bg: var(--debut-surface-alabaster-alt);
-  --debut-dock-secondary-fg: var(--debut-text-noir);
+  --debut-dock-secondary-bg: var(--celestial-surface-wash);
+  --debut-dock-secondary-fg: var(--celestial-text-navy);
 
   /* ==========================================================================
      BACKWARD-COMPATIBLE SEMANTIC ALIASES
-     (Bridges all legacy --wedding-* and --color-sage-* references directly to Rose Glam)
      ========================================================================== */
-  --wedding-bg: var(--debut-bg-alabaster);
-  --wedding-surface: var(--debut-surface-alabaster);
-  --wedding-surface-card: var(--debut-surface-alabaster);
-  --wedding-surface-alt: var(--debut-surface-alabaster-alt);
-  --wedding-primary: var(--debut-bg-coral);
-  --wedding-primary-hover: var(--debut-bg-coral-hover);
-  --wedding-border: var(--debut-rose-gold-border);
-  --wedding-border-subtle: var(--debut-rose-gold-subtle);
-  --wedding-text: var(--debut-text-noir);
-  --wedding-text-muted: var(--debut-text-muted);
-  --wedding-surface-dark: var(--debut-bg-noir);
-  --wedding-surface-dark-alt: var(--debut-surface-noir);
-  --wedding-accent: var(--debut-champagne-gold);
-  --wedding-accent-strong: var(--debut-rose-gold);
-  --wedding-accent-soft: var(--debut-champagne-soft);
+  --wedding-bg: var(--celestial-bg-cloud);
+  --wedding-surface: var(--celestial-surface-pearl);
+  --wedding-surface-card: var(--celestial-surface-pearl);
+  --wedding-surface-alt: var(--celestial-surface-wash);
+  --wedding-primary: var(--celestial-sky-blue);
+  --wedding-primary-hover: var(--celestial-sky-hover);
+  --wedding-border: var(--celestial-sky-border);
+  --wedding-border-subtle: rgba(186, 230, 253, 0.45);
+  --wedding-text: var(--celestial-text-navy);
+  --wedding-text-muted: var(--celestial-text-muted);
+  --wedding-surface-dark: var(--celestial-midnight-navy);
+  --wedding-surface-dark-alt: var(--celestial-surface-navy);
+  --wedding-accent: var(--celestial-gold);
+  --wedding-accent-strong: var(--celestial-sky-blue);
+  --wedding-accent-soft: var(--celestial-gold-glow);
   --wedding-on-primary: #ffffff;
-  --wedding-on-dark: var(--debut-text-on-noir);
-  --wedding-on-dark-muted: var(--debut-text-on-noir-muted);
-  --wedding-focus: var(--debut-focus);
+  --wedding-on-dark: var(--celestial-text-on-navy);
+  --wedding-on-dark-muted: var(--celestial-text-on-navy-muted);
+  --wedding-focus: var(--celestial-focus);
 
   --wedding-glass-light-bg: var(--debut-glass-bg);
   --wedding-glass-light-border: var(--debut-glass-border);
@@ -133,32 +170,32 @@
   --wedding-glass-sage-border: var(--debut-glass-coral-border);
   --wedding-glass-blur: var(--debut-blur);
 
-  --surface-page: var(--debut-bg-alabaster);
-  --surface-card: var(--debut-surface-alabaster);
-  --surface-muted: var(--debut-surface-alabaster-alt);
-  --surface-dark: var(--debut-bg-noir);
-  --text-primary: var(--debut-text-noir);
-  --text-secondary: var(--debut-text-muted);
-  --text-muted: var(--debut-text-muted);
-  --text-on-dark: var(--debut-text-on-noir);
-  --border-default: var(--debut-rose-gold-border);
-  --border-subtle: var(--debut-rose-gold-subtle);
-  --action-primary: var(--debut-bg-coral);
-  --action-primary-hover: var(--debut-bg-coral-hover);
+  --surface-page: var(--celestial-bg-cloud);
+  --surface-card: var(--celestial-surface-pearl);
+  --surface-muted: var(--celestial-surface-wash);
+  --surface-dark: var(--celestial-midnight-navy);
+  --text-primary: var(--celestial-text-navy);
+  --text-secondary: var(--celestial-text-muted);
+  --text-muted: var(--celestial-text-muted);
+  --text-on-dark: var(--celestial-text-on-navy);
+  --border-default: var(--celestial-sky-border);
+  --border-subtle: rgba(186, 230, 253, 0.45);
+  --action-primary: var(--celestial-sky-blue);
+  --action-primary-hover: var(--celestial-sky-hover);
   --action-text: #ffffff;
-  --accent-primary: var(--debut-champagne-gold);
-  --focus-ring: var(--debut-focus);
+  --accent-primary: var(--celestial-gold);
+  --focus-ring: var(--celestial-focus);
 
-  --color-sage-daylight: var(--debut-bg-alabaster);
-  --color-sage-paper: var(--debut-surface-alabaster);
-  --color-sage-wash: var(--debut-surface-alabaster-alt);
-  --color-sage-primary: var(--debut-rose-gold);
-  --color-sage-primary-hover: var(--debut-bg-coral-hover);
-  --color-sage-forest: var(--debut-bg-noir);
-  --color-sage-forest-dark: var(--debut-surface-noir);
-  --color-brass-accent: var(--debut-champagne-gold);
-  --color-brass-soft: var(--debut-champagne-soft);
-  --color-brass-gold: var(--debut-champagne-gold);
+  --color-sage-daylight: var(--celestial-bg-cloud);
+  --color-sage-paper: var(--celestial-surface-pearl);
+  --color-sage-wash: var(--celestial-surface-wash);
+  --color-sage-primary: var(--celestial-sky-blue);
+  --color-sage-primary-hover: var(--celestial-sky-hover);
+  --color-sage-forest: var(--celestial-midnight-navy);
+  --color-sage-forest-dark: var(--celestial-surface-navy);
+  --color-brass-accent: var(--celestial-gold);
+  --color-brass-soft: var(--celestial-gold-glow);
+  --color-brass-gold: var(--celestial-gold);
 
   --radius-sm: var(--debut-radius-sm);
   --radius-card: var(--debut-radius-card);
