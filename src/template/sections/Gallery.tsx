@@ -105,6 +105,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
                     className="w-auto h-auto max-w-full max-h-full object-contain rounded-xl shadow-md select-none block"
                     sizes="(max-width: 1024px) 95vw, 1100px"
                     priority
+                    unoptimized={true}
                   />
                 ) : (
                   <div className="w-[320px] sm:w-[460px] h-[240px] sm:h-[320px] p-2">

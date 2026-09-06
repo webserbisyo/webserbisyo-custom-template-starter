@@ -15,6 +15,7 @@ export interface SpecimenFrameProps extends React.HTMLAttributes<HTMLDivElement>
   isArch?: boolean;
   context?: PlaceholderContext;
   recommendation?: string;
+  imageClassName?: string;
 }
 
 export function SpecimenFrame({
@@ -28,6 +29,7 @@ export function SpecimenFrame({
   isArch = false,
   context,
   recommendation,
+  imageClassName,
   children,
   ...props
 }: SpecimenFrameProps) {
@@ -80,8 +82,12 @@ export function SpecimenFrame({
             alt={alt}
             fill
             priority={priority}
+            unoptimized={true}
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className={cn(
+              "object-cover transition-transform duration-700 group-hover:scale-105",
+              imageClassName
+            )}
             onError={() => setHasError(true)}
           />
         ) : (
