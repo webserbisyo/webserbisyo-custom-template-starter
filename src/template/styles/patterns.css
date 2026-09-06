@@ -86,8 +86,9 @@
 }
 
 /* ==========================================================================
-   DEBUT ROSE GLAM — 4-PATTERN CADENCE SYSTEM (IMAGE-BASED)
-   Tiled ambient wallpapers mapped across the 17 section flow.
+   DEBUT ROSE GLAM — SINGLE SCALED COVER BACKGROUND ENGINE (NON-REPEATING)
+   Single high-definition WebP background mapped per section.
+   Scales smoothly to cover full dynamic height without repeating tiles.
    ========================================================================== */
 
 .bg-pattern-debut-01,
@@ -95,6 +96,9 @@
 .bg-pattern-debut-03,
 .bg-pattern-debut-04 {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
 }
 
 .bg-pattern-debut-01::before,
@@ -106,36 +110,36 @@
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-repeat: repeat;
-  background-position: center;
-  background-size: clamp(220px, 22vw, 320px);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
 }
 
-/* 1. Rosebud Botanical Lattice */
+/* 1. Rosebud Botanical Cover */
 .bg-pattern-debut-01::before {
   background-image: url("/template-assets/backgrounds/pattern-01-rosebud.webp");
   opacity: 0.12;
 }
 
-/* 2. Cotillion Blossom Grid */
+/* 2. Cotillion Blossom Cover */
 .bg-pattern-debut-02::before {
   background-image: url("/template-assets/backgrounds/pattern-02-bloom.webp");
   opacity: 0.12;
 }
 
-/* 3. Celebration Petals & Stardust */
+/* 3. Celebration Petals & Stardust Cover */
 .bg-pattern-debut-03::before {
   background-image: url("/template-assets/backgrounds/pattern-03-petals.webp");
   opacity: 0.14;
 }
 
-/* 4. Ballroom Rosette Medallions */
+/* 4. Ballroom Rosette Medallions Cover */
 .bg-pattern-debut-04::before {
   background-image: url("/template-assets/backgrounds/pattern-04-rosette.webp");
   opacity: 0.1;
 }
 
-/* Canvas B (Living Coral) Surface Harmonization */
+/* Saturated Canvas (Living Coral) Surface Harmonization */
 .section-surface-coral.bg-pattern-debut-01::before,
 .section-surface-coral.bg-pattern-debut-02::before,
 .section-surface-coral.bg-pattern-debut-03::before,
