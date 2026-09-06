@@ -13,7 +13,7 @@ export function GodparentsSection({ data }: { data: NamedGroupsData }) {
   return (
     <section
       id="godparents"
-      className="template-section section-surface-coral relative overflow-x-clip text-white"
+      className="template-section section-surface-coral bg-pattern-celestial-01 relative overflow-x-clip text-white"
     >
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>

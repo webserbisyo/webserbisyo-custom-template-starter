@@ -21,7 +21,7 @@ export function MainEventSection({ data }: { data: MainEventData }) {
   return (
     <section
       id="main_event"
-      className="template-section section-surface-coral text-white relative overflow-x-clip"
+      className="template-section section-surface-coral bg-pattern-celestial-02 text-white relative overflow-x-clip"
     >
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>

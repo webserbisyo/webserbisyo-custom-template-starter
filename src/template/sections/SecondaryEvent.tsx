@@ -19,7 +19,7 @@ export function SecondaryEventSection({ data }: SecondaryEventSectionProps) {
   return (
     <section
       id="secondary_event"
-      className="template-section section-surface-coral text-white relative overflow-x-clip"
+      className="template-section section-surface-coral bg-pattern-celestial-03 text-white relative overflow-x-clip"
     >
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>

@@ -1,5 +1,7 @@
 import type { StoryMessageData } from "@/platform/event-template-data";
 import { CorrespondenceSheet } from "@/template/components/containers/CorrespondenceSheet";
+import { SpecimenFrame } from "@/template/components/containers/SpecimenFrame";
+import { templateAssets } from "@/template/template-assets";
 import { Reveal } from "@/template/components/motion/Reveal";
 import { Sparkles } from "lucide-react";
 
@@ -9,10 +11,12 @@ import { Sparkles } from "lucide-react";
 export function StoryMessageSection({ data }: { data: StoryMessageData }) {
   if (!data.storyBody && !data.storyTitle) return null;
 
+  const storyPhoto = templateAssets.photos.story?.[0];
+
   return (
     <section
       id="story_message"
-      className="template-section section-surface-alabaster relative overflow-x-clip"
+      className="template-section section-surface-alabaster bg-pattern-celestial-01 relative overflow-x-clip"
     >
       <div className="template-container-narrow">
         <Reveal direction="up" distance={16}>
@@ -33,7 +37,19 @@ export function StoryMessageSection({ data }: { data: StoryMessageData }) {
         </Reveal>
 
         <Reveal direction="up" distance={20} delay={0.1}>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto space-y-8">
+            {storyPhoto && (
+              <SpecimenFrame
+                src={storyPhoto}
+                alt="Parents Dedication"
+                caption="Sacramental Dedication Memory"
+                specimenNumber="DEDICATION // 05"
+                aspectRatio="landscape"
+                context="story"
+                className="shadow-soft bg-white"
+              />
+            )}
+
             {/* Story Description Card */}
             {data.storyBody && (
               <div className="relative overflow-visible">

@@ -124,7 +124,7 @@ export function CountdownSection({ data, eventDate, eventTime }: CountdownSectio
   return (
     <section
       id="countdown"
-      className="template-section section-surface-coral relative overflow-x-clip text-white text-center"
+      className="template-section section-surface-coral bg-pattern-celestial-02 relative overflow-x-clip text-white text-center"
     >
       <div className="template-container relative z-10">
         <Reveal direction="up" distance={16}>

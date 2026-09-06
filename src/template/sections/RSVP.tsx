@@ -127,7 +127,7 @@ export function RSVPSection({
   return (
     <section
       id="rsvp_form"
-      className="template-section section-surface-alabaster relative overflow-x-clip"
+      className="template-section section-surface-alabaster bg-pattern-celestial-01 relative overflow-x-clip"
     >
       <div className="template-container-narrow relative z-10">
         <Reveal direction="up" distance={16}>

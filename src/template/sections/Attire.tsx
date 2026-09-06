@@ -12,7 +12,7 @@ export function AttireSection({ data }: { data: AttireData }) {
   return (
     <section
       id="attire_motif"
-      className="template-section section-surface-alabaster relative overflow-x-clip"
+      className="template-section section-surface-alabaster bg-pattern-celestial-03 relative overflow-x-clip"
     >
       <div className="template-container-narrow">
         <Reveal direction="up" distance={16}>

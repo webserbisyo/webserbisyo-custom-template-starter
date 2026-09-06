@@ -88,3 +88,75 @@
       transparent 1px
     );
 }
+
+/* ==========================================================================
+   CANONICAL BAPTISM — SCALED COVER BACKGROUND ENGINE (NON-REPEATING)
+   Single, high-definition 2K cover backgrounds mapped across sections.
+   Scaled smoothly without tiling seams or repetitive grid noise.
+   ========================================================================== */
+
+.bg-pattern-celestial-01,
+.bg-pattern-celestial-02,
+.bg-pattern-celestial-03,
+.bg-pattern-celestial-04 {
+  position: relative;
+}
+
+.bg-pattern-celestial-01::before,
+.bg-pattern-celestial-02::before,
+.bg-pattern-celestial-03::before,
+.bg-pattern-celestial-04::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+}
+
+/* 1. Celestial Nursery Vector Cover */
+.bg-pattern-celestial-01::before {
+  background-image: url("/template-assets/backgrounds/pattern-01-celestial.webp");
+  opacity: 0.11;
+}
+
+/* 2. Doves & Olive Leaves Serene Cover */
+.bg-pattern-celestial-02::before {
+  background-image: url("/template-assets/backgrounds/pattern-02-doves.webp");
+  opacity: 0.11;
+}
+
+/* 3. Sacramental Floral Vector Cover */
+.bg-pattern-celestial-03::before {
+  background-image: url("/template-assets/backgrounds/pattern-03-floral.webp");
+  opacity: 0.11;
+}
+
+/* 4. Heirloom Sacramental Lace Cover */
+.bg-pattern-celestial-04::before {
+  background-image: url("/template-assets/backgrounds/pattern-04-lace.webp");
+  opacity: 0.1;
+}
+
+/* Surface Adaptation: White Canvas vs Sky Blue Canvas */
+.section-surface-alabaster.bg-pattern-celestial-01::before,
+.section-surface-alabaster.bg-pattern-celestial-02::before,
+.section-surface-alabaster.bg-pattern-celestial-03::before,
+.section-surface-alabaster.bg-pattern-celestial-04::before {
+  opacity: 0.11;
+  mix-blend-mode: multiply;
+}
+
+.section-surface-coral.bg-pattern-celestial-01::before,
+.section-surface-coral.bg-pattern-celestial-02::before,
+.section-surface-coral.bg-pattern-celestial-03::before,
+.section-surface-coral.bg-pattern-celestial-04::before,
+.section-surface-primary.bg-pattern-celestial-01::before,
+.section-surface-primary.bg-pattern-celestial-02::before,
+.section-surface-primary.bg-pattern-celestial-03::before,
+.section-surface-primary.bg-pattern-celestial-04::before {
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+}
