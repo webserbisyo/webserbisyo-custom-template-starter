@@ -134,6 +134,7 @@ export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionPr
                   aspectRatio="portrait"
                   priority={true}
                   isArch={true}
+                  imageClassName="object-[center_25%]"
                   className="shadow-floating bg-[var(--debut-surface-alabaster,#ffffff)]"
                 />
               </div>

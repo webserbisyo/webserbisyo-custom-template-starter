@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
+    unoptimized: true, // Permanent zero-loss: serves master 2K WebP files directly with zero compression artifacts
     remotePatterns: [
       {
         protocol: "https",

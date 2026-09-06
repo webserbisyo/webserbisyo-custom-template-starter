@@ -66,18 +66,18 @@ export function SkewCarousel({
           onClick={() => onItemClick?.(item, 0)}
           className="relative inline-flex flex-col items-center justify-center p-3 rounded-3xl border-2 border-[var(--debut-rose-gold-border,#E8C4C8)] bg-[var(--debut-surface-alabaster,#ffffff)] shadow-card cursor-pointer transition-transform hover:scale-[1.02]"
         >
-          <div className="relative flex items-center justify-center overflow-hidden rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/50">
+          <div className="relative w-[300px] sm:w-[410px] md:w-[490px] lg:w-[540px] aspect-[16/10] overflow-hidden rounded-2xl bg-white/40 shadow-xl border border-white/60">
             {item.src ? (
               <Image
                 src={item.src}
                 alt={item.alt || "Gallery preview"}
-                width={item.width || 2752}
-                height={item.height || 1536}
-                className="block w-auto h-auto max-w-[min(84vw,330px)] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[560px] max-h-[300px] sm:max-h-[360px] md:max-h-[410px] lg:max-h-[440px] object-contain rounded-xl select-none pointer-events-none"
-                sizes="(max-width: 640px) 84vw, 560px"
+                fill
+                unoptimized
+                priority
+                className="object-cover rounded-2xl select-none pointer-events-none"
               />
             ) : (
-              <div className="w-[300px] h-[220px] sm:w-[380px] sm:h-[260px]">
+              <div className="w-full h-full">
                 <CelestialImagePlaceholder
                   context="gallery"
                   label={item.folioLabel || "GALLERY SPECIMEN"}
@@ -158,7 +158,7 @@ export function SkewCarousel({
             setActiveIndex(swiper.activeIndex);
             onActiveIndexChange?.(swiper.activeIndex);
           }}
-          className="!overflow-visible w-full h-[420px] sm:h-[480px] md:h-[530px] py-1"
+          className="!overflow-visible w-full h-[320px] sm:h-[390px] md:h-[450px] py-1"
           style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
         >
           {items.map((item, idx) => {
@@ -246,18 +246,18 @@ export function SkewCarousel({
                   }
                 >
                   {/* Photo Frame Auto-Fitting the Rendered Photography */}
-                  <div className="relative flex items-center justify-center overflow-hidden rounded-2xl bg-[var(--debut-surface-alabaster-alt,#F4EBEB)]/40">
+                  <div className="relative w-[300px] sm:w-[410px] md:w-[490px] lg:w-[540px] aspect-[16/10] overflow-hidden rounded-2xl bg-white/40 shadow-xl border border-white/60">
                     {item.src ? (
                       <Image
                         src={item.src}
                         alt={item.alt || `Photo ${idx + 1}`}
-                        width={item.width || 2752}
-                        height={item.height || 1536}
-                        sizes="(max-width: 640px) 84vw, (max-width: 1024px) 60vw, 560px"
-                        className="block w-auto h-auto max-w-[min(84vw,330px)] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[560px] max-h-[300px] sm:max-h-[360px] md:max-h-[410px] lg:max-h-[440px] object-contain rounded-xl select-none pointer-events-none"
+                        fill
+                        unoptimized
+                        priority={idx <= 1}
+                        className="object-cover rounded-2xl select-none pointer-events-none"
                       />
                     ) : (
-                      <div className="w-[280px] h-[200px] sm:w-[340px] sm:h-[240px]">
+                      <div className="w-full h-full">
                         <CelestialImagePlaceholder
                           context="gallery"
                           label={
