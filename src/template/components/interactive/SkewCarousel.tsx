@@ -71,7 +71,7 @@ export function SkewCarousel({
                 src={item.src}
                 alt={item.alt || "Gallery preview"}
                 fill
-                quality={90}
+                unoptimized={true}
                 sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 800px"
                 className="object-cover rounded-xl select-none pointer-events-none transition-transform duration-500 hover:scale-105 [transform:translateZ(0)]"
               />

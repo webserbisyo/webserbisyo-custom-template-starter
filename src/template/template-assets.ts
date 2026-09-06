@@ -18,7 +18,7 @@ export type TemplateAssets = {
 
 export const templateAssets: TemplateAssets = {
   photos: {
-    hero: "/template-assets/photos/gallery/gallery-03-candles.webp",
+    hero: "/template-assets/photos/hero/hero-portrait.webp",
     gallery: [
       "/template-assets/photos/gallery/gallery-01-action.webp",
       "/template-assets/photos/gallery/gallery-02-shield.webp",

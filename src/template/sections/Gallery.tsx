@@ -104,7 +104,7 @@ export function GallerySection({ data }: { data: GalleryData }) {
                     alt={selectedPhoto.alt || "Expanded photo"}
                     width={selectedPhoto.width || 2752}
                     height={selectedPhoto.height || 1536}
-                    quality={90}
+                    unoptimized={true}
                     className="w-auto h-auto max-w-full max-h-full object-contain rounded-lg shadow-md select-none block"
                     sizes="(max-width: 1024px) 95vw, 1200px"
                     priority
