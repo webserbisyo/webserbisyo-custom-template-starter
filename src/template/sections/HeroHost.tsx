@@ -18,13 +18,20 @@ export type HeroHostSectionProps = {
 
 export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionProps) {
   let displayName = "";
+  let milestoneSubtitle = "";
 
   if (data.kind === "debut") {
-    displayName = data.displayAs || data.debutantName || "The Debutante";
+    displayName = data.debutantName || "The Debutante";
+    milestoneSubtitle = data.displayAs || data.milestone || "18th Birthday";
   } else if (data.kind === "birthday") {
-    displayName = data.displayAs || data.celebrantName || "The Celebrant";
+    displayName = data.celebrantName || "The Celebrant";
+    milestoneSubtitle = data.displayAs || data.milestone || "Birthday";
   } else if (data.kind === "baptism") {
-    displayName = data.displayAs || data.childName || "The Child";
+    displayName = data.childName || "The Child";
+    milestoneSubtitle =
+      data.displayAs && data.displayAs.trim().toLowerCase() !== displayName.trim().toLowerCase()
+        ? data.displayAs
+        : "Holy Baptism";
   } else {
     const identity = deriveHostIdentity(data.groomName, data.brideName);
     displayName =
@@ -32,6 +39,15 @@ export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionPr
         ? `${data.brideName || identity.brideName} & ${data.groomName || identity.groomName}`
         : `${data.groomName || identity.groomName} & ${data.brideName || identity.brideName}`;
   }
+
+  const kickerLine =
+    data.hostLine &&
+    data.kind === "baptism" &&
+    data.parentNames &&
+    !data.hostLine.includes(data.parentNames)
+      ? `${data.hostLine}, ${data.parentNames}`
+      : data.hostLine ||
+        (data.kind === "baptism" && data.parentNames ? `Beloved Child of ${data.parentNames}` : "");
 
   const heroPhoto = templateAssets.photos.hero;
 
@@ -54,45 +70,46 @@ export function HeroHostSection({ data, storyEnabled = true }: HeroHostSectionPr
               </div>
             </Reveal>
 
-            {/* 2. Host Names — High-Impact Playfair Display */}
+            {/* 2. Host Invitation Eyebrow / Kicker (Self-Collapsing) */}
+            {kickerLine && (
+              <Reveal direction="up" distance={12} delay={0.05}>
+                <p className="font-serif italic text-base sm:text-lg text-[var(--debut-text-muted,#475569)] tracking-wide">
+                  {kickerLine}
+                </p>
+              </Reveal>
+            )}
+
+            {/* 3. Host Names — High-Impact Playfair Display */}
             <Reveal direction="up" distance={20} delay={0.1}>
               <h1 className="text-role-display tracking-tight text-[var(--debut-text-noir,#0F172A)] text-center lg:text-left">
                 {displayName}
               </h1>
             </Reveal>
 
-            {/* Parents' Line for Baptism */}
-            {data.kind === "baptism" && data.parentNames && (
-              <Reveal direction="up" distance={16} delay={0.12}>
-                <p className="font-serif italic text-lg sm:text-xl text-[var(--debut-text-muted,#475569)] text-center lg:text-left">
-                  Beloved Child of {data.parentNames}
-                </p>
-              </Reveal>
-            )}
-
-            {/* 3. Single Connected Date in Glass Pill */}
-            {data.hostLine && (
-              <Reveal direction="up" distance={16} delay={0.15}>
-                <div className="flex justify-center lg:justify-start">
-                  <div className="inline-flex items-center justify-center px-6 py-2.5 sm:px-8 sm:py-3 rounded-full debut-glass-card border shadow-xs">
-                    <span className="font-cinzel font-bold text-base sm:text-lg md:text-xl tracking-[0.2em] text-[var(--debut-rose-gold,#0284C7)] uppercase">
-                      {data.hostLine}
-                    </span>
+            {/* 4. Pure Milestone Subtitle Badge (Self-Collapsing & Deduplicated) */}
+            {milestoneSubtitle &&
+              milestoneSubtitle.trim().toLowerCase() !== displayName.trim().toLowerCase() && (
+                <Reveal direction="up" distance={16} delay={0.15}>
+                  <div className="flex justify-center lg:justify-start">
+                    <div className="inline-flex items-center justify-center px-5 py-2 sm:px-6 sm:py-2.5 rounded-full debut-glass-card border border-[var(--celestial-sky-border,#BAE6FD)] shadow-xs">
+                      <span className="font-cinzel font-bold text-sm sm:text-base md:text-lg tracking-[0.18em] text-[var(--debut-rose-gold,#0284C7)] uppercase">
+                        {milestoneSubtitle}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            )}
+                </Reveal>
+              )}
 
-            {/* 4. Editorial Invitation Greeting */}
+            {/* 5. Editorial Invitation Greeting */}
             {data.shortHostMessage && (
-              <Reveal direction="up" distance={16} delay={0.25}>
-                <p className="font-serif italic text-2xl sm:text-3xl text-[var(--debut-text-noir,#0F172A)] font-bold max-w-xl mx-auto lg:mx-0 text-center lg:text-left leading-relaxed">
+              <Reveal direction="up" distance={16} delay={0.2}>
+                <p className="font-serif italic text-xl sm:text-2xl text-[var(--debut-text-noir,#0F172A)] font-bold max-w-xl mx-auto lg:mx-0 text-center lg:text-left leading-relaxed pt-1">
                   &ldquo;{data.shortHostMessage}&rdquo;
                 </p>
               </Reveal>
             )}
 
-            {/* 5. Action CTA Buttons */}
+            {/* 6. Action CTA Buttons */}
             <Reveal direction="up" distance={16} delay={0.3}>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2 font-sans">
                 <Magnetic intensity={0.25}>

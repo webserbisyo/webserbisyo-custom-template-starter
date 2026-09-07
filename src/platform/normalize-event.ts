@@ -267,7 +267,7 @@ export function normalizeEventData(
       kind: "baptism" as const,
       childName,
       parentNames: stringValue(hostContent.parentNames) || "",
-      displayAs: displayAs || childName,
+      displayAs: displayAs || "Holy Baptism",
       hostLine,
       shortHostMessage,
     };
@@ -749,7 +749,7 @@ export function normalizeEventData(
   } else if (coupleData.kind === "baptism") {
     const chName = coupleData.childName;
     defaultTitle = `${chName}'s Christening`;
-    defaultDisplayName = displayAs || chName;
+    defaultDisplayName = chName;
   } else {
     defaultTitle = `${groomName} & ${brideName} Wedding`;
     defaultDisplayName =

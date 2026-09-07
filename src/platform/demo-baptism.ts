@@ -24,7 +24,7 @@ export const DEMO_BAPTISM_DATA: EventTemplateData = {
     kind: "baptism",
     childName: "Liam",
     parentNames: "Juan & Maria Santos",
-    displayAs: "Liam Santos",
+    displayAs: "🕊️ Holy Baptism 🕊️",
     hostLine: "Together with their families, Juan & Maria Santos",
     shortHostMessage:
       "Invite you to witness and celebrate the Holy Baptism of their beloved son, Liam.",
