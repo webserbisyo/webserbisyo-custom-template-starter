@@ -23,7 +23,7 @@ export const DEMO_DEBUT_DATA: EventTemplateData = {
     kind: "debut",
     debutantName: "Sophia Marie Reyes",
     milestone: "18th Birthday",
-    displayAs: "Sophia Marie",
+    displayAs: "🌹 18th Birthday 🌹",
     hostLine: "Together with her parents, Mr. & Mrs. Ricardo Reyes",
     shortHostMessage: "Cordially invites you to celebrate her 18th Birthday Grand Cotillion Ball.",
   },

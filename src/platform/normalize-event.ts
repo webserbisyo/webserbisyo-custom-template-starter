@@ -239,11 +239,12 @@ export function normalizeEventData(
 
   if (hostKind === "debut") {
     const debutantName = stringValue(hostContent.debutantName) || "Debutante";
+    const milestone = stringValue(hostContent.milestone) || "18th Birthday";
     coupleData = {
       kind: "debut" as const,
       debutantName,
-      milestone: stringValue(hostContent.milestone) || "18th Birthday",
-      displayAs: displayAs || debutantName,
+      milestone,
+      displayAs: displayAs || milestone,
       hostLine,
       shortHostMessage,
     };
@@ -734,7 +735,7 @@ export function normalizeEventData(
   if (coupleData.kind === "debut") {
     const dName = coupleData.debutantName;
     defaultTitle = `${dName}'s ${coupleData.milestone || "Debut"}`;
-    defaultDisplayName = displayAs || dName;
+    defaultDisplayName = dName;
   } else if (coupleData.kind === "birthday") {
     const cName = coupleData.celebrantName;
     defaultTitle = coupleData.milestone
